@@ -874,19 +874,18 @@ button:hover ~ #cursor-outer {
     align-items: center;
     overflow: hidden;
     padding: 80px 0;
-    background-color: var(--dark);
-    /* Negative margin pulls section upward so its bg overlaps the previous section's bottom */
-    margin-top: -80px;
-    padding-top: 160px;
+    background-color: transparent; /* Changed from var(--dark) */
+    /* Exact Hero Transition Logic: 150px physical overlap */
+    margin-top: -150px;
+    padding-top: 230px;
+    z-index: 2; /* Ensures sections stack correctly in DOM order */
 }
 
-/* First institute section needs extra overlap to clear hero content */
-.maac-section {
-    margin-top: -150px; /* Stronger physical overlap to eliminate visual seam */
-    padding-top: 230px; /* Compensate for margin to maintain content relative positioning */
-    z-index: 2; /* Sits over Hero to allow top edge blending via ::before */
+/* Soften top edge: 150px cross-fade with previous section visible behind */
+.institute-section > .section-bg {
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 150px, black 100%);
+    mask-image: linear-gradient(to bottom, transparent 0%, black 150px, black 100%);
 }
-
 
 
 .section-bg {
@@ -1068,312 +1067,55 @@ button:hover ~ #cursor-outer {
     position: absolute;
     left: 0;
     right: 0;
-    z-index: 3;
+    z-index: 0;
     pointer-events: none;
 }
 
-/* ── Hero → MAAC: advanced seamless blending ───────────────
-     A 400px transition zone at the hero bottom + 400px at
-     MAAC top uses matched warm-dark atmospheric overlays.
-     Multiple radial gradients create organic light falloff
-     so the viewer perceives one continuous environment.
-     Opacity never exceeds 0.08 per the spec.
-     ─────────────────────────────────────────────────────── */
-.hero-section::after {
-    bottom: 0;
-    height: 400px;
-    background:
-        linear-gradient(to top,
-            rgba(18, 14, 10, 0.08) 0%,
-            rgba(18, 14, 10, 0.05) 30%,
-            rgba(18, 14, 10, 0.02) 65%,
-            transparent 100%),
-        radial-gradient(ellipse 150% 100% at 50% 100%,
-            rgba(20, 16, 12, 0.06) 0%,
-            transparent 60%),
-        /* rim light / depth */
-        radial-gradient(ellipse 60% 40% at 20% 100%,
-            rgba(22, 18, 14, 0.04) 0%,
-            transparent 100%),
-        radial-gradient(ellipse 60% 40% at 80% 100%,
-            rgba(16, 12, 8, 0.04) 0%,
-            transparent 100%);
-}
+/* ============================================================
+   GLOBAL CINEMATIC BLENDING SYSTEM
+   ============================================================ */
 
-.maac-section::before {
-    top: 0;
-    height: 400px;
-    background:
-        linear-gradient(to bottom,
-            rgba(18, 14, 10, 0.07) 0%,
-            rgba(18, 14, 10, 0.04) 35%,
-            rgba(18, 14, 10, 0.02) 75%,
-            transparent 100%),
-        radial-gradient(ellipse 140% 80% at 50% 0%,
-            rgba(20, 16, 12, 0.05) 0%,
-            transparent 60%),
-        radial-gradient(ellipse 50% 30% at 35% 0%,
-            rgba(22, 18, 14, 0.03) 0%,
-            transparent 100%),
-        radial-gradient(ellipse 50% 30% at 65% 0%,
-            rgba(16, 12, 8, 0.03) 0%,
-            transparent 100%);
-}
-
-/* ── MAAC → AKSHA: warm-to-cool atmospheric transition ────── */
-.maac-section::after {
-    bottom: 0;
-    height: 300px;
-    background:
-        linear-gradient(to top,
-            rgba(9, 11, 18, 0.08) 0%,
-            rgba(9, 11, 18, 0.04) 28%,
-            rgba(9, 11, 18, 0.01) 65%,
-            transparent 100%),
-        radial-gradient(ellipse 130% 70% at 50% 100%,
-            rgba(7, 9, 16, 0.06) 0%,
-            transparent 100%),
-        radial-gradient(ellipse 45% 40% at 25% 88%,
-            rgba(12, 10, 14, 0.03) 0%,
-            transparent 100%),
-        radial-gradient(ellipse 45% 40% at 75% 92%,
-            rgba(8, 12, 20, 0.03) 0%,
-            transparent 100%);
-}
-
-.aksha-section::before {
-    top: 0;
-    height: 300px;
-    background:
-        linear-gradient(to bottom,
-            rgba(9, 11, 18, 0.07) 0%,
-            rgba(9, 11, 18, 0.03) 32%,
-            rgba(9, 11, 18, 0.01) 68%,
-            transparent 100%),
-        radial-gradient(ellipse 110% 55% at 50% 0%,
-            rgba(7, 9, 16, 0.05) 0%,
-            transparent 100%),
-        radial-gradient(ellipse 40% 28% at 60% 8%,
-            rgba(10, 14, 22, 0.03) 0%,
-            transparent 100%);
-}
-
-/* ── AKSHA → Space-E-Fic: cool-to-tech blue transition ───── */
-.aksha-section::after {
-    bottom: 0;
-    height: 300px;
-    background:
-        linear-gradient(to top,
-            rgba(6, 8, 20, 0.08) 0%,
-            rgba(6, 8, 20, 0.04) 28%,
-            rgba(6, 8, 20, 0.01) 65%,
-            transparent 100%),
-        radial-gradient(ellipse 130% 70% at 50% 100%,
-            rgba(5, 7, 18, 0.06) 0%,
-            transparent 100%),
-        radial-gradient(ellipse 45% 38% at 35% 88%,
-            rgba(8, 10, 22, 0.03) 0%,
-            transparent 100%),
-        radial-gradient(ellipse 45% 38% at 68% 90%,
-            rgba(6, 8, 16, 0.03) 0%,
-            transparent 100%);
-}
-
-.spacefic-section::before {
-    top: 0;
-    height: 300px;
-    background:
-        linear-gradient(to bottom,
-            rgba(6, 8, 20, 0.07) 0%,
-            rgba(6, 8, 20, 0.03) 32%,
-            rgba(6, 8, 20, 0.01) 68%,
-            transparent 100%),
-        radial-gradient(ellipse 110% 55% at 50% 0%,
-            rgba(5, 7, 18, 0.05) 0%,
-            transparent 100%),
-        radial-gradient(ellipse 40% 25% at 55% 10%,
-            rgba(8, 10, 22, 0.03) 0%,
-            transparent 100%);
-}
-
-/* ── Space-E-Fic → Courses: tech-to-dark transition ───────── */
-.spacefic-section::after {
-    bottom: 0;
-    height: 300px;
-    background:
-        linear-gradient(to top,
-            rgba(10, 8, 14, 0.08) 0%,
-            rgba(10, 8, 14, 0.04) 28%,
-            rgba(10, 8, 14, 0.01) 65%,
-            transparent 100%),
-        radial-gradient(ellipse 140% 75% at 50% 100%,
-            rgba(8, 6, 12, 0.06) 0%,
-            transparent 100%),
-        radial-gradient(ellipse 45% 35% at 30% 86%,
-            rgba(12, 10, 16, 0.03) 0%,
-            transparent 100%),
-        radial-gradient(ellipse 45% 35% at 70% 92%,
-            rgba(8, 6, 14, 0.03) 0%,
-            transparent 100%);
-}
-
-.courses-section::before {
-    top: 0;
-    height: 300px;
-    background:
-        linear-gradient(to bottom,
-            rgba(10, 8, 14, 0.07) 0%,
-            rgba(10, 8, 14, 0.03) 32%,
-            rgba(10, 8, 14, 0.01) 68%,
-            transparent 100%),
-        radial-gradient(ellipse 120% 60% at 50% 0%,
-            rgba(8, 6, 12, 0.05) 0%,
-            transparent 100%),
-        radial-gradient(ellipse 40% 25% at 42% 8%,
-            rgba(10, 8, 14, 0.03) 0%,
-            transparent 100%);
-}
-
-/* ── Courses → Stats ─────────────────────────────────────── */
-.courses-section::after {
-    bottom: 0;
-    height: 300px;
-    background:
-        linear-gradient(to top,
-            rgba(15, 10, 5, 0.08) 0%,
-            rgba(15, 10, 5, 0.04) 30%,
-            rgba(15, 10, 5, 0.01) 70%,
-            transparent 100%),
-        radial-gradient(ellipse 120% 60% at 50% 100%,
-            rgba(15, 10, 5, 0.06) 0%,
-            transparent 100%),
-        radial-gradient(ellipse 50% 30% at 35% 88%,
-            rgba(18, 14, 4, 0.03) 0%,
-            transparent 100%);
-}
-
-.stats-section::before {
-    top: 0;
-    height: 200px;
-    background:
-        linear-gradient(to bottom,
-            rgba(15, 10, 5, 0.06) 0%,
-            rgba(15, 10, 5, 0.02) 50%,
-            transparent 100%);
-}
-
-/* ── Stats → Recruiters ──────────────────────────────────── */
-.stats-section::after {
-    bottom: 0;
-    height: 200px;
-    background:
-        linear-gradient(to top,
-            rgba(8, 8, 14, 0.06) 0%,
-            rgba(8, 8, 14, 0.02) 50%,
-            transparent 100%);
-}
-
-.recruiters-section::before {
-    top: 0;
-    height: 300px;
-    background:
-        linear-gradient(to bottom,
-            rgba(8, 8, 14, 0.07) 0%,
-            rgba(8, 8, 14, 0.03) 35%,
-            rgba(8, 8, 14, 0.01) 70%,
-            transparent 100%),
-        radial-gradient(ellipse 110% 55% at 50% 0%,
-            rgba(8, 8, 14, 0.05) 0%,
-            transparent 100%),
-        radial-gradient(ellipse 40% 25% at 45% 10%,
-            rgba(10, 10, 16, 0.03) 0%,
-            transparent 100%);
-}
-
-/* ── Recruiters → Placement ──────────────────────────────── */
-.recruiters-section::after {
-    bottom: 0;
-    height: 300px;
-    background:
-        linear-gradient(to top,
-            rgba(8, 8, 18, 0.08) 0%,
-            rgba(8, 8, 18, 0.04) 30%,
-            rgba(8, 8, 18, 0.01) 70%,
-            transparent 100%),
-        radial-gradient(ellipse 120% 60% at 50% 100%,
-            rgba(8, 8, 18, 0.06) 0%,
-            transparent 100%),
-        radial-gradient(ellipse 45% 30% at 55% 88%,
-            rgba(10, 10, 20, 0.03) 0%,
-            transparent 100%);
-}
-
-.placement-section::before {
-    top: 0;
-    height: 200px;
-    background:
-        linear-gradient(to bottom,
-            rgba(8, 8, 18, 0.06) 0%,
-            rgba(8, 8, 18, 0.02) 50%,
-            transparent 100%);
-}
-
-/* ── Placement → Journey ─────────────────────────────────── */
-.placement-section::after {
-    bottom: 0;
-    height: 200px;
-    background:
-        linear-gradient(to top,
-            rgba(5, 5, 12, 0.06) 0%,
-            rgba(5, 5, 12, 0.02) 50%,
-            transparent 100%);
-}
-
-.journey-section::before {
-    top: 0;
-    height: 200px;
-    background:
-        linear-gradient(to bottom,
-            rgba(5, 5, 12, 0.06) 0%,
-            rgba(5, 5, 12, 0.02) 50%,
-            transparent 100%);
-}
-
-/* ── Journey → AI ────────────────────────────────────────── */
-.journey-section::after {
-    bottom: 0;
-    height: 200px;
-    background:
-        linear-gradient(to top,
-            rgba(5, 5, 14, 0.06) 0%,
-            rgba(5, 5, 14, 0.02) 50%,
-            transparent 100%);
-}
-
-.ai-section::before {
-    top: 0;
-    height: 200px;
-    background:
-        linear-gradient(to bottom,
-            rgba(5, 5, 14, 0.06) 0%,
-            rgba(5, 5, 14, 0.02) 50%,
-            transparent 100%);
-}
-
-/* ── AI → Footer ─────────────────────────────────────────── */
+/* 
+ * UNIVERSAL ATMOSPHERIC OVERLAYS 
+ * Standardized across all sections to ensure perfect consistency.
+ * Darkest point is floated to 15% to prevent edge banding.
+ */
+.hero-section::after,
+.maac-section::after,
+.aksha-section::after,
+.spacefic-section::after,
+.courses-section::after,
+.stats-section::after,
+.recruiters-section::after,
+.placement-section::after,
+.journey-section::after,
 .ai-section::after {
-    bottom: 0;
-    height: 250px;
-    background:
-        linear-gradient(to top,
-            rgba(5, 5, 10, 0.07) 0%,
-            rgba(5, 5, 10, 0.03) 40%,
-            rgba(5, 5, 10, 0.01) 75%,
-            transparent 100%),
-        radial-gradient(ellipse 120% 60% at 50% 100%,
-            rgba(5, 5, 10, 0.05) 0%,
-            transparent 100%);
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 500px;
+    background: linear-gradient(to top, transparent 0%, rgba(10, 8, 14, 0.02) 15%, transparent 100%);
+    z-index: 0; pointer-events: none;
 }
+
+.maac-section::before,
+.aksha-section::before,
+.spacefic-section::before,
+.courses-section::before,
+.stats-section::before,
+.recruiters-section::before,
+.placement-section::before,
+.journey-section::before,
+.ai-section::before,
+.footer::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 500px;
+    background: linear-gradient(to bottom, transparent 0%, rgba(10, 8, 14, 0.02) 15%, transparent 100%);
+    z-index: 0; pointer-events: none;
+}
+
 .sakura-canvas {
     position: absolute;
     inset: 0;
@@ -1394,10 +1136,16 @@ button:hover ~ #cursor-outer {
     position: relative;
     padding: 100px 0 80px;
     overflow: hidden;
-    background-color: var(--dark);
-    margin-top: -80px;
-    padding-top: 180px;
+    background-color: transparent;
+    /* Exact Hero Transition Logic: 150px physical overlap */
+    margin-top: -150px;
+    padding-top: 250px;
     z-index: 2;
+}
+
+.courses-section > .section-bg {
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 150px, black 100%);
+    mask-image: linear-gradient(to bottom, transparent 0%, black 150px, black 100%);
 }
 
 .section-header {
@@ -1531,6 +1279,8 @@ button:hover ~ #cursor-outer {
    ============================================================ */
 .stats-section {
     background: linear-gradient(180deg, rgba(15, 10, 5, 1), rgba(8, 8, 18, 1));
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 80px, black 100%);
+    mask-image: linear-gradient(to bottom, transparent 0%, black 80px, black 100%);
     padding: 64px 24px;
     position: relative;
     z-index: 3;
@@ -1597,6 +1347,8 @@ button:hover ~ #cursor-outer {
     margin-top: -60px;
     padding-top: 140px;
     z-index: 2;
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 100px, black 100%);
+    mask-image: linear-gradient(to bottom, transparent 0%, black 100px, black 100%);
 }
 
 .placement-group::before {
@@ -2016,6 +1768,10 @@ button:hover ~ #cursor-outer {
     background: linear-gradient(180deg, rgba(5, 5, 12, 1), rgba(10, 5, 5, 1));
     position: relative;
     overflow: hidden;
+    margin-top: -80px;
+    padding-top: 160px;
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 100px, black 100%);
+    mask-image: linear-gradient(to bottom, transparent 0%, black 100px, black 100%);
 }
 
 /* ─── Journey Swiper ──────────────────────────────────── */
@@ -2428,11 +2184,15 @@ button:hover ~ #cursor-outer {
 /* ============================================================
    AI SECTION
    ============================================================ */
-.ai-section {
+/* .ai-section {
     padding: 80px 24px;
     background: linear-gradient(180deg, rgba(5, 5, 14, 1), rgba(8, 8, 22, 1));
     position: relative;
-}
+    margin-top: -80px;
+    padding-top: 160px;
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 100px, black 100%);
+    mask-image: linear-gradient(to bottom, transparent 0%, black 100px, black 100%);
+} */
 
 .ai-content-grid {
     display: grid;
@@ -2497,9 +2257,12 @@ button:hover ~ #cursor-outer {
 .footer {
     position: relative;
     background: linear-gradient(180deg, rgba(5, 5, 10, 1), #020206);
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
     padding: 60px 0 0;
     overflow: hidden;
+    /* margin-top: -80px;
+    padding-top: 140px;
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 100px, black 100%);
+    mask-image: linear-gradient(to bottom, transparent 0%, black 100px, black 100%); */
 }
 
 .footer-tree-left,
