@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Services</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        .banner-service {
+            background: url("photo-1611241893603-3c359704e0ee.jpeg");
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 100vh;
+        }
+
+        .banner-service-inner {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding-top: 15%;
+
+            .heading-service {
+                color: white;
+                text-shadow: 0 0 14px black;
+                font-size: 4rem;
+                font-weight: 700;
+            }
+
+            .desc-service {
+                font-size: 1.6rem;
+                text-shadow: 0 0 14px black;
+                color: white;
+            }
+
+            .ser-btn {
+                font-size: 1.3rem;
+                padding-top: 10px;
+                padding-bottom: 10px;
+                padding-left: 50px;
+                padding-right: 50px;
+
+                &:hover {
+                    border: 1px solid white;
+                }
+            }
+        }
+
+
+        /* first section */
+        .first {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 5%;
+
+            .first-left img {
+                width: 70%;
+            }
+
+            .first-right h3 {
+                font-size: 2rem;
+                font-weight: 700;
+            }
+        }
+
+        /* second section */
+        .second {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            gap: 2%;
+            padding: 5%;
+            background: #bbb9b9b0;
+
+            .second-left {
+                width: 80%;
+            }
+
+            .second-left h3 {
+                font-size: 2rem;
+                font-weight: 700;
+            }
+
+            .second-right img {
+                width: 80%;
+                float: inline-end;
+            }
+        }
+
+        /* third section */
+        .third-inner {
+            padding: 5%;
+            text-align: center;
+
+            .third-service-heading {
+                font-size: 3rem;
+                font-weight: 700;
+            }
+
+            .third-subinner {
+                display: flex;
+                gap: 5%;
+                justify-content: space-around;
+                overflow-y: auto;
+            }
+
+            .third-subinner::-webkit-scrollbar {
+                display: none;
+            }
+
+            
+            .third-subinner {
+                -ms-overflow-style: none;
+                /* IE and Edge */
+                scrollbar-width: none;
+                /* Firefox */
+            }
+
+            .third-subinner .cards {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        /* forth section */
+        .forth {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 5%;
+            background: #bbb9b9b0;
+
+            .forth-left h3 {
+                font-size: 2rem;
+                font-weight: 700;
+            }
+
+            .forth-right {
+                float: right;
+            }
+
+            .forth-right .forth-form {
+                display: flex;
+                flex-direction: column;
+            }
+
+            .forth-right .forth-form .forth-input {
+                border: 1px solid rgba(173, 173, 173, 0.646);
+                padding: 15px;
+                outline: none;
+            }
+
+            .inputs {
+                display: flex;
+            }
+
+            .forth-right .forth-form button {
+                font-size: 1.2rem;
+                padding: 2%;
+            }
+        }
+
+
+        /* responsive ----------------->*/
+        @media (max-width:750px) {
+    .banner-service {
+        background: url("photo-1611241893603-3c359704e0ee.jpeg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        height: 100vh;
+    }
+
+    .banner-service-inner {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding-top: 15%;
+
+        .heading-service {
+            color: white;
+            text-shadow: 0 0 14px black;
+            font-size: 3rem;
+            font-weight: 700;
+        }
+
+        .desc-service {
+            font-size: 1rem;
+            text-shadow: 0 0 14px black;
+            color: white;
+        }
+
+        .ser-btn {
+            font-size: 1rem;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            padding-left: 40px;
+            padding-right: 40px;
+
+            &:hover {
+                border: 1px solid white;
+            }
+        }
+    }
+
+
+
+
+    /* first section */
+    .first {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 5%;
+
+        .first-left {
+            display: flex;
+            justify-content: center;
+        }
+
+        .first-left img {
+            width: 70%;
+        }
+
+        .first-right h3 {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        .first-right p {
+            text-align: center;
+        }
+    }
+
+
+
+
+    /* second section */
+    .second {
+        display: flex;
+        flex-direction: column-reverse;
+        align-items: center;
+        gap: 2%;
+        padding: 5%;
+        background: #bbb9b9b0;
+
+        .second-left {
+            width: 100%;
+        }
+
+        .second-left h3 {
+            font-size: 2rem;
+            font-weight: 700;
+            text-align: center;
+            margin-top: 3%;
+        }
+
+        .second-left p {
+            text-align: center;
+        }
+
+        .second-right {
+            display: flex;
+            justify-content: center;
+        }
+
+        .second-right img {
+            width: 70%;
+        }
+    }
+
+
+
+
+    /* third section */
+    .third-inner {
+        padding: 5%;
+        text-align: center;
+
+        .third-service-heading {
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        .third-subinner {
+            display: flex;
+            gap: 5%;
+            justify-content: space-around;
+            overflow-y: auto;
+        }
+
+        .third-subinner::-webkit-scrollbar {
+            display: none;
+        }
+
+
+        .third-subinner {
+            -ms-overflow-style: none;
+            /* IE and Edge */
+            scrollbar-width: none;
+            /* Firefox */
+        }
+
+        .third-subinner .cards {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .third-subinner .cards img {
+            width: 190px;
+            height: 190px;
+        }
+
+        .third-subinner .cards h4 {
+            font-size: 1rem;
+        }
+
+        .third-subinner .cards p {
+            font-size: 0.6rem;
+        }
+    }
+
+
+
+    /* forth section */
+    .forth {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 5%;
+        background: #bbb9b9b0;
+
+        .forth-left h3 {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 700;
+        }
+        .forth-left p {
+            text-align: center;
+        }
+
+        .forth-right {
+            float: right;
+        }
+
+        .forth-right .forth-form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .forth-right .forth-form .forth-input {
+            border: 1px solid rgba(173, 173, 173, 0.646);
+            padding: 15px;
+            outline: none;
+        }
+
+        .inputs {
+            display: flex;
+        }
+
+        .forth-right .forth-form button {
+            font-size: 1.2rem;
+            padding: 2%;
+        }
+    }
+}
+
+
+
+@media (max-width:470px) {
+    .banner-service {
+        background: url("photo-1611241893603-3c359704e0ee.jpeg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        height: 90vh;
+    }
+
+    .banner-service-inner {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding-top: 15%;
+
+        .heading-service {
+            color: white;
+            text-shadow: 0 0 14px black;
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        .desc-service {
+            font-size: 0.7rem;
+            text-shadow: 0 0 14px black;
+            color: white;
+        }
+
+        .ser-btn {
+            font-size: 0.8rem;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            padding-left: 40px;
+            padding-right: 40px;
+
+            &:hover {
+                border: 1px solid white;
+            }
+        }
+    }
+
+
+
+
+    /* first section */
+    .first {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 5%;
+
+        .first-left {
+            display: flex;
+            justify-content: center;
+        }
+
+        .first-left img {
+            width: 70%;
+        }
+
+        .first-right h3 {
+            margin-top: 3%;
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+        .first-right p {
+            text-align: center;
+            font-size: 0.7rem;
+        }
+    }
+
+
+
+
+    /* second section */
+    .second {
+        display: flex;
+        flex-direction: column-reverse;
+        align-items: center;
+        gap: 2%;
+        padding: 5%;
+        background: #bbb9b9b0;
+
+        .second-left {
+            width: 100%;
+        }
+
+        .second-left h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            text-align: center;
+            margin-top: 3%;
+        }
+
+        .second-left p {
+            text-align: center;
+            font-size: 0.7rem;
+        }
+
+        .second-right {
+            display: flex;
+            justify-content: center;
+        }
+
+        .second-right img {
+            width: 70%;
+        }
+    }
+
+
+
+
+    /* third section */
+    .third-inner {
+        padding: 5%;
+        text-align: center;
+
+        .third-service-heading {
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        .third-subinner {
+            display: flex;
+            gap: 5%;
+            justify-content: space-around;
+            overflow-y: auto;
+        }
+
+        .third-subinner::-webkit-scrollbar {
+            display: none;
+        }
+
+
+        .third-subinner {
+            -ms-overflow-style: none;
+            /* IE and Edge */
+            scrollbar-width: none;
+            /* Firefox */
+        }
+
+        .third-subinner .cards {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .third-subinner .cards img {
+            width: 200px;
+            height: 200px;
+        }
+
+        .third-subinner .cards h4 {
+            font-size: 1rem;
+        }
+
+        .third-subinner .cards p {
+            font-size: 0.6rem;
+        }
+    }
+
+
+
+    /* forth section */
+    .forth {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 5%;
+        background: #bbb9b9b0;
+
+        .forth-left h3 {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 700;
+        }
+        .forth-left p {
+            text-align: center;
+        }
+
+        .forth-right {
+            float: right;
+        }
+
+        .forth-right .forth-form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .forth-right .forth-form .forth-input {
+            border: 1px solid rgba(173, 173, 173, 0.646);
+            padding: 15px;
+            outline: none;
+            width: 100%;
+        }
+
+        .inputs {
+            display: block;
+        }
+
+        .inputs input{
+            margin-bottom: 3%;
+        }
+
+        .forth-right .forth-form button {
+            font-size: 1.2rem;
+            padding: 2%;
+        }
+    }
+}
+
+
+
+@media (max-width:432px) {
+    .banner-service {
+        background: url("photo-1611241893603-3c359704e0ee.jpeg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        height: 90vh;
+    }
+
+    .banner-service-inner {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding-top: 15%;
+
+        .heading-service {
+            color: white;
+            text-shadow: 0 0 14px black;
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        .desc-service {
+            font-size: 0.7rem;
+            text-shadow: 0 0 14px black;
+            color: white;
+        }
+
+        .ser-btn {
+            font-size: 0.8rem;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            padding-left: 40px;
+            padding-right: 40px;
+
+            &:hover {
+                border: 1px solid white;
+            }
+        }
+    }
+
+
+
+
+    /* first section */
+    .first {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 5%;
+
+        .first-left {
+            display: flex;
+            justify-content: center;
+        }
+
+        .first-left img {
+            width: 70%;
+        }
+
+        .first-right h3 {
+            margin-top: 3%;
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+        .first-right p {
+            text-align: center;
+            font-size: 0.7rem;
+        }
+    }
+
+
+
+
+    /* second section */
+    .second {
+        display: flex;
+        flex-direction: column-reverse;
+        align-items: center;
+        gap: 2%;
+        padding: 5%;
+        background: #bbb9b9b0;
+
+        .second-left {
+            width: 100%;
+        }
+
+        .second-left h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            text-align: center;
+            margin-top: 3%;
+        }
+
+        .second-left p {
+            text-align: center;
+            font-size: 0.7rem;
+        }
+
+        .second-right {
+            display: flex;
+            justify-content: center;
+        }
+
+        .second-right img {
+            width: 70%;
+        }
+    }
+
+
+
+
+    /* third section */
+    .third-inner {
+        padding: 5%;
+        text-align: center;
+
+        .third-service-heading {
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        .third-subinner {
+            display: flex;
+            gap: 5%;
+            justify-content: space-around;
+            overflow-y: auto;
+        }
+
+        .third-subinner::-webkit-scrollbar {
+            display: none;
+        }
+
+
+        .third-subinner {
+            -ms-overflow-style: none;
+            /* IE and Edge */
+            scrollbar-width: none;
+            /* Firefox */
+        }
+
+        .third-subinner .cards {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .third-subinner .cards img {
+            width: 360px;
+            height: 360px;
+        }
+
+        .third-subinner .cards h4 {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 600;
+        }
+
+        .third-subinner .cards p {
+            font-size: 1rem;
+        }
+    }
+
+
+
+    /* forth section */
+    .forth {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 5%;
+        background: #bbb9b9b0;
+
+        .forth-left h3 {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 700;
+        }
+        .forth-left p {
+            text-align: center;
+        }
+
+        .forth-right {
+            float: right;
+        }
+
+        .forth-right .forth-form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .forth-right .forth-form .forth-input {
+            border: 1px solid rgba(173, 173, 173, 0.646);
+            padding: 15px;
+            outline: none;
+            width: 100%;
+        }
+
+        .inputs {
+            display: block;
+        }
+
+        .inputs input{
+            margin-bottom: 3%;
+        }
+
+        .forth-right .forth-form button {
+            font-size: 1.2rem;
+            padding: 2%;
+        }
+    }
+}
+    </style>
+</head>
+
+<body>
+    <div class="container-service" style="overflow-x: hidden;">
+
+
+        <!-- banner -->
+        <div class="banner-service">
+            <div class="banner-service-inner">
+                <h1 class="heading-service">OUR SERVICES</h1>
+                <p class="desc-service">Transform your ideas into stunning visual stories with our top-notch graphic
+                    design services.</p>
+                <button class="btn btn-dark ser-btn">
+                    Explore
+                </button>
+            </div>
+        </div>
+        <!-- banner end -->
+
+
+        <!-- first section -->
+        <section class="first">
+            <div class="first-left">
+                <img class="rounded" src="photo-1540242908484-50aa09aea5a7.jpeg" alt="">
+            </div>
+            <div class="first-right">
+                <h3>Custom Graphic Design Solutions</h3>
+                <p>Creative graphic design solutions tailored to your business needs, helping you stand out in the
+                    Indian market with impactful visuals.</p>
+            </div>
+        </section>
+        <!-- first section end -->
+
+
+
+        <!-- second section -->
+        <section class="second">
+            <div class="second-left">
+                <h3>Welcome to Graphic Design</h3>
+                <p>Embark on a creative journey with us as we transform your vision into stunning visual masterpieces.
+                    Based in India, our team of talented graphic designers are dedicated to bringing your ideas to life
+                    through innovative designs that captivate and inspire. Let us elevate your brand and make a lasting
+                    impression with our expert graphic design services.</p>
+            </div>
+            <div class="second-right">
+                <img class="rounded" src="photo-1572044162444-ad60f128bdea.jpeg" alt="">
+            </div>
+        </section>
+        <!-- second section end -->
+
+
+
+        <!-- third section -->
+        <section class="third">
+            <div class="third-inner">
+                <h3 class="third-service-heading pb-5">Our services</h3>
+                <div class="third-subinner">
+                    <div class="cards">
+                        <img class="rounded" src="photo-1512295767273-ac109ac3acfa.jpeg" alt="" width="360px"
+                            height="300px">
+
+                        <div class="description mt-3">
+                            <h4 class="title-third">Logo Design Services</h4>
+                            <p class="desc-third">Creative solutions for unique brand logos.</p>
+                        </div>
+                    </div>
+
+                    <div class="cards">
+                        <img class="rounded" src="photo-1613909207039-6b173b755cc1.jpeg" alt="" width="360px"
+                            height="300px">
+
+                        <div class="description mt-3">
+                            <h4 class="title-third">Website Graphics Creation</h4>
+                            <p class="desc-third">Engaging visuals to enhance website appeal.</p>
+                        </div>
+                    </div>
+
+                    <div class="cards">
+                        <img class="rounded" src="photo-1611241893603-3c359704e0ee.jpeg" alt="" width="360px"
+                            height="300px">
+
+                        <div class="description mt-3">
+                            <h4 class="title-third">Print Media Design</h4>
+                            <p class="desc-third">Eye-catching designs for all print materials.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+        <!-- third section end -->
+
+
+
+        <!-- forth section -->
+        <section class="forth gap-3">
+            <div class="forth-left">
+                <h3 class="forth-heading">Get In Touch</h3>
+                <p class="">Send us a message and we'll get back to you as soon as we can.</p>
+
+            </div>
+            <div class="forth-right">
+                <form action="" class="forth-form">
+                    <div class="inputs gap-2">
+                        <input class="rounded forth-input" type="text" placeholder="Name" required />
+                        <input class="rounded forth-input" type="email" placeholder="Email Address" required />
+                    </div>
+                    <textarea class="rounded forth-input mt-2" name="message" id="message" cols="20" rows="5"
+                        placeholder="Send Message"></textarea>
+                    <button class="btn btn-dark mt-2">SEND</button>
+                </form>
+            </div>
+        </section>
+        <!-- forth section end -->
+
+
+        <!-- fifth section -->
+
+        <!-- fifth section end -->
+    </div>
+</body>
+
+</html>

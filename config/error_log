@@ -1,0 +1,68 @@
+[11-Feb-2024 07:03:28 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home2/educazio/maacdurgapur.com/config/cache.php:18
+Stack trace:
+#0 {main}
+  thrown in /home2/educazio/maacdurgapur.com/config/cache.php on line 18
+[22-Jun-2024 15:49:54 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home2/educazio/maacdurgapur.com/config/database.php:18
+Stack trace:
+#0 {main}
+  thrown in /home2/educazio/maacdurgapur.com/config/database.php on line 18
+[22-Jun-2024 15:49:54 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home2/educazio/maacdurgapur.com/config/database.php:18
+Stack trace:
+#0 {main}
+  thrown in /home2/educazio/maacdurgapur.com/config/database.php on line 18
+[22-Aug-2024 19:34:30 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home2/educazio/maacdurgapur.com/config/database.php:18
+Stack trace:
+#0 {main}
+  thrown in /home2/educazio/maacdurgapur.com/config/database.php on line 18
+[22-Aug-2024 19:34:31 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home2/educazio/maacdurgapur.com/config/database.php:18
+Stack trace:
+#0 {main}
+  thrown in /home2/educazio/maacdurgapur.com/config/database.php on line 18
+[25-Aug-2024 10:51:18 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home2/educazio/maacdurgapur.com/config/cache.php:18
+Stack trace:
+#0 {main}
+  thrown in /home2/educazio/maacdurgapur.com/config/cache.php on line 18
+[31-Jan-2025 19:54:12 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home2/educazio/maacdurgapur.com/config/app.php:18
+Stack trace:
+#0 {main}
+  thrown in /home2/educazio/maacdurgapur.com/config/app.php on line 18
+[01-Feb-2025 23:40:00 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home2/educazio/maacdurgapur.com/config/app.php:18
+Stack trace:
+#0 {main}
+  thrown in /home2/educazio/maacdurgapur.com/config/app.php on line 18
+[02-Feb-2025 23:42:28 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home2/educazio/maacdurgapur.com/config/app.php:18
+Stack trace:
+#0 {main}
+  thrown in /home2/educazio/maacdurgapur.com/config/app.php on line 18
+[07-Feb-2025 00:05:10 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home2/educazio/maacdurgapur.com/config/app.php:18
+Stack trace:
+#0 {main}
+  thrown in /home2/educazio/maacdurgapur.com/config/app.php on line 18
+[18-Feb-2025 02:20:08 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home2/educazio/maacdurgapur.com/config/app.php:18
+Stack trace:
+#0 {main}
+  thrown in /home2/educazio/maacdurgapur.com/config/app.php on line 18
+[02-Apr-2025 17:39:57 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home2/educazio/maacdurgapur.com/config/app.php:18
+Stack trace:
+#0 {main}
+  thrown in /home2/educazio/maacdurgapur.com/config/app.php on line 18
+[15-Apr-2025 03:24:54 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home2/educazio/maacdurgapur.com/config/services.php:18
+Stack trace:
+#0 {main}
+  thrown in /home2/educazio/maacdurgapur.com/config/services.php on line 18
+[15-Apr-2025 03:25:05 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home2/educazio/maacdurgapur.com/config/app.php:18
+Stack trace:
+#0 {main}
+  thrown in /home2/educazio/maacdurgapur.com/config/app.php on line 18
+[15-Apr-2025 03:27:27 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home2/educazio/maacdurgapur.com/config/cache.php:18
+Stack trace:
+#0 {main}
+  thrown in /home2/educazio/maacdurgapur.com/config/cache.php on line 18
+[15-Apr-2025 03:27:28 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home2/educazio/maacdurgapur.com/config/filesystems.php:16
+Stack trace:
+#0 {main}
+  thrown in /home2/educazio/maacdurgapur.com/config/filesystems.php on line 16
+[15-Apr-2025 03:27:28 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function resource_path() in /home2/educazio/maacdurgapur.com/config/view.php:17
+Stack trace:
+#0 {main}
+  thrown in /home2/educazio/maacdurgapur.com/config/view.php on line 17

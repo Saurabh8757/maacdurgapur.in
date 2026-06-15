@@ -1,0 +1,8 @@
+[02-Apr-2025 17:39:58 UTC] PHP Fatal error:  Uncaught Error: Class "Illuminate\Support\Facades\Route" not found in /home2/educazio/maacdurgapur.com/routes/web.php:17
+Stack trace:
+#0 {main}
+  thrown in /home2/educazio/maacdurgapur.com/routes/web.php on line 17
+[15-Apr-2025 03:25:38 UTC] PHP Fatal error:  Uncaught Error: Class "Illuminate\Support\Facades\Route" not found in /home2/educazio/maacdurgapur.com/routes/web.php:17
+Stack trace:
+#0 {main}
+  thrown in /home2/educazio/maacdurgapur.com/routes/web.php on line 17
