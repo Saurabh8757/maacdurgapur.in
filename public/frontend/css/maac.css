@@ -1,0 +1,1581 @@
+/* ============================================================
+   MAAC DURGAPUR — Page Styles
+   A premium, dark-themed creative institute landing page.
+   Uses design-system variables defined in style.css :root.
+   ============================================================ */
+
+/* ==========================================================
+   1. HERO SECTION
+   ========================================================== */
+
+.maac-hero {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+}
+
+/* --- Hero Background Image --- */
+.maac-hero-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+}
+
+.maac-hero-bg-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+/* --- Hero Dark Overlay --- */
+.maac-hero-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(
+        35deg,
+        rgba(5, 5, 12, 0.92) 0%,
+        rgba(8, 8, 18, 0.78) 40%,
+        rgba(10, 10, 20, 0.55) 70%,
+        transparent 100%
+    );
+    pointer-events: none;
+}
+
+/* --- Hero Content Wrapper --- */
+.maac-hero-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    max-width: var(--container-w);
+    width: 100%;
+    margin: 0 auto;
+    padding: 100px 24px 60px;
+}
+
+/* ----------------------------------------------------------
+   Hero Left — Heading, Subtitle, Tagline, Offer
+   ---------------------------------------------------------- */
+
+.maac-hero-left {
+    flex: 0 0 55%;
+    max-width: 55%;
+}
+
+/* Heading block */
+.maac-hero-heading {
+    font-family: 'Oswald', sans-serif;
+    text-transform: uppercase;
+    line-height: 1.05;
+    margin-bottom: 18px;
+}
+
+.maac-hero-heading .line1 {
+    display: block;
+    font-size: clamp(2.2rem, 5vw, 4rem);
+    font-weight: 600;
+    color: #ffffff;
+}
+
+.maac-hero-heading .passion {
+    display: block;
+    font-size: clamp(3.5rem, 8vw, 6.5rem);
+    font-weight: 700;
+    color: #ffd700;
+    letter-spacing: 2px;
+}
+
+.maac-hero-heading .line3 {
+    display: block;
+    font-size: clamp(2rem, 4.5vw, 3.8rem);
+    font-weight: 600;
+    color: #ffffff;
+}
+
+/* Subtitle */
+.maac-hero-subtitle {
+    font-family: 'Nunito', sans-serif;
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    line-height: 1.65;
+    margin-top: 14px;
+    margin-bottom: 16px;
+    max-width: 520px;
+}
+
+/* Tagline — LEARN . CREATE . SUCCEED */
+.maac-hero-tagline-wrapper {
+    margin-bottom: 28px;
+    display: inline-block;
+}
+
+.maac-hero-tagline {
+    font-family: 'Rajdhani', sans-serif;
+    color: #fb5c6e;
+    font-size: 1.25rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+}
+
+.tagline-line {
+    height: 3px;
+    width: 100px;
+    background-color: #fb5c6e;
+    border-radius: 2px;
+}
+
+/* --- Special Offer Card --- */
+.maac-hero-offer {
+    position: relative;
+    max-width: 440px;
+    margin-top: 30px;
+    /* margin-left: 200px; */
+    background: rgba(20, 15, 30, 0.5);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(251, 92, 110, 0.4);
+    border-radius: 12px;
+    padding: 24px 140px 24px 24px;
+    box-shadow: 0 0 15px rgba(251, 92, 110, 0.15), inset 0 0 10px rgba(251, 92, 110, 0.1);
+}
+
+.offer-character {
+    position: absolute;
+    right: -30px;
+    bottom: -20px;
+    height: 140%;
+    z-index: 5;
+    pointer-events: none;
+    object-fit: contain;
+}
+
+.offer-badge {
+    display: inline-block;
+    background: linear-gradient(90deg, #fdb121, #ff8c00);
+    color: #ffffff;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 4px 12px;
+    border-radius: 4px;
+    margin-bottom: 12px;
+}
+
+.offer-title {
+    font-family: 'Nunito', sans-serif;
+    color: #ffffff;
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 2px;
+}
+
+.offer-highlight {
+    font-family: 'Oswald', sans-serif;
+    color: #fb5c6e;
+    font-size: 1.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    line-height: 1.1;
+    letter-spacing: 1px;
+}
+
+.offer-emi {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #ffd700;
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.offer-emi img,
+.offer-emi svg {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+}
+
+/* ----------------------------------------------------------
+   Hero Right — Enquiry Form
+   ---------------------------------------------------------- */
+
+.maac-hero-right {
+    flex: 0 0 42%;
+    max-width: 42%;
+}
+
+/* --- Student Enquiry Form Card --- */
+.maac-enquiry-form {
+    background: rgba(10, 10, 25, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 30px 28px;
+    box-shadow: 0 0 50px rgba(255, 255, 255, 0.08);
+}
+
+/* Form Header */
+.enquiry-form-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.enquiry-logo {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(255, 255, 255, 0.8);
+    margin: 0 auto 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px;
+    box-sizing: border-box;
+}
+
+.enquiry-logo-icon {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: invert(1);
+}
+
+.enquiry-title {
+    font-family: 'Oswald', sans-serif;
+    color: #ffffff;
+    font-size: 1.15rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+}
+
+.enquiry-subtitle {
+    font-family: 'Nunito', sans-serif;
+    color: var(--text-muted);
+    font-size: 0.75rem;
+}
+
+/* Form Fields */
+.enquiry-field {
+    position: relative;
+    margin-bottom: 14px;
+}
+
+.enquiry-field-icon {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 18px;
+    height: 18px;
+    opacity: 0.6;
+    filter: invert(1);
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* For textarea, icon should align to top */
+.enquiry-field textarea ~ .enquiry-field-icon,
+.enquiry-field:has(textarea) .enquiry-field-icon {
+    top: 18px;
+    transform: none;
+}
+
+.enquiry-field input,
+.enquiry-field select {
+    width: 100%;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    padding: 12px 14px 12px 40px;
+    color: #ffffff;
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.85rem;
+    outline: none;
+    transition: border-color var(--trans-base), box-shadow var(--trans-base);
+    box-sizing: border-box;
+    appearance: none;
+    -webkit-appearance: none;
+}
+
+.enquiry-field select {
+    cursor: pointer;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none'%3E%3Cpath d='M1 1.5l5 5 5-5' stroke='%23999' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 36px;
+}
+
+.enquiry-field select option {
+    background: #12121a;
+    color: #ffffff;
+}
+
+.enquiry-field textarea {
+    width: 100%;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    padding: 12px 14px 12px 40px;
+    color: #ffffff;
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.85rem;
+    outline: none;
+    transition: border-color var(--trans-base), box-shadow var(--trans-base);
+    box-sizing: border-box;
+    min-height: 80px;
+    resize: vertical;
+}
+
+.enquiry-field input:focus,
+.enquiry-field select:focus,
+.enquiry-field textarea:focus {
+    border-color: var(--orange);
+    box-shadow: 0 0 0 2px rgba(255, 106, 0, 0.15);
+}
+
+.enquiry-field input::placeholder,
+.enquiry-field textarea::placeholder {
+    color: var(--text-muted);
+    opacity: 0.7;
+}
+
+/* Consent Checkbox */
+.enquiry-consent {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    margin-bottom: 16px;
+    margin-top: 4px;
+}
+
+.enquiry-consent input[type="checkbox"] {
+    accent-color: var(--orange);
+    margin-top: 3px;
+    flex-shrink: 0;
+    width: 15px;
+    height: 15px;
+    cursor: pointer;
+}
+
+.enquiry-consent label {
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    line-height: 1.3;
+    cursor: pointer;
+}
+
+.enquiry-consent label a {
+    color: var(--orange-light);
+    text-decoration: underline;
+}
+
+/* Submit Button — ENROLL NOW */
+.enquiry-submit {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(to right, #fb5c6e, #fdb121);
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700;
+    font-size: 1.15rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: transform var(--trans-base), box-shadow var(--trans-base);
+    position: relative;
+    overflow: hidden;
+}
+
+.enquiry-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(255, 106, 0, 0.4);
+}
+
+.enquiry-submit:active {
+    transform: translateY(0);
+    box-shadow: 0 4px 12px rgba(255, 106, 0, 0.3);
+}
+
+.submit-arrow {
+    transition: transform var(--trans-base);
+    width: 18px;
+    height: 18px;
+    display: inline-flex;
+}
+
+.submit-arrow img,
+.submit-arrow svg {
+    width: 100%;
+    height: 100%;
+    filter: brightness(10);
+}
+
+.enquiry-submit:hover .submit-arrow {
+    transform: translateX(4px);
+}
+
+
+/* ==========================================================
+   2. COURSE GUIDANCE CTA SECTION
+   ========================================================== */
+
+.maac-cta-section {
+    position: relative;
+    padding: 80px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--dark);
+    overflow: hidden;
+}
+
+.maac-cta-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+}
+
+.maac-cta-bg-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    /* Removed the heavy blur and made it clear but slightly darkened so the card still pops */
+    filter: blur(0px) brightness(0.6);
+}
+
+.maac-cta-card {
+    position: relative;
+    z-index: 2;
+    max-width: 1100px;
+    width: 100%;
+    display: flex;
+    align-items: stretch;
+    background: rgba(15, 10, 25, 0.6);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+}
+
+/* Left Image Column */
+.cta-card-image {
+    flex: 0 0 35%;
+    position: relative;
+}
+
+.cta-card-image::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    /* Gradient to fade the clear background of the cyborg into the card's dark background */
+    background: linear-gradient(to right, transparent 50%, rgba(15, 10, 25, 1) 100%);
+    z-index: 1;
+}
+
+.cyborg-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+/* Middle Content Column */
+.cta-card-content {
+    flex: 0 0 38%;
+    padding: 40px 20px 40px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    z-index: 2;
+}
+
+@media (max-width: 991px) {
+    .maac-cta-card {
+        flex-direction: column;
+    }
+    .cta-card-image {
+        flex: 0 0 250px;
+    }
+    .cta-card-image::after {
+        background: linear-gradient(to bottom, transparent 50%, rgba(15, 10, 25, 1) 100%);
+    }
+    .cta-card-content {
+        padding: 20px 40px;
+    }
+    .cta-card-features {
+        border-left: none;
+        border-top: 1px solid rgba(255, 255, 255, 0.2);
+        padding: 30px 40px;
+    }
+}
+
+@media (max-width: 767px) {
+    .cta-card-content {
+        padding: 20px;
+    }
+    .cta-card-features {
+        padding: 20px;
+    }
+}
+
+.maac-cta-heading {
+    font-family: 'Oswald', sans-serif;
+    color: #ffffff;
+    font-size: 2rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    line-height: 1.1;
+    margin-bottom: 12px;
+}
+
+.maac-cta-text {
+    font-family: 'Nunito', sans-serif;
+    color: #e0e0e0;
+    font-size: 1rem;
+    line-height: 1.5;
+    margin-bottom: 24px;
+}
+
+.maac-cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: #0f0a1c;
+    border: 2px solid #fb5c6e;
+    color: #fb5c6e;
+    padding: 10px 24px;
+    border-radius: 8px;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    text-transform: uppercase;
+    cursor: pointer;
+    width: fit-content;
+    transition: background 0.3s, color 0.3s, transform 0.3s;
+}
+
+.maac-cta-btn:hover {
+    background: #fb5c6e;
+    color: #ffffff;
+    transform: translateY(-2px);
+}
+
+.cta-btn-icon {
+    width: 22px;
+    height: 22px;
+    /* Pink filter */
+    filter: invert(51%) sepia(85%) saturate(2250%) hue-rotate(320deg) brightness(101%) contrast(97%);
+    transition: filter 0.3s;
+}
+
+.maac-cta-btn:hover .cta-btn-icon {
+    filter: brightness(0) invert(1);
+}
+
+/* Right Features Column */
+.cta-card-features {
+    flex: 0 0 27%;
+    padding: 40px 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 25px;
+    border-left: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.maac-cta-feature {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.cta-icon-img,
+.cta-icon-svg {
+    width: 24px;
+    height: 24px;
+    filter: invert(1);
+    opacity: 0.9;
+    flex-shrink: 0;
+}
+
+.cta-feature-text {
+    font-family: 'Nunito', sans-serif;
+    color: #ffffff;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+
+/* ==========================================================
+   3. WHY CHOOSE MAAC SECTION
+   ========================================================== */
+
+.maac-why-section {
+    position: relative;
+    background-color: var(--dark);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 80px 20px;
+    overflow: hidden;
+}
+
+/* Overlay */
+.maac-why-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        180deg,
+        rgba(10, 10, 18, 0.94) 0%,
+        rgba(12, 8, 28, 0.88) 50%,
+        rgba(10, 10, 18, 0.94) 100%
+    );
+    z-index: 0;
+}
+
+/* Section Header */
+.maac-why-header {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.maac-why-label {
+    font-family: 'Rajdhani', sans-serif;
+    color: var(--gold);
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.maac-why-title {
+    font-family: 'Oswald', sans-serif;
+    color: #ffffff;
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    font-weight: 600;
+    text-transform: uppercase;
+    line-height: 1.2;
+    margin-bottom: 0;
+    position: relative;
+    display: inline-block;
+}
+
+.maac-why-title::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--orange), var(--gold));
+    margin: 12px auto 0;
+    border-radius: 2px;
+}
+
+/* Why Grid */
+.maac-why-grid {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+/* Why Card */
+.maac-why-card {
+    background: rgba(15, 15, 30, 0.6);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    padding: 30px 24px;
+    text-align: center;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                border-color 0.4s ease,
+                box-shadow 0.4s ease;
+}
+
+.maac-why-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(255, 106, 0, 0.3);
+    box-shadow: 0 12px 40px rgba(255, 106, 0, 0.1);
+}
+
+.why-card-icon {
+    width: 50px;
+    height: 50px;
+    margin: 0 auto 16px;
+    object-fit: contain;
+    filter: invert(1) brightness(2);
+    opacity: 0.85;
+    transition: filter 0.4s ease, opacity 0.4s ease;
+}
+
+.maac-why-card:hover .why-card-icon {
+    filter: invert(70%) sepia(80%) saturate(400%) hue-rotate(0deg) brightness(105%);
+    opacity: 1;
+}
+
+.why-card-title {
+    font-family: 'Oswald', sans-serif;
+    color: #ffffff;
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    line-height: 1.3;
+}
+
+.why-card-text {
+    font-family: 'Nunito', sans-serif;
+    color: var(--text-muted);
+    font-size: 0.82rem;
+    line-height: 1.6;
+    margin: 0;
+}
+
+
+/* ==========================================================
+   4. JOB ORIENTED COURSES SECTION
+   ========================================================== */
+
+.maac-courses-section {
+    position: relative;
+    background-color: var(--dark);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 80px 20px;
+    overflow: hidden;
+}
+
+/* Overlay */
+.maac-courses-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        160deg,
+        rgba(10, 10, 18, 0.94) 0%,
+        rgba(20, 8, 28, 0.88) 40%,
+        rgba(15, 12, 25, 0.9) 70%,
+        rgba(10, 10, 18, 0.94) 100%
+    );
+    z-index: 0;
+}
+
+/* Section Header */
+.maac-courses-header {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.maac-courses-label {
+    font-family: 'Rajdhani', sans-serif;
+    color: var(--gold);
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.maac-courses-title {
+    font-family: 'Oswald', sans-serif;
+    color: #ffffff;
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    font-weight: 600;
+    text-transform: uppercase;
+    line-height: 1.2;
+    position: relative;
+    display: inline-block;
+}
+
+.maac-courses-title::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--orange), var(--gold));
+    margin: 12px auto 0;
+    border-radius: 2px;
+}
+
+.maac-courses-desc {
+    font-family: 'Nunito', sans-serif;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    line-height: 1.65;
+    max-width: 700px;
+    margin: 16px auto 0;
+}
+
+/* Courses Swiper Slider */
+.maac-courses-swiper {
+    width: 100%;
+    padding: 40px 0 60px 0; /* Padding for shadows and pagination */
+    position: relative;
+    overflow: hidden;
+}
+
+.maac-courses-swiper .swiper-slide {
+    width: 320px; /* Fixed width for coverflow effect */
+    height: auto;
+    display: flex;
+}
+
+/* Course Card (Now acts as swiper-slide) */
+.maac-course-card {
+    width: 100%;
+    background: rgba(15, 15, 30, 0.6);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 14px;
+    padding: 30px 20px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                border-color 0.4s ease, box-shadow 0.4s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Gradient glow on hover (pseudo-element) */
+.maac-course-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    background: radial-gradient(circle at top, rgba(255, 106, 0, 0.12), transparent 70%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.swiper-slide-active .maac-course-card {
+    border-color: rgba(255, 106, 0, 0.4);
+    box-shadow: 0 10px 40px rgba(255, 106, 0, 0.15);
+}
+
+.swiper-slide-active .maac-course-card::before {
+    opacity: 1;
+}
+
+.course-card-icon {
+    position: relative;
+    z-index: 1;
+    width: 55px;
+    height: 55px;
+    margin: 0 auto 20px;
+    border-radius: 12px;
+    object-fit: contain;
+    display: block;
+    filter: drop-shadow(0 4px 10px rgba(0,0,0,0.5));
+}
+
+.course-card-title {
+    position: relative;
+    z-index: 1;
+    font-family: 'Oswald', sans-serif;
+    color: #ffffff;
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    line-height: 1.3;
+}
+
+.course-card-text {
+    position: relative;
+    z-index: 1;
+    font-family: 'Nunito', sans-serif;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    line-height: 1.6;
+    margin: 0;
+    flex-grow: 1;
+}
+
+.course-card-tools {
+    position: relative;
+    z-index: 1;
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.75rem;
+    color: rgba(255, 215, 0, 0.8);
+    margin-top: 15px;
+    font-style: italic;
+    line-height: 1.4;
+    padding-top: 15px;
+    border-top: 1px solid rgba(255,255,255,0.05);
+}
+
+/* Swiper Pagination & Navigation Customization */
+.maac-courses-swiper .swiper-pagination {
+    bottom: 0px;
+}
+
+.maac-courses-swiper .swiper-pagination-bullet {
+    background: rgba(255, 255, 255, 0.3);
+    width: 10px;
+    height: 10px;
+    transition: all 0.3s ease;
+}
+
+.maac-courses-swiper .swiper-pagination-bullet-active {
+    background: var(--orange);
+    width: 24px;
+    border-radius: 5px;
+}
+
+.swiper-btn-next,
+.swiper-btn-prev {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 44px;
+    height: 44px;
+    background: rgba(15, 15, 30, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(5px);
+}
+
+.swiper-btn-next:hover,
+.swiper-btn-prev:hover {
+    background: var(--orange);
+    border-color: var(--orange);
+    box-shadow: 0 0 15px rgba(255, 106, 0, 0.4);
+}
+
+.swiper-btn-next {
+    right: 10px;
+}
+
+.swiper-btn-prev {
+    left: 10px;
+}
+
+@media (max-width: 767px) {
+    .maac-courses-swiper .swiper-slide {
+        width: 280px;
+    }
+    .swiper-btn-next, .swiper-btn-prev {
+        display: none; /* Hide arrows on mobile for cleaner look */
+    }
+}
+
+
+
+/* ==========================================================
+   5. STUDENTS ACROSS WEST BENGAL — LOCATIONS SECTION
+   ========================================================== */
+
+.maac-locations-section {
+    position: relative;
+    background-color: var(--dark);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 80px 20px;
+    overflow: hidden;
+}
+
+/* Overlay */
+.maac-locations-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        180deg,
+        rgba(10, 10, 18, 0.94) 0%,
+        rgba(14, 8, 28, 0.9) 50%,
+        rgba(10, 10, 18, 0.94) 100%
+    );
+    z-index: 0;
+}
+
+/* Section Header */
+.maac-locations-header {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.maac-locations-label {
+    font-family: 'Rajdhani', sans-serif;
+    color: var(--gold);
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.maac-locations-title {
+    font-family: 'Oswald', sans-serif;
+    color: #ffffff;
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    font-weight: 600;
+    text-transform: uppercase;
+    line-height: 1.2;
+    position: relative;
+    display: inline-block;
+}
+
+.maac-locations-title::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--orange), var(--gold));
+    margin: 12px auto 0;
+    border-radius: 2px;
+}
+
+.maac-locations-desc {
+    font-family: 'Nunito', sans-serif;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    line-height: 1.65;
+    max-width: 650px;
+    margin: 16px auto 0;
+}
+
+/* Locations Grid */
+.maac-locations-grid {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+/* Location Card */
+.maac-location-card {
+    background: rgba(15, 15, 30, 0.6);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 14px;
+    padding: 24px 20px;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                border-color 0.4s ease;
+}
+
+.maac-location-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(255, 106, 0, 0.25);
+}
+
+.location-card-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.location-pin {
+    width: 22px;
+    height: 22px;
+    flex-shrink: 0;
+    /* Orange tint filter */
+    filter: invert(48%) sepia(89%) saturate(500%) hue-rotate(360deg) brightness(100%) contrast(100%);
+}
+
+.location-card-title {
+    font-family: 'Oswald', sans-serif;
+    color: var(--orange);
+    font-size: 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    line-height: 1.3;
+    margin: 0;
+}
+
+.location-card-text {
+    font-family: 'Nunito', sans-serif;
+    color: var(--text-muted);
+    font-size: 0.78rem;
+    line-height: 1.6;
+    margin: 0;
+}
+
+
+/* ==========================================================
+   6. SCROLL REVEAL ANIMATIONS
+   ========================================================== */
+
+.maac-reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+    will-change: opacity, transform;
+}
+
+.maac-reveal.revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Staggered children */
+.maac-reveal-child {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.maac-reveal.revealed .maac-reveal-child {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Stagger delays for child elements */
+.maac-reveal.revealed .maac-reveal-child:nth-child(1)  { transition-delay: 0.05s; }
+.maac-reveal.revealed .maac-reveal-child:nth-child(2)  { transition-delay: 0.1s;  }
+.maac-reveal.revealed .maac-reveal-child:nth-child(3)  { transition-delay: 0.15s; }
+.maac-reveal.revealed .maac-reveal-child:nth-child(4)  { transition-delay: 0.2s;  }
+.maac-reveal.revealed .maac-reveal-child:nth-child(5)  { transition-delay: 0.25s; }
+.maac-reveal.revealed .maac-reveal-child:nth-child(6)  { transition-delay: 0.3s;  }
+.maac-reveal.revealed .maac-reveal-child:nth-child(7)  { transition-delay: 0.35s; }
+.maac-reveal.revealed .maac-reveal-child:nth-child(8)  { transition-delay: 0.4s;  }
+.maac-reveal.revealed .maac-reveal-child:nth-child(9)  { transition-delay: 0.45s; }
+.maac-reveal.revealed .maac-reveal-child:nth-child(10) { transition-delay: 0.5s;  }
+.maac-reveal.revealed .maac-reveal-child:nth-child(11) { transition-delay: 0.55s; }
+.maac-reveal.revealed .maac-reveal-child:nth-child(12) { transition-delay: 0.6s;  }
+
+
+/* ==========================================================
+   7. RESPONSIVE — TABLET  (max-width: 1024px)
+   ========================================================== */
+
+@media (max-width: 1024px) {
+
+    /* Hero */
+    .maac-hero-content {
+        flex-direction: column;
+        text-align: center;
+        padding-top: 90px;
+        padding-bottom: 50px;
+        gap: 30px;
+    }
+
+    .maac-hero-left {
+        flex: none;
+        max-width: 100%;
+        width: 100%;
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .maac-hero-subtitle {
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 560px;
+    }
+
+    .maac-hero-offer {
+        margin: 0 auto;
+    }
+
+    .maac-hero-right {
+        flex: none;
+        max-width: 500px;
+        width: 100%;
+        margin: 0 auto;
+    }
+
+    /* CTA */
+    .maac-cta-container {
+        flex-direction: column;
+        text-align: center;
+        gap: 32px;
+    }
+
+    .maac-cta-text {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .maac-cta-right {
+        align-items: center;
+    }
+
+    /* Why Grid */
+    .maac-why-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 22px;
+    }
+
+    /* Courses Grid */
+    .maac-courses-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 18px;
+    }
+
+    /* Locations Grid */
+    .maac-locations-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+}
+
+
+/* ==========================================================
+   8. RESPONSIVE — MOBILE  (max-width: 768px)
+   ========================================================== */
+
+@media (max-width: 768px) {
+
+    /* Hero */
+    .maac-hero {
+        min-height: auto;
+    }
+
+    .maac-hero-content {
+        padding-top: 80px;
+        padding-bottom: 40px;
+        gap: 24px;
+    }
+
+    .maac-hero-heading .line1 {
+        font-size: clamp(1.6rem, 5vw, 2.4rem);
+    }
+
+    .maac-hero-heading .passion {
+        font-size: clamp(2.5rem, 8vw, 4rem);
+    }
+
+    .maac-hero-heading .line3 {
+        font-size: clamp(1.4rem, 4.5vw, 2.2rem);
+    }
+
+    .maac-hero-tagline {
+        font-size: 0.95rem;
+        letter-spacing: 2px;
+    }
+
+    .maac-hero-left {
+        margin-bottom: 20px;
+    }
+
+    /* Form */
+    .maac-enquiry-form {
+        padding: 24px 20px;
+        border-radius: 16px;
+    }
+
+    .enquiry-title {
+        font-size: 1.05rem;
+    }
+
+    /* Sections — reduce padding */
+    .maac-cta-section {
+        padding: 48px 16px;
+    }
+
+    .maac-why-section {
+        padding: 60px 16px;
+    }
+
+    .maac-courses-section {
+        padding: 60px 16px;
+    }
+
+    .maac-locations-section {
+        padding: 60px 16px;
+    }
+
+    /* Why Grid — single column */
+    .maac-why-grid {
+        grid-template-columns: 1fr;
+        gap: 18px;
+    }
+
+    .maac-why-card {
+        padding: 24px 20px;
+    }
+
+    /* Courses Grid — 2 columns */
+    .maac-courses-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 14px;
+    }
+
+    .maac-course-card {
+        padding: 20px 14px;
+    }
+
+    /* Locations Grid — single column */
+    .maac-locations-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    /* CTA */
+    .maac-cta-heading {
+        font-size: clamp(1.3rem, 4vw, 1.6rem);
+    }
+
+    .maac-cta-btn {
+        padding: 11px 24px;
+        font-size: 0.88rem;
+    }
+
+    /* Section headers */
+    .maac-why-header,
+    .maac-courses-header,
+    .maac-locations-header {
+        margin-bottom: 36px;
+    }
+}
+
+
+/* ==========================================================
+   9. RESPONSIVE — SMALL MOBILE  (max-width: 480px)
+   ========================================================== */
+
+@media (max-width: 480px) {
+
+    /* Hero */
+    .maac-hero-content {
+        padding: 72px 14px 32px;
+        gap: 20px;
+    }
+
+    .maac-hero-heading .line1 {
+        font-size: 1.5rem;
+    }
+
+    .maac-hero-heading .passion {
+        font-size: 2.2rem;
+    }
+
+    .maac-hero-heading .line3 {
+        font-size: 1.3rem;
+    }
+
+    .maac-hero-subtitle {
+        font-size: 0.82rem;
+    }
+
+    .maac-hero-tagline {
+        font-size: 0.85rem;
+        letter-spacing: 1.5px;
+    }
+
+    .maac-hero-offer {
+        padding: 14px 16px;
+    }
+
+    .offer-highlight {
+        font-size: 1.3rem;
+    }
+
+    /* Form */
+    .maac-enquiry-form {
+        padding: 20px 16px;
+        border-radius: 14px;
+    }
+
+    .enquiry-logo {
+        width: 42px;
+        height: 42px;
+    }
+
+    .enquiry-title {
+        font-size: 0.95rem;
+    }
+
+    .enquiry-field input,
+    .enquiry-field select,
+    .enquiry-field textarea {
+        padding: 10px 12px 10px 36px;
+        font-size: 0.8rem;
+        border-radius: 8px;
+    }
+
+    .enquiry-field-icon {
+        width: 16px;
+        height: 16px;
+        left: 10px;
+    }
+
+    .enquiry-submit {
+        padding: 12px;
+        font-size: 0.95rem;
+        border-radius: 10px;
+    }
+
+    .enquiry-field {
+        margin-bottom: 10px;
+    }
+
+    /* Courses Grid — single column */
+    .maac-courses-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    /* Section padding */
+    .maac-cta-section {
+        padding: 40px 14px;
+    }
+
+    .maac-why-section,
+    .maac-courses-section,
+    .maac-locations-section {
+        padding: 48px 14px;
+    }
+
+    /* CTA features */
+    .maac-cta-feature {
+        gap: 10px;
+    }
+
+    .cta-feature-icon {
+        width: 36px;
+        height: 36px;
+        min-width: 36px;
+    }
+
+    .cta-feature-icon img,
+    .cta-feature-icon svg {
+        width: 18px;
+        height: 18px;
+    }
+
+    .cta-feature-text {
+        font-size: 0.85rem;
+    }
+
+    /* Cards */
+    .maac-why-card {
+        padding: 22px 18px;
+        border-radius: 14px;
+    }
+
+    .why-card-icon {
+        width: 42px;
+        height: 42px;
+    }
+
+    .why-card-title {
+        font-size: 1rem;
+    }
+
+    .maac-location-card {
+        padding: 20px 16px;
+        border-radius: 12px;
+    }
+
+    .location-card-title {
+        font-size: 0.92rem;
+    }
+
+    .location-card-text {
+        font-size: 0.75rem;
+    }
+
+    /* Section headers */
+    .maac-why-header,
+    .maac-courses-header,
+    .maac-locations-header {
+        margin-bottom: 28px;
+    }
+
+    .maac-why-label,
+    .maac-courses-label,
+    .maac-locations-label {
+        font-size: 0.72rem;
+        letter-spacing: 1.5px;
+    }
+}
+
+/* ==========================================================
+   Background Images & Overlays for Inner Sections
+   ========================================================== */
+.maac-cta-bg, .maac-why-bg, .maac-courses-bg, .maac-locations-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+.maac-cta-bg-img, .maac-section-bg-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.maac-cta-overlay, .maac-section-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(
+        135deg,
+        rgba(10, 10, 20, 0.94) 0%,
+        rgba(25, 15, 35, 0.85) 50%,
+        rgba(10, 10, 20, 0.94) 100%
+    );
+    pointer-events: none;
+}
+
+.maac-why-inner, .maac-courses-inner, .maac-locations-inner {
+    position: relative;
+    z-index: 2;
+}

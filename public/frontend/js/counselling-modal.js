@@ -265,13 +265,17 @@
 
   /* ─── Event listeners ──────────────────────────────────── */
 
-  // Document-level event delegation for ALL modal trigger buttons
-  document.addEventListener('click', function (e) {
-    var target = e.target.closest('.btn-counselling, .btn-register, .btn-primary, .open-modal');
-    if (target) {
-      openModal(e);
-    }
-  });
+  // Direct event attachment for ALL modal trigger buttons to prevent mobile/iOS Safari delegation issues
+  const attachModalListeners = () => {
+    document.querySelectorAll('.btn-counselling, .btn-register, .btn-primary, .open-modal, .mobile-cta').forEach(btn => {
+      btn.addEventListener('click', function(e) {
+        openModal(e);
+      });
+    });
+  };
+  
+  // Call once initially
+  attachModalListeners();
 
   // Close button
   if (closeBtn) {

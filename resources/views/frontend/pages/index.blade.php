@@ -96,7 +96,7 @@
         <li><a href="#"><span class="dot-icon"></span>AI &amp; Technology</a></li>
       </ul>
     </li>
-    <li><a href="#students-work">Students Work</a></li>
+    <li><a href="{{ route('showcase') }}">Students Work</a></li>
     <li><a href="#contact">Contact Us</a></li>
   </ul>
 
@@ -127,7 +127,7 @@
       <li><a href="#" data-close><span class="dot-icon"></span>AI &amp; Technology</a></li>
     </ul>
 
-    <a href="#students-work" class="mobile-link" data-close>Students Work</a>
+    <a href="{{ route('showcase') }}" class="mobile-link" data-close>Students Work</a>
     <a href="#contact" class="mobile-link" data-close>Contact Us</a>
 
     <div class="mobile-cta-wrap">
@@ -149,8 +149,8 @@
   <div class="hero-content">
     <h1 class="hero-heading">
       <span class="line1">WEST BENGAL'S</span>
-      <span class="line2">#1 ANIMATION, VFX & AI</span>
-      <span class="line3 orange-gradient">CREATIVE INSTITUTE</span>
+      <span class="line2">#1 ANIMATION,<br class="hero-br">VFX & AI</span>
+      <span class="line3 orange-gradient">CREATIVE<br class="hero-br">INSTITUTE</span>
     </h1>
     <p class="hero-subtext">
       Learn from the future of creatives at MAAC Durgapur the leading destination for Animation, VFX, Gaming, Graphic Design, Multimedia, and Digital Filmmaking. Located in the heart of Durgapur, we offer industry-focused training, expert mentorship, modern studios, and 100% placement support.
@@ -172,7 +172,9 @@
   
   <div class="institute-card maac-card">
     <div class="card-logo">
-      <img src="{{ asset('frontend/images/maac_logo.png') }}" alt="MAAC Logo" loading="lazy">
+      <a href="{{ route('maac') }}">
+        <img src="{{ asset('frontend/images/maac_logo.png') }}" alt="MAAC Logo" loading="lazy">
+      </a>
     </div>
     <div class="card-content">
       <p>MAAC (Maya Academy of Advanced Creativity) Durgapur is the region's most trusted animation and multimedia training institute, strategically located near City Center Durgapur. Students from Kolkata, Burdwan, Bolpur, Bankura, Asansol, Raniganj and Purulia choose MAAC for career-ready skills in animation, VFX, gaming, graphic design, and the latest AI creative tools.</p>
@@ -192,7 +194,9 @@
   
   <div class="institute-card aksha-card">
     <div class="card-logo">
-      <img src="{{ asset('frontend/images/Aksha_logo.png') }}" alt="AKSHA Logo" loading="lazy">
+      <a href="{{ route('aksha') }}">
+        <img src="{{ asset('frontend/images/Aksha_logo.png') }}" alt="AKSHA Logo" loading="lazy">
+      </a>
     </div>
     <div class="card-content">
       <p>AKSHA is a modern creative design institute focused on visual storytelling, UI/UX, graphic design, branding, digital communication, and AI-creative tools. With hands-on training, expert mentorship & industry-focused training, AKSHA helps students build professional skills, creative portfolios, and successful careers in the digital design project. West Bengal's No.1 UI/UX, Graphic Design and Digitally-focused learning institute, strategically located near City Centre, Durgapur.</p>
@@ -212,7 +216,9 @@
   
   <div class="institute-card spacefic-card">
     <div class="card-logo spacefic-logo-wrap">
-      <img src="{{ asset('frontend/images/spacific_logo.png') }}" alt="Space-E-Fic Logo" class="spacefic-logo" loading="lazy">
+      <a href="{{ route('space_e_fic') }}">
+        <img src="{{ asset('frontend/images/spacific_logo.png') }}" alt="Space-E-Fic Logo" class="spacefic-logo" loading="lazy">
+      </a>
     </div>
     <div class="card-content">
       <p>Space-E-Fic is a future-focused coding technology institute specializing in AI, Robotics, Game Development, Coding, AR/VR, and immersive digital innovation. Designed for the next generation of creators and tech innovators, Space-E-Fic creativity with futuristic technology through hands-on learning and real-world training. Best No.1 institute, strategically located near City Centre, Durgapur.</p>
@@ -721,7 +727,7 @@
       <h4>Quick Links</h4>
       <ul>
         <li><a href="#">Home</a></li>
-        <li><a href="#">Blog</a></li>
+        <li><a href="{{ route('blog') }}">Blog</a></li>
         <li><a href="#">Courses</a></li>
         <li><a href="#">About Us</a></li>
         <li><a href="#">Disclaimer</a></li>

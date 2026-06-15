@@ -31,15 +31,16 @@ Route::get('/config-cache', function() {
      return 'Application cache cleared';
  });
 Route::get('/',[PageController::class, 'index'])->name('home');
-Route::get('/vfx-course',[PageController::class, 'vfx'])->name('vfx');
-
-Route::get('/3d-animation-course',[PageController::class, 'animation'])->name('animation');
-
+Route::get('/maac',[PageController::class, 'maac'])->name('maac');
+Route::get('/aksha',[PageController::class, 'aksha'])->name('aksha');
+Route::get('/space-e-fic',[PageController::class, 'space_e_fic'])->name('space_e_fic');
+Route::get('/fcq',[PageController::class, 'fcq'])->name('fcq');
+Route::get('/showcase',[PageController::class, 'showcase'])->name('showcase');
+Route::get('/blog',[PageController::class, 'blog'])->name('blog');
 Route::get('/web-design-ui-ux-course',[PageController::class, 'web'])->name('web');
 
 Route::get('/motion-graphics',[PageController::class, 'motion'])->name('motion');
 
-Route::get('/multimedia-and-digital-design',[PageController::class, 'multimedia'])->name('multimedia');
 
 
 Route::post('career-counselling',[PageController::class, 'counselling'])->name('career_counselling');

@@ -627,10 +627,10 @@
   #aksha-window {
     width: calc(100vw - 20px);
     max-width: 380px;
-    height: 75vh;
-    max-height: 75vh;
+    height: auto;
+    max-height: calc(100vh - 200px);
     right: 10px;
-    bottom: 240px;
+    bottom: 100px;
     border-radius: 18px;
   }
 

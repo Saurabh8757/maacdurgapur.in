@@ -143,7 +143,10 @@ function showLeadForm() {
   bubble.innerHTML = '<strong>\u{1F4CB} Book Your Free Counselling Session</strong><br><br>Fill in your details and our team will reach out shortly!';
   var form = document.createElement('div');
   form.className = 'lead-form';
-  form.innerHTML = '<input type="text" id="lf-name" placeholder="Your Full Name *" /><div class="lead-error" id="lf-name-error"></div><input type="tel" id="lf-phone" placeholder="Phone Number *" /><div class="lead-error" id="lf-phone-error"></div><input type="text" id="lf-email" placeholder="Email Address" /><div class="lead-error" id="lf-email-error"></div><input type="text" id="lf-city" placeholder="City" /><select id="lf-course"><option value="" disabled selected>Interested Course</option><option>Graphic Design</option><option>UI/UX Design</option><option>Animation & VFX</option><option>Game Development</option><option>AI & Emerging Tech</option><option>Robotics & IoT</option><option>Digital Marketing</option><option>Motion Graphics</option><option>Video Editing</option></select><div class="lead-error" id="lf-course-error"></div><button type="button" onclick="submitLead()">\u{1F680} Submit &amp; Book Counselling</button>';
+  var courseSelect = document.getElementById('modal-course');
+  var courseOptions = courseSelect ? courseSelect.innerHTML : '<option value="" disabled selected>Interested Course</option>';
+  
+  form.innerHTML = '<input type="text" id="lf-name" placeholder="Your Full Name *" /><div class="lead-error" id="lf-name-error"></div><input type="tel" id="lf-phone" placeholder="Phone Number *" /><div class="lead-error" id="lf-phone-error"></div><input type="text" id="lf-email" placeholder="Email Address" /><div class="lead-error" id="lf-email-error"></div><select id="lf-course">' + courseOptions + '</select><div class="lead-error" id="lf-course-error"></div><button type="button" onclick="submitLead()">\u{1F680} Submit &amp; Book Counselling</button>';
   bubble.appendChild(form);
   row.appendChild(avatar);
   row.appendChild(bubble);

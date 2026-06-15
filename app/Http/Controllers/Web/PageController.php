@@ -87,18 +87,35 @@ public function terms()
         return view('frontend.pages.t_and_c');
     }
 
- public function vfx()
+ public function maac()
     {
-         $courses = OurCourse::where('status', 'Active')->get();
-
-        return view('frontend.pages.graphics',compact('courses'));
+        $courses = OurCourse::where('status', 'Active')->get();
+        return view('frontend.pages.maac', compact('courses'));
     }
-    
- public function animation()
-    {
-         $courses = OurCourse::where('status', 'Active')->get();
 
-        return view('frontend.pages.animation',compact('courses'));
+ public function aksha()
+    {
+        return view('frontend.pages.aksha');
+    }
+
+ public function space_e_fic()
+    {
+        return view('frontend.pages.space_e_fic');
+    }
+
+ public function fcq()
+    {
+        return view('frontend.pages.fcq');
+    }
+
+ public function showcase()
+    {
+        return view('frontend.pages.showcase');
+    }
+
+ public function blog()
+    {
+        return view('frontend.pages.blog');
     }
     
  public function web()
@@ -114,13 +131,7 @@ public function terms()
 
         return view('frontend.pages.motion',compact('courses'));
     } 
-    
- public function multimedia()
-    {
-         $courses = OurCourse::where('status', 'Active')->get();
-
-        return view('frontend.pages.multimedia',compact('courses'));
-    } 
+ 
 }
 
 
