@@ -263,6 +263,7 @@
 
 <!-- ===================== STATS SECTION ===================== -->
 <section class="stats-section">
+  <canvas class="sakura-canvas" data-section="stats"></canvas>
   <div class="stats-grid">
     <div class="stat-item" data-count="5000" data-suffix="+">
       <span class="stat-num" data-target="5000">0</span><span class="stat-suffix">+</span>
@@ -288,6 +289,7 @@
 
 <!-- ===================== RECRUITERS SECTION ===================== -->
 <section class="recruiters-section">
+  <canvas class="sakura-canvas" data-section="recruiters"></canvas>
   <canvas class="interactive-leaf-canvas"></canvas>
   
   <div class="section-header">
@@ -437,6 +439,7 @@
 
 <!-- ===================== JOURNEY SECTION ===================== -->
 <section class="journey-section">
+  <canvas class="sakura-canvas" data-section="journey"></canvas>
   <canvas class="interactive-leaf-canvas"></canvas>
   <div class="section-header">
     <h2 class="section-title gold">YOUR JOURNEY TO EXCELLENCE BEGINS HERE</h2>
@@ -670,6 +673,7 @@
 
 <!-- ===================== AI SECTION ===================== -->
 <section class="ai-section">
+  <canvas class="sakura-canvas" data-section="ai"></canvas>
   <canvas class="interactive-leaf-canvas"></canvas>
   <div class="section-header">
     <h2 class="section-title gold">THE FUTURE OF AI IN ANIMATION & DESIGN</h2>

@@ -13,12 +13,10 @@
     initHeroSakura(heroCanvas);
   }
 
-  // Skip section sakura on mobile
-  if (!isMobile) {
-    document.querySelectorAll('.sakura-canvas').forEach(function (canvas) {
-      initSectionSakura(canvas);
-    });
-  }
+  // Initialize section sakura everywhere
+  document.querySelectorAll('.sakura-canvas').forEach(function (canvas) {
+    initSectionSakura(canvas);
+  });
 
   /* ─────────────────────────────────────────────────────────
      HERO SAKURA (Three.js) — reduced particles
@@ -119,8 +117,17 @@
     }
 
     var clock = new THREE.Clock();
+    var active = true;
+    
+    var observer = new IntersectionObserver(function(entries) {
+      active = entries[0].isIntersecting;
+    }, { threshold: 0.0 });
+    observer.observe(canvas.parentElement);
+
     function animate() {
       requestAnimationFrame(animate);
+      if (!active) return;
+      
       var time = clock.getElapsedTime();
       spawnTimer++;
 
@@ -229,7 +236,12 @@
       ctx.clearRect(0, 0, W, H);
       if (!active) return;
 
-      if (frame % 20 === 0 && petals.length < 30) {
+      var isTablet = window.innerWidth < 1024 && window.innerWidth >= 768;
+      var isMobileCheck = window.innerWidth < 768;
+      var MAX_PETALS = isMobileCheck ? 8 : (isTablet ? 15 : 25);
+      var SPAWN_RATE = isMobileCheck ? 40 : (isTablet ? 30 : 20);
+
+      if (frame % SPAWN_RATE === 0 && petals.length < MAX_PETALS) {
         spawnPetal();
       }
 
