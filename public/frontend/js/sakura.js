@@ -249,4 +249,133 @@
     animatePetals();
   }
 
+  /* ─────────────────────────────────────────────────────────
+     INTERACTIVE SAKURA (Hover/Touch trigger, auto-decay)
+  ───────────────────────────────────────────────────────── */
+  function initInteractiveSakura(canvas, section) {
+    var ctx = canvas.getContext('2d');
+    var W, H;
+    var petals = [];
+    var frame = 0;
+    var isHovering = false;
+    var animationId = null;
+
+    function resize() {
+      var rect = section.getBoundingClientRect();
+      W = rect.width || window.innerWidth;
+      H = rect.height || 600;
+      canvas.width = W;
+      canvas.height = H;
+    }
+    resize();
+    window.addEventListener('resize', resize, { passive: true });
+
+    function spawnPetal(x, y, fromMouse) {
+      petals.push({
+        x: x !== undefined ? x : Math.random() * W,
+        y: y !== undefined ? y : -20 + Math.random() * 20,
+        vx: (Math.random() - 0.5) * 1.5,
+        vy: fromMouse ? (-1 - Math.random() * 2) : (1 + Math.random() * 1.5),
+        rotation: Math.random() * Math.PI * 2,
+        rotSpeed: (Math.random() - 0.5) * 0.08,
+        life: 1.0,
+        decay: fromMouse ? 0.008 : (0.002 + Math.random() * 0.002), // 6-15s lifespan
+        w: 6 + Math.random() * 8,
+        h: 4 + Math.random() * 5,
+        color: 'hsl(' + (340 + Math.random() * 25) + ', 80%, ' + (70 + Math.random() * 15) + '%)',
+        swing: Math.random() * Math.PI * 2,
+        swingSpeed: 0.02 + Math.random() * 0.03,
+      });
+    }
+
+    function drawPetal(p) {
+      ctx.save();
+      ctx.translate(p.x, p.y);
+      ctx.rotate(p.rotation);
+      ctx.globalAlpha = p.life * 0.7;
+      ctx.fillStyle = p.color;
+      ctx.beginPath();
+      ctx.ellipse(0, 0, p.w * 0.5, p.h * 0.5, 0, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.restore();
+    }
+
+    function animatePetals() {
+      frame++;
+      ctx.clearRect(0, 0, W, H);
+
+      // Ambient spawn only while hovering
+      if (isHovering && frame % 15 === 0 && petals.length < 50) {
+        spawnPetal();
+      }
+
+      for (var i = petals.length - 1; i >= 0; i--) {
+        var p = petals[i];
+        p.swing += p.swingSpeed;
+        p.vx += Math.sin(p.swing) * 0.02;
+        p.x += p.vx;
+        p.y += p.vy;
+        p.rotation += p.rotSpeed;
+        p.life -= p.decay;
+        
+        // Remove dead/fallen petals
+        if (p.y > H + 20 || p.life <= 0) { petals.splice(i, 1); continue; }
+        drawPetal(p);
+      }
+
+      // Stop engine if completely idle
+      if (petals.length > 0 || isHovering) {
+        animationId = requestAnimationFrame(animatePetals);
+      } else {
+        animationId = null;
+      }
+    }
+
+    function triggerBurst() {
+      // Spawn 15-20 petals instantly
+      var count = 15 + Math.floor(Math.random() * 5);
+      for(var i=0; i<count; i++) {
+        spawnPetal(Math.random() * W, Math.random() * (H * 0.3));
+      }
+      if (!animationId) animatePetals();
+    }
+
+    // --- Desktop Interactions ---
+    section.addEventListener('mouseenter', function() {
+      isHovering = true;
+      triggerBurst();
+    }, { passive: true });
+
+    section.addEventListener('mousemove', function(e) {
+      if (!isHovering) return;
+      if (Math.random() > 0.85 && petals.length < 60) {
+        var rect = section.getBoundingClientRect();
+        spawnPetal(e.clientX - rect.left, e.clientY - rect.top, true);
+      }
+    }, { passive: true });
+
+    section.addEventListener('mouseleave', function() {
+      isHovering = false;
+    }, { passive: true });
+
+    // --- Mobile Interactions ---
+    section.addEventListener('touchstart', function() {
+      if (!isHovering) {
+        isHovering = true;
+        triggerBurst();
+        // Auto-fade since mobile lacks clean 'mouseleave'
+        setTimeout(function() { isHovering = false; }, 1500);
+      }
+    }, { passive: true });
+  }
+
+  // Initialize interactive canvases safely
+  document.querySelectorAll('.interactive-leaf-canvas').forEach(function (canvas) {
+    var section = canvas.closest('section');
+    if (section) {
+      // Only init if not on low-end mobile to save battery
+      initInteractiveSakura(canvas, section);
+    }
+  });
+
 })();

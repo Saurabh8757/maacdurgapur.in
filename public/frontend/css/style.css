@@ -64,6 +64,8 @@
 html {
     scroll-behavior: smooth;
     font-size: 16px;
+    overflow-x: hidden;
+    width: 100%;
 }
 
 body {
@@ -71,6 +73,7 @@ body {
     color: var(--text-light);
     font-family: Nunito, sans-serif;
     overflow-x: hidden;
+    width: 100%;
     cursor: none;
 }
 
@@ -184,6 +187,8 @@ button:hover ~ #cursor-outer {
     top: 0;
     left: 0;
     right: 0;
+    width: 100%;
+    max-width: 100%;
     height: var(--nav-h);
     display: flex;
     align-items: center;
@@ -1106,8 +1111,7 @@ button:hover ~ #cursor-outer {
 .recruiters-section::before,
 .placement-section::before,
 .journey-section::before,
-.ai-section::before,
-.footer::before {
+.ai-section::before {
     content: '';
     position: absolute;
     top: 0; left: 0; right: 0;
@@ -1339,6 +1343,9 @@ button:hover ~ #cursor-outer {
 /* ============================================================
    PLACEMENT GROUP (shared wrapper for Recruiters + Placement)
    ============================================================ */
+/* ============================================================
+   PLACEMENT GROUP (shared wrapper for Recruiters + Placement)
+   ============================================================ */
 .placement-group {
     position: relative;
     background-size: cover;
@@ -1347,8 +1354,6 @@ button:hover ~ #cursor-outer {
     margin-top: -60px;
     padding-top: 140px;
     z-index: 2;
-    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 100px, black 100%);
-    mask-image: linear-gradient(to bottom, transparent 0%, black 100px, black 100%);
 }
 
 .placement-group::before {
@@ -1363,6 +1368,24 @@ button:hover ~ #cursor-outer {
 .placement-group > * {
     position: relative;
     z-index: 2;
+}
+
+/* Cinematic Top Blend (replaces mask-image) */
+.placement-group::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 120px;
+    background: linear-gradient(to bottom, rgba(8, 8, 18, 1) 0%, transparent 100%);
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* Premium Parallax Effect on Desktop */
+@media (min-width: 1024px) {
+    .placement-group {
+        background-attachment: fixed;
+    }
 }
 
 /* ============================================================
@@ -1765,13 +1788,11 @@ button:hover ~ #cursor-outer {
    ============================================================ */
 .journey-section {
     padding: 80px 24px 100px;
-    background: linear-gradient(180deg, rgba(5, 5, 12, 1), rgba(10, 5, 5, 1));
+    background: transparent;
     position: relative;
     overflow: hidden;
     margin-top: -80px;
     padding-top: 160px;
-    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 100px, black 100%);
-    mask-image: linear-gradient(to bottom, transparent 0%, black 100px, black 100%);
 }
 
 /* ─── Journey Swiper ──────────────────────────────────── */
@@ -2184,15 +2205,13 @@ button:hover ~ #cursor-outer {
 /* ============================================================
    AI SECTION
    ============================================================ */
-/* .ai-section {
+.ai-section {
     padding: 80px 24px;
-    background: linear-gradient(180deg, rgba(5, 5, 14, 1), rgba(8, 8, 22, 1));
+    background: transparent;
     position: relative;
     margin-top: -80px;
     padding-top: 160px;
-    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 100px, black 100%);
-    mask-image: linear-gradient(to bottom, transparent 0%, black 100px, black 100%);
-} */
+}
 
 .ai-content-grid {
     display: grid;
@@ -2566,3 +2585,35 @@ button:hover ~ #cursor-outer {
     .loader-text { letter-spacing: 2px; }
     }
 
+
+
+/* ── Interactive Leaf Canvas ── */
+.interactive-leaf-canvas {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    width: 100%; height: 100%;
+    z-index: 1;
+    pointer-events: none;
+}
+
+
+
+/* ============================================================
+   MOBILE ENVIRONMENT FIX
+   ============================================================ */
+@media (max-width: 768px) {
+    /* 1. Mobile Screen Crop: Anchor background without stretching or fixing */
+    .placement-group {
+        background-size: auto 100vh !important;
+        background-position: top center !important;
+        background-repeat: no-repeat !important;
+    }
+
+    /* 2. Retain independent opaque visual environments for Journey and AI */
+    .journey-section {
+        background: linear-gradient(180deg, rgba(5, 5, 12, 1), rgba(10, 5, 5, 1)) !important;
+    }
+    .ai-section {
+        background: linear-gradient(180deg, rgba(5, 5, 14, 1), rgba(8, 8, 22, 1)) !important;
+    }
+}

@@ -277,6 +277,7 @@ r
 
 <!-- ===================== RECRUITERS SECTION ===================== -->
 <section class="recruiters-section">
+  <canvas class="interactive-leaf-canvas"></canvas>
   
   <div class="section-header">
     <h2 class="section-title gold">OUR TOP RECRUITERS</h2>
@@ -301,7 +302,8 @@ r
     </div>
   </div>
   <!-- <div class="swiper-button-prev recruiter-prev"></div>
-  <div class="swiper-button-next recruiter-next"></div></section> -->
+  <div class="swiper-button-next recruiter-next"></div>-->
+</section>
 
 <!-- ===================== PLACEMENT SECTION ===================== -->
 <section class="placement-section">
@@ -422,10 +424,9 @@ r
   </div>
 </section>
 
-</div><!-- /placement-group -->
-
 <!-- ===================== JOURNEY SECTION ===================== -->
 <section class="journey-section">
+  <canvas class="interactive-leaf-canvas"></canvas>
   <div class="section-header">
     <h2 class="section-title gold">YOUR JOURNEY TO EXCELLENCE BEGINS HERE</h2>
     <p class="section-subtitle">Join thousands of students from Durgapur, Kolkata, Asansol, Burdwan, Raniganj, Bolpur and Purulia who have built their careers in animation and technology at MAAC Durgapur.</p>
@@ -658,6 +659,7 @@ r
 
 <!-- ===================== AI SECTION ===================== -->
 <section class="ai-section">
+  <canvas class="interactive-leaf-canvas"></canvas>
   <div class="section-header">
     <h2 class="section-title gold">THE FUTURE OF AI IN ANIMATION & DESIGN</h2>
     <p class="section-subtitle">MAAC Durgapur is included in the Schoolnet Advanced Technology framework to include AI creative courses. We are the premier for the future of design and we have a roster of the best trainers from Burdwan–</p>
@@ -686,6 +688,8 @@ r
     </div>
   </div>
 </section>
+
+</div><!-- /placement-group -->
 
 <!-- ===================== FOOTER ===================== -->
 <footer id="contact" class="footer">
