@@ -532,5 +532,5 @@
     });
   }
 
-  console.log('Counselling Modal — Premium Loaded ✓');
+
 })();

@@ -138,9 +138,7 @@
     if (e.key === 'Escape' && menuOpen) closeMenu();
   });
 
-  window.addEventListener('scroll', () => {
-    navbar.classList.toggle('scrolled', window.scrollY > 40);
-  }, { passive: true });
+
 
   /* ─── Magnetic button effect ────────────────────────────── */
   document.querySelectorAll('.btn-primary, .btn-secondary, .btn-register, .btn-counselling').forEach(btn => {
@@ -155,40 +153,9 @@
     });
   });
 
-  /* ─── Lazy-load section backgrounds ─────────────────────── */
-  if ('IntersectionObserver' in window) {
-    const imgObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const img = entry.target;
-          if (img.dataset.src) {
-            img.src = img.dataset.src;
-            img.removeAttribute('data-src');
-          }
-          imgObserver.unobserve(img);
-        }
-      });
-    }, { rootMargin: '200px' });
 
-    document.querySelectorAll('.section-bg-img[data-src]').forEach(img => imgObserver.observe(img));
-  }
 
-  /* ─── GSAP ScrollTo polyfill check ─────────────────────── */
-  // Load gsap ScrollToPlugin if needed
-  if (typeof gsap !== 'undefined' && typeof ScrollToPlugin === 'undefined') {
-    // Fallback smooth scroll without plugin
-    document.querySelectorAll('a[href^="#"]').forEach(link => {
-      if (link._smoothScrollBound) return;
-      link._smoothScrollBound = true;
-      link.addEventListener('click', (e) => {
-        const target = document.querySelector(link.getAttribute('href'));
-        if (target) {
-          e.preventDefault();
-          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-      });
-    });
-  }
+
 
   /* ─── Image blur-up loading (journey + placement cards) ── */
   document.querySelectorAll('.journey-card-img, .placement-card-img').forEach(function (img) {
@@ -216,20 +183,9 @@
     });
   });
 
-  /* ─── Performance: GPU hints ─────────────────────────────── */
-  document.querySelectorAll('.hero-bg-img, .section-bg-img').forEach(el => {
-    el.style.willChange = 'transform';
-  });
 
-  /* ─── Institute section tree hover — spawn sakura ────────── */
-  document.querySelectorAll('.institute-section').forEach(section => {
-    const canvas = section.querySelector('.sakura-canvas');
-    if (!canvas) return;
-    section.addEventListener('mousemove', (e) => {
-      // Extra petals are spawned in sakura.js via the mousemove listener
-      // This is just a hook for additional effects if needed
-    });
-  });
 
-  console.log('MAAC Durgapur — Website Loaded ✓');
+
+
+
 })();

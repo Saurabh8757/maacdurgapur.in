@@ -17,7 +17,6 @@
     --gold: #ffd700;
     --gold-light: #ffe55c;
     --blue-accent: #1e90ff;
-    --blue-dark: #0a1628;
     --dark: #0a0a0f;
     --dark2: #12121a;
     --text-light: #e8e8f0;
@@ -47,7 +46,6 @@
     --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.4);
     --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.5);
     --shadow-orange: 0 4px 20px rgba(255, 106, 0, 0.35);
-    --haze: rgba(15, 15, 25, 0.04);
 }
 
 /* ============================================================
@@ -74,7 +72,6 @@ body {
     font-family: Nunito, sans-serif;
     overflow-x: hidden;
     width: 100%;
-    cursor: none;
 }
 
 body.loading {
@@ -99,54 +96,6 @@ body.loading {
 ::selection {
     background: rgba(255, 106, 0, 0.3);
     color: #fff;
-}
-/* ============================================================
-   CUSTOM CURSOR
-   ============================================================ */
-#cursor-outer {
-    position: fixed;
-    width: 36px;
-    height: 36px;
-    border: 1.5px solid rgba(255, 106, 0, 0.7);
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 99999;
-    transform: translate(-50%, -50%);
-    transition: width var(--trans-base), height var(--trans-base), border-color var(--trans-base), background var(--trans-base);
-    mix-blend-mode: normal;
-}
-
-#cursor-inner {
-    position: fixed;
-    width: 8px;
-    height: 8px;
-    background: var(--orange);
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 99999;
-    transform: translate(-50%, -50%);
-    box-shadow: 0 0 10px var(--orange), 0 0 20px var(--orange);
-    transition: width var(--trans-fast), height var(--trans-fast);
-}
-
-#cursor-canvas {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 99998;
-}
-
-body:hover #cursor-outer {
-    opacity: 1;
-}
-
-a:hover ~ #cursor-outer,
-button:hover ~ #cursor-outer {
-    width: 50px;
-    height: 50px;
 }
 
 /* ============================================================
@@ -831,11 +780,6 @@ button:hover ~ #cursor-outer {
         text-align: left;
         max-width: 100%;
         background: radial-gradient(ellipse at 20% 50%, rgba(5, 5, 10, 0.35) 0%, transparent 75%);
-        backdrop-filter: none;
-        -webkit-backdrop-filter: none;
-        border: none;
-        box-shadow: none;
-        border-radius: 0;
     }
 
     .hero-sub2,
@@ -924,13 +868,6 @@ button:hover ~ #cursor-outer {
     object-position: center;
 }
 
-
-.sakura-canvas {
-    position: absolute;
-    inset: 0;
-    z-index: 2;
-    pointer-events: none;
-}
 
 /* Institute Cards */
 .institute-card {
@@ -1095,12 +1032,9 @@ button:hover ~ #cursor-outer {
 .placement-section::after,
 .journey-section::after,
 .ai-section::after {
-    content: '';
-    position: absolute;
-    bottom: 0; left: 0; right: 0;
+    bottom: 0;
     height: 500px;
     background: linear-gradient(to top, transparent 0%, rgba(10, 8, 14, 0.02) 15%, transparent 100%);
-    z-index: 0; pointer-events: none;
 }
 
 .maac-section::before,
@@ -1112,12 +1046,9 @@ button:hover ~ #cursor-outer {
 .placement-section::before,
 .journey-section::before,
 .ai-section::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
+    top: 0;
     height: 500px;
     background: linear-gradient(to bottom, transparent 0%, rgba(10, 8, 14, 0.02) 15%, transparent 100%);
-    z-index: 0; pointer-events: none;
 }
 
 .sakura-canvas {
@@ -1537,7 +1468,7 @@ button:hover ~ #cursor-outer {
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: 420px; /* ENFORCED FIXED HEIGHT FOR ALL CARDS */
+    min-height: 420px; /* MIN HEIGHT FOR ALL CARDS */
     position: relative;
     will-change: transform;
 }
@@ -1745,10 +1676,6 @@ button:hover ~ #cursor-outer {
 @media (max-width: 1024px) {
     .placement-swiper {
         padding: 24px 50px 100px; /* Increased bottom padding */
-        overflow: visible !important;
-    }
-    .placement-swiper .swiper-wrapper {
-        align-items: stretch !important;
     }
     .salary-amount {
         font-size: 1.3rem;
@@ -1758,13 +1685,9 @@ button:hover ~ #cursor-outer {
 @media (max-width: 768px) {
     .placement-section .placement-swiper {
         padding: 20px 16px 100px !important; /* Increased padding */
-        overflow: visible !important;
-    }
-    .placement-section .placement-swiper .swiper-wrapper {
-        align-items: stretch !important; /* Force baseline */
     }
     .placement-card {
-        height: 380px !important; /* Slightly shorter for mobile but still fixed */
+        min-height: 380px !important; /* Slightly shorter for mobile but still min */
     }
     .salary-amount {
         font-size: 1.2rem;
@@ -1863,11 +1786,6 @@ button:hover ~ #cursor-outer {
 .journey-card-bg:has(.journey-card-img.loaded)::before {
     opacity: 0;
     animation: none;
-}
-
-@keyframes skeletonSweep {
-    0% { background-position: 200% 0; }
-    100% { background-position: -200% 0; }
 }
 
 .journey-card-img {
@@ -2142,9 +2060,6 @@ button:hover ~ #cursor-outer {
     .journey-card-content {
         padding: 28px;
     }
-}
-
-@media (max-width: 1024px) {
     .journey-pagination {
         margin-top: 50px;
     }
@@ -2262,13 +2177,11 @@ button:hover ~ #cursor-outer {
 }
 
 @media (max-width: 768px) {
-    .stats-grid { grid-template-columns: repeat(2, 1fr); }
     .ai-features { grid-template-columns: 1fr; }
     .courses-swiper { padding: 0 16px 40px; }
 }
 
 @media (max-width: 480px) {
-    .stats-grid { grid-template-columns: 1fr 1fr; }
 }
 /* ============================================================
    FOOTER SECTION

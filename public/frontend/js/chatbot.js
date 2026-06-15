@@ -17,25 +17,24 @@ var chatOpened = false;
 // TOGGLE
 // ─────────────────────────────────────────────
 function toggleChat() {
-  console.log('[AKSHA CHAT] toggleChat called');
+
   var win = document.getElementById('aksha-window');
   var btn = document.getElementById('aksha-launcher');
-  if (!win) { console.error('[AKSHA CHAT] #aksha-window not found'); return; }
-  if (!btn) { console.error('[AKSHA CHAT] #aksha-launcher not found'); return; }
+  if (!win || !btn) return;
   if (win.classList.contains('visible')) {
     win.classList.remove('visible');
     btn.classList.remove('open');
-    console.log('[AKSHA CHAT] Chat closed');
+
   } else {
     win.classList.add('visible');
     btn.classList.add('open');
-    console.log('[AKSHA CHAT] Chat opened');
+
     if (!chatOpened) { chatOpened = true; setTimeout(showWelcome, 300); }
   }
 }
 
 function closeChat() {
-  console.log('[AKSHA CHAT] closeChat called');
+
   var win = document.getElementById('aksha-window');
   var btn = document.getElementById('aksha-launcher');
   if (!win || !btn) return;
@@ -47,7 +46,7 @@ function closeChat() {
 // WELCOME
 // ─────────────────────────────────────────────
 function showWelcome() {
-  console.log('[AKSHA CHAT] showWelcome');
+
   var welcome = '\u{1F44B} <strong>Welcome to AKSHA International School of Design & Technology!</strong><br><br>I am <strong>AKSHA AI</strong> \u2014 your personal admission counselor powered by <strong>MAAC Durgapur</strong> \u{1F393}<br><br>I can help you with:<br><ul><li>\u{1F3A8} Choosing the right creative or tech course</li><li>\u{1F4BC} Career guidance & salary insights</li><li>\u{1F4CB} Admission process & fees</li><li>\u{1F916} AI, Animation, Gaming, Robotics & more</li></ul><br>What would you like to explore today?';
   appendBotMessage(welcome, QUICK_REPLIES_INITIAL);
 }
@@ -153,7 +152,7 @@ function showLeadForm() {
 }
 
 function submitLead() {
-  console.log('[AKSHA CHAT] submitLead called');
+
   var nameEl = document.getElementById('lf-name');
   var phoneEl = document.getElementById('lf-phone');
   var emailEl = document.getElementById('lf-email');
@@ -209,7 +208,7 @@ function submitLead() {
           if (msgDiv) {
             msgDiv.innerHTML = '<div class="lead-success"><span class="success-icon">\u2705</span><h4>Thank You! \u{1F389}</h4><p>Your counselling request has been received. Our team will reach out shortly!</p></div>';
           }
-          console.log('[AKSHA CHAT] Lead submitted successfully');
+
         } else if (resp.status === 0 && resp.error) {
           // Server-side validation errors
           if (resp.error.name) document.getElementById('lf-name-error').textContent = resp.error.name[0];
@@ -218,15 +217,15 @@ function submitLead() {
           if (resp.error.course_id) document.getElementById('lf-course-error').textContent = resp.error.course_id[0];
         }
       } catch(e) {
-        console.error('[AKSHA CHAT] Parse error:', e);
+
       }
     } else {
-      console.error('[AKSHA CHAT] HTTP error:', xhr.status);
+
     }
   };
 
   xhr.onerror = function() {
-    console.error('[AKSHA CHAT] Network error');
+
     if (submitBtn) {
       submitBtn.disabled = false;
       submitBtn.textContent = '\u{1F680} Submit & Book Counselling';
@@ -246,7 +245,7 @@ function submitLead() {
 // SEND MESSAGE
 // ─────────────────────────────────────────────
 function sendUserText(text) {
-  console.log('[AKSHA CHAT] sendUserText:', text);
+
   if (isTyping) return;
   appendUserMessage(text);
   chatHistory.push({ role: 'user', content: text });
@@ -288,7 +287,7 @@ function getBotReply(text) {
 }
 
 function sendMessage() {
-  console.log('[AKSHA CHAT] sendMessage called');
+
   var input = document.getElementById('chat-input');
   if (!input) return;
   var text = input.value.trim();
@@ -310,9 +309,4 @@ function autoResize(el) {
   el.style.height = el.scrollHeight + 'px';
 }
 
-// ─────────────────────────────────────────────
-// DEBUG — Log that chatbot loaded
-// ─────────────────────────────────────────────
-console.log('[AKSHA CHAT] chatbot.js loaded successfully');
-console.log('[AKSHA CHAT] #aksha-launcher exists:', !!document.getElementById('aksha-launcher'));
-console.log('[AKSHA CHAT] #aksha-window exists:', !!document.getElementById('aksha-window'));
+

@@ -5,6 +5,22 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="csrf-token" content="{{ csrf_token() }}">
 <title>MAAC Durgapur – West Bengal's #1 Animation, VFX & AI Creative Institute</title>
+<meta name="description" content="MAAC Durgapur is West Bengal's leading Animation, VFX, Gaming, Graphic Design & AI Creative Institute. Industry-focused training, expert mentorship, modern studios and 100% placement support near City Centre, Durgapur.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="{{ url('/') }}">
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="MAAC Durgapur – West Bengal's #1 Animation, VFX & AI Creative Institute">
+<meta property="og:description" content="Learn Animation, VFX, Gaming, Graphic Design & AI at MAAC Durgapur. Industry-focused training with 100% placement support.">
+<meta property="og:image" content="{{ asset('frontend/images/pg-01.webp') }}">
+<meta property="og:url" content="{{ url('/') }}">
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="MAAC Durgapur – West Bengal's #1 Animation, VFX & AI Institute">
+<meta name="twitter:description" content="Learn Animation, VFX, Gaming, Graphic Design & AI at MAAC Durgapur. Industry-focused training with 100% placement support.">
+<meta name="twitter:image" content="{{ asset('frontend/images/pg-01.webp') }}">
+<!-- Favicon -->
+<link rel="icon" type="image/png" href="{{ asset('frontend/images/favicon.png') }}">
 <link rel="stylesheet" href="{{ asset('frontend/css/style.css') }}">
 <link rel="stylesheet" href="{{ asset('frontend/css/chatbot.css') }}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -27,7 +43,7 @@
       <div class="loader-ring"></div>
       <div class="loader-ring loader-ring-inner"></div>
       <div class="loader-glow"></div>
-r
+
       <div class="loader-logo">
         <div class="loader-robot">
           <div class="loader-robot-head"></div>
@@ -48,18 +64,13 @@ r
   </div>
 </div>
 
-<!-- Custom Cursor -->
-<div id="cursor-outer"></div>
-<div id="cursor-inner"></div>
-<canvas id="cursor-canvas"></canvas>
+
 
 <!-- Floating Action Buttons -->
 <a href="https://wa.me/919333504000" class="fab fab-whatsapp" target="_blank">
   <img src="{{ asset('frontend/images/whatsapp__1_.png') }}" alt="WhatsApp" loading="lazy">
 </a>
-<!-- <a href="tel:+919333504000" class="fab fab-phone" target="_blank">
-  <img src="{{ asset('frontend/images/7e21b9661c85d61676143a8ae2c9a73b.jpg') }}" alt="Call" loading="lazy">
-</a> -->
+
 
 <!-- ===================== NAVBAR ===================== -->
 <nav id="navbar">
@@ -767,21 +778,21 @@ r
 
         <div class="form-group">
           <span class="field-icon">👤</span>
-          <input type="text" name="name" id="modal-name" class="field-input" placeholder=" " autocomplete="name">
+          <input type="text" name="name" id="modal-name" class="field-input" placeholder=" " autocomplete="name" required>
           <label class="field-label" for="modal-name">Your Full Name</label>
           <span class="error-text name_error"></span>
         </div>
 
         <div class="form-group">
           <span class="field-icon">📞</span>
-          <input type="text" name="phone" id="modal-phone" class="field-input" placeholder=" " autocomplete="tel">
+          <input type="tel" name="phone" id="modal-phone" class="field-input" placeholder=" " autocomplete="tel" required>
           <label class="field-label" for="modal-phone">Phone Number</label>
           <span class="error-text phone_error"></span>
         </div>
 
         <div class="form-group">
           <span class="field-icon">✉️</span>
-          <input type="text" name="email" id="modal-email" class="field-input" placeholder=" " autocomplete="email">
+          <input type="email" name="email" id="modal-email" class="field-input" placeholder=" " autocomplete="email" required>
           <label class="field-label" for="modal-email">Email Address</label>
           <span class="error-text email_error"></span>
         </div>
@@ -832,7 +843,7 @@ r
 </div>
 
 <!-- chatbot -->
-<button id="aksha-launcher" aria-label="Open chat" onclick="toggleChat(); console.log('chatbot-toggle clicked')">
+<button id="aksha-launcher" aria-label="Open chat" onclick="toggleChat()">
   <svg class="chat-icon" viewBox="0 0 24 24" width="28" height="28"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z" fill="white"/></svg>
   <svg class="close-icon" viewBox="0 0 24 24" width="28" height="28"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" fill="white"/></svg>
 </button>
@@ -1048,15 +1059,14 @@ r
 
 })();
 </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/10.3.1/swiper-bundle.min.js"></script>
-<script src="{{ asset('frontend/js/cursor.js') }}"></script>
-<script src="{{ asset('frontend/js/sakura.js') }}"></script>
-<script src="{{ asset('frontend/js/animations.js') }}"></script>
-<script src="{{ asset('frontend/js/main.js') }}"></script>
-<script src="{{ asset('frontend/js/counselling-modal.js') }}"></script>
-<script src="{{ asset('frontend/js/chatbot.js') }}"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/10.3.1/swiper-bundle.min.js"></script>
+<script defer src="{{ asset('frontend/js/sakura.js') }}"></script>
+<script defer src="{{ asset('frontend/js/animations.js') }}"></script>
+<script defer src="{{ asset('frontend/js/main.js') }}"></script>
+<script defer src="{{ asset('frontend/js/counselling-modal.js') }}"></script>
+<script defer src="{{ asset('frontend/js/chatbot.js') }}"></script>
 </body>
 </html>

@@ -234,5 +234,5 @@
     });
   }
 
-  console.log('Animations — Initialized ✓');
+
 })();
