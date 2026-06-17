@@ -98,6 +98,11 @@ public function terms()
         return view('frontend.pages.aksha');
     }
 
+ public function faq()
+    {
+        return view('frontend.pages.faq');
+    }
+
  public function space_e_fic()
     {
         return view('frontend.pages.space_e_fic');

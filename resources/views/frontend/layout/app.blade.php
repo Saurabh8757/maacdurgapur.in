@@ -46,12 +46,7 @@
       <div class="loader-glow"></div>
 
       <div class="loader-logo">
-        <div class="loader-robot">
-          <div class="loader-robot-head"></div>
-          <div class="loader-robot-body"></div>
-          <div class="loader-robot-arm left"></div>
-          <div class="loader-robot-arm right"></div>
-        </div>
+        <img src="{{ asset('frontend/images/maac/icons/transparent-logo.png') }}" alt="MAAC Robot Mascot" style="max-width: 80px; height: auto;">
       </div>
     </div>
     <h2 class="loader-text">Loading Creative Universe<span class="loader-dots"></span></h2>
@@ -74,22 +69,25 @@
 
 
 <!-- ===================== NAVBAR ===================== -->
-<nav id="navbar">
-  <!-- Robot Logo -->
-  <div class="nav-robot" aria-label="Logo">
-    <div class="robot-figure">
-      <div class="robot-head"></div>
-      <div class="robot-body"></div>
-      <div class="robot-arm left"></div>
-      <div class="robot-arm right"></div>
-    </div>
-  </div>
+<nav id="navbar" class="{{ request()->routeIs('maac', 'aksha', 'space_e_fic') ? 'brand-navbar' : '' }}">
+  <!-- Mascot Overlap Decor -->
+  <a href="{{ url('/') }}" class="nav-brand {{ request()->routeIs('maac', 'aksha', 'space_e_fic') ? 'nav-brand-text-logo' : '' }}">
+    @if(request()->routeIs('maac'))
+        <img src="{{ asset('frontend/images/maac_new_logo.png') }}" alt="MAAC Logo" class="nav-brand-icon brand-text-logo" loading="lazy">
+    @elseif(request()->routeIs('aksha'))
+        <img src="{{ asset('frontend/images/aksha_new_logo.png') }}" alt="AKSHA Logo" class="nav-brand-icon brand-text-logo" loading="lazy">
+    @elseif(request()->routeIs('space_e_fic'))
+        <img src="{{ asset('frontend/images/space-e-fic_new_logo.png') }}" alt="Space-E-Fic Logo" class="nav-brand-icon brand-text-logo" loading="lazy">
+    @else
+        <img src="{{ asset('frontend/images/maac/icons/transparent-logo.png') }}" alt="MAAC Durgapur Official Brand Mascot" class="nav-brand-icon" loading="lazy">
+    @endif
+  </a>
 
   <!-- Desktop Links -->
   <ul class="nav-links">
-    <li><a href="#home" class="active">Home</a></li>
+    <li><a href="{{ route('home') }}" class="{{ request()->routeIs('home') ? 'active' : '' }}">Home</a></li>
     <li class="has-dropdown">
-      <a href="#courses">Courses <span class="arrow">▼</span></a>
+      <a href="#courses" class="">Courses <span class="arrow">▼</span></a>
       <ul class="dropdown">
         <li><a href="#"><span class="dot-icon"></span>Animation &amp; VFX</a></li>
         <li><a href="#"><span class="dot-icon"></span>UI/UX Design</a></li>
@@ -97,7 +95,9 @@
         <li><a href="#"><span class="dot-icon"></span>AI &amp; Technology</a></li>
       </ul>
     </li>
-    <li><a href="{{ route('showcase') }}">Students Work</a></li>
+    <li><a href="{{ route('showcase') }}" class="{{ request()->routeIs('showcase') ? 'active' : '' }}">Students Work</a></li>
+    <li><a href="{{ route('blog') }}" class="{{ request()->routeIs('blog*') ? 'active' : '' }}">Blog</a></li>
+    <li><a href="{{ route('faq') }}" class="{{ request()->routeIs('faq*') ? 'active' : '' }}">FAQ</a></li>
     <li><a href="#contact">Contact Us</a></li>
   </ul>
 
@@ -115,9 +115,9 @@
 <!-- Mobile Overlay Menu -->
 <div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true" aria-label="Navigation">
   <div class="mobile-nav-inner">
-    <a href="#home" class="mobile-link active" data-close>Home</a>
+    <a href="{{ route('home') }}" class="mobile-link {{ request()->routeIs('home') ? 'active' : '' }}" data-close>Home</a>
 
-    <a href="#" class="mobile-link" id="coursesToggle">
+    <a href="#courses" class="mobile-link" id="coursesToggle">
       Courses
       <span class="arrow" style="font-size:0.7rem">▼</span>
     </a>
@@ -128,7 +128,9 @@
       <li><a href="#" data-close><span class="dot-icon"></span>AI &amp; Technology</a></li>
     </ul>
 
-    <a href="{{ route('showcase') }}" class="mobile-link" data-close>Students Work</a>
+    <a href="{{ route('showcase') }}" class="mobile-link {{ request()->routeIs('showcase') ? 'active' : '' }}" data-close>Students Work</a>
+    <a href="{{ route('blog') }}" class="mobile-link {{ request()->routeIs('blog*') ? 'active' : '' }}" data-close>Blog</a>
+    <a href="{{ route('faq') }}" class="mobile-link {{ request()->routeIs('faq*') ? 'active' : '' }}" data-close>FAQ</a>
     <a href="#contact" class="mobile-link" data-close>Contact Us</a>
 
     <div class="mobile-cta-wrap">
@@ -156,6 +158,7 @@
       <ul>
         <li><a href="#">Home</a></li>
         <li><a href="{{ route('blog') }}">Blog</a></li>
+        <li><a href="{{ route('faq') }}">FAQ</a></li>
         <li><a href="#">Courses</a></li>
         <li><a href="#">About Us</a></li>
         <li><a href="#">Disclaimer</a></li>
@@ -186,9 +189,9 @@
   <div class="footer-bottom">
     <p>Powered by</p>
     <div class="footer-logos">
-      <img src="{{ asset('frontend/images/Aksha_logo.png') }}" alt="AKSHA" class="footer-logo" loading="lazy">
-      <img src="{{ asset('frontend/images/maac_logo.png') }}" alt="MAAC" class="footer-logo" loading="lazy">
-      <img src="{{ asset('frontend/images/spacific_logo.png') }}" alt="Space-E-Fic" class="footer-logo" loading="lazy">
+      <a href="{{ route('aksha') }}"><img src="{{ asset('frontend/images/aksha_new_logo.png') }}" alt="AKSHA" class="footer-logo" loading="lazy"></a>
+      <a href="{{ route('maac') }}"><img src="{{ asset('frontend/images/maac_new_logo.png') }}" alt="MAAC" class="footer-logo" loading="lazy"></a>
+      <a href="{{ route('space_e_fic') }}"><img src="{{ asset('frontend/images/space-e-fic_new_logo.png') }}" alt="Space-E-Fic" class="footer-logo" loading="lazy"></a>
     </div>
     <p class="copyright">© 2026 MAAC Durgapur. All Rights Reserved.</p>
   </div>

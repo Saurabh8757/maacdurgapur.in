@@ -19,7 +19,6 @@
 <meta name="twitter:title" content="MAAC Durgapur – West Bengal's #1 Animation, VFX & AI Institute">
 <meta name="twitter:description" content="Learn Animation, VFX, Gaming, Graphic Design & AI at MAAC Durgapur. Industry-focused training with 100% placement support.">
 <meta name="twitter:image" content="{{ asset('frontend/images/pg-01.webp') }}">
-<!-- Favicon -->
 <link rel="icon" type="image/png" href="{{ asset('frontend/images/favicon.png') }}">
 <link rel="stylesheet" href="{{ asset('frontend/css/style.css') }}">
 <link rel="stylesheet" href="{{ asset('frontend/css/chatbot.css') }}">
@@ -45,12 +44,7 @@
       <div class="loader-glow"></div>
 
       <div class="loader-logo">
-        <div class="loader-robot">
-          <div class="loader-robot-head"></div>
-          <div class="loader-robot-body"></div>
-          <div class="loader-robot-arm left"></div>
-          <div class="loader-robot-arm right"></div>
-        </div>
+        <img src="{{ asset('frontend/images/maac/icons/transparent-logo.png') }}" alt="MAAC Robot Mascot" style="max-width: 80px; height: auto;">
       </div>
     </div>
     <h2 class="loader-text">Loading Creative Universe<span class="loader-dots"></span></h2>
@@ -74,21 +68,16 @@
 
 <!-- ===================== NAVBAR ===================== -->
 <nav id="navbar">
-  <!-- Robot Logo -->
-  <div class="nav-robot" aria-label="Logo">
-    <div class="robot-figure">
-      <div class="robot-head"></div>
-      <div class="robot-body"></div>
-      <div class="robot-arm left"></div>
-      <div class="robot-arm right"></div>
-    </div>
-  </div>
+  <!-- Mascot Overlap Decor -->
+  <a href="{{ url('/') }}" class="nav-brand">
+    <img src="{{ asset('frontend/images/maac/icons/transparent-logo.png') }}" alt="MAAC Durgapur Official Brand Mascot" class="nav-brand-icon" loading="lazy">
+  </a>
 
   <!-- Desktop Links -->
   <ul class="nav-links">
-    <li><a href="#home" class="active">Home</a></li>
+    <li><a href="#home" class="{{ request()->routeIs('home') ? 'active' : '' }}">Home</a></li>
     <li class="has-dropdown">
-      <a href="#courses">Courses <span class="arrow">▼</span></a>
+      <a href="#courses" class="{{ request()->routeIs('maac', 'aksha', 'space_e_fic') ? 'active' : '' }}">Courses <span class="arrow">▼</span></a>
       <ul class="dropdown">
         <li><a href="#"><span class="dot-icon"></span>Animation &amp; VFX</a></li>
         <li><a href="#"><span class="dot-icon"></span>UI/UX Design</a></li>
@@ -96,8 +85,11 @@
         <li><a href="#"><span class="dot-icon"></span>AI &amp; Technology</a></li>
       </ul>
     </li>
-    <li><a href="{{ route('showcase') }}">Students Work</a></li>
+    <li><a href="{{ route('showcase') }}" class="{{ request()->routeIs('showcase') ? 'active' : '' }}">Students Work</a></li>
+    <li><a href="{{ route('blog') }}" class="{{ request()->routeIs('blog*') ? 'active' : '' }}">Blog</a></li>
+    <li><a href="{{ route('faq') }}" class="{{ request()->routeIs('faq*') ? 'active' : '' }}">FAQ</a></li>
     <li><a href="#contact">Contact Us</a></li>
+    
   </ul>
 
   <!-- Desktop CTA -->
@@ -114,9 +106,9 @@
 <!-- Mobile Overlay Menu -->
 <div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true" aria-label="Navigation">
   <div class="mobile-nav-inner">
-    <a href="#home" class="mobile-link active" data-close>Home</a>
+    <a href="#home" class="mobile-link {{ request()->routeIs('home') ? 'active' : '' }}" data-close>Home</a>
 
-    <a href="#" class="mobile-link" id="coursesToggle">
+    <a href="#courses" class="mobile-link {{ request()->routeIs('maac', 'aksha', 'space_e_fic') ? 'active' : '' }}" id="coursesToggle">
       Courses
       <span class="arrow" style="font-size:0.7rem">▼</span>
     </a>
@@ -127,8 +119,11 @@
       <li><a href="#" data-close><span class="dot-icon"></span>AI &amp; Technology</a></li>
     </ul>
 
-    <a href="{{ route('showcase') }}" class="mobile-link" data-close>Students Work</a>
+    <a href="{{ route('showcase') }}" class="mobile-link {{ request()->routeIs('showcase') ? 'active' : '' }}" data-close>Students Work</a>
+    <a href="{{ route('blog') }}" class="mobile-link {{ request()->routeIs('blog*') ? 'active' : '' }}" data-close>Blog</a>
+    <a href="{{ route('faq') }}" class="mobile-link {{ request()->routeIs('faq*') ? 'active' : '' }}" data-close>FAQ</a>
     <a href="#contact" class="mobile-link" data-close>Contact Us</a>
+    
 
     <div class="mobile-cta-wrap">
       <p class="mobile-divider">Ready to start?</p>
@@ -170,18 +165,18 @@
   </div>
   <canvas class="sakura-canvas" data-section="maac"></canvas>
   
-  <div class="institute-card maac-card">
-    <div class="card-logo">
-      <a href="{{ route('maac') }}">
-        <img src="{{ asset('frontend/images/maac_logo.png') }}" alt="MAAC Logo" loading="lazy">
+  <div class="brand-section-content align-right">
+    <div class="brand-logo-box maac-logo-box">
+      <a href="{{ route('maac') }}" class="premium-brand-link">
+        <img src="{{ asset('frontend/images/maac_new_logo.png') }}" alt="MAAC Premium Brand Logo" class="premium-brand-logo" loading="lazy">
       </a>
     </div>
     <div class="card-content">
-      <p>MAAC (Maya Academy of Advanced Creativity) Durgapur is the region's most trusted animation and multimedia training institute, strategically located near City Center Durgapur. Students from Kolkata, Burdwan, Bolpur, Bankura, Asansol, Raniganj and Purulia choose MAAC for career-ready skills in animation, VFX, gaming, graphic design, and the latest AI creative tools.</p>
+      <p>MAAC (Maya Academy of Advanced Creativity) Durgapur is the region's most trusted animation and multimedia training institute, strategically located near City Center, Durgapur. Students from Kolkata, Burdwan, Bolpur, Bankura, Asansol, Raniganj and Purulia choose us for career-ready skills in animation, VFX, gaming, graphic design, and the latest AI creative tools.</p>
     </div>
-    <button class="btn-register orange open-modal">
-    Register Now →
-</button>
+    <button class="btn-register btn-gradient-orange open-modal">
+      Register Now →
+    </button>
   </div>
 </section>
 
@@ -192,18 +187,18 @@
   </div>
   <canvas class="sakura-canvas" data-section="aksha"></canvas>
   
-  <div class="institute-card aksha-card">
-    <div class="card-logo">
-      <a href="{{ route('aksha') }}">
-        <img src="{{ asset('frontend/images/Aksha_logo.png') }}" alt="AKSHA Logo" loading="lazy">
+  <div class="brand-section-content align-left">
+    <div class="brand-logo-box aksha-logo-box">
+      <a href="{{ route('aksha') }}" class="premium-brand-link">
+        <img src="{{ asset('frontend/images/aksha_new_logo.png') }}" alt="AKSHA Premium Brand Logo" class="premium-brand-logo" loading="lazy">
       </a>
     </div>
     <div class="card-content">
-      <p>AKSHA is a modern creative design institute focused on visual storytelling, UI/UX, graphic design, branding, digital communication, and AI-creative tools. With hands-on training, expert mentorship & industry-focused training, AKSHA helps students build professional skills, creative portfolios, and successful careers in the digital design project. West Bengal's No.1 UI/UX, Graphic Design and Digitally-focused learning institute, strategically located near City Centre, Durgapur.</p>
+      <p>AKSHA is a modern creative design institute focused on visual storytelling, UI/UX, graphic design, branding, digital communication, and AI creative tool. With hands-on learning, expert mentorship & industry-focused training, AKSHA helps students build professional skills, creative portfolios, and successful careers in the digital design project. West Bengal's no.1 UI/UX, branding and Digital marketing training institute, strategically located near City Center, Durgapur.</p>
     </div>
-    <button class="btn-register orange open-modal">
-    Register Now →
-</button>
+    <button class="btn-register btn-gradient-blue open-modal">
+      Register Now →
+    </button>
   </div>
 </section>
 
@@ -214,18 +209,18 @@
   </div>
   <canvas class="sakura-canvas" data-section="spacefic"></canvas>
   
-  <div class="institute-card spacefic-card">
-    <div class="card-logo spacefic-logo-wrap">
-      <a href="{{ route('space_e_fic') }}">
-        <img src="{{ asset('frontend/images/spacific_logo.png') }}" alt="Space-E-Fic Logo" class="spacefic-logo" loading="lazy">
+  <div class="brand-section-content align-right">
+    <div class="brand-logo-box spacefic-logo-box">
+      <a href="{{ route('space_e_fic') }}" class="premium-brand-link">
+        <img src="{{ asset('frontend/images/space-e-fic_new_logo.png') }}" alt="Space-E-Fic Premium Brand Logo" class="premium-brand-logo" loading="lazy">
       </a>
     </div>
     <div class="card-content">
-      <p>Space-E-Fic is a future-focused coding technology institute specializing in AI, Robotics, Game Development, Coding, AR/VR, and immersive digital innovation. Designed for the next generation of creators and tech innovators, Space-E-Fic creativity with futuristic technology through hands-on learning and real-world training. Best No.1 institute, strategically located near City Centre, Durgapur.</p>
+      <p>Space-E-Fic is a future focused creative technology institute specializing in AI, Robotics, Game Development, Coding, AR/VR, and immersive digital innovation. Designed for the next generation of creators and tech innovators, Space-E-Fic creativity with futuristic technology through hands-on learning and real world training best no.1 institute, strategically located near City Center, Durgapur.</p>
     </div>
-    <button class="btn-register orange open-modal">
-    Register Now →
-</button>
+    <button class="btn-register btn-gradient-cyan open-modal">
+      Register Now →
+    </button>
   </div>
 </section>
 
@@ -758,9 +753,9 @@
   <div class="footer-bottom">
     <p>Powered by</p>
     <div class="footer-logos">
-      <img src="{{ asset('frontend/images/Aksha_logo.png') }}" alt="AKSHA" class="footer-logo" loading="lazy">
-      <img src="{{ asset('frontend/images/maac_logo.png') }}" alt="MAAC" class="footer-logo" loading="lazy">
-      <img src="{{ asset('frontend/images/spacific_logo.png') }}" alt="Space-E-Fic" class="footer-logo" loading="lazy">
+      <a href="{{ route('aksha') }}"><img src="{{ asset('frontend/images/aksha_new_logo.png') }}" alt="AKSHA" class="footer-logo" loading="lazy"></a>
+      <a href="{{ route('maac') }}"><img src="{{ asset('frontend/images/maac_new_logo.png') }}" alt="MAAC" class="footer-logo" loading="lazy"></a>
+      <a href="{{ route('space_e_fic') }}"><img src="{{ asset('frontend/images/space-e-fic_new_logo.png') }}" alt="Space-E-Fic" class="footer-logo" loading="lazy"></a>
     </div>
     <p class="copyright">© 2026 MAAC Durgapur. All Rights Reserved.</p>
   </div>

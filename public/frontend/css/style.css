@@ -90,6 +90,14 @@ body {
     width: 100%;
 }
 
+p {
+    font-family: 'Myriad Pro', sans-serif !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Barber Chop', sans-serif !important;
+}
+
 body.loading {
     overflow: hidden;
 }
@@ -168,90 +176,103 @@ body.loading {
 }
 
 #navbar.scrolled {
-    height: 58px;
-    background: rgba(6, 6, 14, 0.62);
+    background: rgba(6, 6, 14, 0.95);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
 }
 
-/* Robot Brand Logo */
-.nav-robot {
-    width: 52px;
-    height: 52px;
-    flex-shrink: 0;
+/* ============================================================
+   NAVBAR LOGO (Pixel-Perfect Overlap Effect)
+   ============================================================ */
+.nav-brand {
     position: relative;
-    cursor: pointer;
-}
-
-.robot-figure {
-    position: relative;
-    width: 100%;
+    display: flex;
+    align-items: center;
+    width: 65px; /* Preserves flex layout spacing without clipping */
     height: 100%;
+    text-decoration: none;
+    z-index: 9000;
 }
 
-.robot-head {
+.nav-brand-icon {
     position: absolute;
-    top: 4px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 24px;
-    height: 20px;
-    background: linear-gradient(135deg, #3a3a6a, #5a5a9a);
-    border-radius: 6px 6px 4px 4px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    transition: transform var(--trans-base);
+    top: -2px; /* Hugs the very top of the screen */
+    left: -10px; /* Leans out to the left */
+    height: 105px; /* Perfect scale for a fixed 72px navbar (33px overhang) */
+    max-height: none; /* Override constraints */
+    width: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 12px 20px rgba(0,0,0,0.4));
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transform-origin: top center;
+    pointer-events: auto;
 }
 
-.nav-robot:hover .robot-head {
-    transform: translateX(-50%) translateY(-2px);
+.nav-brand:hover .nav-brand-icon {
+    transform: translateY(-4px) scale(1.04) rotate(1deg);
 }
 
-.robot-head::after,
-.robot-head::before {
-    content: "";
-    position: absolute;
-    top: 5px;
-    width: 5px;
-    height: 5px;
-    background: var(--blue-accent);
-    border-radius: 50%;
-    box-shadow: 0 0 6px var(--blue-accent);
-    animation: 3.5s infinite blink;
+/* Styling for text/flat logos in navbar (MAAC, AKSHA, Space-E-Fic) */
+#navbar.brand-navbar {
+    height: 110px; /* Increased navbar height */
 }
 
-.robot-head::before { left: 4px; animation-delay: 0s; }
-.robot-head::after { right: 4px; animation-delay: 0.4s; }
-
-@keyframes blink {
-    0%, 100%, 88%, 92% { opacity: 1; }
-    90% { opacity: 0.1; }
+.nav-brand.nav-brand-text-logo {
+    width: auto; /* Let the width adapt to the wider logos */
+    margin-right: 15px; /* Spacing before links */
+    padding-left: 10px;
 }
 
-.robot-body {
-    position: absolute;
-    top: 26px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 28px;
-    height: 20px;
-    background: linear-gradient(135deg, #2a2a5a, #4a4a8a);
-    border-radius: 4px;
-    border: 1px solid rgba(255, 255, 255, 0.15);
+.nav-brand-icon.brand-text-logo {
+    position: relative;
+    top: 0px; /* Aligned nicely */
+    left: 0;
+    height: auto; 
+    max-height: 140px; /* Huge height for maximum visibility */
+    width: auto;
+    max-width: 500px; /* Huge width */
+    object-fit: contain;
+    mix-blend-mode: screen; /* Removes solid black background from the image */
+    transform-origin: center left;
 }
 
-.robot-arm {
-    position: absolute;
-    top: 28px;
-    width: 8px;
-    height: 14px;
-    background: linear-gradient(180deg, #3a3a6a, #2a2a4a);
-    border-radius: 4px;
-    transition: transform var(--trans-slow);
+.nav-brand:hover .brand-text-logo {
+    transform: translateY(-2px) scale(1.02) rotate(0deg); /* No goofy rotation for text logos */
 }
 
-.robot-arm.left { left: 6px; transform-origin: top center; }
-.robot-arm.right { right: 6px; transform-origin: top center; }
+/* Tablet & iPad Air (Pixel-perfect overhang) */
+@media (max-width: 1024px) {
+    .nav-brand { width: 55px; }
+    .nav-brand-icon { 
+        height: 105px; /* Matches Desktop exact proportions! 33px overhang */
+        top: -2px; 
+        left: -8px;
+    }
+    .nav-brand.nav-brand-text-logo { width: auto; margin-right: 15px; padding-left: 5px; }
+    #navbar.brand-navbar { height: 90px; }
+    .nav-brand-icon.brand-text-logo { height: auto; max-height: 110px; max-width: 350px; top: 0px; left: 0; }
+}
 
-.nav-robot:hover .robot-arm.left { transform: rotate(-18deg); }
-.nav-robot:hover .robot-arm.right { transform: rotate(18deg); }
+/* Mobile (Pixel-perfect overhang) */
+@media (max-width: 768px) {
+    :root {
+        --nav-h: 55px; /* Compact mobile navbar */
+    }
+    .nav-brand { width: 50px; }
+    .nav-brand-icon { 
+        height: 80px; /* Mathematically exact proportional height (105px * 0.76) */
+        top: -2px; /* Mathematically exact top offset */
+        left: -8px; /* Mathematically exact left offset */
+        filter: drop-shadow(0 8px 12px rgba(0,0,0,0.4));
+        transform: none;
+    }
+    .nav-brand:hover .nav-brand-icon {
+        transform: translateY(-2px) scale(1.02);
+    }
+    
+    .nav-brand.nav-brand-text-logo { width: auto; padding-left: 0; }
+    #navbar.brand-navbar { height: 80px; }
+    .nav-brand-icon.brand-text-logo { height: auto; max-height: 90px; max-width: 280px; top: -1px; left: 0; }
+}
 
 /* Navigation Links */
 .nav-links {
@@ -261,6 +282,10 @@ body.loading {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
+}
+
+@media (max-width: 1100px) {
+    .nav-links { gap: 16px; }
 }
 
 .nav-links a {
@@ -277,7 +302,7 @@ body.loading {
     gap: 4px;
 }
 
-.nav-links a.active,
+/* Hover State */
 .nav-links a:hover {
     color: var(--orange);
 }
@@ -294,8 +319,22 @@ body.loading {
     transition: width var(--trans-base);
 }
 
-.nav-links a.active::after,
 .nav-links a:hover::after {
+    width: 100%;
+}
+
+/* Active State */
+.nav-links a.active {
+    color: var(--orange);
+    text-shadow: 0 0 10px rgba(255, 106, 0, 0.4);
+}
+
+.nav-links a.active::after {
+    width: 100%;
+    box-shadow: 0 0 8px rgba(255, 106, 0, 0.6);
+}
+
+.nav-links a.active:hover::after {
     width: 100%;
 }
 
@@ -488,8 +527,14 @@ body.loading {
     transition: color var(--trans-fast);
 }
 
-.mobile-link.active,
+/* Mobile Hover */
 .mobile-link:hover { color: var(--orange); }
+
+/* Mobile Active */
+.mobile-link.active {
+    color: var(--orange);
+    text-shadow: 0 0 10px rgba(255, 106, 0, 0.4);
+}
 
 .mobile-link:last-of-type { border-bottom: none; }
 
@@ -911,122 +956,146 @@ body.loading {
 }
 
 
-/* Institute Cards */
-.institute-card {
+/* Pixel Perfect Brand Layout */
+.brand-section-content {
     position: relative;
     z-index: 5;
-    pointer-events: auto; /* Restore clicks for the card contents */
-    background: var(--glass-bg);
-    backdrop-filter: blur(20px);
-    border: 1px solid var(--glass-border);
-    border-radius: var(--radius-lg);
-    padding: 40px 48px;
-    max-width: 600px;
-    box-shadow: var(--shadow-lg);
-    transition: transform var(--trans-slow), box-shadow var(--trans-slow);
+    pointer-events: auto;
+    width: 100%;
+    max-width: 500px;
 }
 
-.institute-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.65);
-}
-
-.maac-card {
+.brand-section-content.align-right {
     margin-left: auto;
-    margin-right: 8%;
-    border-color: rgba(255, 106, 0, 0.2);
-    box-shadow: var(--shadow-lg), 0 0 40px rgba(255, 106, 0, 0.08);
+    margin-right: 5%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    text-align: right;
 }
 
-.maac-card:hover {
-    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.65), 0 0 60px rgba(255, 106, 0, 0.15);
+.brand-section-content.align-left {
+    margin-left: 5%;
+    margin-right: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
 }
 
-.aksha-card {
-    margin-left: 8%;
-    border-color: rgba(30, 100, 200, 0.25);
-    box-shadow: var(--shadow-lg), 0 0 40px rgba(30, 100, 200, 0.08);
+.brand-logo-box {
+    background: rgba(10, 10, 15, 0.85);
+    border: 1px solid;
+    border-radius: var(--radius-md);
+    padding: 10px; /* Reduced padding so logo fills more space */
+    margin-bottom: 24px;
+    max-width: 450px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
 }
 
-.aksha-card:hover {
-    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.65), 0 0 60px rgba(30, 100, 200, 0.15);
+.brand-logo-box:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.7);
 }
 
-.spacefic-card {
-    margin-left: auto;
-    margin-right: 8%;
-    border-color: rgba(30, 144, 255, 0.25);
-    box-shadow: var(--shadow-lg), 0 0 40px rgba(30, 144, 255, 0.08);
-}
+.maac-logo-box { border-color: rgba(255, 106, 0, 0.5); }
+.aksha-logo-box { border-color: rgba(0, 191, 255, 0.5); }
+.spacefic-logo-box { border-color: rgba(30, 144, 255, 0.4); }
 
-.spacefic-card:hover {
-    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.65), 0 0 60px rgba(30, 144, 255, 0.2);
-}
-
-.card-logo { margin-bottom: 24px; }
-.card-logo img {
-    max-width: 280px;
-    max-height: 100px;
-    object-fit: contain;
-    filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.5));
-}
-
-.spacefic-logo-wrap {
+.premium-brand-link {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(0, 0, 0, 0.4);
-    border-radius: var(--radius-md);
-    padding: 16px;
-    margin-bottom: 24px;
+    width: 100%;
+    height: 100%;
 }
 
-.spacefic-logo {
-    max-width: 220px;
-    max-height: 80px;
+.premium-brand-logo {
+    width: 100%;
+    height: auto;
+    max-height: 180px; /* Allows logo to grow much larger inside the box */
     object-fit: contain;
+    filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.5));
 }
 
-.card-content p {
-    font-size: 0.88rem;
-    line-height: 1.7;
-    color: rgba(210, 210, 230, 0.9);
-    margin-bottom: 28px;
+.brand-section-content p {
+    font-size: 0.95rem; /* Increased slightly for better readability */
+    font-style: italic;
+    line-height: 1.6;
+    color: #ffffff; /* Brighter white for contrast */
+    margin-bottom: 24px;
+    max-width: 480px;
+    background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0) 80%); /* Soft blending background */
+    padding: 20px;
+    /* Removed border and box-shadow so it doesn't look like a box */
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.9), 0px 0px 10px rgba(0, 0, 0, 0.6); /* Text shadow for extra clarity */
 }
 
+/* Gradient Buttons */
 .btn-register {
     display: inline-block;
-    padding: 12px 28px;
-    border-radius: var(--radius-full);
+    padding: 14px 35px;
+    border-radius: 50px;
     text-decoration: none;
     font-family: 'ComicNeueSansID', sans-serif;
-    font-size: 0.95rem;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-    transition: transform 0.25s, box-shadow 0.25s;
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    border: none;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
 }
 
-.btn-register.orange {
-    background: linear-gradient(135deg, var(--orange), #c40);
-    color: #fff;
-    box-shadow: var(--shadow-orange);
+.btn-register::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.3) 50%, rgba(255,255,255,0) 100%);
+    transform: skewX(-25deg);
+    animation: shine 4s infinite;
 }
 
-.btn-register.orange:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 32px rgba(255, 106, 0, 0.65);
+@keyframes shine {
+    0% { left: -100%; }
+    20% { left: 200%; }
+    100% { left: 200%; }
 }
 
-.btn-register.blue {
-    background: linear-gradient(135deg, var(--blue-accent), #006fcc);
-    color: #fff;
-    box-shadow: 0 4px 20px rgba(30, 144, 255, 0.45);
+.btn-gradient-orange {
+    background: linear-gradient(135deg, #d32f2f, #f57c00);
+    color: white;
+    box-shadow: 0 5px 15px rgba(245, 124, 0, 0.3);
 }
 
-.btn-register.blue:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 32px rgba(30, 144, 255, 0.65);
+.btn-gradient-blue {
+    background: linear-gradient(135deg, #1976d2, #42a5f5);
+    color: white;
+    box-shadow: 0 5px 15px rgba(66, 165, 245, 0.3);
 }
+
+.btn-gradient-cyan {
+    background: linear-gradient(135deg, #0d47a1, #1e88e5);
+    color: white;
+    box-shadow: 0 5px 15px rgba(30, 136, 229, 0.3);
+}
+
+.btn-register:hover {
+    transform: translateY(-2px);
+}
+
+.btn-gradient-orange:hover { box-shadow: 0 8px 25px rgba(245, 124, 0, 0.5); color: white; }
+.btn-gradient-blue:hover { box-shadow: 0 8px 25px rgba(66, 165, 245, 0.5); color: white; }
+.btn-gradient-cyan:hover { box-shadow: 0 8px 25px rgba(30, 136, 229, 0.5); color: white; }
 
 /* ============================================================
    ATMOSPHERIC SECTION BLENDING

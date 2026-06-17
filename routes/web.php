@@ -37,6 +37,7 @@ Route::get('/space-e-fic',[PageController::class, 'space_e_fic'])->name('space_e
 Route::get('/fcq',[PageController::class, 'fcq'])->name('fcq');
 Route::get('/showcase',[PageController::class, 'showcase'])->name('showcase');
 Route::get('/blog',[PageController::class, 'blog'])->name('blog');
+Route::get('/faq',[PageController::class, 'faq'])->name('faq');
 Route::get('/web-design-ui-ux-course',[PageController::class, 'web'])->name('web');
 
 Route::get('/motion-graphics',[PageController::class, 'motion'])->name('motion');
