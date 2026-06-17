@@ -27,9 +27,7 @@ class PageController extends Controller
     {
         $banner=Banner::first();
         $courses = OurCourse::where('status', 'Active')->get();
-        // dd($courses);
         $testimonial=Testimonial::where('status','Active')->orderBy('created_at', 'asc')->get();
-        //dd($testimonial);
 
         return view('frontend.pages.index',compact('testimonial','banner','courses'));
     }
@@ -68,8 +66,6 @@ class PageController extends Controller
 
             $course=OurCourse::where('id',$request->course_id)->first();
             $course_name=$course->name;
-
-            // Mail::to('mondalsoumen071@gmail.com')->send(new AdminNotification($request->name, $request->phone, $request->email, $course_name));
 
             return response()->json([
                 'status' => 1,

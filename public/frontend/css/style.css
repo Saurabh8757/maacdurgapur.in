@@ -1561,34 +1561,35 @@ body.loading {
 }
 
 .placement-card {
-    background: linear-gradient(170deg, rgba(12, 14, 30, 0.92), rgba(8, 10, 24, 0.96));
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 16px;
+    background: linear-gradient(145deg, rgba(20, 22, 40, 0.85), rgba(8, 10, 24, 0.98));
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
     overflow: hidden;
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     box-shadow:
-        0 8px 32px rgba(0, 0, 0, 0.4),
-        0 0 0 1px rgba(255, 215, 0, 0.03);
+        0 15px 35px rgba(0, 0, 0, 0.5),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
     transition:
-        transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-        box-shadow 0.35s ease,
-        border-color 0.35s ease;
+        transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+        box-shadow 0.4s ease,
+        border-color 0.4s ease;
     cursor: pointer;
     display: flex;
     flex-direction: column;
     width: 100%;
-    min-height: 420px; /* MIN HEIGHT FOR ALL CARDS */
+    min-height: 360px;
     position: relative;
     will-change: transform;
 }
 
 .placement-card:hover {
-    transform: translateY(-10px) scale(1.03);
-    border-color: rgba(255, 215, 0, 0.4);
+    transform: translateY(-12px);
+    border-color: rgba(255, 106, 0, 0.6);
     box-shadow:
-        0 30px 70px rgba(0, 0, 0, 0.8),
-        0 0 40px rgba(255, 215, 0, 0.15);
+        0 40px 80px rgba(0, 0, 0, 0.95),
+        0 0 50px rgba(255, 106, 0, 0.25),
+        inset 0 0 20px rgba(255, 106, 0, 0.05);
 }
 
 /* ─── Card Image Area ─────────────────────────────────── */
@@ -1596,7 +1597,7 @@ body.loading {
     position: relative;
     overflow: hidden;
     border-bottom: 1px solid rgba(255, 215, 0, 0.06);
-    height: 180px; /* FIXED HEIGHT FOR IMAGE AREA */
+    height: 150px;
     flex-shrink: 0;
 }
 
@@ -1620,18 +1621,21 @@ body.loading {
     width: 100%;
     height: 100%;
     display: block;
-    border-radius: 15px 15px 0 0;
-    object-fit: cover; /* Ensures no distortion */
+    border-radius: 20px 20px 0 0;
+    object-fit: cover;
     transition:
         opacity 0.8s ease,
-        transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     opacity: 0;
-    transform: scale(1.08);
+    transform: scale(1);
 }
 
 .placement-card-img.loaded {
     opacity: 1;
-    transform: scale(1);
+}
+
+.placement-card:hover .placement-card-img.loaded {
+    transform: scale(1.12); /* Eye-catching zoom on hover */
 }
 
 /* Subtle gradient overlay on image */
@@ -1678,13 +1682,14 @@ body.loading {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, var(--gold) 0%, var(--orange) 50%, transparent 50.5%);
-    opacity: 0.85;
+    background: linear-gradient(135deg, #ff4e50 0%, #f9d423 50%, transparent 50.5%);
+    opacity: 0.95;
+    box-shadow: 2px 2px 15px rgba(255, 78, 80, 0.4);
 }
 
 /* ─── Card Body ───────────────────────────────────────── */
 .placement-card-body {
-    padding: 16px 18px 20px;
+    padding: 14px 16px 16px;
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -1733,14 +1738,15 @@ body.loading {
 
 .salary-amount {
     font-family: Oswald, sans-serif;
-    font-size: 1.5rem;
+    font-size: 1.6rem;
     font-weight: 700;
-    background: linear-gradient(135deg, var(--gold) 0%, var(--orange-light) 50%, var(--gold) 100%);
+    background: linear-gradient(to right, #f9d423 0%, #ff4e50 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
     line-height: 1.1;
     letter-spacing: 0.5px;
+    filter: drop-shadow(0px 4px 10px rgba(249, 212, 35, 0.25));
 }
 
 .salary-label {

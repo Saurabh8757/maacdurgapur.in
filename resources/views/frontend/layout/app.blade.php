@@ -22,13 +22,15 @@
 <!-- Favicon -->
 <link rel="icon" type="image/png" href="{{ asset('frontend/images/favicon.png') }}">
 <link rel="stylesheet" href="{{ asset('frontend/css/style.css') }}">
-<link rel="stylesheet" href="{{ asset('frontend/css/chatbot.css') }}">
+<link rel="stylesheet" href="{{ asset('frontend/css/chatbot.css') }}" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="{{ asset('frontend/css/chatbot.css') }}"></noscript>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Rajdhani:wght@400;500;600;700&family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet">
 <!-- Swiper CSS -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/10.3.1/swiper-bundle.min.css">
 <!-- Counselling Modal CSS -->
-<link rel="stylesheet" href="{{ asset('frontend/css/counselling-modal.css') }}">
+<link rel="stylesheet" href="{{ asset('frontend/css/counselling-modal.css') }}" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="{{ asset('frontend/css/counselling-modal.css') }}"></noscript>
 <!-- Preload hero image for LCP -->
 <link rel="preload" as="image" href="{{ asset('frontend/images/pg-01.webp') }}" fetchpriority="high">
     @yield('custom_css')
@@ -502,6 +504,7 @@
 </script>
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/10.3.1/swiper-bundle.min.js"></script>
 <script defer src="{{ asset('frontend/js/sakura.js') }}"></script>

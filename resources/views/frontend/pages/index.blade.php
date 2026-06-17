@@ -44,7 +44,7 @@
       <div class="loader-glow"></div>
 
       <div class="loader-logo">
-        <img src="{{ asset('frontend/images/maac/icons/transparent-logo.png') }}" alt="MAAC Robot Mascot" style="max-width: 80px; height: auto;">
+        <img loading="lazy" src="{{ asset('frontend/images/maac/icons/transparent-logo.png') }}" alt="MAAC Robot Mascot" style="max-width: 80px; height: auto;">
       </div>
     </div>
     <h2 class="loader-text">Loading Creative Universe<span class="loader-dots"></span></h2>
@@ -244,7 +244,7 @@
           <div class="swiper-slide">
             <div class="course-card">
               <div class="course-img">
-                <img src="{{ asset($course->image) }}" alt="{{ $course->name }}" loading="lazy">
+                <img loading="lazy" src="{{ asset($course->image) }}" alt="{{ $course->name }}" loading="lazy">
                 <div class="course-overlay"></div>
               </div>
               <div class="course-info">

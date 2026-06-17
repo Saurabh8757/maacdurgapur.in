@@ -1,8 +1,6 @@
 @extends('frontend.layout.app')
 
 @section('custom_css')
-<!-- Swiper CSS -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 <link rel="stylesheet" href="{{ asset('frontend/css/maac.css') }}">
 @endsection
 
@@ -34,10 +32,10 @@
         <p class="offer-title">Master Animation ,<br>VFX & Graphic Design</p>
         <p class="offer-highlight">SPECIAL<br>OFFER</p>
         <div class="offer-emi">
-          <img src="{{ asset('frontend/images/maac/icons/payment.png') }}" alt="EMI" class="offer-check-icon">
+          <img loading="lazy" src="{{ asset('frontend/images/maac/icons/payment.png') }}" alt="EMI" class="offer-check-icon">
           <span>EMI Facilities Available</span>
         </div>
-        <img src="{{ asset('frontend/images/maac/icons/charctaer.png') }}" alt="Character" class="offer-character">
+        <img loading="lazy" src="{{ asset('frontend/images/maac/icons/charctaer.png') }}" alt="Character" class="offer-character">
       </div>
     </div>
 
@@ -46,7 +44,7 @@
       <div class="maac-enquiry-form">
         <div class="enquiry-form-header">
           <div class="enquiry-logo">
-            <img src="{{ asset('frontend/images/maac/icons/user.png') }}" alt="Student" class="enquiry-logo-icon">
+            <img loading="lazy" src="{{ asset('frontend/images/maac/icons/user.png') }}" alt="Student" class="enquiry-logo-icon">
           </div>
           <h2 class="enquiry-title">STUDENT ENQUIRY FORM</h2>
           <p class="enquiry-subtitle">Fill out the form and our counselor will<br>connect you .</p>
@@ -56,25 +54,25 @@
           @csrf
 
           <div class="enquiry-field">
-            <img src="{{ asset('frontend/images/maac/icons/user.png') }}" alt="" class="enquiry-field-icon">
+            <img loading="lazy" src="{{ asset('frontend/images/maac/icons/user.png') }}" alt="" class="enquiry-field-icon">
             <input type="text" name="name" placeholder="Full Name *" required autocomplete="name">
             <span class="field-error name_error"></span>
           </div>
 
           <div class="enquiry-field">
-            <img src="{{ asset('frontend/images/maac/icons/phone-call.png') }}" alt="" class="enquiry-field-icon">
+            <img loading="lazy" src="{{ asset('frontend/images/maac/icons/phone-call.png') }}" alt="" class="enquiry-field-icon">
             <input type="tel" name="phone" placeholder="Phone Number*" required autocomplete="tel">
             <span class="field-error phone_error"></span>
           </div>
 
           <div class="enquiry-field">
-            <img src="{{ asset('frontend/images/maac/icons/email.png') }}" alt="" class="enquiry-field-icon">
+            <img loading="lazy" src="{{ asset('frontend/images/maac/icons/email.png') }}" alt="" class="enquiry-field-icon">
             <input type="email" name="email" placeholder="E-mail Address*" required autocomplete="email">
             <span class="field-error email_error"></span>
           </div>
 
           <div class="enquiry-field">
-            <img src="{{ asset('frontend/images/maac/icons/education.png') }}" alt="" class="enquiry-field-icon">
+            <img loading="lazy" src="{{ asset('frontend/images/maac/icons/education.png') }}" alt="" class="enquiry-field-icon">
             <select name="course_id" required>
               <option value="" disabled selected hidden>Select Course of Interest*</option>
               @if(!empty($courses))
@@ -87,7 +85,7 @@
           </div>
 
           <div class="enquiry-field">
-            <img src="{{ asset('frontend/images/maac/icons/location.png') }}" alt="" class="enquiry-field-icon">
+            <img loading="lazy" src="{{ asset('frontend/images/maac/icons/location.png') }}" alt="" class="enquiry-field-icon">
             <select name="location">
               <option value="" disabled selected hidden>Prefered Location</option>
               <option value="Durgapur">Durgapur</option>
@@ -102,7 +100,7 @@
           </div>
 
           <div class="enquiry-field enquiry-field-textarea">
-            <img src="{{ asset('frontend/images/maac/icons/chat.png') }}" alt="" class="enquiry-field-icon" style="top: 25px;">
+            <img loading="lazy" src="{{ asset('frontend/images/maac/icons/chat.png') }}" alt="" class="enquiry-field-icon" style="top: 25px;">
             <textarea name="message" placeholder="Tell Us about Your interest / query" rows="3"></textarea>
           </div>
 
@@ -142,7 +140,7 @@
       <h2 class="maac-cta-heading">NOT SURE WHICH COURSE IS RIGHT FOR YOU?</h2>
       <p class="maac-cta-text">Speak to our career experts and get personalized guidance .</p>
       <button class="maac-cta-btn open-modal">
-        <img src="{{ asset('frontend/images/maac/icons/customer-service.png') }}" alt="" class="cta-btn-icon">
+        <img loading="lazy" src="{{ asset('frontend/images/maac/icons/customer-service.png') }}" alt="" class="cta-btn-icon">
         <span>BOOK FREE COUNSELING</span>
       </button>
     </div>
@@ -150,11 +148,11 @@
     <!-- Right Column: Features -->
     <div class="cta-card-features">
       <div class="maac-cta-feature">
-        <img src="{{ asset('frontend/images/maac/icons/education.png') }}" alt="" class="cta-icon-img">
+        <img loading="lazy" src="{{ asset('frontend/images/maac/icons/education.png') }}" alt="" class="cta-icon-img">
         <span class="cta-feature-text">100% Career Guidance</span>
       </div>
       <div class="maac-cta-feature">
-        <img src="{{ asset('frontend/images/maac/icons/clipboard.png') }}" alt="" class="cta-icon-img">
+        <img loading="lazy" src="{{ asset('frontend/images/maac/icons/clipboard.png') }}" alt="" class="cta-icon-img">
         <span class="cta-feature-text">Course & Fee Details</span>
       </div>
       <div class="maac-cta-feature">
@@ -181,7 +179,7 @@
       <!-- Card 1: Industry-Aligned Curriculum -->
       <div class="maac-why-card">
         <div class="why-card-icon-wrap">
-          <img src="{{ asset('frontend/images/maac/icons/education.png') }}" alt="Industry Curriculum" class="why-card-icon">
+          <img loading="lazy" src="{{ asset('frontend/images/maac/icons/education.png') }}" alt="Industry Curriculum" class="why-card-icon">
         </div>
         <h3 class="why-card-title">Industry-Aligned<br>Curriculum</h3>
         <p class="why-card-text">Industry-aligned curriculum covering Maya, Blender, Unreal Engine, Houdini FX, ZBrush, and modern AI creative tools. Emphasis on real-world projects, production workflows, and production skills used by leading studios and creative professionals.</p>
@@ -190,7 +188,7 @@
       <!-- Card 2: 100% Placement Assistance -->
       <div class="maac-why-card">
         <div class="why-card-icon-wrap">
-          <img src="{{ asset('frontend/images/maac/icons/placement.png') }}" alt="Placement" class="why-card-icon">
+          <img loading="lazy" src="{{ asset('frontend/images/maac/icons/placement.png') }}" alt="Placement" class="why-card-icon">
         </div>
         <h3 class="why-card-title">100% Placement<br>Assistance</h3>
         <p class="why-card-text">Dedicated Placement Cell connecting students with animation studios, gaming companies, OTT platforms and digital agencies across India. Through campus drives, portfolio reviews, and career-focused interview preparation.</p>
@@ -199,7 +197,7 @@
       <!-- Card 3: AI-Integrated Learning -->
       <div class="maac-why-card">
         <div class="why-card-icon-wrap">
-          <img src="{{ asset('frontend/images/maac/icons/clipboard.png') }}" alt="AI Learning" class="why-card-icon">
+          <img loading="lazy" src="{{ asset('frontend/images/maac/icons/clipboard.png') }}" alt="AI Learning" class="why-card-icon">
         </div>
         <h3 class="why-card-title">AI-Integrated<br>Learning</h3>
         <p class="why-card-text">One of the first creative institutes in the Durgapur–Asansol–Burdwan–Bolpur– Bankura–Purulia region to integrate AI-focused curriculum for Animation, VFX, Designers, AI Video Editing, and AI powered VFX tools into every course for future-ready creative learning.</p>
@@ -208,7 +206,7 @@
       <!-- Card 4: State-of-the-Art Labs -->
       <div class="maac-why-card">
         <div class="why-card-icon-wrap">
-          <img src="{{ asset('frontend/images/maac/icons/play.png') }}" alt="Art Labs" class="why-card-icon">
+          <img loading="lazy" src="{{ asset('frontend/images/maac/icons/play.png') }}" alt="Art Labs" class="why-card-icon">
         </div>
         <h3 class="why-card-title">State-of-the-<br>Art Labs</h3>
         <p class="why-card-text">Train with high-performance workstations, render farms, Wacom tablets, motion capture facilities, and the latest licensed software used by leading studios and creative professionals worldwide.</p>
@@ -217,7 +215,7 @@
       <!-- Card 5: Affordable Fees & EMI -->
       <div class="maac-why-card">
         <div class="why-card-icon-wrap">
-          <img src="{{ asset('frontend/images/maac/icons/payment.png') }}" alt="EMI" class="why-card-icon">
+          <img loading="lazy" src="{{ asset('frontend/images/maac/icons/payment.png') }}" alt="EMI" class="why-card-icon">
         </div>
         <h3 class="why-card-title">Affordable Fees &<br>EMI</h3>
         <p class="why-card-text">Affordable animation and VFX courses in west Bengal with industry-quality training, modern infrastructure, and easy EMI facilities for students from Kolkata, Burdwan, Bankura, Bolpur, and beyond.</p>
@@ -226,7 +224,7 @@
       <!-- Card 6: Conveniently Located -->
       <div class="maac-why-card">
         <div class="why-card-icon-wrap">
-          <img src="{{ asset('frontend/images/maac/icons/location.png') }}" alt="Location" class="why-card-icon">
+          <img loading="lazy" src="{{ asset('frontend/images/maac/icons/location.png') }}" alt="Location" class="why-card-icon">
         </div>
         <h3 class="why-card-title">Conveniently Located</h3>
         <p class="why-card-text">Conveniently located near City Center, Durgapur with excellent connectivity from Asansol, Burdwan, Bankura, Bolpur, Bishnupur, Purulia, and Kolkata. Hostel facilities available for outstation students.</p>
@@ -253,7 +251,7 @@
         <!-- Course 1: 3D Animation Programme -->
         <div class="swiper-slide maac-course-card">
           <div class="course-card-icon-wrap">
-            <img src="{{ asset('frontend/images/maac/icons/100.png') }}" alt="3D Animation" class="course-card-icon">
+            <img loading="lazy" src="{{ asset('frontend/images/maac/icons/100.png') }}" alt="3D Animation" class="course-card-icon">
           </div>
           <h3 class="course-card-title">3D-Animation<br>Programme<br>(VFX Programme)</h3>
           <p class="course-card-text">One of the most sought-after animation courses in Durgapur, designed for students from Kolkata and Burdwan looking to build a career in 3D. Covers the complete animation pipeline from modeling and texturing to rigging to cinematic storytelling and final rendering.</p>
@@ -263,7 +261,7 @@
         <!-- Course 2: Visual Effects -->
         <div class="swiper-slide maac-course-card">
           <div class="course-card-icon-wrap">
-            <img src="{{ asset('frontend/images/maac/icons/101.png') }}" alt="VFX" class="course-card-icon">
+            <img loading="lazy" src="{{ asset('frontend/images/maac/icons/101.png') }}" alt="VFX" class="course-card-icon">
           </div>
           <h3 class="course-card-title">Visual Effects<br>(VFX) Programme</h3>
           <p class="course-card-text">A top-rated VFX course in Durgapur and Asansol region. Students from Kolkata, Burdwan, and Bolpur come to learn cinema-level VFX. Learn essentials of VFX, 3D assets, real-time compositing, AI-powered workflows using Houdini FX, Nuke, and After Effects.</p>
@@ -273,7 +271,7 @@
         <!-- Course 3: Gaming & Interactive Media -->
         <div class="swiper-slide maac-course-card">
           <div class="course-card-icon-wrap">
-            <img src="{{ asset('frontend/images/maac/icons/102.png') }}" alt="Gaming" class="course-card-icon">
+            <img loading="lazy" src="{{ asset('frontend/images/maac/icons/102.png') }}" alt="Gaming" class="course-card-icon">
           </div>
           <h3 class="course-card-title">Gaming &<br>Interactive Media</h3>
           <p class="course-card-text">MAAC Durgapur is a leading gaming institute covering mobile, PC and console game development for students from Burdwan For course! Focused on complete game pipeline including 3D assets, real-time workflows using Unreal Engine and AI-powered tools.</p>
@@ -283,7 +281,7 @@
         <!-- Course 4: Graphic Design with AI -->
         <div class="swiper-slide maac-course-card">
           <div class="course-card-icon-wrap">
-            <img src="{{ asset('frontend/images/maac/icons/after-effects (1).png') }}" alt="Graphic Design" class="course-card-icon">
+            <img loading="lazy" src="{{ asset('frontend/images/maac/icons/after-effects (1).png') }}" alt="Graphic Design" class="course-card-icon">
           </div>
           <h3 class="course-card-title">Graphic Design<br>with AI Tools</h3>
           <p class="course-card-text">A comprehensive graphic design course covering branding, layout design, social media graphics and digital design using Photoshop, Illustrator, InDesign, Figma, Midjourney, and AI-powered creative tools.</p>
@@ -293,7 +291,7 @@
         <!-- Course 5: Motion Graphics & Video Editing -->
         <div class="swiper-slide maac-course-card">
           <div class="course-card-icon-wrap">
-            <img src="{{ asset('frontend/images/maac/icons/illustrator.png') }}" alt="Motion Graphics" class="course-card-icon">
+            <img loading="lazy" src="{{ asset('frontend/images/maac/icons/illustrator.png') }}" alt="Motion Graphics" class="course-card-icon">
           </div>
           <h3 class="course-card-title">Motion Graphics<br>& Video Editing</h3>
           <p class="course-card-text">A leading motion graphics and video editing course in Durgapur. Students from Kolkata, Burdwan, and Asansol learn professional video production, animation sequences, explainer videos, Premiere Pro, DaVinci Resolve, and AI-powered editing.</p>
@@ -303,7 +301,7 @@
         <!-- Course 6: Digital Content Creator -->
         <div class="swiper-slide maac-course-card">
           <div class="course-card-icon-wrap">
-            <img src="{{ asset('frontend/images/maac/icons/photoshop.png') }}" alt="Content Creator" class="course-card-icon">
+            <img loading="lazy" src="{{ asset('frontend/images/maac/icons/photoshop.png') }}" alt="Content Creator" class="course-card-icon">
           </div>
           <h3 class="course-card-title">Digital Content<br>Creator Programme</h3>
           <p class="course-card-text">Become a digital content creator with skills in video production, social media strategy, short-form video, YouTube optimization, live streaming, and monetization. Includes AI-based content generation, storytelling, and generative AI creative solutions.</p>
@@ -338,7 +336,7 @@
       <!-- Location 1: Burdwan -->
       <div class="maac-location-card">
         <div class="location-card-header">
-          <img src="{{ asset('frontend/images/maac/icons/location.png') }}" alt="" class="location-pin">
+          <img loading="lazy" src="{{ asset('frontend/images/maac/icons/location.png') }}" alt="" class="location-pin">
           <h3 class="location-card-title">Burdwan /<br>Bardhaman</h3>
         </div>
         <p class="location-card-text">MAAC Durgapur is a preferred destination for students from Burdwan seeking industry-focused training in Animation, VFX, Graphic Design, and Unreal Engine. Located just 45 minutes from Burdwan, the institute offers career-oriented creative education with modern tools and placement support.</p>
@@ -347,7 +345,7 @@
       <!-- Location 2: Bolpur -->
       <div class="maac-location-card">
         <div class="location-card-header">
-          <img src="{{ asset('frontend/images/maac/icons/location.png') }}" alt="" class="location-pin">
+          <img loading="lazy" src="{{ asset('frontend/images/maac/icons/location.png') }}" alt="" class="location-pin">
           <h3 class="location-card-title">Bolpur/<br>Santiniketan</h3>
         </div>
         <p class="location-card-text">Students from Bolpur and Santiniketan choose MAAC Durgapur for industry-focused training in VFX, Motion Graphics, Graphic Design, Video Editing, and AI-powered creative courses – delivering professional training close to home.</p>
@@ -356,7 +354,7 @@
       <!-- Location 3: Bankura -->
       <div class="maac-location-card">
         <div class="location-card-header">
-          <img src="{{ asset('frontend/images/maac/icons/location.png') }}" alt="" class="location-pin">
+          <img loading="lazy" src="{{ asset('frontend/images/maac/icons/location.png') }}" alt="" class="location-pin">
           <h3 class="location-card-title">Bankura</h3>
         </div>
         <p class="location-card-text">MAAC Durgapur is the nearest professional animation and multimedia institute for students from Bankura, offering training in Graphic Design, Video Editing, Maya, Blender, Photoshop, Unreal Engine, and industry-focused creative courses with placement support.</p>
@@ -365,7 +363,7 @@
       <!-- Location 4: Purulia -->
       <div class="maac-location-card">
         <div class="location-card-header">
-          <img src="{{ asset('frontend/images/maac/icons/location.png') }}" alt="" class="location-pin">
+          <img loading="lazy" src="{{ asset('frontend/images/maac/icons/location.png') }}" alt="" class="location-pin">
           <h3 class="location-card-title">Purulia</h3>
         </div>
         <p class="location-card-text">Students from Purulia choose MAAC Durgapur for industry-focused training in VFX, Gaming, Motion Graphics, Video Editing, Graphic Design, and AI-powered creative courses – helping students build successful careers in the digital media industry.</p>
@@ -374,7 +372,7 @@
       <!-- Location 5: Raniganj, Asansol -->
       <div class="maac-location-card">
         <div class="location-card-header">
-          <img src="{{ asset('frontend/images/maac/icons/location.png') }}" alt="" class="location-pin">
+          <img loading="lazy" src="{{ asset('frontend/images/maac/icons/location.png') }}" alt="" class="location-pin">
           <h3 class="location-card-title">Raniganj, Asansol</h3>
         </div>
         <p class="location-card-text">Students from Asansol and Raniganj choose MAAC Durgapur for industry-focused training in Animation, VFX, Graphic Design, and AI Creative courses with dedicated placement assistance and career-focused learning.</p>
@@ -383,7 +381,7 @@
       <!-- Location 6: Andal, Jamuria, Kulti -->
       <div class="maac-location-card">
         <div class="location-card-header">
-          <img src="{{ asset('frontend/images/maac/icons/location.png') }}" alt="" class="location-pin">
+          <img loading="lazy" src="{{ asset('frontend/images/maac/icons/location.png') }}" alt="" class="location-pin">
           <h3 class="location-card-title">Andal, Jamuria, Kulti,<br>Barakar, Salanpur</h3>
         </div>
         <p class="location-card-text">Students from Andal, Jamuria, Kulti, Barakar, and nearby industrial regions choose MAAC Durgapur for successful, industry-focused training in Animation, VFX, Graphic Design, Gaming, and creative technologies.</p>
@@ -395,8 +393,6 @@
 @endsection
 
 @section('custom_js')
-<!-- Swiper JS -->
-<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script src="{{ asset('frontend/js/maac.js') }}"></script>
 <script>
   document.addEventListener('DOMContentLoaded', function () {

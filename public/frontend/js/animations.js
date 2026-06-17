@@ -5,8 +5,9 @@
 (function() {
   'use strict';
 
-  // Register ScrollTrigger plugin
-  gsap.registerPlugin(ScrollTrigger);
+  // Register GSAP plugins
+  if (typeof ScrollTrigger !== 'undefined') gsap.registerPlugin(ScrollTrigger);
+  if (typeof ScrollToPlugin !== 'undefined') gsap.registerPlugin(ScrollToPlugin);
 
   /* ─── Navbar entrance ──────────────────────────────────── */
   gsap.from('#navbar', {
@@ -52,8 +53,7 @@
       scrollTrigger: {
         trigger: img.closest('section') || img.parentElement,
         start: 'top bottom',
-        end: 'bottom top',
-        scrub: true,
+        scrub: 0.5, // Reduced scrub to fix lag
       },
     });
   });
@@ -89,10 +89,9 @@
     gsap.from(card, {
       x: fromRight ? 80 : -80,
       opacity: 0,
-      filter: 'blur(8px)',
       duration: 1,
       ease: 'power3.out',
-      scrollTrigger: { trigger: card, start: 'top 82%', toggleActions: 'play none none none' },
+      scrollTrigger: { trigger: card, start: 'top 85%', toggleActions: 'play none none none' },
     });
   });
 
@@ -145,8 +144,7 @@
   gsap.from('.journey-card', {
     y: 60,
     opacity: 0,
-    scale: 0.92,
-    filter: 'blur(6px)',
+    scale: 0.95,
     duration: 0.9,
     stagger: 0.15,
     ease: 'power3.out',
@@ -172,7 +170,6 @@
     y: 50,
     opacity: 0,
     scale: 0.95,
-    filter: 'blur(4px)',
     duration: 0.8,
     stagger: 0.1,
     ease: 'power3.out',

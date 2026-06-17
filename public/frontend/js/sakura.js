@@ -118,15 +118,23 @@
 
     var clock = new THREE.Clock();
     var active = true;
+    var animationId = null;
     
     var observer = new IntersectionObserver(function(entries) {
       active = entries[0].isIntersecting;
+      if (active && !animationId) {
+        clock.getElapsedTime(); // Prevent huge jump
+        animate();
+      }
     }, { threshold: 0.0 });
     observer.observe(canvas.parentElement);
 
     function animate() {
-      requestAnimationFrame(animate);
-      if (!active) return;
+      if (!active) {
+        animationId = null;
+        return;
+      }
+      animationId = requestAnimationFrame(animate);
       
       var time = clock.getElapsedTime();
       spawnTimer++;
@@ -190,8 +198,12 @@
     resize();
     window.addEventListener('resize', resize, { passive: true });
 
+    var animationId = null;
     var observer = new IntersectionObserver(function (entries) {
       active = entries[0].isIntersecting;
+      if (active && !animationId) {
+        animatePetals();
+      }
     }, { threshold: 0.1 });
     observer.observe(canvas.parentElement);
 
@@ -231,10 +243,13 @@
     }
 
     function animatePetals() {
-      requestAnimationFrame(animatePetals);
+      if (!active) {
+        animationId = null;
+        return;
+      }
+      animationId = requestAnimationFrame(animatePetals);
       frame++;
       ctx.clearRect(0, 0, W, H);
-      if (!active) return;
 
       var isTablet = window.innerWidth < 1024 && window.innerWidth >= 768;
       var isMobileCheck = window.innerWidth < 768;

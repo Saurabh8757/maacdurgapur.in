@@ -1,0 +1,43 @@
+c:\xampp\htdocs\maacdurgapur\public\frontend\images\7e21b9661c85d61676143a8ae2c9a73b.jpg
+c:\xampp\htdocs\maacdurgapur\public\frontend\images\arrow_trail_right.webp
+c:\xampp\htdocs\maacdurgapur\public\frontend\images\maac\bg\035ebb1a-087d-4589-a362-997ef824ea59.png
+c:\xampp\htdocs\maacdurgapur\public\frontend\images\maac\bg\5971696c-b063-4a33-b617-97c0680da76f.png
+c:\xampp\htdocs\maacdurgapur\public\frontend\images\maac\bg\739c2d5a-5e36-4bcf-92e4-f4aa9b8e332a.png
+c:\xampp\htdocs\maacdurgapur\public\frontend\images\maac\bg\754b2a5c-27da-4bf2-bde3-3b1eb2cac44a.png
+c:\xampp\htdocs\maacdurgapur\public\frontend\images\maac\bg\afa6ad76-cc5c-4eb6-aa08-9ded1e7497ba.png
+c:\xampp\htdocs\maacdurgapur\public\frontend\images\maac\bg\b4655f98-f304-4043-90e8-bb7d4e2e635e.png
+c:\xampp\htdocs\maacdurgapur\public\frontend\images\maac\bg\b52a44e1-58b3-4344-8621-95beb97b4de2.png
+c:\xampp\htdocs\maacdurgapur\public\frontend\images\maac\bg\c9fd1d49-3abb-488e-b8ca-12d1a3de9058.png
+c:\xampp\htdocs\maacdurgapur\public\frontend\images\maac\icons\0b5ef8cc-0c75-4331-aa7c-7ab5d3c40a6e.png
+c:\xampp\htdocs\maacdurgapur\public\frontend\images\maac\icons\24076131-cd4e-4446-81fa-a2e05fc60c04.png
+c:\xampp\htdocs\maacdurgapur\public\frontend\images\maac\icons\343-3436652_ue-logo-unreal-engine-icon.png
+c:\xampp\htdocs\maacdurgapur\public\frontend\images\maac\icons\44689385-6703-4c6f-b3d4-1a94a701242d.png
+c:\xampp\htdocs\maacdurgapur\public\frontend\images\maac\icons\49ce9df5-d99b-4f60-ac49-9dcb252bc806.png
+c:\xampp\htdocs\maacdurgapur\public\frontend\images\maac\icons\75f12a74-ab1b-4248-ab4f-b0dd444e17cf.png
+c:\xampp\htdocs\maacdurgapur\public\frontend\images\maac\icons\9b78c349-6f9a-4b6d-885c-43cbe5a9f1fa.png
+c:\xampp\htdocs\maacdurgapur\public\frontend\images\maac\icons\Aksha_logo.png
+c:\xampp\htdocs\maacdurgapur\public\frontend\images\maac\icons\b4f941b6-f706-4f05-a9fc-79f4a30d6c4c.png
+c:\xampp\htdocs\maacdurgapur\public\frontend\images\maac\icons\b73949c6-01c6-49f3-9c5d-8e002c8b85ff.png
+c:\xampp\htdocs\maacdurgapur\public\frontend\images\maac\icons\bbc6b50b-4c2c-4c55-9d6e-a2bfcbfaddf1.png
+c:\xampp\htdocs\maacdurgapur\public\frontend\images\maac\icons\Blender_logo_no_text.svg.png
+c:\xampp\htdocs\maacdurgapur\public\frontend\images\maac\icons\check-box-empty.png
+c:\xampp\htdocs\maacdurgapur\public\frontend\images\maac\icons\down-arrow.png
+c:\xampp\htdocs\maacdurgapur\public\frontend\images\maac\icons\e75e498a-dd1c-4027-9943-3cbb958851ac.png
+c:\xampp\htdocs\maacdurgapur\public\frontend\images\maac\icons\facebook.png
+c:\xampp\htdocs\maacdurgapur\public\frontend\images\maac\icons\idvlMMTcQr_1778773083348.png
+c:\xampp\htdocs\maacdurgapur\public\frontend\images\maac\icons\index-logo.png
+c:\xampp\htdocs\maacdurgapur\public\frontend\images\maac\icons\instagram.png
+c:\xampp\htdocs\maacdurgapur\public\frontend\images\maac\icons\left-arrow.png
+c:\xampp\htdocs\maacdurgapur\public\frontend\images\maac\icons\maac_logo.png
+c:\xampp\htdocs\maacdurgapur\public\frontend\images\maac\icons\maac_logo_png.png
+c:\xampp\htdocs\maacdurgapur\public\frontend\images\maac\icons\mascot-logo.png
+c:\xampp\htdocs\maacdurgapur\public\frontend\images\maac\icons\maya-2017-logo-png-transparent.png
+c:\xampp\htdocs\maacdurgapur\public\frontend\images\maac\icons\netflix.png
+c:\xampp\htdocs\maacdurgapur\public\frontend\images\maac\icons\right-arrow (1).png
+c:\xampp\htdocs\maacdurgapur\public\frontend\images\maac\icons\Rockstar_Games-Logo.wine.png
+c:\xampp\htdocs\maacdurgapur\public\frontend\images\maac\icons\spacific logo.png
+c:\xampp\htdocs\maacdurgapur\public\frontend\images\maac\icons\Technicolor_logo.svg.png
+c:\xampp\htdocs\maacdurgapur\public\frontend\images\maac\icons\unnamed.png
+c:\xampp\htdocs\maacdurgapur\public\frontend\images\maac\icons\user (1).png
+c:\xampp\htdocs\maacdurgapur\public\frontend\images\maac\icons\whatsapp (1).png
+c:\xampp\htdocs\maacdurgapur\public\frontend\images\maac\icons\youtube.png
