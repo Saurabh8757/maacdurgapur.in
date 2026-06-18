@@ -1,0 +1,36 @@
+<IfModule mod_rewrite.c>
+    <IfModule mod_negotiation.c>
+        Options -MultiViews -Indexes
+    </IfModule>
+
+    RewriteEngine On
+
+    # Reject legacy URLs that expose public/ as a visible path segment.
+    # When public/ is the real document root, normal request URLs do not
+    # contain this segment and are unaffected.
+    RewriteCond %{THE_REQUEST} "\s/+[^?\s]*/public(?:[/?\s])" [NC]
+    RewriteRule ^ - [R=404,L]
+
+    # Preserve the Authorization header for authenticated API requests.
+    RewriteCond %{HTTP:Authorization} .
+    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+    # Redirect trailing slashes when the request is not a real directory.
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_URI} (.+)/$
+    RewriteRule ^ %1 [L,R=301]
+
+    # Route non-file, non-directory requests through Laravel.
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^ index.php [L]
+</IfModule>
+
+# Disable directory listings even if mod_rewrite or mod_negotiation is absent.
+Options -Indexes
+
+# Defense-in-depth: sensitive files do not belong in public/, but deny them if
+# they are introduced accidentally.
+<FilesMatch "(^\.|(?:^|\.)(?:env|log|sql|sqlite|bak|backup|old|orig|save|swp|dist)$|^(?:artisan|composer\.(?:json|lock)|package(?:-lock)?\.json|phpunit\.xml|vite\.config\.js)$)">
+    Require all denied
+</FilesMatch>

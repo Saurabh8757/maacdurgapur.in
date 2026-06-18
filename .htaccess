@@ -1,28 +1,47 @@
-<IfModule mod_rewrite.c>
-    <IfModule mod_negotiation.c>
-        Options -MultiViews -Indexes
-    </IfModule>
+Options -Indexes
 
+# Deny sensitive root files and common backup/configuration artifacts.
+<FilesMatch "(^\.|^(?:artisan|composer\.(?:json|lock)|package(?:-lock)?\.json|phpunit\.xml|vite\.config\.js|db_dump\.sql|PROJECT_MAP\.md|SPRINT1_EXECUTION_PLAN\.md)$|\.(?:env|log|sql|sqlite|bak|backup|old|orig|save|swp)$)">
+    Require all denied
+</FilesMatch>
+
+<IfModule mod_rewrite.c>
     RewriteEngine On
 
-    # Handle Authorization Header
+    # Preserve bearer/API authorization headers.
     RewriteCond %{HTTP:Authorization} .
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
 
-    # Redirect Trailing Slashes If Not A Folder...
+    # Block framework source, dependencies, runtime storage, and development
+    # directories from the legacy repository-root URL.
+    RewriteRule ^(?:app|bootstrap|config|database|lang|node_modules|resources|routes|storage|tests|vendor)(?:/|$) - [R=404,L,NC]
+
+    # Private applicant documents must never be served directly.
+    RewriteRule ^upload/file(?:/|$) - [R=404,L,NC]
+
+    # Prevent public/ from becoming an alternate visible application path.
+    RewriteRule ^public(?:/|$) - [R=404,L,NC]
+
+    # Keep the legacy subdirectory deployment available until Apache is pointed
+    # directly at public/. These are internal rewrites; /public never appears
+    # in the browser-visible URL.
+    RewriteRule ^(frontend|admin|image)(/.*)?$ public/$1$2 [END,NC]
+    RewriteRule ^(favicon\.ico|robots\.txt)$ public/$1 [END,NC]
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^upload/(SERVICE|images)(/.*)?$ public/upload/$1$2 [END,NC]
+
+    # Block direct requests to the compatibility front controller.
+    # Laravel may still reach it through the internal rewrite below.
+    RewriteCond %{THE_REQUEST} "\s/+[^?\s]*/index\.php(?:[?\s])" [NC]
+    RewriteRule ^index\.php$ - [R=404,L]
+
+    # Redirect trailing slashes only when the target is not a real directory.
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_URI} (.+)/$
-    RewriteRule ^ %1 [L,R=301]
+    RewriteRule ^ %1 [R=301,L]
 
-    # Send Requests To Front Controller...
+    # Route application requests through Laravel.
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
 </IfModule>
-
-# php -- BEGIN cPanel-generated handler, do not edit
-# Set the “ea-php81” package as the default “PHP” programming language.
-<IfModule mime_module>
-  AddHandler application/x-httpd-ea-php81___lsphp .php .php8 .phtml
-</IfModule>
-# php -- END cPanel-generated handler, do not edit

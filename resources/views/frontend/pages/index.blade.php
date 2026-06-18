@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -829,9 +829,9 @@
         </div>
       </div>
     </div>
-    <div class="swiper-button-prev journey-prev"></div>
+    <!-- <div class="swiper-button-prev journey-prev"></div>
     <div class="swiper-button-next journey-next"></div>
-    <div class="journey-pagination"></div>
+    <div class="journey-pagination"></div> -->
   </div>
 </section>
 

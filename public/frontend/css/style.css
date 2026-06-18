@@ -692,8 +692,8 @@ body.loading {
         inset: -20% -10% -20% -30%;
         background: radial-gradient(
             ellipse at center,
-            rgba(10, 10, 20, 0.30) 0%,
-            rgba(10, 10, 20, 0.22) 40%,
+            rgba(10, 10, 20, 0.548) 0%,
+            rgba(10, 10, 20, 0.329) 40%,
             rgba(10, 10, 20, 0) 70%,
             transparent 100%
         );
@@ -712,8 +712,8 @@ body.loading {
 
 .hero-heading {
     font-family: 'Barber Chop', Oswald, sans-serif;
-    font-weight: normal; /* Custom display fonts usually don't need 700 weight unless specified */
-    line-height: 1.08;
+    font-weight: 700; 
+    line-height: 1.1;
     text-transform: uppercase;
     margin-bottom: 16px;
 }
@@ -729,7 +729,7 @@ body.loading {
     display: block;
     font-size: clamp(1.4rem, 2.8vw, 2.2rem);
     color: #fff;
-    letter-spacing: 1px;
+    letter-spacing: 1.5px;
 }
 
 .hero-heading .line3 {
@@ -746,11 +746,11 @@ body.loading {
 
 .hero-sub2,
 .hero-subtext {
-    font-family: 'Myriad Pro', Arial, sans-serif;
+    font-family: "Myriad Pro", sans-serif;
     font-style: italic;
     font-weight: normal;
     font-size: 0.82rem;
-    color: rgba(220, 220, 240, 0.85);
+    color: rgb(255, 255, 255);
     line-height: 1.6;
     margin-bottom: 10px;
 }
@@ -845,7 +845,7 @@ body.loading {
         padding: 8vh 16px 40px 0;
         text-align: right;
         max-width: 82%;
-        background: radial-gradient(ellipse at 100% 50%, rgba(10, 10, 20, 0.65) 0%, transparent 85%);
+        background: radial-gradient(ellipse at 100% 50%, rgba(10, 10, 20, 0.678) 0%, transparent 85%);
         align-items: flex-end;
     }
 
@@ -1308,7 +1308,7 @@ body.loading {
 
 .course-link:hover { color: var(--orange-light); }
 
-/* .swiper-button-next,
+.swiper-button-next,
 .swiper-button-prev {
     color: var(--orange) !important;
     background: rgba(10, 10, 25, 0.7);
@@ -1319,7 +1319,7 @@ body.loading {
 }
 
 .swiper-button-next::after,
-.swiper-button-prev::after { font-size: 16px !important; } */
+.swiper-button-prev::after { font-size: 16px !important; }
 
 /* ============================================================
    STATS SECTION
