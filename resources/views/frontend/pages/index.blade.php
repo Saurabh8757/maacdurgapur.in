@@ -138,6 +138,7 @@
     <img src="{{ asset('frontend/images/pg-01.webp') }}" alt="Hero Background" class="hero-bg-img parallax-bg" data-speed="0.3" fetchpriority="high">
   </div>
   <canvas id="hero-sakura-canvas"></canvas>
+  <canvas class="interactive-leaf-canvas"></canvas>
   
   <div class="hero-badge">End-to-End</div>
   
@@ -164,6 +165,7 @@
     <img src="{{ asset('frontend/images/pg-02.webp') }}" alt="MAAC Background" class="section-bg-img parallax-bg" data-speed="0.2" loading="lazy">
   </div>
   <canvas class="sakura-canvas" data-section="maac"></canvas>
+  <canvas class="interactive-leaf-canvas"></canvas>
   
   <div class="brand-section-content align-right">
     <div class="brand-logo-box maac-logo-box">
@@ -186,6 +188,7 @@
     <img src="{{ asset('frontend/images/pg-03.webp') }}" alt="AKSHA Background" class="section-bg-img parallax-bg" data-speed="0.2" loading="lazy">
   </div>
   <canvas class="sakura-canvas" data-section="aksha"></canvas>
+  <canvas class="interactive-leaf-canvas"></canvas>
   
   <div class="brand-section-content align-left">
     <div class="brand-logo-box aksha-logo-box">
@@ -208,6 +211,7 @@
     <img src="{{ asset('frontend/images/pg-04.webp') }}" alt="Space-E-Fic Background" class="section-bg-img parallax-bg" data-speed="0.2" loading="lazy">
   </div>
   <canvas class="sakura-canvas" data-section="spacefic"></canvas>
+  <canvas class="interactive-leaf-canvas"></canvas>
   
   <div class="brand-section-content align-right">
     <div class="brand-logo-box spacefic-logo-box">
@@ -230,6 +234,7 @@
     <img src="{{ asset('frontend/images/pg-05.webp') }}" alt="Courses Background" class="section-bg-img parallax-bg" data-speed="0.15" loading="lazy">
   </div>
   <canvas class="sakura-canvas" data-section="courses"></canvas>
+  <canvas class="interactive-leaf-canvas"></canvas>
   
   <div class="section-header">
     <h2 class="section-title gold">EXPLORE CAREER-FOCUSED COURSES IN</h2>
@@ -265,6 +270,7 @@
 <!-- ===================== STATS SECTION ===================== -->
 <section class="stats-section">
   <canvas class="sakura-canvas" data-section="stats"></canvas>
+  <canvas class="interactive-leaf-canvas"></canvas>
   <div class="stats-grid">
     <div class="stat-item" data-count="5000" data-suffix="+">
       <span class="stat-num" data-target="5000">0</span><span class="stat-suffix">+</span>
@@ -317,18 +323,35 @@
         height: 100vh;
         height: 100svh;
         overflow: hidden;
+        /* Instant Poster while video loads */
+        background: url('{{ asset("frontend/images/pg-06.webp") }}') center/cover no-repeat;
+    }
+
+    /* Inner relative wrapper to fix Safari sticky offset parent bug */
+    .placement-video-inner {
+        position: relative !important;
+        width: 100%;
+        height: 100%;
+        transform: translateZ(0); /* Force hardware acceleration */
     }
     
     .placement-bg-video {
+        position: absolute !important;
+        top: 0;
+        left: 0;
         width: 100%;
         height: 100%;
         object-fit: cover;
+        transform: translateZ(0); /* Force hardware acceleration to prevent blur/pixelation */
+        backface-visibility: hidden;
+        transition: opacity 1.5s ease-in-out; /* Smooth crossfade for seamless loop */
     }
     
     .placement-bg-overlay {
         position: absolute !important;
         inset: 0;
         background: rgba(5, 5, 12, 0.15);
+        z-index: 2 !important;
     }
 
     /* All content sections scroll normally over the sticky video */
@@ -342,37 +365,96 @@
         height: auto !important; /* Remove any 100vh overrides */
         min-height: auto !important;
     }
-
-    /* Toggle videos based on device */
-    .placement-video-mobile { display: none; }
-    .placement-video-desktop { display: block; }
-
-    @media (max-width: 1024px) {
-        .placement-video-mobile { display: block; }
-        .placement-video-desktop { display: none; }
-    }
 </style>
 <div class="placement-group">
 
-    <!-- Sticky Video Background for All Devices -->
+    <!-- Seamless Crossfade Sticky Video Background -->
     <div class="placement-video-absolute-wrapper">
         <div class="placement-video-sticky-box">
-            <!-- Mobile Video -->
-            <video class="placement-bg-video placement-video-mobile" autoplay muted loop playsinline preload="metadata" oncontextmenu="return false;" controlsList="nodownload nofullscreen noremoteplayback" disablePictureInPicture>
-                <source src="{{ asset('frontend/vedio/waterfall.mp4') }}" type="video/mp4">
-            </video>
-            <!-- Desktop Video -->
-            <video class="placement-bg-video placement-video-desktop" autoplay muted loop playsinline preload="metadata" oncontextmenu="return false;" controlsList="nodownload nofullscreen noremoteplayback" disablePictureInPicture>
-                <source src="{{ asset('frontend/vedio/waterfall_desktop.mp4') }}" type="video/mp4">
-            </video>
-            <div class="placement-bg-overlay"></div>
+            <!-- Inner wrapper resolves occasional size distortion/stretch bugs on Safari -->
+            <div class="placement-video-inner">
+                <!-- Dual Videos for Seamless Looping -->
+                <video id="bg-video-1" class="placement-bg-video" muted playsinline preload="auto" oncontextmenu="return false;" controlsList="nodownload nofullscreen noremoteplayback" disablePictureInPicture style="z-index: 1; opacity: 1;"></video>
+                <video id="bg-video-2" class="placement-bg-video" muted playsinline preload="auto" oncontextmenu="return false;" controlsList="nodownload nofullscreen noremoteplayback" disablePictureInPicture style="z-index: 0; opacity: 0;"></video>
+                <div class="placement-bg-overlay"></div>
+            </div>
         </div>
     </div>
 
+    <!-- Performance & Seamless Loop Script -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const video1 = document.getElementById('bg-video-1');
+            const video2 = document.getElementById('bg-video-2');
+            if(!video1 || !video2) return;
+
+            let activeVideo = 1;
+            const crossfadeMargin = 1.0; // Starts fading 1 second before video ends
+            
+            // 1. Performance Optimization: Only load the correct video for the device!
+            let currentMode = window.innerWidth <= 1024 ? 'mobile' : 'desktop';
+            
+            function loadVideos() {
+                const videoSrc = currentMode === 'mobile' ? "{{ asset('frontend/vedio/waterfall.mp4') }}" : "{{ asset('frontend/vedio/waterfall_desktop.mp4') }}";
+                video1.src = videoSrc;
+                video2.src = videoSrc;
+                video1.load();
+                video2.load();
+                
+                // Play the active video after swapping sources
+                if (activeVideo === 1) video1.play().catch(e=>console.log(e));
+                else video2.play().catch(e=>console.log(e));
+            }
+            
+            // Initial load
+            loadVideos();
+            
+            // Listen for window resize to swap videos if testing responsive design (fixes bad quality/cropping)
+            window.addEventListener('resize', function() {
+                const newMode = window.innerWidth <= 1024 ? 'mobile' : 'desktop';
+                if (currentMode !== newMode) {
+                    currentMode = newMode;
+                    loadVideos(); // Hot-swap the video files!
+                }
+            });
+
+            // 2. Seamless Loop Crossfade Logic
+            function checkVideoTime() {
+                const currentVid = activeVideo === 1 ? video1 : video2;
+                const nextVid = activeVideo === 1 ? video2 : video1;
+                
+                // When we are near the end of the current video...
+                if (currentVid.duration && currentVid.currentTime >= (currentVid.duration - crossfadeMargin)) {
+                    // Prepare and play the next video from the start
+                    nextVid.currentTime = 0;
+                    nextVid.play().catch(e => console.log(e));
+                    
+                    // Trigger the CSS crossfade
+                    nextVid.style.opacity = '1';
+                    nextVid.style.zIndex = '1';
+                    currentVid.style.opacity = '0';
+                    currentVid.style.zIndex = '0';
+                    
+                    activeVideo = activeVideo === 1 ? 2 : 1;
+                    
+                    // Wait until crossfade finishes before checking again
+                    setTimeout(checkVideoTime, crossfadeMargin * 1000 + 100);
+                    return;
+                }
+                
+                // Efficient loop using requestAnimationFrame
+                requestAnimationFrame(checkVideoTime);
+            }
+            
+            // Start monitoring
+            requestAnimationFrame(checkVideoTime);
+        });
+    </script>
+
 <!-- ===================== RECRUITERS SECTION ===================== -->
 <section class="recruiters-section">
-  <canvas class="sakura-canvas" data-section="recruiters"></canvas>
-  <canvas class="interactive-leaf-canvas"></canvas>
+  <!-- <canvas class="sakura-canvas" data-section="recruiters"></canvas> -->
+  <!-- <canvas class="interactive-leaf-canvas"></canvas> -->
   
   <div class="section-header">
     <h2 class="section-title gold">OUR TOP RECRUITERS</h2>
@@ -402,7 +484,7 @@
 
 <!-- ===================== PLACEMENT SECTION ===================== -->
 <section class="placement-section">
-  <canvas class="sakura-canvas" data-section="placement"></canvas>
+  <!-- <canvas class="sakura-canvas" data-section="placement"></canvas> -->
   <div class="section-header">
     <span class="placement-accent">✦ Premium Placements</span>
     <h2 class="section-title gold">OUR PLACEMENT PROMISE</h2>
@@ -521,8 +603,8 @@
 
 <!-- ===================== JOURNEY SECTION ===================== -->
 <section class="journey-section">
-  <canvas class="sakura-canvas" data-section="journey"></canvas>
-  <canvas class="interactive-leaf-canvas"></canvas>
+  <!-- <canvas class="sakura-canvas" data-section="journey"></canvas> -->
+  <!-- <canvas class="interactive-leaf-canvas"></canvas> -->
   <div class="section-header">
     <h2 class="section-title gold">YOUR JOURNEY TO EXCELLENCE BEGINS HERE</h2>
     <p class="section-subtitle">Join thousands of students from Durgapur, Kolkata, Asansol, Burdwan, Raniganj, Bolpur and Purulia who have built their careers in animation and technology at MAAC Durgapur.</p>
@@ -755,8 +837,8 @@
 
 <!-- ===================== AI SECTION ===================== -->
 <section class="ai-section">
-  <canvas class="sakura-canvas" data-section="ai"></canvas>
-  <canvas class="interactive-leaf-canvas"></canvas>
+  <!-- <canvas class="sakura-canvas" data-section="ai"></canvas> -->
+  <!-- <canvas class="interactive-leaf-canvas"></canvas> -->
   <div class="section-header">
     <h2 class="section-title gold">THE FUTURE OF AI IN ANIMATION & DESIGN</h2>
     <p class="section-subtitle">MAAC Durgapur is included in the Schoolnet Advanced Technology framework to include AI creative courses. We are the premier for the future of design and we have a roster of the best trainers from Burdwan–</p>

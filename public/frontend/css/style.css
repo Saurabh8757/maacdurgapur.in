@@ -1549,9 +1549,15 @@ body.loading {
 }
 
 /* ─── Placement Card ──────────────────────────────────── */
+.placement-swiper .swiper-wrapper {
+    align-items: stretch !important;
+    flex-wrap: nowrap !important; /* Prevent Swiper loop cloning bugs from wrapping edge slides */
+}
+
 .placement-swiper .swiper-slide {
-    height: auto; /* Required for align-items: stretch to work */
-    display: flex;
+    height: auto !important; /* Required for align-items: stretch to work */
+    display: flex !important;
+    align-self: stretch !important; /* Force to top and stretch */
     z-index: 1;
     transition: z-index 0.3s;
 }
@@ -1579,6 +1585,7 @@ body.loading {
     flex-direction: column;
     width: 100%;
     min-height: 360px;
+    height: 100% !important; /* Force to stretch and align perfectly with siblings */
     position: relative;
     will-change: transform;
 }
@@ -2065,8 +2072,8 @@ body.loading {
 
 /* Inactive cards: slightly dimmed but text still readable */
 .swiper-slide:not(.swiper-slide-active) .journey-card {
-    opacity: 0.75;
-    filter: brightness(0.85) saturate(0.85);
+    opacity: 1; /* DO NOT make it transparent, otherwise the global video background ruins it */
+    filter: brightness(0.55) saturate(0.7); /* Darken it heavily instead to show inactivity */
 }
 
 .swiper-slide:not(.swiper-slide-active) .journey-card-content {
