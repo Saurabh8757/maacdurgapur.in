@@ -10,7 +10,7 @@
     font-display: swap;
 }
 
-@font-face {
+/* @font-face {
     font-family: 'Barber Chop';
     src: local('Barber Chop'), url('../fonts/BarberChop/BarberChop.woff2') format('woff2'), url('../fonts/BarberChop/BarberChop.woff') format('woff');
     font-weight: normal;
@@ -24,7 +24,7 @@
     font-weight: normal;
     font-style: italic;
     font-display: swap;
-}
+} */
 
 :root {
     /* Colors */

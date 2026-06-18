@@ -34,15 +34,17 @@
   }
 
   /* ─── Hero section ──────────────────────────────────────── */
-  const heroTl = gsap.timeline({ delay: 0.5 });
-  heroTl
-    .from('.hero-badge', { x: 80, opacity: 0, duration: 0.7, ease: 'power2.out' })
-    .from('.hero-heading .line1', { y: 40, opacity: 0, duration: 0.7, ease: 'power3.out' }, '-=0.3')
-    .from('.hero-heading .line2', { y: 40, opacity: 0, duration: 0.7, ease: 'power3.out' }, '-=0.5')
-    .from('.hero-heading .line3', { y: 40, opacity: 0, duration: 0.8, ease: 'power3.out' }, '-=0.5')
-    .from('.hero-subtext', { y: 20, opacity: 0, duration: 0.6, ease: 'power2.out' }, '-=0.3')
-    .from('.hero-sub2', { y: 20, opacity: 0, duration: 0.6, ease: 'power2.out' }, '-=0.4')
-    .from('.hero-buttons', { y: 20, opacity: 0, duration: 0.6, ease: 'power2.out' }, '-=0.4');
+  if (document.querySelector('.hero-section')) {
+    const heroTl = gsap.timeline({ delay: 0.5 });
+    heroTl
+      .from('.hero-badge', { x: 80, opacity: 0, duration: 0.7, ease: 'power2.out' })
+      .from('.hero-heading .line1', { y: 40, opacity: 0, duration: 0.7, ease: 'power3.out' }, '-=0.3')
+      .from('.hero-heading .line2', { y: 40, opacity: 0, duration: 0.7, ease: 'power3.out' }, '-=0.5')
+      .from('.hero-heading .line3', { y: 40, opacity: 0, duration: 0.8, ease: 'power3.out' }, '-=0.5')
+      .from('.hero-subtext', { y: 20, opacity: 0, duration: 0.6, ease: 'power2.out' }, '-=0.3')
+      .from('.hero-sub2', { y: 20, opacity: 0, duration: 0.6, ease: 'power2.out' }, '-=0.4')
+      .from('.hero-buttons', { y: 20, opacity: 0, duration: 0.6, ease: 'power2.out' }, '-=0.4');
+  }
 
   /* ─── Parallax backgrounds — passive ScrollTrigger ────── */
   gsap.utils.toArray('.parallax-bg').forEach(function (img) {
@@ -141,53 +143,61 @@
   });
 
   /* ─── Journey cards — cinematic staggered reveal ───────── */
-  gsap.from('.journey-card', {
-    y: 60,
-    opacity: 0,
-    scale: 0.95,
-    duration: 0.9,
-    stagger: 0.15,
-    ease: 'power3.out',
-    scrollTrigger: {
-      trigger: '.journey-swiper',
-      start: 'top 85%',
-      toggleActions: 'play none none none',
-    },
-  });
+  if (document.querySelector('.journey-swiper')) {
+    gsap.from('.journey-card', {
+      y: 60,
+      opacity: 0,
+      scale: 0.95,
+      duration: 0.9,
+      stagger: 0.15,
+      ease: 'power3.out',
+      scrollTrigger: {
+        trigger: '.journey-swiper',
+        start: 'top 85%',
+        toggleActions: 'play none none none',
+      },
+    });
+  }
 
   gsap.from('.footer-top > *', {
     y: 30, opacity: 0, duration: 0.7, stagger: 0.12, ease: 'power2.out',
     scrollTrigger: { trigger: '.footer-top', start: 'top 90%', toggleActions: 'play none none none' },
   });
 
-  gsap.from('.logo-ticker-wrapper', {
-    opacity: 0, y: 20, duration: 0.8, ease: 'power2.out',
-    scrollTrigger: { trigger: '.logo-ticker-wrapper', start: 'top 90%', toggleActions: 'play none none none' },
-  });
+  if (document.querySelector('.logo-ticker-wrapper')) {
+    gsap.from('.logo-ticker-wrapper', {
+      opacity: 0, y: 20, duration: 0.8, ease: 'power2.out',
+      scrollTrigger: { trigger: '.logo-ticker-wrapper', start: 'top 90%', toggleActions: 'play none none none' },
+    });
+  }
 
   /* ─── Placement cards staggered reveal ────────────────── */
-  gsap.from('.placement-card', {
-    y: 50,
-    opacity: 0,
-    scale: 0.95,
-    duration: 0.8,
-    stagger: 0.1,
-    ease: 'power3.out',
-    scrollTrigger: {
-      trigger: '.placement-swiper',
-      start: 'top 85%',
-      toggleActions: 'play none none none',
-    },
-  });
+  if (document.querySelector('.placement-swiper')) {
+    gsap.from('.placement-card', {
+      y: 50,
+      opacity: 0,
+      scale: 0.95,
+      duration: 0.8,
+      stagger: 0.1,
+      ease: 'power3.out',
+      scrollTrigger: {
+        trigger: '.placement-swiper',
+        start: 'top 85%',
+        toggleActions: 'play none none none',
+      },
+    });
+  }
 
-  gsap.from('.placement-accent', {
-    y: 15, opacity: 0, duration: 0.6, ease: 'power2.out',
-    scrollTrigger: {
-      trigger: '.placement-section .section-header',
-      start: 'top 88%',
-      toggleActions: 'play none none none',
-    },
-  });
+  if (document.querySelector('.placement-section .section-header')) {
+    gsap.from('.placement-accent', {
+      y: 15, opacity: 0, duration: 0.6, ease: 'power2.out',
+      scrollTrigger: {
+        trigger: '.placement-section .section-header',
+        start: 'top 88%',
+        toggleActions: 'play none none none',
+      },
+    });
+  }
 
   gsap.utils.toArray('.institute-section').forEach(function (section) {
     gsap.from(section, {
@@ -200,10 +210,17 @@
   if (typeof ScrollToPlugin !== 'undefined') {
     document.querySelectorAll('a[href^="#"]').forEach(function (link) {
       link.addEventListener('click', function (e) {
-        var target = document.querySelector(link.getAttribute('href'));
-        if (target) {
-          e.preventDefault();
-          gsap.to(window, { scrollTo: { y: target, offsetY: 72 }, duration: 1.2, ease: 'power3.inOut' });
+        var href = link.getAttribute('href');
+        if (!href || href === '#') return;
+        
+        try {
+          var target = document.querySelector(href);
+          if (target) {
+            e.preventDefault();
+            gsap.to(window, { scrollTo: { y: target, offsetY: 72 }, duration: 1.2, ease: 'power3.inOut' });
+          }
+        } catch (err) {
+          // Ignore invalid selectors like href="#some@invalid"
         }
       });
     });

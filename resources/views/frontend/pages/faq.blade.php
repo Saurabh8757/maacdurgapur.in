@@ -1,14 +1,19 @@
 @extends('frontend.layout.app')
 
 @section('custom_css')
-<link rel="stylesheet" href="{{ asset('frontend/css/faq.css') }}">
+<link rel="stylesheet" href="{{ asset('frontend/css/faq.css') }}?v={{ time() }}">
 @endsection
 
 @section('content')
 <!-- FAQ Hero -->
 <section class="faq-hero">
-    <div class="faq-hero-bg"></div>
-    <div class="container" style="position: relative; z-index: 2;">
+    <div class="faq-hero-bg">
+        <!-- Clean, performant animated gradient background -->
+        <div class="hero-gradient-mesh"></div>
+        <div class="hero-glass-overlay"></div>
+        <div class="hero-bottom-fade"></div>
+    </div>
+    <div class="container" style="position: relative; z-index: 10;">
         <h1 class="faq-hero-title">Frequently Asked Questions</h1>
         <p class="faq-hero-subtitle">Everything you need to know about admissions, courses, fees, and career opportunities at MAAC Durgapur.</p>
         
@@ -115,11 +120,32 @@
 @endsection
 
 @section('custom_js')
+<style>
+    /* Prevent horizontal scroll issues from 3D */
+    body { overflow-x: hidden; }
+</style>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    // Accordion Logic
+    // Staggered Entrance Animation for FAQ Items
     const faqItems = document.querySelectorAll('.faq-item');
-    
+    faqItems.forEach((item, index) => {
+        item.style.opacity = '0';
+        item.style.transform = 'translateY(30px)';
+        item.style.transition = 'all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+        item.style.transitionDelay = `${index * 0.1}s`;
+        
+        setTimeout(() => {
+            item.style.opacity = '1';
+            item.style.transform = 'translateY(0)';
+            // Remove inline transition after entrance so CSS hover transition works
+            setTimeout(() => { 
+                item.style.transition = ''; 
+                item.style.transitionDelay = ''; 
+            }, 600);
+        }, 100);
+    });
+
+    // Accordion Logic
     faqItems.forEach(item => {
         const question = item.querySelector('.faq-question');
         question.addEventListener('click', () => {
@@ -163,15 +189,20 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 if (filter === 'all' || filter === category) {
                     item.style.display = 'block';
-                    // small animation effect
                     item.style.opacity = '0';
-                    setTimeout(() => { item.style.opacity = '1'; }, 50);
+                    item.style.transform = 'translateY(10px)';
+                    setTimeout(() => { 
+                        item.style.transition = 'all 0.4s ease';
+                        item.style.opacity = '1'; 
+                        item.style.transform = 'translateY(0)';
+                    }, 50);
                 } else {
                     item.style.display = 'none';
                 }
             });
         });
     });
+
 });
 </script>
 @endsection

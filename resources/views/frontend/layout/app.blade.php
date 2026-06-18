@@ -31,8 +31,10 @@
 <!-- Counselling Modal CSS -->
 <link rel="stylesheet" href="{{ asset('frontend/css/counselling-modal.css') }}" media="print" onload="this.media='all'">
 <noscript><link rel="stylesheet" href="{{ asset('frontend/css/counselling-modal.css') }}"></noscript>
+@if(request()->routeIs('home'))
 <!-- Preload hero image for LCP -->
 <link rel="preload" as="image" href="{{ asset('frontend/images/pg-01.webp') }}" fetchpriority="high">
+@endif
     @yield('custom_css')
 </head>
 <body class="loading">
@@ -492,12 +494,14 @@
     }, '-=0.3');
 
     /* 3. Reveal hero section with a subtle upward slide */
-    tl.from('.hero-section', {
-      opacity: 0,
-      y: 40,
-      duration: 0.8,
-      ease: 'power3.out'
-    }, '-=0.2');
+    if (document.querySelector('.hero-section')) {
+      tl.from('.hero-section', {
+        opacity: 0,
+        y: 40,
+        duration: 0.8,
+        ease: 'power3.out'
+      }, '-=0.2');
+    }
   }
 
 })();
