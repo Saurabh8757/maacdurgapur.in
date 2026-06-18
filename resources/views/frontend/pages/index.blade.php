@@ -286,7 +286,81 @@
 </section>
 
 <!-- ===================== GROUPED: RECRUITERS + PLACEMENT ===================== -->
+<style>
+    @media (max-width: 1024px) {
+        /* Fix for mobile browsers (especially iOS) where overflow-x: hidden on body breaks position: sticky */
+        html, body {
+            overflow-x: visible !important;
+            overflow-x: clip !important; 
+        }
+        .placement-group {
+            background-image: none !important;
+            overflow: visible !important;
+        }
+        
+        /* The Absolute Container that spans the full placement-group height without taking space */
+        .mobile-video-absolute-wrapper {
+            position: absolute !important;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 0 !important;
+            pointer-events: none;
+        }
+        
+        /* The Sticky Element that stays in view */
+        .mobile-video-sticky-box {
+            position: -webkit-sticky !important;
+            position: sticky !important;
+            top: 0;
+            width: 100%;
+            height: 100vh;
+            height: 100svh;
+            overflow: hidden;
+        }
+        
+        .mobile-bg-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .mobile-bg-overlay {
+            position: absolute !important;
+            inset: 0;
+            background: rgba(5, 5, 12, 0.15);
+        }
+
+        /* All content sections scroll normally over the sticky video */
+        .recruiters-section,
+        .placement-section,
+        .journey-section,
+        .ai-section {
+            position: relative !important; /* Force relative so they scroll */
+            z-index: 10 !important;
+            background: transparent !important;
+            height: auto !important; /* Remove any 100vh overrides */
+            min-height: auto !important;
+        }
+    }
+    @media (min-width: 1025px) {
+        .mobile-video-absolute-wrapper {
+            display: none !important;
+        }
+    }
+</style>
 <div class="placement-group" style="background-image: url('{{ asset('frontend/images/pg-06.webp') }}')">
+
+    <!-- Sticky Video Background for Mobile -->
+    <div class="mobile-video-absolute-wrapper">
+        <div class="mobile-video-sticky-box">
+            <video class="mobile-bg-video" autoplay muted loop playsinline preload="metadata" oncontextmenu="return false;" controlsList="nodownload nofullscreen noremoteplayback" disablePictureInPicture>
+                <source src="{{ asset('frontend/vedio/waterfall.mp4') }}" type="video/mp4">
+            </video>
+            <div class="mobile-bg-overlay"></div>
+        </div>
+    </div>
 
 <!-- ===================== RECRUITERS SECTION ===================== -->
 <section class="recruiters-section">
