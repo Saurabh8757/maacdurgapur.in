@@ -5,22 +5,16 @@ namespace App\Services\Brands;
 use App\Models\Brand;
 use App\Models\BrandDomain;
 use Closure;
-use Illuminate\Contracts\Cache\Repository as CacheRepository;
 use Illuminate\Http\Request;
 
 class BrandContextResolver
 {
-    private const CACHE_PREFIX = 'brand-domain:v1:';
-    private const NEGATIVE_CACHE_VALUE = ['resolved' => false];
-
     private array $requestCache = [];
 
     public function __construct(
         private HostnameNormalizer $hostnameNormalizer,
-        private CacheRepository $cache,
-        private ?Closure $domainLookup = null,
-        private int $positiveTtlSeconds = 600,
-        private int $negativeTtlSeconds = 60
+        private BrandDomainCache $domainCache,
+        private ?Closure $domainLookup = null
     ) {
         $this->domainLookup ??= static function (string $hostname): ?BrandDomain {
             return BrandDomain::query()
@@ -49,8 +43,7 @@ class BrandContextResolver
             return $this->requestCache[$normalizedHostname];
         }
 
-        $cacheKey = self::CACHE_PREFIX.$normalizedHostname;
-        $cached = $this->cache->get($cacheKey);
+        $cached = $this->domainCache->get($normalizedHostname);
 
         if (is_array($cached) && ($cached['resolved'] ?? null) === false) {
             return $this->requestCache[$normalizedHostname] = null;
@@ -72,17 +65,13 @@ class BrandContextResolver
             || $domain->status !== 'active'
             || $domain->brand->status !== 'active'
         ) {
-            $this->cache->put(
-                $cacheKey,
-                self::NEGATIVE_CACHE_VALUE,
-                $this->negativeTtlSeconds
-            );
+            $this->domainCache->putUnresolved($normalizedHostname);
 
             return $this->requestCache[$normalizedHostname] = null;
         }
 
         $payload = $this->contextPayload($domain, $normalizedHostname);
-        $this->cache->put($cacheKey, $payload, $this->positiveTtlSeconds);
+        $this->domainCache->putResolved($normalizedHostname, $payload);
 
         return $this->requestCache[$normalizedHostname] = $this->hydrateContext(
             $payload,
@@ -95,7 +84,7 @@ class BrandContextResolver
         $normalizedHostname = $this->hostnameNormalizer->normalize($hostname);
 
         unset($this->requestCache[$normalizedHostname]);
-        $this->cache->forget(self::CACHE_PREFIX.$normalizedHostname);
+        $this->domainCache->forget($normalizedHostname);
     }
 
     private function contextPayload(

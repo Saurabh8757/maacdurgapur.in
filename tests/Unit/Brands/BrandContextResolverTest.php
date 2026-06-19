@@ -4,6 +4,7 @@ namespace Tests\Unit\Brands;
 
 use App\Models\Brand;
 use App\Models\BrandDomain;
+use App\Services\Brands\BrandDomainCache;
 use App\Services\Brands\BrandContextResolver;
 use App\Services\Brands\HostnameNormalizer;
 use Illuminate\Cache\ArrayStore;
@@ -46,12 +47,12 @@ class BrandContextResolverTest extends TestCase
 
         $firstResolver = new BrandContextResolver(
             new HostnameNormalizer(),
-            $cache,
+            $this->domainCache($cache),
             $lookup
         );
         $secondResolver = new BrandContextResolver(
             new HostnameNormalizer(),
-            $cache,
+            $this->domainCache($cache),
             $lookup
         );
 
@@ -95,8 +96,18 @@ class BrandContextResolverTest extends TestCase
     {
         return new BrandContextResolver(
             new HostnameNormalizer(),
-            new Repository(new ArrayStore()),
+            $this->domainCache(new Repository(new ArrayStore())),
             Closure::fromCallable($lookup)
+        );
+    }
+
+    private function domainCache(Repository $cache): BrandDomainCache
+    {
+        return new BrandDomainCache(
+            $cache,
+            'brand-domain:v1:',
+            600,
+            60
         );
     }
 
