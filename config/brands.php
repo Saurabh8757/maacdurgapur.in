@@ -21,4 +21,9 @@ return [
     'admin_context' => [
         'session_key' => 'admin_brand_context',
     ],
+
+    'settings' => [
+        'supported_locales' => ['en'],
+        'default_locale' => 'en',
+    ],
 ];

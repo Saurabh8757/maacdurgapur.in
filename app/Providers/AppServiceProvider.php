@@ -8,6 +8,9 @@ use App\Services\Brands\BrandDomainCache;
 use App\Services\Brands\AdminBrandAccessResolver;
 use App\Services\Brands\AdminBrandContextResolver;
 use App\Services\Brands\HostnameNormalizer;
+use App\Services\Settings\SettingsAuthorizationService;
+use App\Services\Settings\SettingsLocaleResolver;
+use App\Services\Settings\SettingsScopeResolver;
 use Illuminate\Contracts\Cache\Repository as CacheRepository;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\DB;
@@ -36,6 +39,9 @@ class AppServiceProvider extends ServiceProvider
         $this->app->scoped(BrandContextManager::class);
         $this->app->scoped(AdminBrandAccessResolver::class);
         $this->app->scoped(AdminBrandContextResolver::class);
+        $this->app->scoped(SettingsScopeResolver::class);
+        $this->app->scoped(SettingsAuthorizationService::class);
+        $this->app->scoped(SettingsLocaleResolver::class);
 
         $this->app->scoped(BrandContextResolver::class, function ($app) {
             return new BrandContextResolver(
