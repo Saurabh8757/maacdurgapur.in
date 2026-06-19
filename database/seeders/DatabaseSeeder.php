@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -15,11 +14,17 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call([AdminLoginSeeder::class]);
-        $this->call([CmsSeeder::class]);
-        $this->call([SiteInfoSeeder::class]);
-        $this->call([ContactInfoSeeder::class]);
-        $this->call([AboutPageSeeder::class]);
+        $this->call([
+            AdminLoginSeeder::class,
+            BrandSeeder::class,
+            BrandDomainSeeder::class,
+            BrandUserSeeder::class,
+            SettingGroupSeeder::class,
+            SettingDefinitionSeeder::class,
+            CmsSeeder::class,
+            SiteInfoSeeder::class,
+            ContactInfoSeeder::class,
+            AboutPageSeeder::class,
+        ]);
     }
 }
-
