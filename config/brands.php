@@ -6,4 +6,15 @@ return [
         'positive_ttl_seconds' => 600,
         'negative_ttl_seconds' => 60,
     ],
+
+    'host_validation' => [
+        'operational_hosts' => array_values(array_filter(array_map(
+            'trim',
+            explode(',', (string) env('BRAND_OPERATIONAL_HOSTS', ''))
+        ))),
+        'local_compatibility_hosts' => [
+            'localhost',
+            '127.0.0.1',
+        ],
+    ],
 ];
