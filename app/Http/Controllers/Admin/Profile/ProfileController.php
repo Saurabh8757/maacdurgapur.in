@@ -99,9 +99,13 @@ class ProfileController extends Controller
         }
     }
     /*** Admin Logout ***/
-    public function admin_logout()
+    public function admin_logout(Request $request)
     {
         Auth::logout();
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
         return redirect()->route('admin_login')->with('success','You have been successfully logged out!');
     }
 }

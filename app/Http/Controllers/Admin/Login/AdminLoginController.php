@@ -41,7 +41,8 @@ class AdminLoginController extends Controller
 
 
             if (Auth::attempt(['email'=>$email,'password'=>$password,'user_type'=>'Admin'])) {
-                
+                $request->session()->regenerate();
+
                 return response()->json(['status' => 200, 'message' => 'Login Submit Successfully']);
             } else {
                 return response()->json(['status' => 201,'message' => 'Invalid Email Or Password']);
