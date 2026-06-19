@@ -97,6 +97,11 @@ class Brand extends Model
         return $this->hasMany(MediaUsage::class);
     }
 
+    public function userRoleAssignments()
+    {
+        return $this->hasMany(UserRole::class);
+    }
+
     public function scopeActive($query)
     {
         return $query->where('status', 'active');

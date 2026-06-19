@@ -116,4 +116,44 @@ class User extends Authenticatable
     {
         return $this->hasMany(MediaUsage::class, 'created_by');
     }
+
+    public function roleAssignments()
+    {
+        return $this->hasMany(UserRole::class);
+    }
+
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class, 'user_roles')
+            ->withPivot([
+                'uuid',
+                'brand_id',
+                'scope_key',
+                'status',
+                'starts_at',
+                'expires_at',
+            ]);
+    }
+
+    public function globalRoleAssignments()
+    {
+        return $this->hasMany(UserRole::class)
+            ->where('scope_key', 'global');
+    }
+
+    public function brandRoleAssignments()
+    {
+        return $this->hasMany(UserRole::class)
+            ->whereNotNull('brand_id');
+    }
+
+    public function assignedRoleGrants()
+    {
+        return $this->hasMany(UserRole::class, 'assigned_by');
+    }
+
+    public function revokedRoleGrants()
+    {
+        return $this->hasMany(UserRole::class, 'revoked_by');
+    }
 }
