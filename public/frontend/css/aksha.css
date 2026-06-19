@@ -1,0 +1,1070 @@
+/* AKSHA — page-scoped premium frontend */
+.aksha-page {
+  --ak-bg: #030812;
+  --ak-surface: #081525;
+  --ak-cyan: #1ac8ff;
+  --ak-blue: #087ee8;
+  --ak-violet: #8057ff;
+  --ak-pink: #ff4fd8;
+  --ak-white: #f5fbff;
+  --ak-muted: #9db1c7;
+  --ak-line: rgba(120, 210, 255, .16);
+  background: var(--ak-bg);
+  color: var(--ak-white);
+  overflow: hidden;
+}
+
+.aksha-page h1,
+.aksha-page h2,
+.aksha-page h3,
+.aksha-page h4 {
+  font-family: "Rajdhani", sans-serif !important;
+  margin: 0;
+}
+
+.aksha-page p { font-family: "Nunito", sans-serif !important; }
+.aksha-page a { color: inherit; text-decoration: none; }
+.aksha-page button { font: inherit; }
+
+.aksha-shell {
+  width: min(1180px, calc(100% - 48px));
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+.aksha-hero {
+  position: relative;
+  min-height: 100vh;
+  padding: 150px 0 90px;
+  display: flex;
+  align-items: center;
+  isolation: isolate;
+}
+
+.aksha-grid,
+.aksha-cta-grid {
+  position: absolute;
+  inset: 0;
+  opacity: .35;
+  background-image:
+    linear-gradient(rgba(26, 200, 255, .08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(26, 200, 255, .08) 1px, transparent 1px);
+  background-size: 76px 76px;
+  mask-image: linear-gradient(to bottom, black, transparent 88%);
+}
+
+.aksha-grid::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 72% 48%, transparent 0 20%, var(--ak-bg) 69%);
+}
+
+.aksha-glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(110px);
+  opacity: .22;
+  pointer-events: none;
+}
+
+.aksha-glow-one { width: 420px; height: 420px; background: var(--ak-violet); right: 2%; top: 15%; }
+.aksha-glow-two { width: 300px; height: 300px; background: var(--ak-cyan); left: -10%; bottom: 0; }
+
+.aksha-hero-layout {
+  display: grid;
+  grid-template-columns: 1.05fr .95fr;
+  align-items: center;
+  gap: 76px;
+}
+
+.aksha-eyebrow,
+.aksha-kicker {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-transform: uppercase;
+  letter-spacing: .18em;
+  font-size: .72rem;
+  font-weight: 800;
+  color: var(--ak-cyan);
+}
+
+.aksha-eyebrow span {
+  width: 32px;
+  height: 1px;
+  background: var(--ak-cyan);
+  box-shadow: 0 0 12px var(--ak-cyan);
+}
+
+.aksha-hero h1 {
+  margin: 24px 0;
+  font-size: clamp(3.5rem, 6.8vw, 6.8rem);
+  line-height: .88;
+  letter-spacing: -.055em;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.aksha-hero h1 span,
+.aksha-section-heading h2 span,
+.aksha-lab-copy h2 span,
+.aksha-future-card h2 span,
+.aksha-cta h2 span {
+  color: transparent;
+  -webkit-text-stroke: 1px var(--ak-cyan);
+  text-shadow: 0 0 28px rgba(26, 200, 255, .12);
+}
+
+.aksha-hero-text {
+  max-width: 620px;
+  color: var(--ak-muted);
+  line-height: 1.8;
+  font-size: 1.03rem;
+}
+
+.aksha-actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 32px; }
+.aksha-actions-centered { justify-content: center; }
+
+.aksha-btn {
+  min-height: 52px;
+  padding: 0 24px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  font-family: "Rajdhani", sans-serif;
+  font-weight: 700;
+  font-size: .82rem;
+  cursor: pointer;
+  transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease, background .25s ease;
+}
+
+.aksha-btn:hover { transform: translateY(-3px); }
+.aksha-btn-primary {
+  color: #00101a;
+  background: linear-gradient(115deg, var(--ak-cyan), #62e9ff);
+  box-shadow: 0 12px 34px rgba(26, 200, 255, .24);
+}
+.aksha-btn-primary:hover { box-shadow: 0 16px 40px rgba(26, 200, 255, .36); }
+.aksha-btn-ghost { color: var(--ak-white); background: rgba(255,255,255,.025); border-color: rgba(255,255,255,.18); }
+.aksha-btn-ghost:hover { border-color: var(--ak-cyan); background: rgba(26,200,255,.06); }
+
+.aksha-hero-notes { display: flex; flex-wrap: wrap; gap: 22px; margin-top: 30px; }
+.aksha-hero-notes span {
+  position: relative;
+  padding-left: 14px;
+  color: #bac9d7;
+  font-size: .78rem;
+  letter-spacing: .04em;
+}
+.aksha-hero-notes span::before {
+  content: "";
+  position: absolute;
+  width: 5px; height: 5px;
+  left: 0; top: 50%;
+  background: var(--ak-violet);
+  box-shadow: 0 0 8px var(--ak-violet);
+  transform: translateY(-50%) rotate(45deg);
+}
+
+.aksha-hero-visual { position: relative; aspect-ratio: 1; max-width: 500px; margin-left: auto; }
+.aksha-hero-visual::before {
+  content: "";
+  position: absolute;
+  inset: 11%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(26,200,255,.13), transparent 64%);
+  filter: blur(12px);
+}
+
+.aksha-orbit {
+  position: absolute;
+  inset: 12%;
+  border-radius: 50%;
+  border: 1px solid rgba(26, 200, 255, .35);
+  box-shadow: inset 0 0 30px rgba(26,200,255,.03);
+}
+.orbit-one { animation: aksha-spin 20s linear infinite; }
+.orbit-two { inset: 23%; border-style: dashed; border-color: rgba(128,87,255,.5); animation: aksha-spin 14s linear infinite reverse; }
+.orbit-three { inset: 35%; border-color: rgba(255,79,216,.35); animation: aksha-pulse 3s ease-in-out infinite; }
+.orbit-one::after, .orbit-two::after {
+  content: "";
+  position: absolute;
+  width: 10px; height: 10px;
+  left: 50%; top: -5px;
+  border-radius: 50%;
+  background: var(--ak-cyan);
+  box-shadow: 0 0 18px var(--ak-cyan);
+}
+.orbit-two::after { background: var(--ak-pink); box-shadow: 0 0 18px var(--ak-pink); }
+
+.aksha-core {
+  position: absolute;
+  inset: 38%;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(4, 15, 29, .92);
+  border: 1px solid rgba(26,200,255,.5);
+  box-shadow: 0 0 60px rgba(26,200,255,.22), inset 0 0 30px rgba(26,200,255,.12);
+}
+.aksha-core strong { font-family: "Rajdhani", sans-serif; font-size: 3.3rem; line-height: .9; color: var(--ak-cyan); }
+.core-kicker, .core-caption { font-size: .48rem; letter-spacing: .15em; text-transform: uppercase; color: var(--ak-muted); }
+
+.aksha-node {
+  position: absolute;
+  padding: 7px 11px;
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 3px;
+  background: rgba(5,15,29,.85);
+  color: #cfeeff;
+  font-family: "Rajdhani", sans-serif;
+  font-weight: 700;
+  font-size: .7rem;
+  letter-spacing: .08em;
+  box-shadow: 0 8px 24px rgba(0,0,0,.3);
+}
+.node-one { top: 8%; left: 42%; }
+.node-two { top: 30%; right: 4%; }
+.node-three { bottom: 18%; right: 11%; }
+.node-four { bottom: 7%; left: 30%; }
+.node-five { top: 35%; left: 3%; }
+
+.aksha-data-card {
+  position: absolute;
+  padding: 12px 16px;
+  border-left: 2px solid var(--ak-cyan);
+  background: rgba(5,14,27,.82);
+  color: #dcebf6;
+  font-size: .68rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  backdrop-filter: blur(8px);
+}
+.aksha-data-card span { display: block; color: var(--ak-cyan); margin-bottom: 3px; }
+.data-card-one { top: 13%; right: -2%; }
+.data-card-two { bottom: 7%; left: 2%; border-color: var(--ak-pink); }
+.data-card-two span { color: var(--ak-pink); }
+
+.aksha-scroll-cue {
+  position: absolute;
+  z-index: 3;
+  left: 50%;
+  bottom: 24px;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 8px;
+  color: #8298ac;
+  text-transform: uppercase;
+  font-size: .58rem;
+  letter-spacing: .16em;
+}
+.aksha-scroll-cue i { width: 1px; height: 34px; background: linear-gradient(var(--ak-cyan), transparent); }
+
+.aksha-marquee {
+  overflow: hidden;
+  border-block: 1px solid var(--ak-line);
+  background: #06111e;
+  transform: rotate(-1deg) scale(1.02);
+}
+.aksha-marquee-track {
+  width: max-content;
+  padding: 15px 0;
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  animation: aksha-marquee 28s linear infinite;
+}
+.aksha-marquee span { color: #a9c6dc; font-family: "Rajdhani", sans-serif; font-weight: 700; font-size: .78rem; letter-spacing: .15em; }
+.aksha-marquee i { width: 7px; height: 7px; background: var(--ak-cyan); transform: rotate(45deg); box-shadow: 0 0 12px var(--ak-cyan); }
+
+.aksha-section { position: relative; padding: 110px 0; }
+.aksha-intro { background: linear-gradient(180deg, var(--ak-bg), #050d19); }
+.aksha-intro-grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: 100px; align-items: start; }
+.aksha-section-heading h2,
+.aksha-lab-copy h2,
+.aksha-future-card h2,
+.aksha-cta h2 {
+  margin-top: 16px;
+  font-size: clamp(2.6rem, 5vw, 5.2rem);
+  line-height: .98;
+  letter-spacing: -.04em;
+  text-transform: uppercase;
+}
+.aksha-intro-copy { border-left: 1px solid var(--ak-line); padding-left: 42px; }
+.aksha-intro-copy p, .aksha-lab-copy > p, .aksha-heading-copy {
+  color: var(--ak-muted);
+  line-height: 1.8;
+  margin-bottom: 18px;
+}
+.aksha-text-link { display: inline-flex; gap: 20px; margin-top: 10px; color: var(--ak-cyan) !important; text-transform: uppercase; letter-spacing: .1em; font-size: .75rem; font-weight: 800; }
+
+.aksha-programs {
+  background:
+    radial-gradient(circle at 10% 30%, rgba(128,87,255,.1), transparent 30%),
+    linear-gradient(180deg, #050d19, #030812);
+}
+.aksha-section-heading { max-width: 800px; }
+.aksha-section-heading-centered { text-align: center; margin-inline: auto; }
+.aksha-section-heading-centered .aksha-kicker { justify-content: center; }
+.aksha-heading-copy { max-width: 520px; margin-top: 22px; }
+.aksha-program-grid { margin-top: 56px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+.aksha-program-card {
+  position: relative;
+  min-height: 335px;
+  padding: 34px;
+  border: 1px solid var(--ak-line);
+  border-radius: 10px;
+  background: linear-gradient(135deg, rgba(10,30,51,.72), rgba(5,13,25,.82));
+  overflow: hidden;
+  transition: transform .35s ease, border-color .35s ease, box-shadow .35s ease;
+}
+.aksha-program-card::after {
+  content: "";
+  position: absolute;
+  width: 200px; height: 200px;
+  right: -100px; bottom: -120px;
+  border-radius: 50%;
+  background: var(--ak-cyan);
+  filter: blur(80px);
+  opacity: 0;
+  transition: opacity .35s ease;
+}
+.aksha-program-card:hover { transform: translateY(-7px); border-color: rgba(26,200,255,.48); box-shadow: 0 20px 60px rgba(0,0,0,.28); }
+.aksha-program-card:hover::after { opacity: .12; }
+.aksha-card-index { position: absolute; right: 24px; top: 20px; color: rgba(255,255,255,.15); font: 700 3rem/1 "Rajdhani", sans-serif; }
+.aksha-program-icon { width: 48px; height: 48px; display: grid; place-items: center; border: 1px solid rgba(26,200,255,.35); color: var(--ak-cyan); font: 700 .9rem "Rajdhani", sans-serif; background: rgba(26,200,255,.06); }
+.aksha-program-card h3 { margin: 27px 0 12px; font-size: 1.7rem; text-transform: uppercase; }
+.aksha-program-card p { max-width: 520px; color: var(--ak-muted); line-height: 1.7; font-size: .92rem; }
+.aksha-program-card ul { display: flex; flex-wrap: wrap; gap: 8px; margin: 24px 0 0; padding: 0; list-style: none; }
+.aksha-program-card li { padding: 6px 10px; border: 1px solid rgba(255,255,255,.1); border-radius: 3px; color: #b9d6e9; font-size: .68rem; text-transform: uppercase; letter-spacing: .06em; }
+
+.aksha-lab { background: #06111e; border-block: 1px solid var(--ak-line); }
+.aksha-lab-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 90px; align-items: center; }
+.aksha-code-window { border: 1px solid rgba(26,200,255,.25); border-radius: 8px; background: #020710; box-shadow: 0 35px 80px rgba(0,0,0,.4), 30px -30px 0 rgba(26,200,255,.025); overflow: hidden; }
+.aksha-window-bar { display: flex; align-items: center; gap: 7px; padding: 14px 16px; border-bottom: 1px solid rgba(255,255,255,.07); background: #07111f; }
+.aksha-window-bar i { width: 8px; height: 8px; border-radius: 50%; background: #ff6577; }
+.aksha-window-bar i:nth-child(2) { background: #ffc85b; }
+.aksha-window-bar i:nth-child(3) { background: #49d69b; }
+.aksha-window-bar span { margin-left: auto; color: #60788d; font: 500 .62rem "Rajdhani", sans-serif; letter-spacing: .08em; }
+.aksha-code-line { display: grid; grid-template-columns: 35px 90px 1fr; gap: 8px; padding: 13px 20px; border-bottom: 1px solid rgba(255,255,255,.035); font: .78rem/1.4 monospace; color: #7790a5; }
+.aksha-code-line b { color: #395064; font-weight: 400; }
+.aksha-code-line span { color: var(--ak-violet); }
+.aksha-code-line em { color: #9fc5d9; font-style: normal; }
+.aksha-code-line.is-active { background: rgba(26,200,255,.055); }
+.aksha-code-result { margin: 28px 20px 24px; padding: 20px; background: rgba(26,200,255,.05); border-left: 2px solid var(--ak-cyan); color: var(--ak-cyan); font: 700 .74rem "Rajdhani", sans-serif; letter-spacing: .13em; }
+.aksha-code-result span { animation: aksha-blink .8s steps(1) infinite; }
+.aksha-lab-copy h2 { font-size: clamp(2.5rem, 4.5vw, 4.4rem); margin-bottom: 24px; }
+.aksha-feature-list { margin-top: 30px; display: grid; gap: 18px; }
+.aksha-feature-list > div { display: grid; grid-template-columns: 45px 1fr; gap: 18px; padding-top: 18px; border-top: 1px solid var(--ak-line); }
+.aksha-feature-list strong { color: var(--ak-cyan); font: 700 .7rem "Rajdhani", sans-serif; }
+.aksha-feature-list span { color: var(--ak-muted); font-size: .82rem; line-height: 1.55; }
+.aksha-feature-list b { display: block; color: var(--ak-white); font: 700 1rem "Rajdhani", sans-serif; text-transform: uppercase; margin-bottom: 4px; }
+
+.aksha-journey { background: linear-gradient(180deg, #030812, #071321); }
+.aksha-journey-line { position: relative; display: grid; grid-template-columns: repeat(4,1fr); gap: 24px; margin-top: 70px; }
+.aksha-journey-line::before { content: ""; position: absolute; left: 10%; right: 10%; top: 28px; height: 1px; background: linear-gradient(90deg, transparent, var(--ak-cyan), var(--ak-violet), transparent); }
+.aksha-journey-step { position: relative; text-align: center; }
+.aksha-journey-step > span { width: 56px; height: 56px; margin: 0 auto 26px; border-radius: 50%; display: grid; place-items: center; border: 1px solid rgba(26,200,255,.4); background: #071321; color: var(--ak-cyan); font: 700 .75rem "Rajdhani", sans-serif; box-shadow: 0 0 24px rgba(26,200,255,.08); }
+.aksha-journey-step h3 { text-transform: uppercase; font-size: 1.25rem; margin-bottom: 9px; }
+.aksha-journey-step p { color: var(--ak-muted); font-size: .83rem; line-height: 1.6; }
+
+.aksha-future { padding-top: 50px; background: #071321; }
+.aksha-future-card { padding: 60px; display: grid; grid-template-columns: 1fr .9fr; gap: 60px; align-items: center; border: 1px solid var(--ak-line); border-radius: 12px; background: linear-gradient(135deg, rgba(9,35,57,.9), rgba(16,12,45,.88)); }
+.aksha-future-card h2 { font-size: clamp(2.4rem, 4vw, 4rem); }
+.aksha-future-tags { display: flex; flex-wrap: wrap; gap: 10px; }
+.aksha-future-tags span { padding: 10px 13px; border: 1px solid rgba(255,255,255,.13); border-radius: 3px; color: #c7d9e7; font-size: .72rem; letter-spacing: .06em; text-transform: uppercase; }
+
+.aksha-cta { padding: 130px 0; background: #030812; text-align: center; overflow: hidden; }
+.aksha-cta-grid { opacity: .25; mask-image: radial-gradient(circle, black, transparent 70%); }
+.aksha-cta-inner { max-width: 850px; }
+.aksha-cta .aksha-kicker { justify-content: center; }
+.aksha-cta h2 { font-size: clamp(3.2rem, 7vw, 7rem); }
+.aksha-cta-inner > p:not(.aksha-kicker) { max-width: 560px; margin: 25px auto 0; color: var(--ak-muted); line-height: 1.7; }
+
+.aksha-reveal { opacity: 1; transform: none; }
+.aksha-js .aksha-reveal { opacity: 0; transform: translateY(32px); transition: opacity .75s ease, transform .75s cubic-bezier(.2,.8,.2,1); }
+.aksha-js .aksha-reveal.is-visible { opacity: 1; transform: translateY(0); }
+
+@keyframes aksha-spin { to { transform: rotate(360deg); } }
+@keyframes aksha-pulse { 50% { transform: scale(1.07); opacity: .55; } }
+@keyframes aksha-marquee { to { transform: translateX(-50%); } }
+@keyframes aksha-blink { 50% { opacity: 0; } }
+
+@media (max-width: 991px) {
+  .aksha-hero { min-height: auto; padding-top: 145px; }
+  .aksha-hero-layout { grid-template-columns: 1fr; gap: 55px; }
+  .aksha-hero-copy { text-align: center; }
+  .aksha-eyebrow, .aksha-actions, .aksha-hero-notes { justify-content: center; }
+  .aksha-hero-text { margin-inline: auto; }
+  .aksha-hero-visual { width: min(520px, 90vw); margin: 0 auto; }
+  .aksha-intro-grid, .aksha-lab-grid, .aksha-future-card { grid-template-columns: 1fr; gap: 48px; }
+  .aksha-intro-copy { padding-left: 28px; }
+  .aksha-journey-line { grid-template-columns: repeat(2,1fr); row-gap: 48px; }
+  .aksha-journey-line::before { display: none; }
+}
+
+@media (max-width: 767px) {
+  .aksha-shell { width: min(100% - 32px, 1180px); }
+  .aksha-hero { padding: 120px 0 70px; }
+  .aksha-hero h1 { font-size: clamp(3rem, 15vw, 4.6rem); }
+  .aksha-hero-visual { width: 100%; }
+  .aksha-data-card { display: none; }
+  .aksha-node { font-size: .57rem; padding: 5px 7px; }
+  .aksha-scroll-cue { display: none; }
+  .aksha-section { padding: 78px 0; }
+  .aksha-intro-grid { gap: 35px; }
+  .aksha-intro-copy { border-left: 0; padding-left: 0; }
+  .aksha-program-grid { grid-template-columns: 1fr; }
+  .aksha-program-card { min-height: 0; padding: 28px 24px; }
+  .aksha-code-line { grid-template-columns: 25px 70px 1fr; padding-inline: 12px; font-size: .62rem; }
+  .aksha-journey-line { grid-template-columns: 1fr; gap: 28px; }
+  .aksha-journey-step { display: grid; grid-template-columns: 56px 1fr; column-gap: 18px; text-align: left; }
+  .aksha-journey-step > span { grid-row: 1 / 3; margin: 0; }
+  .aksha-future { padding-top: 20px; }
+  .aksha-future-card { padding: 34px 24px; gap: 32px; }
+  .aksha-cta { padding: 90px 0; }
+  .aksha-btn { width: 100%; }
+  .aksha-actions { width: 100%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aksha-page *, .aksha-page *::before, .aksha-page *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; }
+  .aksha-js .aksha-reveal { opacity: 1; transform: none; }
+}
+
+/* ==========================================================
+   AKSHA HERO — Poster-inspired redesign
+   Scoped overrides keep every following section unchanged.
+   ========================================================== */
+.aksha-hero {
+  min-height: 100vh;
+  padding: 145px 0 75px;
+  background:
+    radial-gradient(circle at 76% 44%, rgba(34, 166, 255, .2), transparent 34%),
+    linear-gradient(118deg, #f7fbff 0 54%, #edf7ff 54% 100%);
+}
+
+.aksha-hero-pattern {
+  position: absolute;
+  inset: 0;
+  opacity: .34;
+  background-image: radial-gradient(circle at center, rgba(8,126,232,.18) 1px, transparent 1.5px);
+  background-size: 25px 25px;
+  mask-image: linear-gradient(90deg, black, transparent 48%, black);
+}
+
+.aksha-hero-accent {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.aksha-hero-accent-one {
+  width: 360px;
+  height: 360px;
+  left: -220px;
+  top: 18%;
+  border: 70px solid rgba(26,200,255,.08);
+}
+
+.aksha-hero-accent-two {
+  width: 90px;
+  height: 90px;
+  left: 47%;
+  bottom: 8%;
+  border-radius: 18px;
+  background: linear-gradient(135deg, rgba(8,126,232,.16), transparent);
+  transform: rotate(45deg);
+}
+
+.aksha-hero .aksha-hero-layout {
+  grid-template-columns: 1.02fr .98fr;
+  gap: 52px;
+}
+
+.aksha-hero-brand {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 9px;
+}
+
+.aksha-hero-logo {
+  display: block;
+  width: clamp(180px, 21vw, 270px);
+  height: auto;
+  filter: drop-shadow(0 9px 22px rgba(0,100,180,.12));
+}
+
+.aksha-hero-brand span {
+  color: #37607c;
+  text-transform: uppercase;
+  letter-spacing: .18em;
+  font: 700 .62rem "Rajdhani", sans-serif;
+}
+
+.aksha-hero-label {
+  margin-top: 34px;
+  color: var(--ak-blue);
+  text-transform: uppercase;
+  letter-spacing: .15em;
+  font-size: .68rem;
+  font-weight: 800;
+}
+
+.aksha-hero h1 {
+  max-width: 690px;
+  margin: 13px 0 24px;
+  color: #092039;
+  font-size: clamp(3.4rem, 5.5vw, 5.9rem);
+  line-height: .91;
+  letter-spacing: -.05em;
+}
+
+.aksha-hero h1 span {
+  display: block;
+  color: var(--ak-blue);
+  -webkit-text-stroke: 0;
+  text-shadow: none;
+}
+
+.aksha-hero .aksha-hero-text {
+  max-width: 590px;
+  color: #536d81;
+  line-height: 1.75;
+  font-size: 1rem;
+}
+
+.aksha-hero .aksha-btn-primary {
+  color: #fff;
+  background: linear-gradient(115deg, #087ee8, #20b9ed);
+  box-shadow: 0 14px 32px rgba(8,126,232,.24);
+}
+
+.aksha-hero .aksha-btn-ghost {
+  color: #0b3858;
+  background: rgba(255,255,255,.72);
+  border-color: rgba(8,126,232,.28);
+}
+
+.aksha-hero .aksha-btn-ghost:hover {
+  color: var(--ak-blue);
+  border-color: var(--ak-blue);
+  background: #fff;
+}
+
+.aksha-hero .aksha-hero-visual {
+  position: relative;
+  min-height: 580px;
+  max-width: none;
+  aspect-ratio: auto;
+  display: grid;
+  place-items: center;
+  transition: transform .3s ease-out;
+}
+
+.aksha-hero .aksha-hero-visual::before { display: none; }
+
+.aksha-student-circle {
+  position: relative;
+  width: min(510px, 100%);
+  aspect-ratio: 1;
+  overflow: hidden;
+  border-radius: 50%;
+  background: linear-gradient(145deg, #087ee8, #19c5f5);
+  box-shadow: 0 35px 85px rgba(8,126,232,.3);
+  transition: transform .35s ease-out;
+}
+
+.aksha-student-circle::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(150deg, rgba(8,126,232,.12), rgba(0,119,198,.5));
+  mix-blend-mode: color;
+  pointer-events: none;
+}
+
+.aksha-circle-ring {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  border-radius: 50%;
+  border: 2px solid rgba(255,255,255,.45);
+  box-shadow: inset 0 0 0 12px rgba(255,255,255,.08);
+  pointer-events: none;
+}
+
+.aksha-student-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 18%;
+  filter: saturate(.86) contrast(1.04);
+}
+
+.aksha-achievement-card {
+  position: absolute;
+  z-index: 4;
+  min-width: 205px;
+  padding: 14px 17px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border: 1px solid rgba(8,126,232,.16);
+  border-radius: 12px;
+  background: rgba(255,255,255,.92);
+  box-shadow: 0 18px 40px rgba(24,85,130,.17);
+  backdrop-filter: blur(12px);
+}
+
+.aksha-achievement-icon {
+  width: 38px;
+  height: 38px;
+  flex: 0 0 38px;
+  display: grid;
+  place-items: center;
+  border-radius: 10px;
+  color: #fff;
+  background: linear-gradient(135deg, #087ee8, #27c1ef);
+  box-shadow: 0 8px 18px rgba(8,126,232,.22);
+  font: 700 .8rem "Rajdhani", sans-serif;
+}
+
+.aksha-achievement-card strong,
+.aksha-achievement-card small { display: block; }
+
+.aksha-achievement-card strong {
+  color: #0a3451;
+  text-transform: uppercase;
+  font: 700 .9rem "Rajdhani", sans-serif;
+}
+
+.aksha-achievement-card small {
+  margin-top: 2px;
+  color: #71899a;
+  font-size: .66rem;
+}
+
+.aksha-card-one { left: -20px; top: 17%; }
+.aksha-card-two { right: -22px; top: 45%; }
+.aksha-card-three { left: 6%; bottom: 5%; }
+
+/* ==========================================================
+   AKSHA COURSES — grouped premium programme catalogue
+   ========================================================== */
+.aksha-programs {
+  padding: 120px 0;
+  background:
+    radial-gradient(circle at 8% 8%, rgba(128,87,255,.1), transparent 24%),
+    radial-gradient(circle at 92% 42%, rgba(26,200,255,.08), transparent 26%),
+    linear-gradient(180deg, #050d19, #030812);
+}
+
+.aksha-programs .aksha-section-heading {
+  max-width: 850px;
+}
+
+.aksha-programs .aksha-heading-copy {
+  max-width: 650px;
+  margin: 22px auto 0;
+}
+
+.aksha-course-catalogue {
+  display: grid;
+  gap: 78px;
+  margin-top: 72px;
+}
+
+.aksha-course-group {
+  display: grid;
+  grid-template-columns: 245px minmax(0, 1fr);
+  gap: 30px;
+  align-items: start;
+}
+
+.aksha-course-group-heading {
+  position: sticky;
+  top: 130px;
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+  padding-top: 8px;
+}
+
+.aksha-course-group-heading > span {
+  width: 44px;
+  height: 44px;
+  flex: 0 0 44px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(26,200,255,.35);
+  border-radius: 50%;
+  color: var(--ak-cyan);
+  background: rgba(26,200,255,.06);
+  font: 700 .7rem "Rajdhani", sans-serif;
+  box-shadow: 0 0 25px rgba(26,200,255,.07);
+}
+
+.aksha-course-group-heading p {
+  margin: 1px 0 5px;
+  color: #738da2;
+  text-transform: uppercase;
+  letter-spacing: .13em;
+  font-size: .58rem;
+  font-weight: 800;
+}
+
+.aksha-course-group-heading h3 {
+  color: var(--ak-white);
+  text-transform: uppercase;
+  font-size: 1.55rem;
+  line-height: 1;
+}
+
+.aksha-course-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.aksha-course-card {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(120,210,255,.14);
+  border-radius: 15px;
+  background: linear-gradient(145deg, rgba(12,31,51,.97), rgba(7,17,32,.98));
+  box-shadow: 0 22px 55px rgba(0,0,0,.22);
+  transition: transform .38s cubic-bezier(.2,.8,.2,1), border-color .38s ease, box-shadow .38s ease;
+}
+
+.aksha-course-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(26,200,255,.45);
+  box-shadow: 0 30px 70px rgba(0,0,0,.34), 0 0 28px rgba(26,200,255,.06);
+}
+
+.aksha-course-image {
+  position: relative;
+  height: 225px;
+  overflow: hidden;
+  background: #071321;
+}
+
+.aksha-course-image::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 40%, rgba(5,13,25,.78));
+  pointer-events: none;
+}
+
+.aksha-course-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .65s cubic-bezier(.2,.8,.2,1), filter .45s ease;
+}
+
+.aksha-course-card:hover .aksha-course-image img {
+  transform: scale(1.07);
+  filter: saturate(1.12);
+}
+
+.aksha-course-image > span {
+  position: absolute;
+  z-index: 2;
+  left: 18px;
+  bottom: 16px;
+  padding: 7px 10px;
+  border: 1px solid rgba(255,255,255,.2);
+  border-radius: 4px;
+  color: #e7f8ff;
+  background: rgba(4,15,29,.7);
+  backdrop-filter: blur(9px);
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  font: 700 .6rem "Rajdhani", sans-serif;
+}
+
+.aksha-course-content {
+  padding: 25px 24px 24px;
+}
+
+.aksha-course-duration {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--ak-cyan);
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  font: 700 .64rem "Rajdhani", sans-serif;
+}
+
+.aksha-course-duration i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--ak-cyan);
+  box-shadow: 0 0 10px var(--ak-cyan);
+}
+
+.aksha-course-card h4 {
+  min-height: 58px;
+  margin: 14px 0 11px;
+  color: var(--ak-white);
+  text-transform: uppercase;
+  font-size: 1.45rem;
+  line-height: 1.03;
+}
+
+.aksha-course-card p {
+  min-height: 70px;
+  color: var(--ak-muted);
+  font-size: .82rem;
+  line-height: 1.68;
+}
+
+.aksha-course-btn {
+  width: 100%;
+  min-height: 46px;
+  margin-top: 22px;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid rgba(26,200,255,.26);
+  border-radius: 5px;
+  color: #dff8ff;
+  background: rgba(26,200,255,.05);
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  font: 700 .68rem "Rajdhani", sans-serif;
+  cursor: pointer;
+  transition: color .3s ease, background .3s ease, border-color .3s ease;
+}
+
+.aksha-course-btn span {
+  color: var(--ak-cyan);
+  font-size: 1rem;
+  transition: transform .3s ease;
+}
+
+.aksha-course-btn:hover {
+  color: #00101a;
+  border-color: var(--ak-cyan);
+  background: var(--ak-cyan);
+}
+
+.aksha-course-btn:hover span {
+  color: #00101a;
+  transform: translateX(4px);
+}
+
+/* ==========================================================
+   WHY AKSHA — six-card premium differentiator section
+   ========================================================== */
+.aksha-why {
+  padding: 120px 0;
+  background:
+    radial-gradient(circle at 8% 18%, rgba(26,200,255,.1), transparent 27%),
+    radial-gradient(circle at 92% 84%, rgba(128,87,255,.12), transparent 30%),
+    #071321;
+  border-top: 1px solid var(--ak-line);
+}
+
+.aksha-why .aksha-section-heading {
+  max-width: 850px;
+}
+
+.aksha-why .aksha-heading-copy {
+  max-width: 650px;
+  margin: 22px auto 0;
+}
+
+.aksha-why-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  margin-top: 62px;
+}
+
+.aksha-why-card {
+  position: relative;
+  min-height: 330px;
+  padding: 34px 30px 30px;
+  overflow: hidden;
+  border: 1px solid rgba(119,211,255,.15);
+  border-radius: 14px;
+  background:
+    linear-gradient(145deg, rgba(13,38,61,.94), rgba(7,18,34,.96));
+  box-shadow: 0 22px 55px rgba(0,0,0,.16);
+  transition:
+    transform .38s cubic-bezier(.2,.8,.2,1),
+    border-color .38s ease,
+    box-shadow .38s ease;
+}
+
+.aksha-why-card::before {
+  content: "";
+  position: absolute;
+  width: 190px;
+  height: 190px;
+  right: -110px;
+  bottom: -115px;
+  border-radius: 50%;
+  background: var(--ak-cyan);
+  filter: blur(65px);
+  opacity: 0;
+  transition: opacity .38s ease;
+}
+
+.aksha-why-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: .2;
+  background-image:
+    linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
+  background-size: 32px 32px;
+  mask-image: linear-gradient(135deg, transparent 30%, black);
+  pointer-events: none;
+}
+
+.aksha-why-card:hover {
+  transform: translateY(-10px);
+  border-color: rgba(26,200,255,.5);
+  box-shadow: 0 30px 70px rgba(0,0,0,.3), 0 0 34px rgba(26,200,255,.07);
+}
+
+.aksha-why-card:hover::before { opacity: .13; }
+
+.aksha-why-number {
+  position: absolute;
+  right: 24px;
+  top: 18px;
+  color: rgba(255,255,255,.09);
+  font: 700 3.4rem/1 "Rajdhani", sans-serif;
+}
+
+.aksha-why-icon {
+  position: relative;
+  z-index: 1;
+  width: 58px;
+  height: 58px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(26,200,255,.32);
+  border-radius: 13px;
+  color: var(--ak-cyan);
+  background: linear-gradient(145deg, rgba(26,200,255,.12), rgba(128,87,255,.08));
+  box-shadow: inset 0 0 24px rgba(26,200,255,.05);
+  transition: transform .38s ease, background .38s ease;
+}
+
+.aksha-why-icon svg {
+  width: 28px;
+  height: 28px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.55;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.aksha-why-card:hover .aksha-why-icon {
+  transform: rotate(-5deg) scale(1.07);
+  background: linear-gradient(145deg, rgba(26,200,255,.2), rgba(128,87,255,.14));
+}
+
+.aksha-why-card h3 {
+  position: relative;
+  z-index: 1;
+  max-width: 260px;
+  margin-top: 30px;
+  color: var(--ak-white);
+  font-size: 1.55rem;
+  line-height: 1.05;
+  text-transform: uppercase;
+}
+
+.aksha-why-card p {
+  position: relative;
+  z-index: 1;
+  margin-top: 15px;
+  color: var(--ak-muted);
+  font-size: .86rem;
+  line-height: 1.7;
+}
+
+.aksha-why-line {
+  position: absolute;
+  z-index: 2;
+  left: 30px;
+  right: 30px;
+  bottom: 22px;
+  height: 2px;
+  overflow: hidden;
+  background: rgba(255,255,255,.07);
+}
+
+.aksha-why-line::after {
+  content: "";
+  display: block;
+  width: 35%;
+  height: 100%;
+  background: linear-gradient(90deg, var(--ak-cyan), var(--ak-violet));
+  box-shadow: 0 0 12px rgba(26,200,255,.55);
+  transition: width .38s ease;
+}
+
+.aksha-why-card:hover .aksha-why-line::after { width: 100%; }
+
+@media (max-width: 991px) {
+  .aksha-hero { min-height: auto; padding: 135px 0 80px; }
+  .aksha-hero .aksha-hero-layout { grid-template-columns: 1fr; gap: 55px; }
+  .aksha-hero-brand { align-items: center; }
+  .aksha-hero .aksha-actions { justify-content: center; }
+  .aksha-hero .aksha-hero-visual { width: min(560px, 90vw); min-height: 550px; margin: 0 auto; }
+  .aksha-course-group { grid-template-columns: 1fr; gap: 22px; }
+  .aksha-course-group-heading { position: static; }
+  .aksha-why-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 767px) {
+  .aksha-hero { padding: 112px 0 62px; }
+  .aksha-hero h1 { font-size: clamp(3rem, 14vw, 4.4rem); }
+  .aksha-hero-logo { width: 200px; }
+  .aksha-hero .aksha-hero-visual { width: 100%; min-height: 435px; }
+  .aksha-student-circle { width: min(360px, 92%); }
+  .aksha-achievement-card { min-width: 168px; padding: 10px 12px; gap: 9px; }
+  .aksha-achievement-icon { width: 32px; height: 32px; flex-basis: 32px; }
+  .aksha-achievement-card strong { font-size: .76rem; }
+  .aksha-achievement-card small { font-size: .57rem; }
+  .aksha-card-one { left: 0; top: 12%; }
+  .aksha-card-two { right: 0; top: 48%; }
+  .aksha-card-three { left: 5%; bottom: 2%; }
+  .aksha-programs { padding: 82px 0; }
+  .aksha-course-catalogue { gap: 58px; margin-top: 50px; }
+  .aksha-course-grid { grid-template-columns: 1fr; }
+  .aksha-course-image { height: 215px; }
+  .aksha-course-card h4,
+  .aksha-course-card p { min-height: 0; }
+  .aksha-why { padding: 82px 0; }
+  .aksha-why-grid { grid-template-columns: 1fr; gap: 14px; margin-top: 42px; }
+  .aksha-why-card { min-height: 300px; padding: 28px 24px; }
+  .aksha-why-line { left: 24px; right: 24px; }
+}

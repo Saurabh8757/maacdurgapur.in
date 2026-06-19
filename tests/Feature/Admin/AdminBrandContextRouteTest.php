@@ -7,9 +7,9 @@ use Tests\TestCase;
 
 class AdminBrandContextRouteTest extends TestCase
 {
-    public function test_route_inventory_is_exactly_seventy(): void
+    public function test_route_inventory_is_exactly_seventy_two(): void
     {
-        $this->assertCount(70, $this->app['router']->getRoutes()->getRoutes());
+        $this->assertCount(72, $this->app['router']->getRoutes()->getRoutes());
     }
 
     public function test_all_protected_admin_routes_receive_context_middleware(): void
@@ -23,7 +23,7 @@ class AdminBrandContextRouteTest extends TestCase
             )
         );
 
-        $this->assertCount(51, $protectedRoutes);
+        $this->assertCount(53, $protectedRoutes);
 
         foreach ($protectedRoutes as $route) {
             $this->assertContains(

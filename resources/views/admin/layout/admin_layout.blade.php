@@ -43,6 +43,7 @@ $info = \App\Helper\admin\siteInformation::siteInfo();
     <!-- Toastr -->
     <link rel="stylesheet" href="{{ url('/') }}/admin/plugins/toastr/toastr.min.css">
     <link rel="stylesheet" href="{{ url('/') }}/admin/plugins/validation/validationEngine.jquery.css">
+    @stack('styles')
 
     <style>
         #status_button {

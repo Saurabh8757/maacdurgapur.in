@@ -19,6 +19,7 @@ use App\Http\Controllers\Admin\Profile\ProfileController;
 use App\Http\Controllers\Admin\Dashboard\DashboardController;
 use App\Http\Controllers\Admin\Login\AdminLoginController;
 use App\Http\Controllers\Admin\BrandContextController;
+use App\Http\Controllers\Admin\Settings\SettingsController;
 use App\Http\Middleware\ResolveAdminBrandContext;
 
 
@@ -32,6 +33,10 @@ Route::group(['as' => 'admin::', 'prefix' => 'v1/cpanel/admin', 'middleware' => 
     Route::post('/brand-context', [BrandContextController::class, 'switch'])
         ->name('brand_context.switch');
     Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
+    Route::get('/settings/brand', [SettingsController::class, 'brand'])
+        ->name('settings.brand.index');
+    Route::get('/settings/global', [SettingsController::class, 'global'])
+        ->name('settings.global.index');
     /*** Profile Routes Start ***/
     Route::get('/profile/{name}', [ProfileController::class, 'profile'])->name('profile');
     Route::post('/profile-update', [ProfileController::class, 'profile_update'])->name('profile_update');
