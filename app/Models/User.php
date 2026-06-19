@@ -102,6 +102,11 @@ class User extends Authenticatable
         return $this->hasMany(SettingsPublication::class, 'rolled_back_by');
     }
 
+    public function settingAuditLogs()
+    {
+        return $this->hasMany(SettingAuditLog::class);
+    }
+
     public function uploadedMediaAssets()
     {
         return $this->hasMany(MediaAsset::class, 'uploaded_by');

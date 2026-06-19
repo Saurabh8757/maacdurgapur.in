@@ -56,4 +56,12 @@ class SettingsPublication extends Model
     {
         return $this->hasMany(SettingsPublicationItem::class);
     }
+
+    public function auditLogs()
+    {
+        return $this->hasMany(
+            SettingAuditLog::class,
+            'settings_publication_id'
+        );
+    }
 }

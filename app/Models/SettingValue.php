@@ -62,4 +62,9 @@ class SettingValue extends Model
     {
         return $this->hasMany(SettingsPublicationItem::class);
     }
+
+    public function auditLogs()
+    {
+        return $this->hasMany(SettingAuditLog::class);
+    }
 }

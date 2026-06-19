@@ -82,6 +82,11 @@ class Brand extends Model
         return $this->hasMany(SettingsPublication::class);
     }
 
+    public function settingAuditLogs()
+    {
+        return $this->hasMany(SettingAuditLog::class);
+    }
+
     public function mediaFolders()
     {
         return $this->hasMany(MediaFolder::class);

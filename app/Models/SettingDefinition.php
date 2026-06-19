@@ -58,6 +58,14 @@ class SettingDefinition extends Model
             ->whereIn('status', ['draft', 'published']);
     }
 
+    public function auditLogs()
+    {
+        return $this->hasMany(
+            SettingAuditLog::class,
+            'setting_definition_id'
+        );
+    }
+
     public function scopeActive($query)
     {
         return $query->where('status', 'active');
