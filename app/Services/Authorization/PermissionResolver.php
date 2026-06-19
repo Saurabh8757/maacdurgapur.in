@@ -68,7 +68,11 @@ class PermissionResolver
             );
         }
 
-        if ($brand && !$user->brands()->whereKey($brand->getKey())->exists()) {
+        if (
+            $brand
+            && !$this->hasActiveGlobalSuperAdminAssignment($user)
+            && !$user->brands()->whereKey($brand->getKey())->exists()
+        ) {
             return $this->remember(
                 $memoKey,
                 PermissionDecision::deny(
@@ -163,6 +167,22 @@ class PermissionResolver
                 }
             })
             ->get();
+    }
+
+    private function hasActiveGlobalSuperAdminAssignment(User $user): bool
+    {
+        return UserRole::query()
+            ->active()
+            ->where('user_id', $user->id)
+            ->whereNull('brand_id')
+            ->where('scope_key', 'global')
+            ->whereHas('role', function ($roleQuery) {
+                $roleQuery
+                    ->where('code', 'super_admin')
+                    ->where('scope_type', 'global')
+                    ->where('status', 'active');
+            })
+            ->exists();
     }
 
     private function roleLineage(Role $role): array

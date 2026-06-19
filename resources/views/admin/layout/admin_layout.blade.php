@@ -79,6 +79,7 @@ $info = \App\Helper\admin\siteInformation::siteInfo();
                 </li>
             </ul>
             <ul class="navbar-nav ml-auto">
+                @include('admin.components.brand-switcher')
                 <li class="nav-item">
                     <a class="nav-link" data-toggle="modal" data-target="#modal-default">
                         <i class="fa fa-sign-out-alt" style="margin-right:6px"></i>Logout

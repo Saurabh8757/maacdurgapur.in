@@ -5,6 +5,8 @@ namespace App\Providers;
 use App\Services\Brands\BrandContextManager;
 use App\Services\Brands\BrandContextResolver;
 use App\Services\Brands\BrandDomainCache;
+use App\Services\Brands\AdminBrandAccessResolver;
+use App\Services\Brands\AdminBrandContextResolver;
 use App\Services\Brands\HostnameNormalizer;
 use Illuminate\Contracts\Cache\Repository as CacheRepository;
 use Illuminate\Support\ServiceProvider;
@@ -32,6 +34,8 @@ class AppServiceProvider extends ServiceProvider
         });
 
         $this->app->scoped(BrandContextManager::class);
+        $this->app->scoped(AdminBrandAccessResolver::class);
+        $this->app->scoped(AdminBrandContextResolver::class);
 
         $this->app->scoped(BrandContextResolver::class, function ($app) {
             return new BrandContextResolver(

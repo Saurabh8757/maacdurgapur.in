@@ -6,6 +6,8 @@ use App\Models\Brand;
 use App\Models\BrandDomain;
 use App\Services\Brands\BrandContext;
 use App\Services\Brands\BrandContextManager;
+use App\Services\Brands\AdminBrandContext;
+use Carbon\CarbonImmutable;
 use LogicException;
 use PHPUnit\Framework\TestCase;
 
@@ -51,6 +53,31 @@ class BrandContextManagerTest extends TestCase
         $this->expectException(LogicException::class);
 
         (new BrandContextManager())->requirePublicContext();
+    }
+
+    public function test_public_and_admin_contexts_are_independent(): void
+    {
+        $manager = new BrandContextManager();
+        $publicContext = $this->context(1, 'maac');
+        $brand = new Brand([
+            'code' => 'aksha',
+            'name' => 'AKSHA',
+            'status' => 'active',
+        ]);
+        $brand->id = 2;
+        $adminContext = new AdminBrandContext(
+            $brand,
+            6,
+            'explicit_switch',
+            CarbonImmutable::now(),
+            true
+        );
+
+        $manager->setPublicContext($publicContext);
+        $manager->setAdminContext($adminContext);
+
+        $this->assertSame($publicContext, $manager->requirePublicContext());
+        $this->assertSame($adminContext, $manager->requireAdminContext());
     }
 
     private function context(int $brandId, string $code): BrandContext

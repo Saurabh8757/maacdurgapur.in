@@ -18,6 +18,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\Profile\ProfileController;
 use App\Http\Controllers\Admin\Dashboard\DashboardController;
 use App\Http\Controllers\Admin\Login\AdminLoginController;
+use App\Http\Controllers\Admin\BrandContextController;
+use App\Http\Middleware\ResolveAdminBrandContext;
 
 
 
@@ -26,7 +28,9 @@ Route::get('admin-login',[AdminLoginController::class,'admin_login_page'])->name
 
 
 Route::post('admin-login-check',[AdminLoginController::class,'admin_login_check'])->name('admin_login_check');
-Route::group(['as' => 'admin::', 'prefix' => 'v1/cpanel/admin', 'middleware' => ['web', 'AdminMiddleware', 'revalidate']], function () {
+Route::group(['as' => 'admin::', 'prefix' => 'v1/cpanel/admin', 'middleware' => ['web', 'AdminMiddleware', ResolveAdminBrandContext::class, 'revalidate']], function () {
+    Route::post('/brand-context', [BrandContextController::class, 'switch'])
+        ->name('brand_context.switch');
     Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
     /*** Profile Routes Start ***/
     Route::get('/profile/{name}', [ProfileController::class, 'profile'])->name('profile');

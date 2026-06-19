@@ -17,4 +17,8 @@ return [
             '127.0.0.1',
         ],
     ],
+
+    'admin_context' => [
+        'session_key' => 'admin_brand_context',
+    ],
 ];
