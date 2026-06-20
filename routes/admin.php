@@ -20,6 +20,13 @@ use App\Http\Controllers\Admin\Dashboard\DashboardController;
 use App\Http\Controllers\Admin\Login\AdminLoginController;
 use App\Http\Controllers\Admin\BrandContextController;
 use App\Http\Controllers\Admin\Settings\SettingsController;
+use App\Http\Controllers\Admin\Settings\SettingsDraftController;
+use App\Http\Controllers\Admin\Settings\SettingsVersionController;
+use App\Http\Controllers\Admin\Cms\Pages\CmsCoursePageController;
+use App\Http\Controllers\Admin\Cms\Pages\CmsFaqCategoryPageController;
+use App\Http\Controllers\Admin\Cms\Pages\CmsFaqPageController;
+use App\Http\Controllers\Admin\Cms\Pages\CmsFeaturePageController;
+use App\Http\Controllers\Admin\Cms\Pages\CmsShowcasePageController;
 use App\Http\Middleware\ResolveAdminBrandContext;
 
 
@@ -35,8 +42,20 @@ Route::group(['as' => 'admin::', 'prefix' => 'v1/cpanel/admin', 'middleware' => 
     Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
     Route::get('/settings/brand', [SettingsController::class, 'brand'])
         ->name('settings.brand.index');
+    Route::put('/settings/brand/draft', [SettingsDraftController::class, 'update'])
+        ->name('settings.brand.draft.update');
+    Route::delete('/settings/brand/draft/{definition}/override', [SettingsDraftController::class, 'resetOverride'])
+        ->name('settings.brand.draft.reset');
+    Route::get('/settings/brand/{definition}/versions', [SettingsVersionController::class, 'index'])
+        ->name('settings.brand.versions.index');
+    Route::get('/settings/brand/{definition}/versions/{version}', [SettingsVersionController::class, 'show'])
+        ->name('settings.brand.versions.show');
     Route::get('/settings/global', [SettingsController::class, 'global'])
         ->name('settings.global.index');
+    Route::get('/settings/global/{definition}/versions', [SettingsVersionController::class, 'index'])
+        ->name('settings.global.versions.index');
+    Route::get('/settings/global/{definition}/versions/{version}', [SettingsVersionController::class, 'show'])
+        ->name('settings.global.versions.show');
     /*** Profile Routes Start ***/
     Route::get('/profile/{name}', [ProfileController::class, 'profile'])->name('profile');
     Route::post('/profile-update', [ProfileController::class, 'profile_update'])->name('profile_update');
@@ -57,6 +76,58 @@ Route::group(['as' => 'admin::', 'prefix' => 'v1/cpanel/admin', 'middleware' => 
     Route::post('/heading-save',[CmsController::class,'save'])->name('save_cms');
     Route::post('/heading-status',[CmsController::class,'status'])->name('status_cms');
     /*** CMS End ***/
+
+    /*** CMS FAQ Start ***/
+    Route::group(['prefix' => 'cms'], function () {
+        Route::apiResource('faq-categories', \App\Http\Controllers\Admin\Cms\CmsFaqCategoryController::class)
+            ->except('show')
+            ->names('admin::cms.faq-categories');
+        Route::apiResource('faqs', \App\Http\Controllers\Admin\Cms\CmsFaqController::class)
+            ->except('show')
+            ->names('admin::cms.faqs');
+        Route::apiResource('courses', \App\Http\Controllers\Admin\Cms\CmsCourseController::class)
+            ->except('show')
+            ->names('admin::cms.courses');
+        Route::apiResource('features', \App\Http\Controllers\Admin\Cms\CmsFeatureController::class)
+            ->except('show')
+            ->names('admin::cms.features');
+
+        Route::apiResource('showcase-categories', \App\Http\Controllers\Admin\Cms\CmsShowcaseCategoryController::class)
+            ->except('show')
+            ->names('admin::cms.showcase_categories');
+
+        Route::apiResource('showcase-projects', \App\Http\Controllers\Admin\Cms\CmsShowcaseProjectController::class)
+            ->except('show')
+            ->names('admin::cms.showcase_projects');
+
+        Route::patch('showcase-projects/{showcase_project}/publish', [\App\Http\Controllers\Admin\Cms\CmsShowcaseProjectController::class, 'publish'])
+            ->name('admin::cms.showcase_projects.publish');
+    });
+    /*** CMS FAQ End ***/
+
+    /*** CMS Admin UI Start ***/
+    Route::prefix('content-management')->name('content.')->group(function () {
+        Route::get('faq-categories', [CmsFaqCategoryPageController::class, 'index'])->name('faq-categories.index');
+        Route::get('faq-categories/create', [CmsFaqCategoryPageController::class, 'create'])->name('faq-categories.create');
+        Route::get('faq-categories/{faqCategory}/edit', [CmsFaqCategoryPageController::class, 'edit'])->name('faq-categories.edit');
+
+        Route::get('faqs', [CmsFaqPageController::class, 'index'])->name('faqs.index');
+        Route::get('faqs/create', [CmsFaqPageController::class, 'create'])->name('faqs.create');
+        Route::get('faqs/{faq}/edit', [CmsFaqPageController::class, 'edit'])->name('faqs.edit');
+
+        Route::get('courses', [CmsCoursePageController::class, 'index'])->name('courses.index');
+        Route::get('courses/create', [CmsCoursePageController::class, 'create'])->name('courses.create');
+        Route::get('courses/{course}/edit', [CmsCoursePageController::class, 'edit'])->name('courses.edit');
+
+        Route::get('features', [CmsFeaturePageController::class, 'index'])->name('features.index');
+        Route::get('features/create', [CmsFeaturePageController::class, 'create'])->name('features.create');
+        Route::get('features/{feature}/edit', [CmsFeaturePageController::class, 'edit'])->name('features.edit');
+
+        Route::get('showcase', [CmsShowcasePageController::class, 'index'])->name('showcase.index');
+        Route::get('showcase/create', [CmsShowcasePageController::class, 'create'])->name('showcase.create');
+        Route::get('showcase/{showcase}/edit', [CmsShowcasePageController::class, 'edit'])->name('showcase.edit');
+    });
+    /*** CMS Admin UI End ***/
 
     /*** Conatct Information Start ***/
     Route::get('/contact',[ContactInfoController::class,'index'])->name('contact');

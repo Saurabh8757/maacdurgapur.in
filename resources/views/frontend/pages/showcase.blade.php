@@ -1,4 +1,4 @@
-﻿@extends('frontend.layout.app')
+@extends('frontend.layout.app')
 
 @section('custom_css')
 <link rel="stylesheet" href="{{ asset('frontend/css/showcase.css') }}">
@@ -14,9 +14,9 @@
         
         <div class="showcase-filters">
             <button class="showcase-filter-btn active" data-filter="all">All Projects</button>
-            <button class="showcase-filter-btn" data-filter="3d">3D & VFX</button>
-            <button class="showcase-filter-btn" data-filter="gaming">Gaming Environments</button>
-            <button class="showcase-filter-btn" data-filter="uiux">UI/UX Design</button>
+            @foreach($showcaseCategories as $category)
+                <button class="showcase-filter-btn" data-filter="{{ $category->slug }}">{{ $category->name }}</button>
+            @endforeach
         </div>
     </div>
 </section>
@@ -25,66 +25,43 @@
 <section class="showcase-section">
     <div class="showcase-container">
         <div class="showcase-grid" id="showcaseGrid">
-            
-            <!-- Showcase Item 1 -->
-            <div class="showcase-card" data-category="3d">
-                <div class="showcase-card-image-wrap">
-                    <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&q=80&w=800" alt="Sci-Fi Corridor" class="showcase-card-image" loading="lazy">
-                    <div class="showcase-play-btn">
-                        <div class="showcase-play-icon">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="#0073e6" stroke="none"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+            @forelse($showcaseProjects as $project)
+                <div class="showcase-card" data-category="{{ $project->category->slug }}">
+                    <div class="showcase-card-image-wrap">
+                        @if($project->thumbnail)
+                            <img src="{{ asset($project->thumbnail->storage_key) }}" alt="{{ $project->title }}" class="showcase-card-image" loading="lazy">
+                        @else
+                            <div style="background: #1f2937; width: 100%; height: 100%; display:flex; align-items:center; justify-content:center;">
+                                <span style="color:#6b7280;">No Thumbnail</span>
+                            </div>
+                        @endif
+                        
+                        @if($project->video_url)
+                        <div class="showcase-play-btn">
+                            <a href="{{ $project->video_url }}" target="_blank" class="showcase-play-icon" style="display: flex; align-items: center; justify-content: center; width: 100%; height: 100%;">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="#0073e6" stroke="none"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                            </a>
                         </div>
+                        @endif
                     </div>
-                </div>
-                <div class="showcase-card-content">
-                    <div class="showcase-student-info">
-                        <h3 class="showcase-student-name">Rahul Sharma</h3>
-                        <span class="showcase-category-badge">3D & VFX</span>
-                    </div>
-                    <p class="showcase-description">A fully rendered sci-fi corridor utilizing Houdini FX for procedural generation and Maya for detailed assets. Lighting baked in Nuke.</p>
-                    
-                </div>
-            </div>
-
-            <!-- Showcase Item 2 -->
-            <div class="showcase-card" data-category="uiux">
-                <div class="showcase-card-image-wrap">
-                    <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&q=80&w=800" alt="Fintech Dashboard" class="showcase-card-image" loading="lazy">
-                    <div class="showcase-play-btn">
-                        <div class="showcase-play-icon">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="#0073e6" stroke="none"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="11" y1="8" x2="11" y2="14"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg>
+                    <div class="showcase-card-content">
+                        <div class="showcase-student-info">
+                            <h3 class="showcase-student-name">{{ $project->student_name }}</h3>
+                            <span class="showcase-category-badge">{{ $project->category->name }}</span>
                         </div>
+                        <h4 style="color: #fff; margin: 0 0 10px 0; font-size: 1.1rem; font-weight: 500;">{{ $project->title }}</h4>
+                        <p class="showcase-description">{{ $project->short_description }}</p>
                     </div>
                 </div>
-                <div class="showcase-card-content">
-                    <div class="showcase-student-info">
-                        <h3 class="showcase-student-name">Sneha Gupta</h3>
-                        <span class="showcase-category-badge">UI/UX</span>
-                    </div>
-                    <p class="showcase-description">Comprehensive UX research and UI design for a conceptual Fintech application. Prototyped entirely in Figma with micro-animations.</p>
-                    
+            @empty
+                <div class="premium-empty-state" style="grid-column: 1 / -1; background: linear-gradient(145deg, #1f2937, #111827); padding: 4rem 2rem; border-radius: 16px; text-align: center; border: 1px solid rgba(255,255,255,0.05); box-shadow: 0 20px 40px rgba(0,0,0,0.4);">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#4b5563" stroke-width="1.5" style="margin-bottom: 1.5rem;">
+                        <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                    </svg>
+                    <h3 style="color: #fff; font-size: 1.5rem; margin-bottom: 1rem; font-weight: 600;">Exciting Projects Coming Soon</h3>
+                    <p style="color: #9ca3af; max-width: 500px; margin: 0 auto; line-height: 1.6;">Our students are hard at work crafting amazing portfolios and showreels. Check back shortly to witness their incredible creations.</p>
                 </div>
-            </div>
-
-            <!-- Showcase Item 3 -->
-            <div class="showcase-card" data-category="gaming">
-                <div class="showcase-card-image-wrap">
-                    <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&q=80&w=800" alt="Unreal Level Design" class="showcase-card-image" loading="lazy">
-                    <div class="showcase-play-btn">
-                        <div class="showcase-play-icon">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="#0073e6" stroke="none"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
-                        </div>
-                    </div>
-                </div>
-                <div class="showcase-card-content">
-                    <div class="showcase-student-info">
-                        <h3 class="showcase-student-name">Aritra Das</h3>
-                        <span class="showcase-category-badge">Gaming</span>
-                    </div>
-                    <p class="showcase-description">Real-time level design built in Unreal Engine 5 utilizing Nanite and Lumen. Custom textures painted via Substance Painter.</p>
-                    
-                </div>
-            </div>
+            @endforelse
 
         </div>
     </div>

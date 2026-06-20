@@ -10,12 +10,18 @@ use App\Models\Banner;
 use App\Models\CarrerCounselling;
 use App\Models\ContactInfo;
 use App\Models\ContactUs;
+use App\Models\CmsFaq;
+use App\Models\CmsFaqCategory;
 use App\Models\OurCourse;
 use App\Models\Product;
 use App\Models\Service;
 use App\Models\Subscriber;
 use App\Models\TeamMember;
 use App\Models\Testimonial;
+use App\Services\Brands\BrandContextManager;
+use App\Services\Cms\CmsCourseReadService;
+use App\Services\Cms\CmsFeatureReadService;
+use App\Services\Cms\CmsShowcaseReadService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Mail;
@@ -83,10 +89,12 @@ public function terms()
         return view('frontend.pages.t_and_c');
     }
 
- public function maac()
+ public function maac(CmsCourseReadService $cmsCourseReadService, CmsFeatureReadService $cmsFeatureReadService)
     {
         $courses = OurCourse::where('status', 'Active')->get();
-        return view('frontend.pages.maac', compact('courses'));
+        $cmsCourses = $cmsCourseReadService->getAllPublic();
+        $cmsFeatures = $cmsFeatureReadService->getAllPublic();
+        return view('frontend.pages.maac', compact('courses', 'cmsCourses', 'cmsFeatures'));
     }
 
  public function aksha()
@@ -94,9 +102,27 @@ public function terms()
         return view('frontend.pages.aksha');
     }
 
- public function faq()
+ public function faq(BrandContextManager $brandContextManager)
     {
-        return view('frontend.pages.faq');
+        $brandId = $brandContextManager
+            ->requirePublicContext()
+            ->brand()
+            ->getKey();
+
+        $categories = CmsFaqCategory::with(['faqs' => function ($query) use ($brandId) {
+                $query
+                    ->where('brand_id', $brandId)
+                    ->where('status', 'active')
+                    ->orderBy('sort_order')
+                    ->orderBy('id');
+            }])
+            ->where('brand_id', $brandId)
+            ->where('status', 'active')
+            ->orderBy('sort_order')
+            ->orderBy('id')
+            ->get();
+
+        return view('frontend.pages.faq', compact('categories'));
     }
 
  public function space_e_fic()
@@ -109,9 +135,11 @@ public function terms()
         return view('frontend.pages.fcq');
     }
 
- public function showcase()
+ public function showcase(CmsShowcaseReadService $showcaseReadService)
     {
-        return view('frontend.pages.showcase');
+        $showcaseCategories = $showcaseReadService->getCategoriesPublic();
+        $showcaseProjects = $showcaseReadService->getProjectsPublic();
+        return view('frontend.pages.showcase', compact('showcaseCategories', 'showcaseProjects'));
     }
 
  public function blog()
@@ -134,5 +162,4 @@ public function terms()
     } 
  
 }
-
 

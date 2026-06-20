@@ -175,61 +175,28 @@
       <h2 class="maac-why-title">WHY CHOOSE MAAC DURGAPUR ?</h2>
     </div>
 
+    @if($cmsFeatures->isNotEmpty())
     <div class="maac-why-grid">
-      <!-- Card 1: Industry-Aligned Curriculum -->
+      @foreach($cmsFeatures as $feature)
       <div class="maac-why-card">
         <div class="why-card-icon-wrap">
-          <img loading="lazy" src="{{ asset('frontend/images/maac/icons/education.png') }}" alt="Industry Curriculum" class="why-card-icon">
+          @if($feature->icon)
+              <img loading="lazy" src="{{ asset($feature->icon->storage_key) }}" alt="{{ $feature->title }}" class="why-card-icon">
+          @else
+              <img loading="lazy" src="{{ asset('frontend/images/maac/icons/education.png') }}" alt="{{ $feature->title }}" class="why-card-icon">
+          @endif
         </div>
-        <h3 class="why-card-title">Industry-Aligned<br>Curriculum</h3>
-        <p class="why-card-text">Industry-aligned curriculum covering Maya, Blender, Unreal Engine, Houdini FX, ZBrush, and modern AI creative tools. Emphasis on real-world projects, production workflows, and production skills used by leading studios and creative professionals.</p>
+        <h3 class="why-card-title">{!! nl2br(e($feature->title)) !!}</h3>
+        <p class="why-card-text">{!! nl2br(e($feature->description)) !!}</p>
       </div>
-
-      <!-- Card 2: 100% Placement Assistance -->
-      <div class="maac-why-card">
-        <div class="why-card-icon-wrap">
-          <img loading="lazy" src="{{ asset('frontend/images/maac/icons/placement.png') }}" alt="Placement" class="why-card-icon">
-        </div>
-        <h3 class="why-card-title">100% Placement<br>Assistance</h3>
-        <p class="why-card-text">Dedicated Placement Cell connecting students with animation studios, gaming companies, OTT platforms and digital agencies across India. Through campus drives, portfolio reviews, and career-focused interview preparation.</p>
-      </div>
-
-      <!-- Card 3: AI-Integrated Learning -->
-      <div class="maac-why-card">
-        <div class="why-card-icon-wrap">
-          <img loading="lazy" src="{{ asset('frontend/images/maac/icons/clipboard.png') }}" alt="AI Learning" class="why-card-icon">
-        </div>
-        <h3 class="why-card-title">AI-Integrated<br>Learning</h3>
-        <p class="why-card-text">One of the first creative institutes in the Durgapur–Asansol–Burdwan–Bolpur– Bankura–Purulia region to integrate AI-focused curriculum for Animation, VFX, Designers, AI Video Editing, and AI powered VFX tools into every course for future-ready creative learning.</p>
-      </div>
-
-      <!-- Card 4: State-of-the-Art Labs -->
-      <div class="maac-why-card">
-        <div class="why-card-icon-wrap">
-          <img loading="lazy" src="{{ asset('frontend/images/maac/icons/play.png') }}" alt="Art Labs" class="why-card-icon">
-        </div>
-        <h3 class="why-card-title">State-of-the-<br>Art Labs</h3>
-        <p class="why-card-text">Train with high-performance workstations, render farms, Wacom tablets, motion capture facilities, and the latest licensed software used by leading studios and creative professionals worldwide.</p>
-      </div>
-
-      <!-- Card 5: Affordable Fees & EMI -->
-      <div class="maac-why-card">
-        <div class="why-card-icon-wrap">
-          <img loading="lazy" src="{{ asset('frontend/images/maac/icons/payment.png') }}" alt="EMI" class="why-card-icon">
-        </div>
-        <h3 class="why-card-title">Affordable Fees &<br>EMI</h3>
-        <p class="why-card-text">Affordable animation and VFX courses in west Bengal with industry-quality training, modern infrastructure, and easy EMI facilities for students from Kolkata, Burdwan, Bankura, Bolpur, and beyond.</p>
-      </div>
-
-      <!-- Card 6: Conveniently Located -->
-      <div class="maac-why-card">
-        <div class="why-card-icon-wrap">
-          <img loading="lazy" src="{{ asset('frontend/images/maac/icons/location.png') }}" alt="Location" class="why-card-icon">
-        </div>
-        <h3 class="why-card-title">Conveniently Located</h3>
-        <p class="why-card-text">Conveniently located near City Center, Durgapur with excellent connectivity from Asansol, Burdwan, Bankura, Bolpur, Bishnupur, Purulia, and Kolkata. Hostel facilities available for outstation students.</p>
-      </div>
+      @endforeach
     </div>
+    @else
+    <div class="maac-empty-state" style="text-align: center; padding: 50px 20px; background: rgba(0,0,0,0.5); border-radius: 12px; max-width: 800px; margin: 0 auto;">
+      <h3 style="color: #fff; font-size: 1.5rem; margin-bottom: 15px;">More Features Coming Soon</h3>
+      <p style="color: #ccc;">We are currently updating our feature highlights. Please check back later.</p>
+    </div>
+    @endif
   </div>
 </section>
 
@@ -246,67 +213,25 @@
       <p class="maac-courses-desc">Every course at MAAC Durgapur is designed to make you employment-ready from Day 1. Students from Kolkata, Burdwan, Bolpur, Bankura, Asansol, Raniganj, and Purulia enroll and go on to build successful creative careers across India.</p>
     </div>
 
+    @if($cmsCourses->isNotEmpty())
     <div class="swiper maac-courses-swiper">
       <div class="swiper-wrapper">
-        <!-- Course 1: 3D Animation Programme -->
+        @foreach($cmsCourses as $course)
         <div class="swiper-slide maac-course-card">
           <div class="course-card-icon-wrap">
-            <img loading="lazy" src="{{ asset('frontend/images/maac/icons/100.png') }}" alt="3D Animation" class="course-card-icon">
+            @if($course->thumbnail)
+                <img loading="lazy" src="{{ asset($course->thumbnail->storage_key) }}" alt="{{ $course->title }}" class="course-card-icon">
+            @else
+                <img loading="lazy" src="{{ asset('frontend/images/maac/icons/100.png') }}" alt="{{ $course->title }}" class="course-card-icon">
+            @endif
           </div>
-          <h3 class="course-card-title">3D-Animation<br>Programme<br>(VFX Programme)</h3>
-          <p class="course-card-text">One of the most sought-after animation courses in Durgapur, designed for students from Kolkata and Burdwan looking to build a career in 3D. Covers the complete animation pipeline from modeling and texturing to rigging to cinematic storytelling and final rendering.</p>
-          <p class="course-card-tools">Tools covered: Maya · Blender · 3Ds-Max · ZBrush · Substance Painter · After Effects · Nuke · Animation</p>
+          <h3 class="course-card-title">{!! nl2br(e($course->title)) !!}</h3>
+          <p class="course-card-text">{!! nl2br(e($course->description)) !!}</p>
+          @if($course->tools_covered && is_array($course->tools_covered) && count($course->tools_covered) > 0)
+          <p class="course-card-tools">Tools covered: {{ implode(' · ', $course->tools_covered) }}</p>
+          @endif
         </div>
-
-        <!-- Course 2: Visual Effects -->
-        <div class="swiper-slide maac-course-card">
-          <div class="course-card-icon-wrap">
-            <img loading="lazy" src="{{ asset('frontend/images/maac/icons/101.png') }}" alt="VFX" class="course-card-icon">
-          </div>
-          <h3 class="course-card-title">Visual Effects<br>(VFX) Programme</h3>
-          <p class="course-card-text">A top-rated VFX course in Durgapur and Asansol region. Students from Kolkata, Burdwan, and Bolpur come to learn cinema-level VFX. Learn essentials of VFX, 3D assets, real-time compositing, AI-powered workflows using Houdini FX, Nuke, and After Effects.</p>
-          <p class="course-card-tools">Tools covered: Houdini FX · Nuke · After Effects · Maya · Compositing</p>
-        </div>
-
-        <!-- Course 3: Gaming & Interactive Media -->
-        <div class="swiper-slide maac-course-card">
-          <div class="course-card-icon-wrap">
-            <img loading="lazy" src="{{ asset('frontend/images/maac/icons/102.png') }}" alt="Gaming" class="course-card-icon">
-          </div>
-          <h3 class="course-card-title">Gaming &<br>Interactive Media</h3>
-          <p class="course-card-text">MAAC Durgapur is a leading gaming institute covering mobile, PC and console game development for students from Burdwan For course! Focused on complete game pipeline including 3D assets, real-time workflows using Unreal Engine and AI-powered tools.</p>
-          <p class="course-card-tools">Tools covered: Unreal Engine 5 · Unity · Blender · Substance Painter · AR/VR</p>
-        </div>
-
-        <!-- Course 4: Graphic Design with AI -->
-        <div class="swiper-slide maac-course-card">
-          <div class="course-card-icon-wrap">
-            <img loading="lazy" src="{{ asset('frontend/images/maac/icons/after-effects (1).png') }}" alt="Graphic Design" class="course-card-icon">
-          </div>
-          <h3 class="course-card-title">Graphic Design<br>with AI Tools</h3>
-          <p class="course-card-text">A comprehensive graphic design course covering branding, layout design, social media graphics and digital design using Photoshop, Illustrator, InDesign, Figma, Midjourney, and AI-powered creative tools.</p>
-          <p class="course-card-tools">Tools covered: Photoshop · Illustrator · InDesign · Figma · Midjourney · Generative AI</p>
-        </div>
-
-        <!-- Course 5: Motion Graphics & Video Editing -->
-        <div class="swiper-slide maac-course-card">
-          <div class="course-card-icon-wrap">
-            <img loading="lazy" src="{{ asset('frontend/images/maac/icons/illustrator.png') }}" alt="Motion Graphics" class="course-card-icon">
-          </div>
-          <h3 class="course-card-title">Motion Graphics<br>& Video Editing</h3>
-          <p class="course-card-text">A leading motion graphics and video editing course in Durgapur. Students from Kolkata, Burdwan, and Asansol learn professional video production, animation sequences, explainer videos, Premiere Pro, DaVinci Resolve, and AI-powered editing.</p>
-          <p class="course-card-tools">Tools covered: After Effects · Premiere Pro · DaVinci Resolve · Runway ML · AI Video Editing</p>
-        </div>
-
-        <!-- Course 6: Digital Content Creator -->
-        <div class="swiper-slide maac-course-card">
-          <div class="course-card-icon-wrap">
-            <img loading="lazy" src="{{ asset('frontend/images/maac/icons/photoshop.png') }}" alt="Content Creator" class="course-card-icon">
-          </div>
-          <h3 class="course-card-title">Digital Content<br>Creator Programme</h3>
-          <p class="course-card-text">Become a digital content creator with skills in video production, social media strategy, short-form video, YouTube optimization, live streaming, and monetization. Includes AI-based content generation, storytelling, and generative AI creative solutions.</p>
-          <p class="course-card-tools">Tools covered: Reels · YouTube · AI Content Generation · Podcast Production</p>
-        </div>
+        @endforeach
       </div>
       
       <!-- Swiper Pagination -->
@@ -316,6 +241,12 @@
       <div class="swiper-btn-next"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
       <div class="swiper-btn-prev"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"></polyline></svg></div>
     </div>
+    @else
+    <div class="maac-empty-state" style="text-align: center; padding: 50px 20px; background: rgba(0,0,0,0.5); border-radius: 12px;">
+      <h3 style="color: #fff; font-size: 1.5rem; margin-bottom: 15px;">New Courses Coming Soon</h3>
+      <p style="color: #ccc;">We are currently updating our course curriculum. Please check back later.</p>
+    </div>
+    @endif
   </div>
 </section>
 

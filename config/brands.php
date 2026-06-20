@@ -16,6 +16,7 @@ return [
             'localhost',
             '127.0.0.1',
         ],
+        'local_context_hostname' => env('BRAND_LOCAL_CONTEXT_HOSTNAME'),
     ],
 
     'admin_context' => [

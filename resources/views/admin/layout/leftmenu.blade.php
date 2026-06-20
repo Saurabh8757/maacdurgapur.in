@@ -5,6 +5,35 @@
     $settingsNavigation = app(\App\Services\Settings\SettingsNavigationService::class);
     $canViewBrandSettings = $settingsNavigation->canViewBrand(Auth::user());
     $canViewGlobalSettings = $settingsNavigation->canViewGlobal(Auth::user());
+    $cmsAuthorization = app(\App\Services\Cms\CmsAuthorizationService::class);
+    $adminBrandContext = app(\App\Services\Brands\BrandContextManager::class)->adminContext();
+    $cmsMenuPermissions = [
+        'faqs' => $adminBrandContext
+            ? $cmsAuthorization->allows(Auth::user(), 'faqs', 'view', $adminBrandContext->brand())
+            : false,
+        'courses' => $adminBrandContext
+            ? $cmsAuthorization->allows(Auth::user(), 'courses', 'view', $adminBrandContext->brand())
+            : false,
+        'features' => $adminBrandContext
+            ? $cmsAuthorization->allows(Auth::user(), 'features', 'view', $adminBrandContext->brand())
+            : false,
+        'showcase' => $adminBrandContext
+            ? $cmsAuthorization->allows(Auth::user(), 'showcase', 'view', $adminBrandContext->brand())
+            : false,
+    ];
+    $canViewCmsMenu = in_array(true, $cmsMenuPermissions, true);
+    $profilePicture = basename((string) Auth::user()->profile_picture);
+    $profilePicturePath = $profilePicture !== ''
+        ? public_path('upload/images/profile/'.$profilePicture)
+        : null;
+    $hasProfilePicture = $profilePicturePath && is_file($profilePicturePath);
+    $defaultProfilePicture = 'upload/images/profile/user_image.jpg';
+    $hasDefaultProfilePicture = is_file(public_path($defaultProfilePicture));
+    $profileInitials = collect(preg_split('/\s+/', trim((string) Auth::user()->name)))
+        ->filter()
+        ->take(2)
+        ->map(static fn ($part) => mb_strtoupper(mb_substr($part, 0, 1)))
+        ->implode('');
 @endphp
 
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
@@ -20,8 +49,19 @@
         <!-- Sidebar user panel -->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="image">
-                <img src="{{ asset('upload/images/profile/' . Auth::user()['profile_picture']) }}"
-                    class="img-circle elevation-2" alt="User_Image" style="width: 36px; height: 36px;">
+                @if ($hasProfilePicture)
+                    <img src="{{ asset('upload/images/profile/'.$profilePicture) }}"
+                        class="img-circle elevation-2" alt="{{ Auth::user()->name }}" style="width: 36px; height: 36px; object-fit: cover;">
+                @elseif ($hasDefaultProfilePicture)
+                    <img src="{{ asset($defaultProfilePicture) }}"
+                        class="img-circle elevation-2" alt="{{ Auth::user()->name }}" style="width: 36px; height: 36px; object-fit: cover;">
+                @else
+                    <span class="img-circle elevation-2 d-flex align-items-center justify-content-center"
+                        aria-label="{{ Auth::user()->name }}"
+                        style="width: 36px; height: 36px; background: linear-gradient(135deg, #ff8a00, #ff4d00); color: #fff; font-size: 0.72rem; font-weight: 700;">
+                        {{ $profileInitials ?: 'U' }}
+                    </span>
+                @endif
             </div>
             <div class="info">
                 <a href="{{ route('admin::profile', ['name' => Auth::user()['slug_name']]) }}"
@@ -95,6 +135,45 @@
                         <p>Contact Info</p>
                     </a>
                 </li>
+
+                @if ($canViewCmsMenu)
+                    <li class="nav-item has-treeview @if (request()->routeIs('admin::content.*')) menu-open @endif">
+                        <a href="#" class="nav-link @if (request()->routeIs('admin::content.*')) active @endif">
+                            <i class="fas fa-layer-group nav-icon"></i>
+                            <p>
+                                Content Management
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            @if ($cmsMenuPermissions['faqs'])
+                                <li class="nav-item">
+                                    <a href="{{ route('admin::content.faq-categories.index') }}"
+                                       class="nav-link @if (request()->routeIs('admin::content.faq-categories.*')) active @endif">
+                                        <i class="fas fa-folder-open nav-icon"></i>
+                                        <p>FAQ Categories</p>
+                                    </a>
+                                </li>
+                            @endif
+                            @foreach ([
+                                'faqs' => ['label' => 'FAQs', 'icon' => 'fa-question-circle'],
+                                'courses' => ['label' => 'Courses', 'icon' => 'fa-graduation-cap'],
+                                'features' => ['label' => 'Features', 'icon' => 'fa-star'],
+                                'showcase' => ['label' => 'Showcase', 'icon' => 'fa-images'],
+                            ] as $module => $menu)
+                                @if ($cmsMenuPermissions[$module])
+                                    <li class="nav-item">
+                                        <a href="{{ route("admin::content.{$module}.index") }}"
+                                           class="nav-link @if (request()->routeIs("admin::content.{$module}.*")) active @endif">
+                                            <i class="fas {{ $menu['icon'] }} nav-icon"></i>
+                                            <p>{{ $menu['label'] }}</p>
+                                        </a>
+                                    </li>
+                                @endif
+                            @endforeach
+                        </ul>
+                    </li>
+                @endif
 
                 @if ($canViewBrandSettings || $canViewGlobalSettings)
                     <li class="nav-item has-treeview @if ($segment4 === 'settings') menu-open @endif">

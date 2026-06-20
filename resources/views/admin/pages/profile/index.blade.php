@@ -43,8 +43,28 @@
                                     <div class="card-body">
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">Preview Image</label>
-{{--                                            <img src="{{$user['profile_picture']}}" alt="No Profile Picture Found" style="width: 150px;height: 150px;object-fit: cover;">--}}
-                                            <img src="{{asset('upload/images/profile/'.$user['profile_picture'])}}" alt="No Profile Picture Found" style="width: 150px;height: 150px;object-fit: cover;">
+                                            @php
+                                                $profilePicture = basename((string) $user['profile_picture']);
+                                                $hasProfilePicture = $profilePicture !== ''
+                                                    && is_file(public_path('upload/images/profile/'.$profilePicture));
+                                                $defaultProfilePicture = 'upload/images/profile/user_image.jpg';
+                                                $hasDefaultProfilePicture = is_file(public_path($defaultProfilePicture));
+                                                $profileInitials = collect(preg_split('/\s+/', trim((string) $user['name'])))
+                                                    ->filter()
+                                                    ->take(2)
+                                                    ->map(static fn ($part) => mb_strtoupper(mb_substr($part, 0, 1)))
+                                                    ->implode('');
+                                            @endphp
+                                            @if ($hasProfilePicture)
+                                                <img src="{{ asset('upload/images/profile/'.$profilePicture) }}" alt="{{ $user['name'] }}" style="width: 150px;height: 150px;object-fit: cover;border-radius: 50%;">
+                                            @elseif ($hasDefaultProfilePicture)
+                                                <img src="{{ asset($defaultProfilePicture) }}" alt="{{ $user['name'] }}" style="width: 150px;height: 150px;object-fit: cover;border-radius: 50%;">
+                                            @else
+                                                <div role="img" aria-label="{{ $user['name'] }}"
+                                                    style="width: 150px;height: 150px;border-radius: 50%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#ff8a00,#ff4d00);color:#fff;font-size:2.5rem;font-weight:700;">
+                                                    {{ $profileInitials ?: 'U' }}
+                                                </div>
+                                            @endif
                                         </div>
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">Name</label>

@@ -1,0 +1,101 @@
+.cms-page .content-header {
+    padding-bottom: 8px;
+}
+
+.cms-page .cms-card {
+    border: 0;
+    border-radius: 14px;
+    box-shadow: 0 8px 28px rgba(15, 23, 42, .08);
+    overflow: hidden;
+}
+
+.cms-page .cms-card .card-header {
+    background: #fff;
+    border-bottom: 1px solid #edf0f5;
+    padding: 18px 20px;
+}
+
+.cms-page .cms-toolbar {
+    display: flex;
+    gap: 12px;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.cms-page .cms-search {
+    display: flex;
+    gap: 8px;
+    width: min(100%, 460px);
+}
+
+.cms-page .cms-search .form-control {
+    border-radius: 9px;
+}
+
+.cms-page .table td,
+.cms-page .table th {
+    vertical-align: middle;
+}
+
+.cms-page .cms-title-cell {
+    max-width: 360px;
+    white-space: normal;
+}
+
+.cms-page .cms-actions {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+.cms-page .badge {
+    padding: 7px 10px;
+    border-radius: 999px;
+    font-weight: 600;
+    text-transform: capitalize;
+}
+
+.cms-page .cms-empty {
+    color: #718096;
+    padding: 44px 16px;
+    text-align: center;
+}
+
+.cms-page .cms-form-card .card-body {
+    padding: 24px;
+}
+
+.cms-page .cms-form-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    padding-top: 8px;
+}
+
+.cms-page .cms-help {
+    color: #718096;
+    font-size: .84rem;
+}
+
+.cms-page .cms-api-errors {
+    display: none;
+}
+
+.cms-page .cms-api-errors.is-visible {
+    display: block;
+}
+
+@media (max-width: 767.98px) {
+    .cms-page .cms-toolbar,
+    .cms-page .cms-search,
+    .cms-page .cms-form-actions {
+        align-items: stretch;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .cms-page .cms-actions {
+        min-width: 150px;
+    }
+}

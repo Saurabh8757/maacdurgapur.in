@@ -18,7 +18,7 @@ class AdminLoginSeeder extends Seeder
         $user->name = 'John Doe';
         $user->slug_name ='john';
         // $user->slug_name= Str::slug('John Doe');
-        $user->profile_picture = 'user.jpg';
+        $user->profile_picture = 'user_image.jpg';
         $user->email = 'admin@gmail.com';
         $user->password = bcrypt('123456');
         $user->user_type = 'Admin';
