@@ -1,0 +1,210 @@
+[33mcommit 03be5c8eb31cef0b96ae1309b49f85d4c1636d7e[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m
+Author: Saurabh Kumar <sandilyasaurabhkumar4@gmail.com>
+Date:   Mon Jun 22 03:13:07 2026 +0530
+
+    space e fix design almost completed
+
+[33mcommit 1c767a72e57ca571941b02efdedafdc4872ff2f2[m
+Author: Saurabh Kumar <sandilyasaurabhkumar4@gmail.com>
+Date:   Sun Jun 21 23:30:56 2026 +0530
+
+    Fixed blog and showcase background
+
+[33mcommit f0f8af19148a3a0f4443062fc8fe3a538f5c6021[m
+Author: Saurabh Kumar <sandilyasaurabhkumar4@gmail.com>
+Date:   Sun Jun 21 21:32:20 2026 +0530
+
+    Redesign Showcase card
+
+[33mcommit 9edced4ab188abb48d528c5be2aa0fa6ce336b11[m
+Author: Saurabh Kumar <sandilyasaurabhkumar4@gmail.com>
+Date:   Sun Jun 21 16:26:44 2026 +0530
+
+    fix(showcase): thumbnail upload support up to 20MB via Apache environment
+
+[33mcommit 1a5bb7a7163638222cfcdc55563e0bbe159d87f7[m
+Author: Saurabh Kumar <sandilyasaurabhkumar4@gmail.com>
+Date:   Sun Jun 21 14:16:02 2026 +0530
+
+    refactor: remove legacy admin modules and optimize schema
+
+[33mcommit 08d00b88018179e318860f7b57c73982e602523c[m
+Author: Saurabh Kumar <sandilyasaurabhkumar4@gmail.com>
+Date:   Sun Jun 21 13:31:31 2026 +0530
+
+    feat(cms): complete FAQ, Course, Feature and Showcase admin UI
+
+[33mcommit 49a038918193aab870e2d584cce883ffc50f3d54[m
+Author: Saurabh Kumar <sandilyasaurabhkumar4@gmail.com>
+Date:   Sat Jun 20 12:19:58 2026 +0530
+
+    admin panel 50% done
+
+[33mcommit 513034df00473ca18e1d84bb569465d2d0048c0e[m
+Author: Saurabh Kumar <sandilyasaurabhkumar4@gmail.com>
+Date:   Fri Jun 19 23:39:01 2026 +0530
+
+    antigravity start implemneting backend part ok
+
+[33mcommit d29d385eed699a64ae804fbc59846c5fc390a7ec[m
+Author: Saurabh Kumar <sandilyasaurabhkumar4@gmail.com>
+Date:   Fri Jun 19 16:56:41 2026 +0530
+
+    Settings Phase B - Authorization and Scope Foundation
+
+[33mcommit e00c6bec0ef1aec94af62b24fa620ab7ff452edd[m
+Author: Saurabh Kumar <sandilyasaurabhkumar4@gmail.com>
+Date:   Fri Jun 19 16:43:15 2026 +0530
+
+    Settings Phase A - Audit Foundation
+
+[33mcommit daea84434d8d04c38ab0dd29977d2ca3bb88e631[m
+Author: Saurabh Kumar <sandilyasaurabhkumar4@gmail.com>
+Date:   Fri Jun 19 16:26:25 2026 +0530
+
+    feat: implement B2.4 admin brand context foundation
+
+[33mcommit 06a43b6cd09073109626f9fe5f69c62fa58e1cb3[m
+Author: Saurabh Kumar <sandilyasaurabhkumar4@gmail.com>
+Date:   Fri Jun 19 16:05:09 2026 +0530
+
+    Brand Context B2.3 shadow mode completed
+
+[33mcommit 4844a98ef510d982799c6802b6690b2618d7c976[m
+Author: Saurabh Kumar <sandilyasaurabhkumar4@gmail.com>
+Date:   Fri Jun 19 15:55:44 2026 +0530
+
+    Brand Context B2.2 trusted host enforcement completed
+
+[33mcommit a370017e217366540996a5e408632bbfc367f177[m
+Author: Saurabh Kumar <sandilyasaurabhkumar4@gmail.com>
+Date:   Fri Jun 19 15:34:27 2026 +0530
+
+    Brand Context B2.1 completed
+
+[33mcommit 6791fb3e1a2b97eb5b435092911ca81e9cdeed76[m
+Author: Saurabh Kumar <sandilyasaurabhkumar4@gmail.com>
+Date:   Fri Jun 19 12:22:23 2026 +0530
+
+    Brand Context B1 resolver foundation completed
+
+[33mcommit f857fc0db90282189e70bc111f7e5a4db92f311a[m
+Author: Saurabh Kumar <sandilyasaurabhkumar4@gmail.com>
+Date:   Fri Jun 19 12:08:44 2026 +0530
+
+    RBAC activation and bootstrap admin completed
+
+[33mcommit e191c6148b44acf361cac3af8134c57ed15d48a4[m
+Author: Saurabh Kumar <sandilyasaurabhkumar4@gmail.com>
+Date:   Fri Jun 19 11:47:57 2026 +0530
+
+    RBAC foundation completed
+
+[33mcommit 54af1fcf877ff87a87e8c300dc4136ee7bd1aa85[m
+Author: Saurabh Kumar <sandilyasaurabhkumar4@gmail.com>
+Date:   Fri Jun 19 11:36:13 2026 +0530
+
+    Security: authentication hardening completed
+
+[33mcommit 1a6f595a5c515be60d40992aed8566ceb4770514[m
+Author: Saurabh Kumar <sandilyasaurabhkumar4@gmail.com>
+Date:   Fri Jun 19 11:17:19 2026 +0530
+
+    Sprint S3 Media Foundation completed
+
+[33mcommit d7460a5027cd620a9a145158e6db577dd00dbde5[m
+Author: Saurabh Kumar <sandilyasaurabhkumar4@gmail.com>
+Date:   Fri Jun 19 11:10:37 2026 +0530
+
+    Sprint S3 Media Foundation completed
+
+[33mcommit 0313f231c325b6ab71a0c42ebc2b1779601afe42[m
+Author: Saurabh Kumar <sandilyasaurabhkumar4@gmail.com>
+Date:   Fri Jun 19 00:59:25 2026 +0530
+
+    Security hardening, virtual host migration, architecture approved
+
+[33mcommit 282b15e407d2d6d6e43a583f8b57e2365512ec2d[m
+Author: Saurabh Kumar <sandilyasaurabhkumar4@gmail.com>
+Date:   Thu Jun 18 18:10:11 2026 +0530
+
+    almost index.blade.php is done
+
+[33mcommit 74e70d15d81d0bd98bae05885d0e378b953676e8[m
+Author: Saurabh Kumar <sandilyasaurabhkumar4@gmail.com>
+Date:   Thu Jun 18 16:48:06 2026 +0530
+
+    Set water fall vedio for desktop view
+
+[33mcommit ce127618647876d652e884f0b0f497d83334e87e[m
+Author: Saurabh Kumar <sandilyasaurabhkumar4@gmail.com>
+Date:   Thu Jun 18 16:35:58 2026 +0530
+
+    set water fall vedio in index page for obile view
+
+[33mcommit 5ce61e3cfed60ec31cb84e5219de47db23e92a7a[m
+Author: Saurabh Kumar <sandilyasaurabhkumar4@gmail.com>
+Date:   Thu Jun 18 15:55:28 2026 +0530
+
+    update faq.blade.php
+
+[33mcommit 7662b4f820a8a745fe37f4886e93c5b4a9d09433[m
+Author: Saurabh Kumar <sandilyasaurabhkumar4@gmail.com>
+Date:   Thu Jun 18 00:39:27 2026 +0530
+
+    improment smooth scrolling
+
+[33mcommit f5ec445b0305c3fdd1458eec9f31127251cb0806[m
+Author: Saurabh Kumar <sandilyasaurabhkumar4@gmail.com>
+Date:   Wed Jun 17 19:52:24 2026 +0530
+
+    polishing the all pages
+
+[33mcommit 2c0991b3bfb8fa513d51966404c9b4464a4dd69c[m
+Author: Saurabh Kumar <sandilyasaurabhkumar4@gmail.com>
+Date:   Tue Jun 16 03:22:47 2026 +0530
+
+    maac.blade.php  80% done
+
+[33mcommit f15ddf3943a798163a78293313211a0923884c95[m
+Author: Saurabh Kumar <sandilyasaurabhkumar4@gmail.com>
+Date:   Mon Jun 15 21:51:34 2026 +0530
+
+    Performance optimization phase complited
+
+[33mcommit 8aa482ac0328734057582eecd0bad54a7ebe4d6b[m
+Author: Saurabh Kumar <sandilyasaurabhkumar4@gmail.com>
+Date:   Mon Jun 15 21:00:38 2026 +0530
+
+    Performance optimization phase 1 and 2 completed
+
+[33mcommit 0f36a46af5c71fa7178123f7761b481355dadecf[m
+Author: Saurabh Kumar <sandilyasaurabhkumar4@gmail.com>
+Date:   Mon Jun 15 19:17:38 2026 +0530
+
+    Desktop approved baseline
+
+[33mcommit bbdcfd4d84dd071eab93957436d19556c0be15c2[m
+Author: Saurabh Kumar <sandilyasaurabhkumar4@gmail.com>
+Date:   Mon Jun 15 14:54:02 2026 +0530
+
+    Fix cinematic section blending and overlay issues
+
+[33mcommit 8fef853b77854ba48ad0500f1ec1608d26fca36f[m
+Merge: ff64f7a 1befead
+Author: Saurabh Kumar <sandilyasaurabhkumar4@gmail.com>
+Date:   Mon Jun 15 12:46:37 2026 +0530
+
+    Resolve README merge conflict
+
+[33mcommit ff64f7a3b47f18f50cedd714db08c19e7c28a6f0[m
+Author: Saurabh Kumar <sandilyasaurabhkumar4@gmail.com>
+Date:   Mon Jun 15 12:42:10 2026 +0530
+
+    Initial commit
+
+[33mcommit 1befead71e4d784c6d86386323e8ecc09941c884[m
+Author: Saurabh Kumar <sandilyasaurabhkumar4@gmail.com>
+Date:   Mon Jun 15 12:35:34 2026 +0530
+
+    Initial commit

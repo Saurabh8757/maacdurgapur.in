@@ -29,8 +29,8 @@
 <!-- Swiper CSS -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/10.3.1/swiper-bundle.min.css">
 <!-- Counselling Modal CSS -->
-<link rel="stylesheet" href="{{ asset('frontend/css/counselling-modal.css') }}" media="print" onload="this.media='all'">
-<noscript><link rel="stylesheet" href="{{ asset('frontend/css/counselling-modal.css') }}"></noscript>
+<link rel="stylesheet" href="{{ asset('frontend/css/counselling-modal.css') }}?v={{ time() }}" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="{{ asset('frontend/css/counselling-modal.css') }}?v={{ time() }}"></noscript>
 @if(request()->routeIs('home'))
 <!-- Preload hero image for LCP -->
 <link rel="preload" as="image" href="{{ asset('frontend/images/pg-01.webp') }}" fetchpriority="high">

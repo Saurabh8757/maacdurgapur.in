@@ -183,7 +183,7 @@
         </ul>
       </div>
       <div class="program-visual">
-        <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=2022&auto=format&fit=crop" alt="Junior robotics student" class="cinematic-img">
+        <img src="{{ asset('frontend/images/space_e_fic/curriculum/junior.png') }}" alt="Junior robotics student" class="cinematic-img">
       </div>
     </div>
   </div>
@@ -222,7 +222,7 @@
         </ul>
       </div>
       <div class="program-visual">
-        <img src="https://images.unsplash.com/photo-1555255707-c07966088b7b?q=80&w=1932&auto=format&fit=crop" alt="Advanced robotics student" class="cinematic-img">
+        <img src="{{ asset('frontend/images/space_e_fic/curriculum/senior.png') }}" alt="Advanced robotics student" class="cinematic-img">
       </div>
     </div>
   </div>

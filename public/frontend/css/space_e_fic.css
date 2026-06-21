@@ -43,6 +43,13 @@ h1, h2, h3, h4, h5, h6 {
     color: var(--accent-orange);
     margin-bottom: 12px;
     text-transform: uppercase;
+    transition: color 0.3s ease, text-shadow 0.3s ease, letter-spacing 0.3s ease;
+}
+
+.sef-label:hover {
+    color: #ff8c00;
+    text-shadow: 0 0 10px rgba(255, 140, 0, 0.8);
+    letter-spacing: 3px;
 }
 
 .sef-title {
@@ -50,12 +57,25 @@ h1, h2, h3, h4, h5, h6 {
     line-height: 1.2;
     margin-bottom: 20px;
     text-transform: uppercase;
+    transition: text-shadow 0.3s ease, color 0.3s ease, transform 0.3s ease;
+}
+
+.sef-title:hover {
+    color: #ffffff;
+    text-shadow: 0 0 10px rgba(0, 212, 255, 0.8), 0 0 20px rgba(119, 0, 255, 0.6);
+    transform: scale(1.01);
 }
 
 .sef-desc {
     font-size: 16px;
     line-height: 1.7;
     color: var(--text-muted);
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+.sef-desc:hover {
+    color: #e0f7ff;
+    text-shadow: 0 0 8px rgba(0, 212, 255, 0.4);
 }
 
 .sef-section-header {
@@ -139,11 +159,23 @@ h1, h2, h3, h4, h5, h6 {
     font-size: clamp(40px, 5vw, 65px);
     line-height: 1.1;
     text-transform: uppercase;
+    transition: transform 0.3s ease, text-shadow 0.3s ease;
+}
+
+.sef-hero-heading:hover {
+    transform: scale(1.02);
+    text-shadow: 0 0 15px rgba(0, 212, 255, 0.5), 0 0 30px rgba(119, 0, 255, 0.4);
 }
 
 .sef-hero-heading .passion {
     color: var(--accent-orange);
     text-shadow: 0 0 20px var(--glow-orange);
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+.sef-hero-heading:hover .passion {
+    color: #ffaa00;
+    text-shadow: 0 0 25px rgba(255, 170, 0, 0.9), 0 0 50px rgba(255, 60, 0, 0.6);
 }
 
 .sef-hero-subtitle {
@@ -461,16 +493,25 @@ h1, h2, h3, h4, h5, h6 {
     display: flex;
     gap: 15px;
     margin-bottom: 20px;
-    color: #334155;
+    color: rgba(255, 255, 255, 0.7);
     font-size: 16px;
+    line-height: 1.6;
+    padding: 12px 16px;
+    border-radius: 12px;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: 1px solid transparent;
 }
 
-.dark-mode li {
-    color: var(--text-muted);
+.program-feature-list li:hover {
+    transform: translateX(10px) scale(1.02);
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
-.dark-mode li b {
-    color: #fff;
+.program-feature-list li b {
+    color: #ffffff;
 }
 
 .list-icon {
@@ -480,9 +521,21 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .cinematic-img {
-    width: 100%;
+    width: 85%;
+    max-width: 500px;
+    margin: 0 auto;
+    display: block;
+    height: auto;
     border-radius: var(--border-radius);
     box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+    transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+    border: 2px solid transparent;
+}
+
+.cinematic-img:hover {
+    transform: translateY(-15px) scale(1.03);
+    box-shadow: 0 35px 60px rgba(119, 0, 255, 0.3), 0 0 50px rgba(0, 212, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.15);
 }
 
 /* ===================== STUDENT PROJECTS SHOWCASE ===================== */
