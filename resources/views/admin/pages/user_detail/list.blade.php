@@ -68,9 +68,7 @@
 
                                                 </td>
 
-                                                {{-- <td>
-                                                    <a onclick="deleteItem('{{route('admin::delete_testimonial',$data['id'])}}')" href="javascript:void(0);" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
-                                                </td> --}}
+
                                             </tr>
                                         @endforeach
                                     @endif

@@ -26,8 +26,6 @@ class DatabaseSeeder extends Seeder
             RolePermissionSeeder::class,
             CmsSeeder::class,
             SiteInfoSeeder::class,
-            ContactInfoSeeder::class,
-            AboutPageSeeder::class,
         ]);
     }
 }

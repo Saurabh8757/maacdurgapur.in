@@ -4,11 +4,8 @@ namespace App\Http\Controllers\Web;
 
 use App\Helper\admin\ImageUpload;
 use App\Http\Controllers\Controller;
-use App\Models\AboutPage;
 use App\Models\ApplyNow;
-use App\Models\Banner;
 use App\Models\CarrerCounselling;
-use App\Models\ContactInfo;
 use App\Models\ContactUs;
 use App\Models\CmsFaq;
 use App\Models\CmsFaqCategory;
@@ -17,7 +14,6 @@ use App\Models\Product;
 use App\Models\Service;
 use App\Models\Subscriber;
 use App\Models\TeamMember;
-use App\Models\Testimonial;
 use App\Services\Brands\BrandContextManager;
 use App\Services\Cms\CmsCourseReadService;
 use App\Services\Cms\CmsFeatureReadService;
@@ -31,11 +27,9 @@ class PageController extends Controller
 {
     public function index()
     {
-        $banner=Banner::first();
         $courses = OurCourse::where('status', 'Active')->get();
-        $testimonial=Testimonial::where('status','Active')->orderBy('created_at', 'asc')->get();
 
-        return view('frontend.pages.index',compact('testimonial','banner','courses'));
+        return view('frontend.pages.index',compact('courses'));
     }
 
     public function counselling(Request $request){

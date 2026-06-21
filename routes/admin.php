@@ -1,17 +1,13 @@
 <?php
 
 
-use App\Http\Controllers\Admin\About\AboutPageController;
-use App\Http\Controllers\Admin\Banner\BannerController;
 use App\Http\Controllers\Admin\Career\CareerController;
 use App\Http\Controllers\Admin\Cms\CmsController;
-use App\Http\Controllers\Admin\ContactInfo\ContactInfoController;
 use App\Http\Controllers\Admin\Product\ProductController;
 use App\Http\Controllers\Admin\Service\ServiceController;
 use App\Http\Controllers\Admin\SiteInformation\SiteInformationController;
 use App\Http\Controllers\Admin\Subscribers\SubscriberController;
 use App\Http\Controllers\Admin\Team\TeamMamebrController;
-use App\Http\Controllers\Admin\Testimonial\TestimonialController;
 use App\Http\Controllers\Course\CourseController;
 use Illuminate\Support\Facades\Route;
 
@@ -143,29 +139,7 @@ Route::group(['as' => 'admin::', 'prefix' => 'v1/cpanel/admin', 'middleware' => 
     });
     /*** CMS Admin UI End ***/
 
-    /*** Conatct Information Start ***/
-    Route::get('/contact',[ContactInfoController::class,'index'])->name('contact');
-    Route::get('/edit-contact/{id}',[ContactInfoController::class,'edit'])->name('edit_contact');
-    Route::post('/update-contact/{id}',[ContactInfoController::class,'update'])->name('update_contact_info');
-    Route::post('/status-contact',[ContactInfoController::class,'status'])->name('status_contact');
-    /*** Conatct Information End ***/
 
-    /*** Banner Start ***/
-    Route::get('/banner',[BannerController::class,'index'])->name('banner');
-    Route::get('/add-banner',[BannerController::class,'add'])->name('add_banner');
-    Route::post('/save-banner',[BannerController::class,'save'])->name('save_banner');
-    Route::get('/edit-banner/{id}',[BannerController::class,'edit'])->name('edit_banner');
-    Route::post('/update-banner/{id}',[BannerController::class,'update'])->name('update_banner');
-    Route::get('/delete-banner/{id}',[BannerController::class,'delete'])->name('delete_banner');
-    Route::post('/status-banner',[BannerController::class,'status'])->name('status_banner');
-    /*** Banner End ***/
-
-    /*** About Start ***/
-    Route::get('/about',[AboutPageController::class,'index'])->name('about');
-    Route::get('/edit-about/{id}',[AboutPageController::class,'edit'])->name('edit_about');
-    Route::post('/update-about/{id}',[AboutPageController::class,'update'])->name('update_about');
-    Route::post('/status-about',[AboutPageController::class,'status'])->name('status_about');
-    /*** About End ***/
 
     /*** Team Member Start ***/
     Route::get('/course',[CourseController::class,'index'])->name('course');
@@ -177,15 +151,7 @@ Route::group(['as' => 'admin::', 'prefix' => 'v1/cpanel/admin', 'middleware' => 
     Route::post('/status-course',[CourseController::class,'status'])->name('status_course');
     /*** Team Member End ***/
 
-    /*** Testimonials Start ***/
-    Route::get('/testimonials',[TestimonialController::class,'index'])->name('testimonials');
-    Route::get('/add-testimonial',[TestimonialController::class,'add'])->name('add_testimonial');
-    Route::post('/save-testimonial',[TestimonialController::class,'save'])->name('save_testimonial');
-    Route::get('/edit-testimonial/{id}',[TestimonialController::class,'edit'])->name('edit_testimonial');
-    Route::post('/update-testimonial/{id}',[TestimonialController::class,'update'])->name('update_testimonial');
-    Route::get('/delete-testimonial/{id}',[TestimonialController::class,'delete'])->name('delete_testimonial');
-    Route::post('/status-testimonial',[TestimonialController::class,'status'])->name('status_testimonial');
-    /*** Testimonials End ***/
+
 
 
 

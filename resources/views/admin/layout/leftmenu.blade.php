@@ -81,14 +81,6 @@
                     </a>
                 </li>
 
-                <li class="nav-item">
-                    <a href="{{ route('admin::banner') }}"
-                       class="nav-link
-                            @if (in_array($segment4, ['banner','add-banner','edit-banner'])) active @endif">
-                        <i class="fas fa-images nav-icon"></i>
-                        <p>Banner</p>
-                    </a>
-                </li>
 
                 <li class="nav-item">
                     <a href="{{ route('admin::course') }}"
@@ -99,14 +91,7 @@
                     </a>
                 </li>
 
-                <li class="nav-item">
-                    <a href="{{ route('admin::about') }}"
-                       class="nav-link
-                            @if (in_array($segment4, ['about','edit-about'])) active @endif">
-                        <i class="fas fa-info-circle nav-icon"></i>
-                        <p>About</p>
-                    </a>
-                </li>
+
 
                 <li class="nav-item">
                     <a href="{{ route('admin::user_detail') }}"
@@ -116,25 +101,7 @@
                     </a>
                 </li>
 
-                <li class="nav-item">
-                    <a href="{{ route('admin::testimonials') }}"
-                       class="nav-link
-                            @if (in_array($segment4, ['testimonials','add-testimonial','edit-testimonial'])  ||
-                                $segment5 == 'testimonial')
-                                active @endif">
-                        <i class="fas fa-quote-right nav-icon"></i>
-                        <p>Testimonials</p>
-                    </a>
-                </li>
 
-                <li class="nav-item">
-                    <a href="{{ route('admin::contact') }}"
-                       class="nav-link
-                            @if (in_array($segment4, ['contact','add-contact','edit-contact'])) active @endif">
-                        <i class="fas fa-address-card nav-icon"></i>
-                        <p>Contact Info</p>
-                    </a>
-                </li>
 
                 @if ($canViewCmsMenu)
                     <li class="nav-item has-treeview @if (request()->routeIs('admin::content.*')) menu-open @endif">
