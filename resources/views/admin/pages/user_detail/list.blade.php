@@ -40,8 +40,9 @@
 
                                         <th style="width:20%">Name</th>
                                         <th style="width:10%">phone</th>
-                                        <th style="width:40%">email</th>
-                                        <th style="width:40%">course</th>
+                                        <th style="width:25%">email</th>
+                                        <th style="width:25%">course</th>
+                                        <th style="width:20%">Submitted At</th>
 
                                         {{-- <th style="width:10%">Action</th> --}}
                                     </tr>
@@ -65,10 +66,10 @@
                                                 </td>
                                                 <td>
                                                     {{$helper->course($data['course_id'] ) }}
-
                                                 </td>
-
-
+                                                <td>
+                                                    {{ \Carbon\Carbon::parse($data['created_at'])->timezone('Asia/Kolkata')->format('d-m-Y h:i A') }}
+                                                </td>
                                             </tr>
                                         @endforeach
                                     @endif
@@ -81,6 +82,7 @@
                                         <th>phone</th>
                                         <th>email</th>
                                         <th>course</th>
+                                        <th>Submitted At</th>
                                         {{-- <th>Action</th> --}}
                                     </tr>
                                     </tfoot>

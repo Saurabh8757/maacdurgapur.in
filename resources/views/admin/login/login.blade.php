@@ -681,7 +681,7 @@
                             toastr.success(data.message);
                             setTimeout(function() {
                                 window.location.href = '{{route('admin::dashboard')}}';
-                            }, 600);
+                            }, 100);
                         }
                         if (data.status == 201) {
                             hideLoader();
@@ -689,9 +689,17 @@
                             toastr.error(data.message);
                         }
                     },
-                    error: function() {
+                    error: function(xhr) {
                         hideLoader();
                         btn.removeClass('loading').prop('disabled', false);
+                        if (xhr.status === 419) {
+                            toastr.warning('Session expired. Refreshing page...');
+                            setTimeout(function() {
+                                window.location.reload();
+                            }, 500);
+                        } else {
+                            toastr.error('A network error occurred. Please try again.');
+                        }
                     }
                 });
             });

@@ -13,8 +13,7 @@
     width: 100%;
     min-height: 100vh;
     overflow: hidden;
-    display: flex;
-    align-items: center;
+    display: block;
 }
 
 /* --- Hero Background Image --- */
@@ -57,7 +56,7 @@
     max-width: var(--container-w);
     width: 100%;
     margin: 0 auto;
-    padding: 100px 24px 60px;
+    padding: 150px 24px 80px;
 }
 
 /* ----------------------------------------------------------
@@ -219,31 +218,49 @@
 
 /* --- Student Enquiry Form Card --- */
 .maac-enquiry-form {
-    background: rgba(10, 10, 25, 0.85);
+    background: rgba(8, 10, 25, 0.4);
+    border: 1px solid rgba(138, 43, 226, 0.4);
+    border-radius: 12px;
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 20px;
-    padding: 30px 28px;
-    box-shadow: 0 0 50px rgba(255, 255, 255, 0.08);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5), inset 0 0 15px rgba(138, 43, 226, 0.05);
+    overflow: hidden;
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.maac-enquiry-form:hover {
+    transform: translateY(-5px);
+    border-color: rgba(138, 43, 226, 0.8);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.8), inset 0 0 25px rgba(138, 43, 226, 0.2);
 }
 
 /* Form Header */
 .enquiry-form-header {
+    background: transparent;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 15px 20px;
     text-align: center;
-    margin-bottom: 20px;
+    color: #fff;
+    position: relative;
+}
+
+.enquiry-form-body {
+    padding: 15px 20px 20px;
 }
 
 .enquiry-logo {
-    width: 60px;
-    height: 60px;
+    width: 45px;
+    height: 45px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 50%;
-    border: 1.5px solid rgba(255, 255, 255, 0.8);
-    margin: 0 auto 10px;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 12px;
+    margin: 0 auto 10px;
+    color: #fff;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    padding: 8px;
     box-sizing: border-box;
 }
 
@@ -302,10 +319,10 @@
     background: transparent;
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 10px;
-    padding: 12px 14px 12px 40px;
+    padding: 10px 14px 10px 40px;
     color: #ffffff;
     font-family: 'Nunito', sans-serif;
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     outline: none;
     transition: border-color var(--trans-base), box-shadow var(--trans-base);
     box-sizing: border-box;
@@ -331,14 +348,14 @@
     background: transparent;
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 10px;
-    padding: 12px 14px 12px 40px;
+    padding: 10px 14px 10px 40px;
     color: #ffffff;
     font-family: 'Nunito', sans-serif;
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     outline: none;
     transition: border-color var(--trans-base), box-shadow var(--trans-base);
     box-sizing: border-box;
-    min-height: 80px;
+    min-height: 60px;
     resize: vertical;
 }
 
@@ -389,14 +406,14 @@
 /* Submit Button — ENROLL NOW */
 .enquiry-submit {
     width: 100%;
-    padding: 14px;
+    padding: 10px;
     background: linear-gradient(to right, #fb5c6e, #fdb121);
     color: #ffffff;
     border: none;
     border-radius: 8px;
     font-family: 'Rajdhani', sans-serif;
     font-weight: 700;
-    font-size: 1.15rem;
+    font-size: 1rem;
     letter-spacing: 1px;
     text-transform: uppercase;
     cursor: pointer;
@@ -1207,7 +1224,7 @@
     .maac-hero-content {
         flex-direction: column;
         text-align: center;
-        padding-top: 90px;
+        padding-top: 160px;
         padding-bottom: 50px;
         gap: 30px;
     }
@@ -1285,7 +1302,7 @@
     }
 
     .maac-hero-content {
-        padding-top: 80px;
+        padding-top: 180px;
         padding-bottom: 40px;
         gap: 24px;
     }
@@ -1308,17 +1325,55 @@
     }
 
     .maac-hero-left {
-        margin-bottom: 20px;
+        margin-bottom: 30px !important;
+        width: 100%;
+        transform: none !important;
+    }
+
+    .maac-hero-right {
+        margin: 0 auto !important;
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        max-width: 400px;
     }
 
     /* Form */
     .maac-enquiry-form {
-        padding: 24px 20px;
+        width: 100%;
+        margin: 0 auto;
+        box-sizing: border-box;
         border-radius: 16px;
+        transform: none !important;
+    }
+
+    .enquiry-form-header {
+        padding: 12px;
+    }
+    .enquiry-form-body {
+        padding: 12px;
     }
 
     .enquiry-title {
-        font-size: 1.05rem;
+        font-size: 0.95rem;
+    }
+
+    .enquiry-field {
+        margin-bottom: 10px;
+    }
+
+    .enquiry-field input, .enquiry-field select, .enquiry-field textarea {
+        padding: 8px 12px 8px 35px;
+        font-size: 0.75rem;
+    }
+
+    .enquiry-field textarea {
+        min-height: 50px;
+    }
+
+    .enquiry-submit {
+        padding: 10px;
+        font-size: 0.9rem;
     }
 
     /* Sections — reduce padding */
@@ -1391,12 +1446,15 @@
 
     /* Hero */
     .maac-hero-content {
-        padding: 72px 14px 32px;
+        padding-top: 180px;
+        padding-bottom: 32px;
+        padding-left: 14px;
+        padding-right: 14px;
         gap: 20px;
     }
 
     .maac-hero-heading .line1 {
-        font-size: 1.5rem;
+        font-size: 2rem;
     }
 
     .maac-hero-heading .passion {

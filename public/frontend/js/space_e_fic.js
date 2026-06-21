@@ -1,68 +1,63 @@
-(function () {
-  'use strict';
+document.addEventListener('DOMContentLoaded', () => {
+    
+    // Check if GSAP is loaded
+    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+        gsap.registerPlugin(ScrollTrigger);
 
-  var page = document.querySelector('.sef-page');
-  if (!page) return;
+        // Premium Subtle Fade Up Reveal
+        const revealElements = document.querySelectorAll('.gsap-reveal');
+        
+        revealElements.forEach((el) => {
+            gsap.fromTo(el, 
+                { 
+                    y: 40, 
+                    opacity: 0 
+                },
+                {
+                    scrollTrigger: {
+                        trigger: el,
+                        start: "top 85%", // Triggers slightly before element comes into full view
+                        toggleActions: "play none none reverse"
+                    },
+                    y: 0,
+                    opacity: 1,
+                    duration: 1,
+                    ease: "power2.out"
+                }
+            );
+        });
 
-  page.classList.add('sef-js');
+        // Staggered reveal for grid cards (Projects, Info, Locations)
+        const grids = [
+            '.sef-info-grid', 
+            '.sef-showcase-grid', 
+            '.sef-locations-grid'
+        ];
 
-  var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var revealItems = page.querySelectorAll('.sef-reveal');
+        grids.forEach(gridSelector => {
+            const grid = document.querySelector(gridSelector);
+            if(grid) {
+                const cards = grid.children;
+                gsap.fromTo(cards, 
+                    {
+                        y: 30,
+                        opacity: 0
+                    },
+                    {
+                        scrollTrigger: {
+                            trigger: grid,
+                            start: "top 85%",
+                            toggleActions: "play none none reverse"
+                        },
+                        y: 0,
+                        opacity: 1,
+                        duration: 0.8,
+                        stagger: 0.15,
+                        ease: "power2.out"
+                    }
+                );
+            }
+        });
+    }
 
-  if (reducedMotion || !('IntersectionObserver' in window)) {
-    revealItems.forEach(function (item) { item.classList.add('is-visible'); });
-  } else {
-    var observer = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (!entry.isIntersecting) return;
-        entry.target.classList.add('is-visible');
-        observer.unobserve(entry.target);
-      });
-    }, { threshold: 0.12, rootMargin: '0px 0px -40px' });
-
-    revealItems.forEach(function (item, index) {
-      item.style.transitionDelay = Math.min(index % 4, 3) * 65 + 'ms';
-      observer.observe(item);
-    });
-  }
-
-  var tabs = Array.prototype.slice.call(page.querySelectorAll('.sef-track-tab'));
-  var panels = Array.prototype.slice.call(page.querySelectorAll('.sef-track-panel'));
-
-  function selectTrack(tab) {
-    var track = tab.getAttribute('data-track');
-
-    tabs.forEach(function (item) {
-      var active = item === tab;
-      item.classList.toggle('is-active', active);
-      item.setAttribute('aria-selected', active ? 'true' : 'false');
-      item.setAttribute('tabindex', active ? '0' : '-1');
-    });
-
-    panels.forEach(function (panel) {
-      var active = panel.getAttribute('data-panel') === track;
-      panel.classList.toggle('is-active', active);
-      panel.hidden = !active;
-    });
-  }
-
-  tabs.forEach(function (tab, index) {
-    tab.addEventListener('click', function () { selectTrack(tab); });
-    tab.addEventListener('keydown', function (event) {
-      if (event.key !== 'ArrowRight' && event.key !== 'ArrowLeft' && event.key !== 'ArrowDown' && event.key !== 'ArrowUp') return;
-      event.preventDefault();
-      var direction = event.key === 'ArrowRight' || event.key === 'ArrowDown' ? 1 : -1;
-      var next = tabs[(index + direction + tabs.length) % tabs.length];
-      selectTrack(next);
-      next.focus();
-    });
-  });
-
-  if (!reducedMotion) {
-    var heroMedia = page.querySelector('.sef-hero-media img');
-    window.addEventListener('scroll', function () {
-      if (!heroMedia || window.scrollY > window.innerHeight) return;
-      heroMedia.style.transform = 'translate3d(0,' + (window.scrollY * 0.08) + 'px,0) scale(1.02)';
-    }, { passive: true });
-  }
-})();
+});

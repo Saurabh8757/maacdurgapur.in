@@ -150,9 +150,9 @@ class CourseController extends Controller
     }
     
     
-     public function usersDetails()
+    public function usersDetails()
     {
-        $users = CarrerCounselling::all();
+        $users = CarrerCounselling::latest()->get();
         return view('admin.pages.user_detail.list', compact('users'));
     }
 }

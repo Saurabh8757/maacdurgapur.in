@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -7,13 +7,13 @@
 <title>MAAC Durgapur – West Bengal's #1 Animation, VFX & AI Creative Institute</title>
 <meta name="description" content="MAAC Durgapur is West Bengal's leading Animation, VFX, Gaming, Graphic Design & AI Creative Institute. Industry-focused training, expert mentorship, modern studios and 100% placement support near City Centre, Durgapur.">
 <meta name="robots" content="index, follow">
-<link rel="canonical" href="{{ url('/') }}">
+<link rel="canonical" href="{{ url()->current() }}">
 <!-- Open Graph -->
 <meta property="og:type" content="website">
 <meta property="og:title" content="MAAC Durgapur – West Bengal's #1 Animation, VFX & AI Creative Institute">
 <meta property="og:description" content="Learn Animation, VFX, Gaming, Graphic Design & AI at MAAC Durgapur. Industry-focused training with 100% placement support.">
 <meta property="og:image" content="{{ asset('frontend/images/pg-01.webp') }}">
-<meta property="og:url" content="{{ url('/') }}">
+<meta property="og:url" content="{{ url()->current() }}">
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="MAAC Durgapur – West Bengal's #1 Animation, VFX & AI Institute">
