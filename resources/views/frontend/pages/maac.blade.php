@@ -218,13 +218,11 @@
       <div class="swiper-wrapper">
         @foreach($cmsCourses as $course)
         <div class="swiper-slide maac-course-card">
+          @if($course->thumbnail)
           <div class="course-card-icon-wrap">
-            @if($course->thumbnail)
-                <img loading="lazy" src="{{ asset($course->thumbnail->storage_key) }}" alt="{{ $course->title }}" class="course-card-icon">
-            @else
-                <img loading="lazy" src="{{ asset('frontend/images/maac/icons/100.png') }}" alt="{{ $course->title }}" class="course-card-icon">
-            @endif
+            <img loading="lazy" src="{{ asset($course->thumbnail->storage_key) }}" alt="{{ $course->title }}" class="course-card-icon">
           </div>
+          @endif
           <h3 class="course-card-title">{!! nl2br(e($course->title)) !!}</h3>
           <p class="course-card-text">{!! nl2br(e($course->description)) !!}</p>
           @if($course->tools_covered && is_array($course->tools_covered) && count($course->tools_covered) > 0)

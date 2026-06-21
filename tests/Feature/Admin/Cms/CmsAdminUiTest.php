@@ -36,7 +36,7 @@ class CmsAdminUiTest extends TestCase
         parent::tearDown();
     }
 
-    public function test_ui_route_inventory_is_get_only_and_api_routes_are_unchanged(): void
+    public function test_ui_route_inventory_and_api_routes_are_registered(): void
     {
         $routes = $this->app['router']->getRoutes();
         $uiNames = [
@@ -49,6 +49,9 @@ class CmsAdminUiTest extends TestCase
             'admin::content.features.index',
             'admin::content.features.create',
             'admin::content.features.edit',
+            'admin::content.showcase-categories.index',
+            'admin::content.showcase-categories.create',
+            'admin::content.showcase-categories.edit',
             'admin::content.showcase.index',
             'admin::content.showcase.create',
             'admin::content.showcase.edit',
@@ -65,6 +68,17 @@ class CmsAdminUiTest extends TestCase
             $this->assertContains('AdminMiddleware', $route->gatherMiddleware());
         }
 
+        foreach ([
+            'admin::content.showcase-categories.store' => ['POST'],
+            'admin::content.showcase-categories.update' => ['PUT'],
+            'admin::content.showcase-categories.destroy' => ['DELETE'],
+        ] as $name => $methods) {
+            $route = $routes->getByName($name);
+            $this->assertNotNull($route, $name);
+            $this->assertSame($methods, array_values(array_diff($route->methods(), ['HEAD'])));
+            $this->assertContains('AdminMiddleware', $route->gatherMiddleware());
+        }
+
         $apiRoutes = collect($routes->getRoutes())->filter(
             static fn ($route) => str_starts_with(
                 $route->uri(),
@@ -72,7 +86,13 @@ class CmsAdminUiTest extends TestCase
             )
         );
 
-        $this->assertCount(25, $apiRoutes);
+        $this->assertCount(26, $apiRoutes);
+
+        $mediaUploadRoute = $routes->getByName('admin::cms.showcase_media.store');
+        $this->assertNotNull($mediaUploadRoute);
+        $this->assertSame(['POST'], $mediaUploadRoute->methods());
+        $this->assertContains('AdminMiddleware', $mediaUploadRoute->gatherMiddleware());
+
     }
 
     public function test_authorized_admin_can_render_all_cms_screens_and_sidebar_group(): void
@@ -92,6 +112,9 @@ class CmsAdminUiTest extends TestCase
             ['admin::content.features.index', [], 'Features'],
             ['admin::content.features.create', [], 'Create Feature'],
             ['admin::content.features.edit', ['feature' => 103], 'Edit Feature'],
+            ['admin::content.showcase-categories.index', [], 'Showcase Categories'],
+            ['admin::content.showcase-categories.create', [], 'Create Showcase Category'],
+            ['admin::content.showcase-categories.edit', ['category' => 202], 'Edit Showcase Category'],
             ['admin::content.showcase.index', [], 'Showcase'],
             ['admin::content.showcase.create', [], 'Create Showcase Project'],
             ['admin::content.showcase.edit', ['showcase' => 104], 'Edit Showcase Project'],
@@ -104,6 +127,14 @@ class CmsAdminUiTest extends TestCase
                 ->assertOk()
                 ->assertSee($text);
         }
+
+        $this->actingAs($user)
+            ->withHeader('Host', 'localhost')
+            ->get(route('admin::content.showcase.create', [], false))
+            ->assertOk()
+            ->assertSee('Animation')
+            ->assertSee('Thumbnail image')
+            ->assertSee('Project Link');
     }
 
     public function test_page_access_is_denied_by_cms_authorization_service(): void
@@ -202,9 +233,12 @@ class CmsAdminUiTest extends TestCase
 
         $showcaseCategory = new CmsShowcaseCategory([
             'name' => 'Animation',
+            'slug' => 'animation',
             'status' => 'active',
+            'sort_order' => 1,
         ]);
         $showcaseCategory->id = 202;
+        $showcaseCategory->projects_count = 1;
         $project = new CmsShowcaseProject([
             'title' => 'Sample project',
             'slug' => 'sample-project',
@@ -233,5 +267,6 @@ class CmsAdminUiTest extends TestCase
         $showcaseRead->shouldReceive('getProjectsAdmin')->andReturn(new Collection([$project]));
         $showcaseRead->shouldReceive('getCategoriesAdmin')->andReturn(new Collection([$showcaseCategory]));
         $this->app->instance(CmsShowcaseReadService::class, $showcaseRead);
+
     }
 }

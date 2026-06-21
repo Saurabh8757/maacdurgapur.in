@@ -34,7 +34,10 @@ class CmsShowcaseCategoryRequest extends FormRequest
     public function rules(BrandContextManager $brandContextManager): array
     {
         $brandId = $brandContextManager->requireAdminContext()->brand()->getKey();
-        $categoryId = $this->route('showcase_category') ? $this->route('showcase_category')->id : 'NULL';
+        $category = $this->route('showcase_category') ?? $this->route('category');
+        $categoryId = $category instanceof \App\Models\CmsShowcaseCategory
+            ? $category->getKey()
+            : ($category ?: 'NULL');
 
         return [
             'name' => 'required|string|max:255',

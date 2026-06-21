@@ -159,7 +159,6 @@
                                 'faqs' => ['label' => 'FAQs', 'icon' => 'fa-question-circle'],
                                 'courses' => ['label' => 'Courses', 'icon' => 'fa-graduation-cap'],
                                 'features' => ['label' => 'Features', 'icon' => 'fa-star'],
-                                'showcase' => ['label' => 'Showcase', 'icon' => 'fa-images'],
                             ] as $module => $menu)
                                 @if ($cmsMenuPermissions[$module])
                                     <li class="nav-item">
@@ -171,6 +170,22 @@
                                     </li>
                                 @endif
                             @endforeach
+                            @if ($cmsMenuPermissions['showcase'])
+                                <li class="nav-item">
+                                    <a href="{{ route('admin::content.showcase-categories.index') }}"
+                                       class="nav-link @if (request()->routeIs('admin::content.showcase-categories.*')) active @endif">
+                                        <i class="fas fa-folder-open nav-icon"></i>
+                                        <p>Showcase Categories</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('admin::content.showcase.index') }}"
+                                       class="nav-link @if (request()->routeIs('admin::content.showcase.*')) active @endif">
+                                        <i class="fas fa-images nav-icon"></i>
+                                        <p>Showcase</p>
+                                    </a>
+                                </li>
+                            @endif
                         </ul>
                     </li>
                 @endif

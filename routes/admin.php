@@ -26,7 +26,9 @@ use App\Http\Controllers\Admin\Cms\Pages\CmsCoursePageController;
 use App\Http\Controllers\Admin\Cms\Pages\CmsFaqCategoryPageController;
 use App\Http\Controllers\Admin\Cms\Pages\CmsFaqPageController;
 use App\Http\Controllers\Admin\Cms\Pages\CmsFeaturePageController;
+use App\Http\Controllers\Admin\Cms\Pages\CmsShowcaseCategoryPageController;
 use App\Http\Controllers\Admin\Cms\Pages\CmsShowcasePageController;
+use App\Http\Controllers\Admin\Cms\CmsShowcaseMediaController;
 use App\Http\Middleware\ResolveAdminBrandContext;
 
 
@@ -100,8 +102,12 @@ Route::group(['as' => 'admin::', 'prefix' => 'v1/cpanel/admin', 'middleware' => 
             ->except('show')
             ->names('admin::cms.showcase_projects');
 
+        Route::post('showcase-media', [CmsShowcaseMediaController::class, 'store'])
+            ->name('cms.showcase_media.store');
+
         Route::patch('showcase-projects/{showcase_project}/publish', [\App\Http\Controllers\Admin\Cms\CmsShowcaseProjectController::class, 'publish'])
             ->name('admin::cms.showcase_projects.publish');
+
     });
     /*** CMS FAQ End ***/
 
@@ -123,9 +129,17 @@ Route::group(['as' => 'admin::', 'prefix' => 'v1/cpanel/admin', 'middleware' => 
         Route::get('features/create', [CmsFeaturePageController::class, 'create'])->name('features.create');
         Route::get('features/{feature}/edit', [CmsFeaturePageController::class, 'edit'])->name('features.edit');
 
+        Route::get('showcase-categories', [CmsShowcaseCategoryPageController::class, 'index'])->name('showcase-categories.index');
+        Route::get('showcase-categories/create', [CmsShowcaseCategoryPageController::class, 'create'])->name('showcase-categories.create');
+        Route::post('showcase-categories', [CmsShowcaseCategoryPageController::class, 'store'])->name('showcase-categories.store');
+        Route::get('showcase-categories/{category}/edit', [CmsShowcaseCategoryPageController::class, 'edit'])->name('showcase-categories.edit');
+        Route::put('showcase-categories/{category}', [CmsShowcaseCategoryPageController::class, 'update'])->name('showcase-categories.update');
+        Route::delete('showcase-categories/{category}', [CmsShowcaseCategoryPageController::class, 'destroy'])->name('showcase-categories.destroy');
+
         Route::get('showcase', [CmsShowcasePageController::class, 'index'])->name('showcase.index');
         Route::get('showcase/create', [CmsShowcasePageController::class, 'create'])->name('showcase.create');
         Route::get('showcase/{showcase}/edit', [CmsShowcasePageController::class, 'edit'])->name('showcase.edit');
+
     });
     /*** CMS Admin UI End ***/
 

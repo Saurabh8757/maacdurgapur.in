@@ -40,6 +40,27 @@ class PermissionSeeder extends Seeder
             ['media.assets.manage_shared', 'media', 'manage_shared', 'global', 'critical'],
             ['media.private.view', 'media', 'view_private', 'either', 'high'],
             ['media.private.download', 'media', 'download_private', 'either', 'critical'],
+
+            ['cms.faqs.view', 'cms', 'view', 'brand', 'low'],
+            ['cms.faqs.create', 'cms', 'create', 'brand', 'medium'],
+            ['cms.faqs.edit', 'cms', 'edit', 'brand', 'medium'],
+            ['cms.faqs.delete', 'cms', 'delete', 'brand', 'high'],
+
+            ['cms.courses.view', 'cms', 'view', 'brand', 'low'],
+            ['cms.courses.create', 'cms', 'create', 'brand', 'medium'],
+            ['cms.courses.edit', 'cms', 'edit', 'brand', 'medium'],
+            ['cms.courses.delete', 'cms', 'delete', 'brand', 'high'],
+
+            ['cms.features.view', 'cms', 'view', 'brand', 'low'],
+            ['cms.features.create', 'cms', 'create', 'brand', 'medium'],
+            ['cms.features.edit', 'cms', 'edit', 'brand', 'medium'],
+            ['cms.features.delete', 'cms', 'delete', 'brand', 'high'],
+
+            ['cms.showcase.view', 'cms', 'view', 'brand', 'low'],
+            ['cms.showcase.create', 'cms', 'create', 'brand', 'medium'],
+            ['cms.showcase.edit', 'cms', 'edit', 'brand', 'medium'],
+            ['cms.showcase.delete', 'cms', 'delete', 'brand', 'high'],
+            ['cms.showcase.publish', 'cms', 'publish', 'brand', 'high'],
         ];
 
         foreach ($permissions as [$code, $domain, $action, $scopeType, $riskLevel]) {

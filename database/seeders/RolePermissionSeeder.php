@@ -5,6 +5,9 @@ namespace Database\Seeders;
 use App\Models\Permission;
 use App\Models\Role;
 use App\Models\RolePermission;
+use App\Models\Brand;
+use App\Models\User;
+use App\Models\UserRole;
 use Illuminate\Database\Seeder;
 use RuntimeException;
 
@@ -35,6 +38,23 @@ class RolePermissionSeeder extends Seeder
                 'media.assets.replace',
                 'media.assets.archive',
                 'media.assets.restore',
+                'cms.faqs.view',
+                'cms.faqs.create',
+                'cms.faqs.edit',
+                'cms.faqs.delete',
+                'cms.courses.view',
+                'cms.courses.create',
+                'cms.courses.edit',
+                'cms.courses.delete',
+                'cms.features.view',
+                'cms.features.create',
+                'cms.features.edit',
+                'cms.features.delete',
+                'cms.showcase.view',
+                'cms.showcase.create',
+                'cms.showcase.edit',
+                'cms.showcase.delete',
+                'cms.showcase.publish',
             ],
             'content_manager' => [
                 'brands.view',
@@ -43,6 +63,23 @@ class RolePermissionSeeder extends Seeder
                 'settings.brand.submit',
                 'media.assets.view',
                 'media.assets.attach',
+                'cms.faqs.view',
+                'cms.faqs.create',
+                'cms.faqs.edit',
+                'cms.faqs.delete',
+                'cms.courses.view',
+                'cms.courses.create',
+                'cms.courses.edit',
+                'cms.courses.delete',
+                'cms.features.view',
+                'cms.features.create',
+                'cms.features.edit',
+                'cms.features.delete',
+                'cms.showcase.view',
+                'cms.showcase.create',
+                'cms.showcase.edit',
+                'cms.showcase.delete',
+                'cms.showcase.publish',
             ],
             'content_editor' => [
                 'brands.view',
@@ -50,6 +87,18 @@ class RolePermissionSeeder extends Seeder
                 'settings.brand.edit',
                 'media.assets.view',
                 'media.assets.attach',
+                'cms.faqs.view',
+                'cms.faqs.create',
+                'cms.faqs.edit',
+                'cms.courses.view',
+                'cms.courses.create',
+                'cms.courses.edit',
+                'cms.features.view',
+                'cms.features.create',
+                'cms.features.edit',
+                'cms.showcase.view',
+                'cms.showcase.create',
+                'cms.showcase.edit',
             ],
             'media_manager' => [
                 'brands.view',
@@ -125,6 +174,27 @@ class RolePermissionSeeder extends Seeder
                     ]
                 );
             }
+        }
+
+        $brandAdmin = $roles->get('brand_admin');
+        $maac = Brand::where('code', 'maac')->first();
+
+        if ($brandAdmin && $maac) {
+            User::where('user_type', 'Admin')->each(function (User $user) use ($brandAdmin, $maac): void {
+                UserRole::firstOrCreate(
+                    [
+                        'user_id' => $user->getKey(),
+                        'role_id' => $brandAdmin->getKey(),
+                        'scope_key' => 'brand:'.$maac->uuid,
+                        'status' => 'active',
+                    ],
+                    [
+                        'brand_id' => $maac->getKey(),
+                        'assigned_by' => $user->getKey(),
+                        'reason' => 'Bootstrap admin access',
+                    ]
+                );
+            });
         }
     }
 }

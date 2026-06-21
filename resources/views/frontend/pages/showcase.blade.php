@@ -26,24 +26,16 @@
     <div class="showcase-container">
         <div class="showcase-grid" id="showcaseGrid">
             @forelse($showcaseProjects as $project)
+                @if($project->video_url)
+                <a class="showcase-card" data-category="{{ $project->category->slug }}" href="{{ $project->video_url }}" target="_blank" rel="noopener noreferrer" style="text-decoration:none; color:inherit;">
+                @else
                 <div class="showcase-card" data-category="{{ $project->category->slug }}">
+                @endif
+                    @if($project->thumbnail)
                     <div class="showcase-card-image-wrap">
-                        @if($project->thumbnail)
-                            <img src="{{ asset($project->thumbnail->storage_key) }}" alt="{{ $project->title }}" class="showcase-card-image" loading="lazy">
-                        @else
-                            <div style="background: #1f2937; width: 100%; height: 100%; display:flex; align-items:center; justify-content:center;">
-                                <span style="color:#6b7280;">No Thumbnail</span>
-                            </div>
-                        @endif
-                        
-                        @if($project->video_url)
-                        <div class="showcase-play-btn">
-                            <a href="{{ $project->video_url }}" target="_blank" class="showcase-play-icon" style="display: flex; align-items: center; justify-content: center; width: 100%; height: 100%;">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="#0073e6" stroke="none"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
-                            </a>
-                        </div>
-                        @endif
+                        <img src="{{ asset($project->thumbnail->storage_key) }}" alt="{{ $project->title }}" class="showcase-card-image" loading="lazy">
                     </div>
+                    @endif
                     <div class="showcase-card-content">
                         <div class="showcase-student-info">
                             <h3 class="showcase-student-name">{{ $project->student_name }}</h3>
@@ -52,7 +44,11 @@
                         <h4 style="color: #fff; margin: 0 0 10px 0; font-size: 1.1rem; font-weight: 500;">{{ $project->title }}</h4>
                         <p class="showcase-description">{{ $project->short_description }}</p>
                     </div>
+                @if($project->video_url)
+                </a>
+                @else
                 </div>
+                @endif
             @empty
                 <div class="premium-empty-state" style="grid-column: 1 / -1; background: linear-gradient(145deg, #1f2937, #111827); padding: 4rem 2rem; border-radius: 16px; text-align: center; border: 1px solid rgba(255,255,255,0.05); box-shadow: 0 20px 40px rgba(0,0,0,0.4);">
                     <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#4b5563" stroke-width="1.5" style="margin-bottom: 1.5rem;">

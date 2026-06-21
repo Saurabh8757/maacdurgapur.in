@@ -17,7 +17,8 @@ class CmsShowcaseReadService
     {
         $brandId = $this->brandContextManager->requireAdminContext()->brand()->getKey();
         
-        return CmsShowcaseCategory::where('brand_id', $brandId)
+        return CmsShowcaseCategory::withCount('projects')
+            ->where('brand_id', $brandId)
             ->orderBy('sort_order', 'asc')
             ->orderBy('id', 'asc')
             ->get();
