@@ -27,14 +27,15 @@
     <textarea class="form-control" id="short_description" name="short_description" rows="6">{{ old('short_description', optional($project ?? null)->short_description) }}</textarea>
 </div>
 <div class="row">
-    <div class="col-md-4 form-group">
+    <div class="col-md-6 form-group">
         <label for="thumbnail_media_id">Thumbnail media ID</label>
         <input class="form-control" type="number" min="1" id="thumbnail_media_id" name="thumbnail_media_id" value="{{ old('thumbnail_media_id', optional($project ?? null)->thumbnail_media_id) }}">
         <div class="cms-help mt-1">Optional. Uses an existing media asset.</div>
     </div>
-    <div class="col-md-8 form-group">
-        <label for="video_url">Video URL</label>
-        <input class="form-control" type="url" id="video_url" name="video_url" value="{{ old('video_url', optional($project ?? null)->video_url) }}">
+    <div class="col-md-6 form-group">
+        <label for="software_icon_media_id">Software Icon media ID</label>
+        <input class="form-control" type="number" min="1" id="software_icon_media_id" name="software_icon_media_id" value="{{ old('software_icon_media_id', optional($project ?? null)->software_icon_media_id) }}">
+        <div class="cms-help mt-1">Optional. Uses an existing media asset.</div>
     </div>
 </div>
 <div class="row">

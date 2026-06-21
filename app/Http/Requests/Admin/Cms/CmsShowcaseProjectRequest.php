@@ -62,7 +62,25 @@ class CmsShowcaseProjectRequest extends FormRequest
                     }
                 }
             ],
-            'video_url' => 'nullable|url|max:500',
+            'software_icon_media_id' => [
+                'nullable',
+                'exists:media_assets,id',
+                function ($attribute, $value, $fail) use ($brandId) {
+                    if ($value) {
+                        $media = MediaAsset::find($value);
+                        if (!$media) {
+                            $fail('The selected media asset is invalid.');
+                            return;
+                        }
+                        if ($media->status !== 'active' && $media->status !== 'published') {
+                            $fail('The selected media asset is not active.');
+                        }
+                        if ($media->brand_id !== null && $media->brand_id !== $brandId) {
+                            $fail('The selected media asset is not accessible in the current brand context.');
+                        }
+                    }
+                }
+            ],
             'status' => 'required|in:draft,published',
             'sort_order' => 'integer|min:0'
         ];

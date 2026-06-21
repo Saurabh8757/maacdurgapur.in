@@ -19,6 +19,7 @@ class CmsShowcaseProject extends Model
         'student_name',
         'short_description',
         'thumbnail_media_id',
+        'software_icon_media_id',
         'video_url',
         'status',
         'sort_order'
@@ -37,5 +38,10 @@ class CmsShowcaseProject extends Model
     public function thumbnail(): BelongsTo
     {
         return $this->belongsTo(MediaAsset::class, 'thumbnail_media_id');
+    }
+
+    public function softwareIcon(): BelongsTo
+    {
+        return $this->belongsTo(MediaAsset::class, 'software_icon_media_id');
     }
 }

@@ -1,0 +1,34 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::table('cms_showcase_projects', function (Blueprint $table) {
+            $table->unsignedBigInteger('software_icon_media_id')->nullable()->after('thumbnail_media_id');
+            $table->foreign('software_icon_media_id')->references('id')->on('media_assets')->nullOnDelete();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::table('cms_showcase_projects', function (Blueprint $table) {
+            $table->dropForeign(['software_icon_media_id']);
+            $table->dropColumn('software_icon_media_id');
+        });
+    }
+};

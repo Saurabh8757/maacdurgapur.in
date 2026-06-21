@@ -1,7 +1,7 @@
 @extends('frontend.layout.app')
 
 @section('custom_css')
-<link rel="stylesheet" href="{{ asset('frontend/css/showcase.css') }}">
+<link rel="stylesheet" href="{{ asset('frontend/css/showcase.css') }}?v={{ time() }}">
 @endsection
 
 @section('content')
@@ -25,76 +25,93 @@
     </div>
 </section>
 
-<!-- Showcase Split Section -->
-<section class="showcase-split-section">
-    <div class="showcase-split-container">
-        <!-- Left Panel: Project Navigator -->
-        <div class="showcase-left-pane">
-            <div class="showcase-list" id="showcaseList">
-                @forelse($showcaseProjects as $index => $project)
-                    @php
-                        $thumbUrl = $project->thumbnail ? asset($project->thumbnail->storage_key) : '';
-                        $initials = collect(explode(' ', $project->student_name))->map(fn($n) => substr($n, 0, 1))->take(2)->implode('');
-                        $formattedIndex = sprintf('%02d', $index + 1);
-                    @endphp
-                    <div class="showcase-list-item" 
-                         data-index="{{ $formattedIndex }}"
-                         data-category="{{ $project->category->slug }}"
-                         data-title="{{ $project->title }}"
-                         data-student="{{ $project->student_name }}"
-                         data-category-name="{{ $project->category->name }}"
-                         data-desc="{{ $project->short_description }}"
-                         data-video="{{ $project->video_url }}"
-                         data-thumb="{{ $thumbUrl }}">
-                        
-                        <div class="sl-avatar">{{ strtoupper($initials) }}</div>
-                        <span class="sl-number">{{ $formattedIndex }}</span>
-                        <div class="sl-info">
-                            <span class="sl-student">{{ $project->student_name }}</span>
-                            <span class="sl-title">{{ Str::limit($project->title, 40) }}</span>
-                        </div>
-                    </div>
-                @empty
-                    <div class="premium-empty-state">
-                        <p>No projects available right now.</p>
-                    </div>
-                @endforelse
-            </div>
-        </div>
-
-        <!-- Right Panel: Project Preview -->
-        <div class="showcase-right-pane" id="showcasePreviewPane">
-            <div class="sr-large-number" id="srLargeNumber">01</div>
-            <div class="sr-hero-bg" id="srHeroBg">
-                <div class="sr-hero-overlay"></div>
-            </div>
+<!-- Showcase Portfolio Redesign -->
+<section class="showcase-portfolio-section">
+    <div class="container">
+        
+        <!-- ONE MASTER CARD WRAPPING EVERYTHING -->
+        <div class="showcase-master-card">
             
-            <div class="sr-content">
-                <div class="sr-glass-panel">
-                    <div class="sr-header">
-                        <span class="sr-category" id="srCategory">Category</span>
-                        <h2 class="sr-title" id="srTitle">Project Title</h2>
-                        <h3 class="sr-student" id="srStudent">Student Name</h3>
+            <!-- Top Featured Area -->
+            <div class="featured-area">
+                <div class="featured-header">
+                    <div class="fh-icon">
+                        <svg viewBox="0 0 24 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 30L2 24V4C2 2.89543 2.89543 2 4 2H20C21.1046 2 22 2.89543 22 4V24L12 30Z" stroke="#F59E0B" stroke-width="2"/>
+                            <path d="M12 8V18" stroke="#F59E0B" stroke-width="4" stroke-linecap="round"/>
+                        </svg>
                     </div>
-                    
-                    <div class="sr-body">
-                        <p class="sr-desc" id="srDesc">Project description goes here...</p>
+                    <h2 class="fh-title">FEATURED STUDENT WORK</h2>
+                </div>
+                
+                <div class="featured-content">
+                    <div class="fc-image-wrap">
+                        <img id="fcImage" src="" alt="Featured Project">
+                    </div>
+                    <div class="fc-details">
+                        <h3 class="fc-title" id="fcTitle">Project Title</h3>
+                        <span class="fc-category" id="fcCategory">Category</span>
                         
-                        <div class="sr-tags" id="srTags">
-                            <!-- Tags will be injected here dynamically -->
+                        <div class="fc-student">
+                            <span class="fc-crafted">Crafted by</span>
+                            <span class="fc-name" id="fcStudent">"Student Name"</span>
                         </div>
                         
-                        <div class="sr-actions">
-                            <a href="#" target="_blank" rel="noopener noreferrer" class="sr-btn" id="srVideoBtn">
-                                View Project 
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
-                            </a>
-                            <span class="sr-btn disabled" id="srNoVideoBtn" style="display:none;">Coming Soon</span>
+                        <p class="fc-desc" id="fcDesc">Description...</p>
+                        
+                        <div class="fc-software-wrap">
+                            <span class="fc-software-label" id="fcSoftwareLabel" style="display:none;">Software Used</span>
+                            <img id="fcSoftwareIcon" class="fc-software-icon" src="" alt="Software Icon" style="display:none;">
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+
+            <!-- Bottom Slider Area -->
+            <div class="slider-area">
+                <h3 class="sa-title">STUDENTS PROJECTS</h3>
+                
+                <div class="slider-container-wrap">
+                    <div class="swiper-button-prev showcase-prev">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+                    </div>
+                    
+                    <div class="swiper showcase-swiper" id="showcaseSwiper">
+                        <div class="swiper-wrapper" id="showcaseList">
+                            @forelse($showcaseProjects as $index => $project)
+                                @php
+                                    $thumbUrl = $project->thumbnail ? asset($project->thumbnail->storage_key) : asset('frontend/images/placeholder.jpg');
+                                    $iconUrl = $project->softwareIcon ? asset($project->softwareIcon->storage_key) : '';
+                                    $formattedIndex = sprintf('%02d', $index + 1);
+                                @endphp
+                                <div class="swiper-slide showcase-slide" 
+                                     data-index="{{ $formattedIndex }}"
+                                     data-category="{{ $project->category->slug }}"
+                                     data-title="{{ $project->title }}"
+                                     data-student="{{ $project->student_name }}"
+                                     data-category-name="{{ $project->category->name }}"
+                                     data-desc="{{ $project->short_description }}"
+                                     data-icon="{{ $iconUrl }}"
+                                     data-thumb="{{ $thumbUrl }}">
+                                    <img src="{{ $thumbUrl }}" alt="{{ $project->title }}">
+                                    <div class="slide-overlay"></div>
+                                </div>
+                            @empty
+                                <div class="swiper-slide showcase-slide empty">
+                                    <p>No projects available right now.</p>
+                                </div>
+                            @endforelse
+                        </div>
+                    </div>
+                    
+                    <div class="swiper-button-next showcase-next">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+                    </div>
+                </div>
+            </div>
+            
+        </div> <!-- End Master Card -->
+        
     </div>
 </section>
 @endsection
@@ -103,88 +120,119 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    const listItems = document.querySelectorAll('.showcase-list-item');
     const filterBtns = document.querySelectorAll('.showcase-filter-btn');
     
     // DOM Elements for Preview
-    const srHeroBg = document.getElementById('srHeroBg');
-    const srLargeNumber = document.getElementById('srLargeNumber');
-    const srCategory = document.getElementById('srCategory');
-    const srTitle = document.getElementById('srTitle');
-    const srStudent = document.getElementById('srStudent');
-    const srDesc = document.getElementById('srDesc');
-    const srTags = document.getElementById('srTags');
-    const srVideoBtn = document.getElementById('srVideoBtn');
-    const srNoVideoBtn = document.getElementById('srNoVideoBtn');
-    const srGlassPanel = document.querySelector('.sr-glass-panel');
+    const fcImage = document.getElementById('fcImage');
+    const fcTitle = document.getElementById('fcTitle');
+    const fcCategory = document.getElementById('fcCategory');
+    const fcStudent = document.getElementById('fcStudent');
+    const fcDesc = document.getElementById('fcDesc');
+    const fcSoftwareIcon = document.getElementById('fcSoftwareIcon');
+    const fcSoftwareLabel = document.getElementById('fcSoftwareLabel');
+    const fcDetails = document.querySelector('.fc-details');
     
     let isAnimating = false;
+    let swiper = null;
+    let filteredSlides = [];
+    let allSlidesHTML = document.getElementById('showcaseList').innerHTML;
+    
+    function initSwiper() {
+        if(swiper) { swiper.destroy(true, true); }
+        swiper = new Swiper('.showcase-swiper', {
+            slidesPerView: 3,
+            spaceBetween: 20,
+            centeredSlides: true,
+            loop: false,
+            speed: 600,
+            grabCursor: true,
+            navigation: {
+                nextEl: '.showcase-next',
+                prevEl: '.showcase-prev',
+            },
+            breakpoints: {
+                320: { slidesPerView: 1.2, spaceBetween: 10 },
+                640: { slidesPerView: 2, spaceBetween: 15 },
+                1024: { slidesPerView: 3, spaceBetween: 30 }
+            },
+            on: {
+                slideChangeTransitionStart: function () {
+                    const activeSlide = this.slides[this.activeIndex];
+                    if(activeSlide) selectProject(activeSlide);
+                },
+                click: function (s, e) {
+                    if (s.clickedIndex !== undefined && s.clickedIndex !== s.activeIndex) {
+                        s.slideTo(s.clickedIndex);
+                    }
+                }
+            }
+        });
+    }
 
     function selectProject(item) {
-        if (isAnimating || item.classList.contains('active')) return;
+        if (isAnimating) return;
         isAnimating = true;
 
-        // Update active class
-        listItems.forEach(i => i.classList.remove('active'));
-        item.classList.add('active');
-        
-        // Scroll left list to active item smoothly
-        item.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-        
-        // Extract Data
-        const indexStr = item.getAttribute('data-index');
         const title = item.getAttribute('data-title');
         const student = item.getAttribute('data-student');
         const categoryName = item.getAttribute('data-category-name');
         const desc = item.getAttribute('data-desc');
-        const videoUrl = item.getAttribute('data-video');
+        const iconUrl = item.getAttribute('data-icon');
         const thumbUrl = item.getAttribute('data-thumb');
         
-        // GSAP Animation Timeline
         const tl = gsap.timeline({
             onComplete: () => { isAnimating = false; }
         });
         
-        tl.to(srGlassPanel, { opacity: 0, y: 30, duration: 0.3, ease: 'power2.in' })
-          .to(srLargeNumber, { opacity: 0, x: 20, duration: 0.3, ease: 'power2.in' }, "<")
-          .to(srHeroBg, { scale: 1.1, opacity: 0, duration: 0.4, ease: 'power2.inOut' }, "<")
-          .call(() => {
-              // Update Content
-              srLargeNumber.textContent = indexStr;
-              srTitle.textContent = title;
-              srStudent.textContent = student;
-              srCategory.textContent = categoryName;
-              srDesc.textContent = desc;
-              
-              if (thumbUrl) {
-                  srHeroBg.style.backgroundImage = `url('${thumbUrl}')`;
-              } else {
-                  srHeroBg.style.backgroundImage = 'none';
-                  srHeroBg.style.backgroundColor = '#111827';
-              }
-              
-              if (videoUrl) {
-                  srVideoBtn.href = videoUrl;
-                  srVideoBtn.style.display = 'inline-flex';
-                  srNoVideoBtn.style.display = 'none';
-              } else {
-                  srVideoBtn.style.display = 'none';
-                  srNoVideoBtn.style.display = 'inline-flex';
-              }
-              
-              const tagsHtml = `<span class="sr-tag">${categoryName}</span><span class="sr-tag">Portfolio</span>`;
-              srTags.innerHTML = tagsHtml;
-          })
-          .set(srHeroBg, { scale: 1.05 }) // Initial state before fading in
-          .to(srHeroBg, { scale: 1, opacity: 1, duration: 0.6, ease: 'power3.out' })
-          .to(srLargeNumber, { opacity: 0.1, x: 0, duration: 0.5, ease: 'power3.out' }, "-=0.4")
-          .to(srGlassPanel, { opacity: 1, y: 0, duration: 0.5, ease: 'power3.out' }, "-=0.4");
+        tl.to([fcImage, fcTitle, fcCategory, fcStudent, fcDesc, fcSoftwareIcon, fcSoftwareLabel], { 
+            opacity: 0, y: 10, duration: 0.3, ease: 'power2.in', stagger: 0.02
+        })
+        .call(() => {
+            fcTitle.textContent = title;
+            fcStudent.textContent = `"${student}"`;
+            fcCategory.textContent = categoryName;
+            fcDesc.textContent = desc;
+            fcImage.src = thumbUrl;
+            
+            if (iconUrl) {
+                fcSoftwareIcon.src = iconUrl;
+                fcSoftwareIcon.style.display = 'block';
+                fcSoftwareLabel.style.display = 'block';
+            } else {
+                fcSoftwareIcon.style.display = 'none';
+                fcSoftwareLabel.style.display = 'none';
+            }
+        })
+        .to(fcImage, { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' })
+        .to([fcTitle, fcCategory, fcStudent, fcDesc, fcSoftwareLabel, fcSoftwareIcon], { 
+            opacity: 1, y: 0, duration: 0.5, ease: 'power3.out', stagger: 0.05
+        }, "-=0.4");
     }
 
-    // Attach click listeners
-    listItems.forEach(item => {
-        item.addEventListener('click', () => selectProject(item));
-    });
+    // Initialize
+    initSwiper();
+    
+    const initialSlide = document.querySelector('.showcase-slide');
+    if (initialSlide) {
+        fcTitle.textContent = initialSlide.getAttribute('data-title');
+        fcStudent.textContent = `"${initialSlide.getAttribute('data-student')}"`;
+        fcCategory.textContent = initialSlide.getAttribute('data-category-name');
+        fcDesc.textContent = initialSlide.getAttribute('data-desc');
+        fcImage.src = initialSlide.getAttribute('data-thumb');
+        
+        const iconUrl = initialSlide.getAttribute('data-icon');
+        if (iconUrl) {
+            fcSoftwareIcon.src = iconUrl;
+            fcSoftwareIcon.style.display = 'block';
+            fcSoftwareLabel.style.display = 'block';
+        } else {
+            fcSoftwareIcon.style.display = 'none';
+            fcSoftwareLabel.style.display = 'none';
+        }
+        
+        gsap.from(fcImage, { opacity: 0, scale: 0.95, duration: 1, ease: 'power3.out' });
+        gsap.from([fcTitle, fcCategory, fcStudent, fcDesc, fcSoftwareLabel, fcSoftwareIcon], { opacity: 0, x: 20, duration: 0.8, ease: 'power3.out', stagger: 0.1, delay: 0.2 });
+    }
 
     // Filtering logic
     filterBtns.forEach(btn => {
@@ -193,58 +241,28 @@ document.addEventListener('DOMContentLoaded', function() {
             btn.classList.add('active');
             
             const filter = btn.getAttribute('data-filter');
-            let firstVisible = null;
+            const wrapper = document.getElementById('showcaseList');
             
-            listItems.forEach(item => {
-                const category = item.getAttribute('data-category');
-                if (filter === 'all' || filter === category) {
-                    item.style.display = 'flex';
-                    if (!firstVisible) firstVisible = item;
-                } else {
-                    item.style.display = 'none';
-                }
-            });
+            // Reset to original HTML
+            wrapper.innerHTML = allSlidesHTML;
             
-            if (firstVisible) {
-                isAnimating = false; // Force unlock
-                selectProject(firstVisible);
+            if (filter !== 'all') {
+                const slides = wrapper.querySelectorAll('.showcase-slide');
+                slides.forEach(slide => {
+                    if (slide.getAttribute('data-category') !== filter) {
+                        slide.remove();
+                    }
+                });
+            }
+            
+            initSwiper();
+            const firstFiltered = wrapper.querySelector('.showcase-slide');
+            if (firstFiltered) {
+                isAnimating = false;
+                selectProject(firstFiltered);
             }
         });
     });
-
-    // Initialize first project (simulate initial animation silently)
-    const firstItem = document.querySelector('.showcase-list-item');
-    if (firstItem) {
-        firstItem.classList.add('active');
-        isAnimating = true; // prevent double clicks during init
-        
-        const thumbUrl = firstItem.getAttribute('data-thumb');
-        srLargeNumber.textContent = firstItem.getAttribute('data-index');
-        srTitle.textContent = firstItem.getAttribute('data-title');
-        srStudent.textContent = firstItem.getAttribute('data-student');
-        srCategory.textContent = firstItem.getAttribute('data-category-name');
-        srDesc.textContent = firstItem.getAttribute('data-desc');
-        
-        if (thumbUrl) { srHeroBg.style.backgroundImage = `url('${thumbUrl}')`; }
-        
-        const videoUrl = firstItem.getAttribute('data-video');
-        if (videoUrl) {
-            srVideoBtn.href = videoUrl;
-            srVideoBtn.style.display = 'inline-flex';
-            srNoVideoBtn.style.display = 'none';
-        } else {
-            srVideoBtn.style.display = 'none';
-            srNoVideoBtn.style.display = 'inline-flex';
-        }
-        
-        const tagsHtml = `<span class="sr-tag">${firstItem.getAttribute('data-category-name')}</span><span class="sr-tag">Portfolio</span>`;
-        srTags.innerHTML = tagsHtml;
-        
-        // Initial fade in
-        gsap.from(srHeroBg, { opacity: 0, scale: 1.05, duration: 1, ease: 'power3.out' });
-        gsap.from(srLargeNumber, { opacity: 0, x: 20, duration: 1, ease: 'power3.out', delay: 0.1 });
-        gsap.from(srGlassPanel, { opacity: 0, y: 30, duration: 1, ease: 'power3.out', delay: 0.2, onComplete: () => isAnimating = false });
-    }
 });
 </script>
 @endsection
