@@ -188,9 +188,21 @@
     padding: 20px 0 100px 0;
     position: relative;
     z-index: 2;
-    background: transparent;
+    background-image: url('../images/showcase-bg.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
     display: flex;
     justify-content: center;
+}
+
+/* Dark overlay so the background doesn't overpower the card */
+.showcase-portfolio-section::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(8, 10, 25, 0.65);
+    z-index: -1;
 }
 
 .showcase-portfolio-section .container {
@@ -512,11 +524,17 @@
         margin-bottom: 15px;
     }
     .slider-container-wrap {
-        padding: 0 25px;
+        padding: 0; /* Remove padding to let swiper take full card width */
     }
     .showcase-prev svg, .showcase-next svg {
-        width: 24px;
-        height: 24px;
+        width: 28px;
+        height: 28px;
+    }
+    .showcase-swiper {
+        padding: 20px 0; /* Reduce vertical padding */
+    }
+    .showcase-slide.swiper-slide-active {
+        transform: scale(1.08); /* Reduce scale to prevent bleeding on small screens */
     }
     .sa-title {
         font-size: 1.2rem;

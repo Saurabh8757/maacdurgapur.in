@@ -1,7 +1,7 @@
 @extends('frontend.layout.app')
 
 @section('custom_css')
-<link rel="stylesheet" href="{{ asset('frontend/css/blog.css') }}">
+<link rel="stylesheet" href="{{ asset('frontend/css/blog.css') }}?v={{ time() }}">
 @endsection
 
 @section('content')

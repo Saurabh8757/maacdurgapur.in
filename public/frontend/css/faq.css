@@ -451,6 +451,8 @@
 .faq-toggle-icon {
     width: 32px;
     height: 32px;
+    min-width: 32px;
+    flex-shrink: 0;
     position: relative;
     display: flex;
     align-items: center;

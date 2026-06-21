@@ -143,7 +143,8 @@ document.addEventListener('DOMContentLoaded', function() {
             slidesPerView: 3,
             spaceBetween: 20,
             centeredSlides: true,
-            loop: false,
+            loop: true,
+            slideToClickedSlide: true,
             speed: 600,
             grabCursor: true,
             navigation: {
@@ -159,11 +160,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 slideChangeTransitionStart: function () {
                     const activeSlide = this.slides[this.activeIndex];
                     if(activeSlide) selectProject(activeSlide);
-                },
-                click: function (s, e) {
-                    if (s.clickedIndex !== undefined && s.clickedIndex !== s.activeIndex) {
-                        s.slideTo(s.clickedIndex);
-                    }
                 }
             }
         });
