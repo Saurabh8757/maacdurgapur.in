@@ -1,4 +1,4 @@
-﻿@extends('frontend.layout.app')
+@extends('frontend.layout.app')
 
 @section('custom_css')
 <link rel="stylesheet" href="{{ asset('frontend/css/blog.css') }}">
@@ -7,7 +7,11 @@
 @section('content')
 <!-- Blog Hero -->
 <section class="blog-hero">
-    <div class="blog-hero-bg"></div>
+    <div class="blog-hero-bg">
+        <div class="hero-gradient-mesh"></div>
+        <div class="hero-glass-overlay"></div>
+        <div class="hero-bottom-fade"></div>
+    </div>
     <div class="container" style="position: relative; z-index: 2;">
         <h1 class="blog-hero-title">Creative Insights & News</h1>
         <p class="blog-hero-subtitle">Explore the latest trends in Animation, VFX, UI/UX Design, Gaming, and AI technology from the experts at MAAC Durgapur.</p>

@@ -32,6 +32,12 @@ class CmsShowcaseMediaController extends Controller
 
         $validated = $request->validate([
             'thumbnail' => ['required', 'image', 'mimes:jpg,jpeg,png,webp,gif', 'max:10240'],
+        ], [
+            'thumbnail.uploaded' => 'Image exceeds server upload limit. Please try a smaller file.',
+            'thumbnail.max' => 'Maximum allowed image size is 10 MB.',
+            'thumbnail.mimes' => 'Unsupported image format. Allowed formats: JPG, PNG, WEBP, GIF.',
+            'thumbnail.image' => 'The uploaded file must be a valid image.',
+            'thumbnail.required' => 'Please select a thumbnail image to upload.',
         ]);
 
         $file = $validated['thumbnail'];

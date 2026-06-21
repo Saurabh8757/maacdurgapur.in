@@ -4,104 +4,292 @@
 .faq-hero {
     position: relative;
     padding: 180px 20px 80px;
-    background: var(--dark);
+    background: #020617; /* Deep slate */
     text-align: center;
     overflow: hidden;
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-/* ============================================================
-   CLEAN & FAST MODERN HERO BACKGROUND
-   ============================================================ */
+/* 3D Scene setup */
 .faq-hero-bg {
     position: absolute;
     inset: 0;
-    opacity: 1;
-    background: #020617; /* Deep modern slate */
+    background: radial-gradient(circle at center, #0a0f24 0%, #020617 100%);
     overflow: hidden;
     z-index: 1;
-    pointer-events: none;
+    perspective: 1200px;
 }
 
-.hero-gradient-mesh {
-    position: absolute;
-    inset: -20%;
-    background: 
-        radial-gradient(circle at 10% 20%, rgba(0, 210, 255, 0.4) 0%, transparent 50%),
-        radial-gradient(circle at 90% 80%, rgba(255, 0, 255, 0.4) 0%, transparent 50%),
-        radial-gradient(circle at 50% 50%, rgba(0, 115, 230, 0.3) 0%, transparent 60%);
-    animation: slowMeshRotate 20s ease-in-out infinite alternate;
-    z-index: 0;
-    will-change: transform;
-}
-
-@keyframes slowMeshRotate {
-    0% { transform: scale(1) rotate(0deg); }
-    100% { transform: scale(1.1) rotate(15deg); }
-}
-
-.hero-glass-overlay {
+/* Blinking Stars (Static Twinkle) */
+.faq-hero-bg::before {
+    content: '';
     position: absolute;
     inset: 0;
-    /* Dotted pattern for a premium tech feel */
-    background-image: radial-gradient(rgba(255, 255, 255, 0.15) 1px, transparent 1px);
-    background-size: 40px 40px;
+    background-image: 
+        radial-gradient(2px 2px at 15% 20%, #fff, transparent),
+        radial-gradient(2px 2px at 35% 45%, #fff, transparent),
+        radial-gradient(2px 2px at 55% 15%, #00d2ff, transparent),
+        radial-gradient(2px 2px at 75% 65%, #fff, transparent),
+        radial-gradient(2px 2px at 85% 25%, #ff00ff, transparent),
+        radial-gradient(2px 2px at 10% 80%, #fff, transparent),
+        radial-gradient(2px 2px at 95% 85%, #00d2ff, transparent),
+        radial-gradient(2px 2px at 45% 80%, #fff, transparent);
+    background-size: 100% 100%;
+    animation: twinkle 4s ease-in-out infinite alternate;
+    z-index: 0;
+}
+
+/* Shooting Stars (Meteor Shower) */
+.faq-hero-bg::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 200px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.9), transparent);
+    /* 3 separate meteors staggered in distance and sideways offset */
+    box-shadow: 
+        500px 300px 0 -1px rgba(0, 210, 255, 0.8),
+        1200px -200px 0 -1px rgba(255, 0, 255, 0.8);
+    transform-origin: left center;
+    animation: meteorShower 8s linear infinite;
+    opacity: 0;
+    z-index: 0;
+}
+
+@keyframes twinkle {
+    0% { opacity: 0.1; }
+    50% { opacity: 0.6; }
+    100% { opacity: 0.2; }
+}
+
+@keyframes meteorShower {
+    0% { transform: rotate(-45deg) translateX(800px); opacity: 0; }
+    2% { opacity: 1; }
+    20% { transform: rotate(-45deg) translateX(-2000px); opacity: 0; }
+    100% { transform: rotate(-45deg) translateX(-2000px); opacity: 0; }
+}
+
+/* 3D Astrolabe / Core effect */
+.hero-gradient-mesh, 
+.hero-glass-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    transform-style: preserve-3d;
     z-index: 1;
 }
 
+.hero-gradient-mesh::before,
+.hero-gradient-mesh::after,
+.hero-glass-overlay::before,
+.hero-glass-overlay::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    transform-style: preserve-3d;
+}
+
+/* Ring 1 - Inner Glowing Cyan */
+.hero-gradient-mesh::before {
+    top: -200px;
+    left: -200px;
+    width: 400px;
+    height: 400px;
+    border-color: rgba(0, 210, 255, 0.8);
+    border-top-color: transparent;
+    border-bottom-color: transparent;
+    box-shadow: 0 0 30px rgba(0, 210, 255, 0.4), inset 0 0 30px rgba(0, 210, 255, 0.4);
+    animation: rotateRing1 8s linear infinite;
+}
+
+/* Ring 2 - Middle Glowing Pink */
+.hero-gradient-mesh::after {
+    top: -300px;
+    left: -300px;
+    width: 600px;
+    height: 600px;
+    border-color: rgba(255, 0, 255, 0.5);
+    border-left-color: transparent;
+    border-right-color: transparent;
+    box-shadow: 0 0 40px rgba(255, 0, 255, 0.3), inset 0 0 40px rgba(255, 0, 255, 0.3);
+    animation: rotateRing2 12s linear infinite;
+}
+
+/* Ring 3 - Outer Thin Cyan */
+.hero-glass-overlay::before {
+    top: -450px;
+    left: -450px;
+    width: 900px;
+    height: 900px;
+    border: 1px dashed rgba(0, 210, 255, 0.4);
+    animation: rotateRing3 20s linear infinite;
+}
+
+/* Ring 4 - Abstract grid sphere effect */
+.hero-glass-overlay::after {
+    top: -600px;
+    left: -600px;
+    width: 1200px;
+    height: 1200px;
+    background: radial-gradient(circle, rgba(0, 210, 255, 0.03), transparent 60%);
+    border: 1px dotted rgba(255, 0, 255, 0.2);
+    animation: rotateRing4 30s linear infinite;
+}
+
+@keyframes rotateRing1 {
+    0% { transform: rotateX(60deg) rotateY(0deg) rotateZ(0deg); }
+    100% { transform: rotateX(60deg) rotateY(360deg) rotateZ(360deg); }
+}
+
+@keyframes rotateRing2 {
+    0% { transform: rotateX(45deg) rotateY(45deg) rotateZ(0deg); }
+    100% { transform: rotateX(45deg) rotateY(45deg) rotateZ(-360deg); }
+}
+
+@keyframes rotateRing3 {
+    0% { transform: rotateX(75deg) rotateY(-30deg) rotateZ(0deg); }
+    100% { transform: rotateX(75deg) rotateY(-30deg) rotateZ(360deg); }
+}
+
+@keyframes rotateRing4 {
+    0% { transform: rotateX(-60deg) rotateY(60deg) rotateZ(0deg); }
+    100% { transform: rotateX(-60deg) rotateY(60deg) rotateZ(-360deg); }
+}
+
+/* Floating Particles (Stars) using bottom fade pseudo */
 .hero-bottom-fade {
     position: absolute;
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 150px;
-    background: linear-gradient(to top, var(--dark) 0%, transparent 100%);
-    z-index: 2;
+    height: 250px;
+    background: linear-gradient(to top, #020617 0%, transparent 100%);
+    z-index: 3;
+    pointer-events: none;
+}
+
+.hero-bottom-fade::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 200vh;
+    background-image: 
+        radial-gradient(2px 2px at 20px 30px, #00d2ff, transparent),
+        radial-gradient(2px 2px at 40px 70px, #ff00ff, transparent),
+        radial-gradient(2px 2px at 50px 160px, #ffffff, transparent),
+        radial-gradient(2px 2px at 90px 40px, #00d2ff, transparent),
+        radial-gradient(3px 3px at 130px 80px, #ff00ff, transparent);
+    background-repeat: repeat;
+    background-size: 250px 250px;
+    animation: starsUp 40s linear infinite;
+    opacity: 0.4;
+    z-index: -1;
+}
+
+@keyframes starsUp {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(250px); }
+}
+
+/* Typography & Content - Glassmorphism floating above 3D */
+.faq-hero .container {
+    position: relative;
+    z-index: 10;
+    background: rgba(10, 15, 30, 0.5);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    padding: 50px 30px;
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(0, 210, 255, 0.05);
+    transform: translateY(20px);
+    opacity: 0;
+    animation: floatContainer 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes floatContainer {
+    to { transform: translateY(0); opacity: 1; }
 }
 
 .faq-hero-title {
     position: relative;
-    font-size: 3rem;
+    font-size: 4rem;
     font-family: 'Rajdhani', sans-serif;
     color: #fff;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
     text-transform: uppercase;
     letter-spacing: 2px;
+    font-weight: 700;
+    background: linear-gradient(135deg, #ffffff 0%, #00d2ff 50%, #ff00ff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 5px 15px rgba(0, 210, 255, 0.4));
 }
 
 .faq-hero-subtitle {
     position: relative;
-    font-size: 1.1rem;
-    color: var(--text-muted);
-    max-width: 600px;
-    margin: 0 auto;
+    font-size: 1.2rem;
+    color: #a0aec0;
+    max-width: 650px;
+    margin: 0 auto 40px;
+    line-height: 1.6;
 }
 
-/* Categories */
+/* Premium Categories matching theme */
 .faq-categories {
     display: flex;
     justify-content: center;
     gap: 15px;
-    margin-top: 40px;
-    position: relative;
     flex-wrap: wrap;
+    position: relative;
 }
 
 .faq-category-btn {
     background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    color: var(--text-light);
-    padding: 10px 24px;
-    border-radius: 30px;
-    font-family: 'ComicNeueSansID', sans-serif;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #e2e8f0;
+    padding: 12px 28px;
+    border-radius: 50px;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    backdrop-filter: blur(5px);
 }
 
-.faq-category-btn.active, .faq-category-btn:hover {
-    background: var(--primary);
-    border-color: var(--primary);
+.faq-category-btn:hover {
+    background: rgba(0, 210, 255, 0.1);
+    border-color: rgba(0, 210, 255, 0.5);
+    transform: translateY(-5px);
     color: #fff;
-    box-shadow: 0 4px 15px rgba(0, 115, 230, 0.4);
+    box-shadow: 0 10px 20px rgba(0, 210, 255, 0.3);
+}
+
+.faq-category-btn.active {
+    background: linear-gradient(135deg, #00d2ff, #ff00ff);
+    border-color: transparent;
+    color: #fff;
+    box-shadow: 0 10px 30px rgba(255, 0, 255, 0.4);
+    transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+    .faq-hero { padding: 140px 15px 60px; min-height: auto; }
+    .faq-hero-title { font-size: 2.8rem; }
+    .faq-hero-subtitle { font-size: 1rem; }
+    .faq-category-btn { padding: 10px 20px; font-size: 1rem; }
+    .faq-hero .container { padding: 30px 15px; }
 }
 
 /* FAQ Content Layout */
@@ -109,6 +297,109 @@
     padding: 80px 20px;
     background: var(--dark);
     min-height: 50vh;
+}
+
+/* 3D Background for FAQ Section */
+.faq-section-bg {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    perspective: 1000px;
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* 3D Floor */
+.faq-floor {
+    position: absolute;
+    bottom: 0;
+    left: -50%;
+    width: 200%;
+    height: 60%;
+    background-image: 
+        linear-gradient(rgba(0, 210, 255, 0.15) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 210, 255, 0.15) 1px, transparent 1px);
+    background-size: 60px 60px;
+    transform: rotateX(80deg);
+    transform-origin: bottom center;
+    -webkit-mask-image: linear-gradient(to top, black 0%, transparent 100%);
+}
+
+/* Wrapper to make the ball wander randomly around the floor */
+.faq-ball-wrapper {
+    position: absolute;
+    bottom: 10%;
+    left: 50%;
+    width: 100px;
+    height: 100px;
+    transform-style: preserve-3d;
+    animation: wander 20s infinite ease-in-out alternate;
+    z-index: 2;
+}
+
+@keyframes wander {
+    0%   { transform: translate3d(0vw, 0vh, 0px); }
+    15%  { transform: translate3d(30vw, -10vh, -150px); }
+    30%  { transform: translate3d(-20vw, -20vh, -300px); }
+    45%  { transform: translate3d(-35vw, -5vh, -50px); }
+    60%  { transform: translate3d(10vw, -25vh, -400px); }
+    75%  { transform: translate3d(35vw, -15vh, -200px); }
+    90%  { transform: translate3d(-10vw, 0vh, 0px); }
+    100% { transform: translate3d(0vw, 0vh, 0px); }
+}
+
+/* 3D Bouncing Ball */
+.faq-ball {
+    position: absolute;
+    bottom: 0;
+    left: 0; 
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, #ffffff, #00d2ff 20%, #ff00ff 60%, #020617 100%);
+    box-shadow: 
+        inset -10px -10px 20px rgba(0,0,0,0.8), 
+        inset 10px 10px 20px rgba(255,255,255,0.4),
+        0 0 20px rgba(0, 210, 255, 0.5);
+    animation: bounce 1.5s infinite cubic-bezier(0.28, 0.84, 0.42, 1);
+    transform-style: preserve-3d;
+}
+
+/* Shadow for the Ball */
+.faq-ball-shadow {
+    position: absolute;
+    bottom: -15px;
+    left: 0;
+    width: 100px;
+    height: 30px;
+    background: rgba(0, 0, 0, 0.8);
+    border-radius: 50%;
+    filter: blur(8px);
+    animation: shadowScale 1.5s infinite cubic-bezier(0.28, 0.84, 0.42, 1);
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0) scaleY(0.9) scaleX(1.1); } 
+    5% { transform: translateY(0) scaleY(1) scaleX(1); }
+    50% { transform: translateY(-400px) scale(1) rotateX(180deg) rotateY(180deg); } 
+    95% { transform: translateY(0) scaleY(1) scaleX(1); }
+}
+
+@keyframes shadowScale {
+    0%, 100% { transform: scale(1.2); opacity: 0.8; }
+    50% { transform: scale(0.3); opacity: 0.1; filter: blur(20px); }
+}
+
+@media (max-width: 768px) {
+    .faq-ball-wrapper { width: 60px; height: 60px; bottom: 5%; left: 40%; }
+    .faq-ball { width: 60px; height: 60px; }
+    .faq-ball-shadow { width: 60px; height: 18px; bottom: -9px; }
+    @keyframes bounce {
+        0%, 100% { transform: translateY(0) scaleY(0.9) scaleX(1.1); }
+        5% { transform: translateY(0) scaleY(1) scaleX(1); }
+        50% { transform: translateY(-250px) scale(1) rotateX(180deg) rotateY(180deg); }
+        95% { transform: translateY(0) scaleY(1) scaleX(1); }
+    }
 }
 
 .faq-container {

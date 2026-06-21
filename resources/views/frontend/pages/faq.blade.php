@@ -27,8 +27,16 @@
 </section>
 
 <!-- FAQ Accordion Section -->
-<section class="faq-section">
-    <div class="faq-container">
+<section class="faq-section" style="position: relative; overflow: hidden;">
+    <!-- 3D Bouncing Ball & Floor Background -->
+    <div class="faq-section-bg">
+        <div class="faq-floor"></div>
+        <div class="faq-ball-wrapper">
+            <div class="faq-ball-shadow"></div>
+            <div class="faq-ball"></div>
+        </div>
+    </div>
+    <div class="faq-container" style="position: relative; z-index: 10;">
         
         <!-- Dynamic FAQs -->
         @foreach($categories as $category)
