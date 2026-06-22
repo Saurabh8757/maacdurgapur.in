@@ -459,8 +459,10 @@
 
   /* ─── Custom Select Enhancement ────────────────────────── */
   function initCustomSelect() {
-    const nativeSelect = document.getElementById('modal-course');
-    if (!nativeSelect) return;
+    const nativeSelects = document.querySelectorAll('#modal-course, .enquiry-field select');
+    if (!nativeSelects.length) return;
+
+    nativeSelects.forEach(nativeSelect => {
 
     const group = nativeSelect.closest('.form-group');
     const container = document.createElement('div');
@@ -471,7 +473,15 @@
     
     const trigger = document.createElement('div');
     trigger.className = 'custom-select-trigger';
-    trigger.textContent = ''; // Empty initially to let label show in placeholder pos
+    
+    const isEnquiryField = nativeSelect.closest('.enquiry-field') !== null;
+    if (isEnquiryField && !nativeSelect.value) {
+        trigger.textContent = nativeSelect.options[0] ? nativeSelect.options[0].textContent : '';
+        trigger.classList.add('placeholder-active');
+    } else {
+        trigger.textContent = nativeSelect.options[nativeSelect.selectedIndex]?.textContent || '';
+    }
+    
     container.appendChild(trigger);
 
     const optionsList = document.createElement('div');
@@ -494,6 +504,7 @@
         e.stopPropagation();
         nativeSelect.value = customOpt.dataset.value;
         trigger.textContent = customOpt.textContent;
+        trigger.classList.remove('placeholder-active');
         container.classList.remove('open');
         
         // Update states for CSS animations
@@ -527,13 +538,15 @@
       container.classList.remove('open');
       if (!nativeSelect.value) nativeSelect.classList.remove('focused');
     });
-
+    
     // Reset handler
     form.addEventListener('reset', () => {
       trigger.textContent = '';
       nativeSelect.classList.remove('filled', 'focused');
       optionsList.querySelectorAll('.custom-option').forEach(el => el.classList.remove('selected'));
     });
+    
+    }); // End forEach
   }
 
 

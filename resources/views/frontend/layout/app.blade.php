@@ -514,7 +514,7 @@
 <script defer src="{{ asset('frontend/js/sakura.js') }}"></script>
 <script defer src="{{ asset('frontend/js/animations.js') }}"></script>
 <script defer src="{{ asset('frontend/js/main.js') }}"></script>
-<script defer src="{{ asset('frontend/js/counselling-modal.js') }}"></script>
+<script defer src="{{ asset('frontend/js/counselling-modal.js') }}?v={{ time() }}"></script>
 <script defer src="{{ asset('frontend/js/chatbot.js') }}"></script>
     @yield('custom_js')
 </body>

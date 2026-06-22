@@ -201,6 +201,7 @@
     position: relative;
     width: 100%;
     z-index: 10;
+    box-sizing: border-box;
 }
 
 .custom-select-trigger {
@@ -218,11 +219,13 @@
     cursor: pointer;
     transition: all 0.2s ease;
     position: relative;
+    box-sizing: border-box;
 }
 
-/* Ensure the form-group being interacted with is on top */
+/* Ensure the container being interacted with is on top */
 .form-group:has(.custom-select-container.open),
-.form-group:focus-within {
+.form-group:focus-within,
+.enquiry-field:has(.custom-select-container.open) {
     z-index: 50 !important;
 }
 
@@ -262,9 +265,16 @@
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     z-index: 1000;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
-    max-height: 280px;
-    overflow-y: auto;
     pointer-events: none;
+    box-sizing: border-box;
+    max-height: 250px;
+    overflow-y: auto;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+.custom-options::-webkit-scrollbar {
+    display: none;
 }
 
 .custom-select-container.open .custom-options {
@@ -298,7 +308,8 @@
 }
 
 /* Hide original select but keep it functional for validation and sibling targeting */
-.field-select.enhanced {
+.field-select.enhanced,
+.enquiry-field select.enhanced {
     position: absolute;
     opacity: 0;
     pointer-events: none;
@@ -434,4 +445,57 @@
 
 @media (max-width: 480px) {
     .counselling-modal { border-radius: 12px; padding: 20px 16px; max-width: calc(100vw - 32px); margin: 0 16px; }
+}
+
+/* ============================================================
+   Overrides for Custom Select when used in space_e_fic form
+   ============================================================ */
+.enquiry-field .custom-select-container {
+    z-index: 20;
+}
+.enquiry-field .custom-select-trigger {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 10px 45px 10px 45px;
+    height: 42px; /* Approx height of enquiry fields */
+    font-size: 13px;
+    font-family: inherit;
+    color: #fff;
+    box-shadow: none;
+}
+.enquiry-field .custom-select-trigger.placeholder-active {
+    color: rgba(255, 255, 255, 0.5);
+}
+.enquiry-field .custom-select-container.open .custom-select-trigger {
+    border-color: rgba(138, 43, 226, 0.8);
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 0 3px rgba(138, 43, 226, 0.2);
+}
+.enquiry-field .custom-options {
+    background: rgba(10, 12, 25, 0.98);
+    backdrop-filter: blur(40px);
+    -webkit-backdrop-filter: blur(40px);
+    border: 1px solid rgba(138, 43, 226, 0.6);
+    border-radius: 8px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.9), inset 0 1px 2px rgba(255, 255, 255, 0.15);
+}
+.enquiry-field .custom-option {
+    color: #fff;
+    font-size: 13px;
+    padding: 10px 15px;
+}
+.enquiry-field .custom-option:hover {
+    background: rgba(138, 43, 226, 0.2);
+    color: #fff;
+}
+.enquiry-field .custom-option.selected {
+    background: rgba(138, 43, 226, 0.5);
+    color: #fff;
+}
+@media (max-width: 768px) {
+    .enquiry-field .custom-select-trigger {
+        padding: 8px 35px 8px 35px;
+        height: 38px;
+    }
 }

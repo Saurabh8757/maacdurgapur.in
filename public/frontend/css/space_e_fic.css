@@ -243,7 +243,7 @@ h1, h2, h3, h4, h5, h6 {
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     box-shadow: 0 10px 30px rgba(0,0,0,0.5), inset 0 0 15px rgba(138, 43, 226, 0.05);
-    overflow: hidden;
+    overflow: visible;
     transform: translateY(0);
     transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
