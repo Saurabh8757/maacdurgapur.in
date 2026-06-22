@@ -845,7 +845,8 @@ body.loading {
         padding: 8vh 16px 40px 0;
         text-align: right;
         max-width: 82%;
-        background: radial-gradient(ellipse at 100% 50%, rgba(10, 10, 20, 0.678) 0%, transparent 85%);
+        /* Fixed sharp black line issue by making the left edge perfectly transparent */
+        background: linear-gradient(to right, transparent 0%, rgba(10, 10, 20, 0.5) 30%, rgba(10, 10, 20, 0.8) 100%);
         align-items: flex-end;
     }
 

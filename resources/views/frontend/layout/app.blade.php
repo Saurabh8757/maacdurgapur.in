@@ -25,7 +25,7 @@
 <link rel="stylesheet" href="{{ asset('frontend/css/chatbot.css') }}" media="print" onload="this.media='all'">
 <noscript><link rel="stylesheet" href="{{ asset('frontend/css/chatbot.css') }}"></noscript>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Rajdhani:wght@400;500;600;700&family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&family=Rajdhani:wght@300;400;500;600;700&family=Nunito:wght@200;300;400;600;700&display=swap" rel="stylesheet">
 <!-- Swiper CSS -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/10.3.1/swiper-bundle.min.css">
 <!-- Counselling Modal CSS -->
@@ -36,6 +36,27 @@
 <link rel="preload" as="image" href="{{ asset('frontend/images/pg-01.webp') }}" fetchpriority="high">
 @endif
     @yield('custom_css')
+    <style>
+        /* Global Footer Styles */
+        .footer h4 {
+            font-weight: 500 !important;
+        }
+        .footer, 
+        .footer p, 
+        .footer a, 
+        .footer li, 
+        .footer span,
+        .footer h4 {
+            font-family: 'Myriad Pro', 'Segoe UI', Arial, sans-serif !important;
+        }
+        
+        /* Selective italics for better design */
+        .footer-about p,
+        .footer .copyright,
+        .footer .footer-bottom > p {
+            font-style: italic !important;
+        }
+    </style>
 </head>
 <body class="loading">
 

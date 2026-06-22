@@ -2,6 +2,151 @@
 
 @section('custom_css')
 <link rel="stylesheet" href="{{ asset('frontend/css/maac.css') }}">
+<style>
+    @font-face {
+        font-family: 'Barber Chop';
+        src: url('{{ asset('frontend/fonts/barber_chop/BarberChop.otf') }}') format('opentype');
+        font-weight: normal;
+        font-style: normal;
+    }
+    @import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Montserrat:wght@400;500;700;800;900&display=swap');
+
+    .maac-hero-heading,
+    .maac-hero-heading .line1,
+    .maac-hero-heading .passion, 
+    .maac-hero-heading .line3 {
+        font-family: 'Barber Chop', sans-serif !important;
+        font-weight: 100 !important;
+        letter-spacing: 2px;
+    }
+
+    .enquiry-title {
+        font-family: 'Montserrat', sans-serif !important;
+        font-weight: 700 !important;
+        letter-spacing: 1px;
+    }
+
+    .maac-hero-subtitle {
+        font-family: 'Comic Neue', sans-serif !important;
+    }
+
+    .maac-hero-tagline {
+        font-family: 'Montserrat', sans-serif !important;
+    }
+
+    .offer-badge {
+        font-family: 'Montserrat', sans-serif !important;
+    }
+
+    .offer-title {
+        font-family: 'Comic Neue', sans-serif !important;
+    }
+
+    .offer-highlight {
+        font-family: 'Montserrat', sans-serif !important;
+    }
+
+    .offer-emi span {
+        font-family: 'Comic Neue', sans-serif !important;
+    }
+
+    .maac-cta-heading {
+        font-weight: 400 !important;
+    }
+
+    .maac-cta-text {
+        font-family: 'Comic Neue', sans-serif !important;
+    }
+
+    .maac-cta-btn span {
+        font-family: 'Montserrat', sans-serif !important;
+    }
+
+    .cta-feature-text {
+        font-family: 'Comic Neue', sans-serif !important;
+    }
+
+    .maac-why-label {
+        font-family: 'Comic Neue', sans-serif !important;
+    }
+
+    .maac-why-title {
+        font-weight: 400 !important;
+    }
+
+    .why-card-title,
+    .course-card-title,
+    .location-card-title {
+        font-family: 'Comic Neue', sans-serif !important;
+    }
+
+    .why-card-text,
+    .course-card-text,
+    .course-card-tools,
+    .location-card-text {
+        font-family: 'Myriad Pro', 'Segoe UI', Arial, sans-serif !important;
+        font-style: italic !important;
+    }
+
+    .maac-courses-label {
+        font-family: 'Comic Neue', sans-serif !important;
+    }
+
+    .maac-courses-title {
+        font-weight: 400 !important;
+    }
+
+    .maac-courses-desc {
+        font-family: 'Myriad Pro', 'Segoe UI', Arial, sans-serif !important;
+        font-style: italic !important;
+    }
+
+    .maac-locations-label {
+        font-family: 'Comic Neue', sans-serif !important;
+    }
+
+    .maac-locations-title {
+        font-weight: 400 !important;
+    }
+
+    .maac-locations-desc {
+        font-family: 'Myriad Pro', 'Segoe UI', Arial, sans-serif !important;
+        font-style: italic !important;
+    }
+
+    /* Reduce font weight of headers on Phone & Tablet views, excluding Hero section */
+    @media (max-width: 991px) {
+        section:not(.maac-hero) h1,
+        section:not(.maac-hero) h2,
+        section:not(.maac-hero) h3,
+        section:not(.maac-hero) h4,
+        section:not(.maac-hero) h5,
+        section:not(.maac-hero) h6,
+        section:not(.maac-hero) .enquiry-title,
+        section:not(.maac-hero) [class*="-title"],
+        section:not(.maac-hero) [class*="-heading"] {
+            font-weight: 400 !important;
+            -webkit-text-stroke: 0 !important; /* Prevents artificial bolding by browsers */
+        }
+    }
+
+    /* Mobile view for Hero Heading: Premium spacing and size */
+    @media (max-width: 767px) {
+        .maac-hero-heading {
+            font-size: 3.2rem !important;
+            line-height: 1.1 !important;
+            margin-bottom: 20px !important; /* Space between heading and subtitle */
+            margin-top: -15px !important; /* Pull heading up slightly */
+        }
+        .maac-hero-heading span {
+            display: block;
+            margin-bottom: 2px !important; /* Very slight line gap */
+        }
+        .maac-hero-heading .passion {
+            font-size: 4.2rem !important; /* Premium size for PASSION */
+        }
+    }
+</style>
 @endsection
 
 @section('content')

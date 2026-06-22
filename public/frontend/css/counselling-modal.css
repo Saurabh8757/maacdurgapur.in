@@ -81,9 +81,9 @@
 .counselling-icon { font-size: 24px; }
 
 .counselling-title {
-    font-family: Oswald, sans-serif;
-    font-size: 2rem;
-    font-weight: 600;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    font-size: 1.5rem;
+    font-weight: 100;
     color: #ffffff;
     margin-bottom: 8px;
     text-transform: uppercase;
@@ -444,7 +444,15 @@
 }
 
 @media (max-width: 480px) {
-    .counselling-modal { border-radius: 12px; padding: 20px 16px; max-width: calc(100vw - 32px); margin: 0 16px; }
+    .counselling-modal { border-radius: 12px; padding: 20px 16px; max-width: calc(100vw - 32px);
+     margin: 0 16px; }
+    .counselling-title{
+    font-family: sans-serif;
+    font-weight: lighter;
+    gap: 1.5rem;
+    color: #c3d0e2;
+    font-size: 1rem;}
+     
 }
 
 /* ============================================================

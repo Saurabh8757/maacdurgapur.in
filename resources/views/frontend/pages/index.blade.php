@@ -27,9 +27,26 @@
 <!-- Swiper CSS -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/10.3.1/swiper-bundle.min.css">
 <!-- Counselling Modal CSS -->
-<link rel="stylesheet" href="{{ asset('frontend/css/counselling-modal.css') }}">
+<link rel="stylesheet" href="{{ asset('frontend/css/counselling-modal.css') }}?v={{ time() }}">
 <!-- Preload hero image for LCP -->
 <link rel="preload" as="image" href="{{ asset('frontend/images/pg-01.webp') }}" fetchpriority="high">
+<style>
+    @font-face {
+        font-family: 'Barber Chop';
+        src: url('{{ asset('frontend/fonts/barber_chop/BarberChop.otf') }}') format('opentype');
+        font-weight: normal;
+        font-style: normal;
+    }
+
+    .hero-heading,
+    .hero-heading .line1,
+    .hero-heading .line2,
+    .hero-heading .line3 {
+        font-family: 'Barber Chop', sans-serif !important;
+        font-weight: 100 !important;
+        letter-spacing: 2px;
+    }
+</style>
 </head>
 <body class="loading">
 
