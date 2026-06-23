@@ -131,6 +131,8 @@
     <a href="#akshaEnquiryForm" class="btn-counselling scroll-to-hero-form">Book Free Counselling</a>
   @elseif(request()->routeIs('space_e_fic'))
     <a href="#sefEnquiryForm" class="btn-counselling scroll-to-hero-form">Book Free Counselling</a>
+  @elseif(request()->routeIs('maac'))
+    <a href="#maacEnquiryForm" class="btn-counselling scroll-to-hero-form">Book Free Counselling</a>
   @else
     <a href="#" class="btn-counselling open-modal">Book Free Counselling</a>
   @endif
@@ -170,6 +172,8 @@
         <a href="#akshaEnquiryForm" class="mobile-cta scroll-to-hero-form" data-close>Book Free Counselling</a>
       @elseif(request()->routeIs('space_e_fic'))
         <a href="#sefEnquiryForm" class="mobile-cta scroll-to-hero-form" data-close>Book Free Counselling</a>
+      @elseif(request()->routeIs('maac'))
+        <a href="#maacEnquiryForm" class="mobile-cta scroll-to-hero-form" data-close>Book Free Counselling</a>
       @else
         <a href="#counselling" class="mobile-cta" data-close>Book Free Counselling</a>
       @endif
