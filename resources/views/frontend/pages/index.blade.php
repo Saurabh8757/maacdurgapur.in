@@ -103,7 +103,7 @@
       </ul>
     </li>
     <li><a href="{{ route('showcase') }}" class="{{ request()->routeIs('showcase') ? 'active' : '' }}">Students Work</a></li>
-    <li><a href="{{ route('blog') }}" class="{{ request()->routeIs('blog*') ? 'active' : '' }}">Blog</a></li>
+    <li><a href="{{ route('blogs.index') }}" class="{{ request()->routeIs('blogs.*') ? 'active' : '' }}">Blog</a></li>
     <li><a href="{{ route('faq') }}" class="{{ request()->routeIs('faq*') ? 'active' : '' }}">FAQ</a></li>
     <li><a href="#contact">Contact Us</a></li>
     
@@ -137,7 +137,7 @@
     </ul>
 
     <a href="{{ route('showcase') }}" class="mobile-link {{ request()->routeIs('showcase') ? 'active' : '' }}" data-close>Students Work</a>
-    <a href="{{ route('blog') }}" class="mobile-link {{ request()->routeIs('blog*') ? 'active' : '' }}" data-close>Blog</a>
+    <a href="{{ route('blogs.index') }}" class="mobile-link {{ request()->routeIs('blogs.*') ? 'active' : '' }}" data-close>Blog</a>
     <a href="{{ route('faq') }}" class="mobile-link {{ request()->routeIs('faq*') ? 'active' : '' }}" data-close>FAQ</a>
     <a href="#contact" class="mobile-link" data-close>Contact Us</a>
     
@@ -902,7 +902,7 @@
       <h4>Quick Links</h4>
       <ul>
         <li><a href="#">Home</a></li>
-        <li><a href="{{ route('blog') }}">Blog</a></li>
+        <li><a href="{{ route('blogs.index') }}">Blog</a></li>
         <li><a href="#">Courses</a></li>
         <li><a href="#">About Us</a></li>
         <li><a href="#">Disclaimer</a></li>

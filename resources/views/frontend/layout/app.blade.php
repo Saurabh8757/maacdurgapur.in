@@ -4,16 +4,16 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="csrf-token" content="{{ csrf_token() }}">
-<title>MAAC Durgapur – West Bengal's #1 Animation, VFX & AI Creative Institute</title>
-<meta name="description" content="MAAC Durgapur is West Bengal's leading Animation, VFX, Gaming, Graphic Design & AI Creative Institute. Industry-focused training, expert mentorship, modern studios and 100% placement support near City Centre, Durgapur.">
+<title>@yield('meta_title', 'MAAC Durgapur – West Bengal\'s #1 Animation, VFX & AI Creative Institute')</title>
+<meta name="description" content="@yield('meta_description', 'MAAC Durgapur is West Bengal\'s leading Animation, VFX, Gaming, Graphic Design & AI Creative Institute. Industry-focused training, expert mentorship, modern studios and 100% placement support near City Centre, Durgapur.')">
 <meta name="robots" content="index, follow">
-<link rel="canonical" href="{{ url()->current() }}">
+<link rel="canonical" href="@yield('canonical_url', url()->current())">
 <!-- Open Graph -->
 <meta property="og:type" content="website">
-<meta property="og:title" content="MAAC Durgapur – West Bengal's #1 Animation, VFX & AI Creative Institute">
-<meta property="og:description" content="Learn Animation, VFX, Gaming, Graphic Design & AI at MAAC Durgapur. Industry-focused training with 100% placement support.">
-<meta property="og:image" content="{{ asset('frontend/images/pg-01.webp') }}">
-<meta property="og:url" content="{{ url()->current() }}">
+<meta property="og:title" content="@yield('og_title', View::getSection('meta_title', 'MAAC Durgapur – West Bengal\'s #1 Animation, VFX & AI Creative Institute'))">
+<meta property="og:description" content="@yield('og_description', View::getSection('meta_description', 'Learn Animation, VFX, Gaming, Graphic Design & AI at MAAC Durgapur. Industry-focused training with 100% placement support.'))">
+<meta property="og:image" content="@yield('og_image', asset('frontend/images/pg-01.webp'))">
+<meta property="og:url" content="@yield('canonical_url', url()->current())">
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="MAAC Durgapur – West Bengal's #1 Animation, VFX & AI Institute">
@@ -121,7 +121,7 @@
       </ul>
     </li>
     <li><a href="{{ route('showcase') }}" class="{{ request()->routeIs('showcase') ? 'active' : '' }}">Students Work</a></li>
-    <li><a href="{{ route('blog') }}" class="{{ request()->routeIs('blog*') ? 'active' : '' }}">Blog</a></li>
+    <li><a href="{{ route('blogs.index') }}" class="{{ request()->routeIs('blogs.*') ? 'active' : '' }}">Blog</a></li>
     <li><a href="{{ route('faq') }}" class="{{ request()->routeIs('faq*') ? 'active' : '' }}">FAQ</a></li>
     <li><a href="#contact">Contact Us</a></li>
   </ul>
@@ -162,7 +162,7 @@
     </ul>
 
     <a href="{{ route('showcase') }}" class="mobile-link {{ request()->routeIs('showcase') ? 'active' : '' }}" data-close>Students Work</a>
-    <a href="{{ route('blog') }}" class="mobile-link {{ request()->routeIs('blog*') ? 'active' : '' }}" data-close>Blog</a>
+    <a href="{{ route('blogs.index') }}" class="mobile-link {{ request()->routeIs('blogs.*') ? 'active' : '' }}" data-close>Blog</a>
     <a href="{{ route('faq') }}" class="mobile-link {{ request()->routeIs('faq*') ? 'active' : '' }}" data-close>FAQ</a>
     <a href="#contact" class="mobile-link" data-close>Contact Us</a>
 
@@ -198,7 +198,7 @@
       <h4>Quick Links</h4>
       <ul>
         <li><a href="#">Home</a></li>
-        <li><a href="{{ route('blog') }}">Blog</a></li>
+        <li><a href="{{ route('blogs.index') }}">Blog</a></li>
         <li><a href="{{ route('faq') }}">FAQ</a></li>
         <li><a href="#">Courses</a></li>
         <li><a href="#">About Us</a></li>

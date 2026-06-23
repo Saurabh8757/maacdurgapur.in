@@ -41,7 +41,9 @@ Route::get('/coding-programming-ui-ux-digital-marketing',[PageController::class,
 Route::get('/robotics-classes-for-kids-durgapur',[PageController::class, 'space_e_fic'])->name('space_e_fic');
 Route::get('/fcq',[PageController::class, 'fcq'])->name('fcq');
 Route::get('/showcase',[PageController::class, 'showcase'])->name('showcase');
-Route::get('/blog',[PageController::class, 'blog'])->name('blog');
+Route::redirect('/blog', '/blogs', 301);
+Route::get('/blogs',[\App\Http\Controllers\Web\BlogController::class, 'index'])->name('blogs.index');
+Route::get('/blogs/{slug}',[\App\Http\Controllers\Web\BlogController::class, 'show'])->name('blogs.show');
 Route::get('/faq',[PageController::class, 'faq'])->name('faq');
 Route::get('/web-design-ui-ux-course',[PageController::class, 'web'])->name('web');
 

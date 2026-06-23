@@ -73,6 +73,11 @@ Route::group(['as' => 'admin::', 'prefix' => 'v1/cpanel/admin', 'middleware' => 
     Route::delete('/lead-forms/{id}', [\App\Http\Controllers\Admin\LeadFormController::class, 'destroy'])->name('lead_forms.destroy');
     /*** Lead Forms Routes End ***/
 
+    /*** Blog CMS Routes Start ***/
+    Route::resource('blog-categories', \App\Http\Controllers\Admin\BlogCategoryController::class);
+    Route::resource('blogs', \App\Http\Controllers\Admin\BlogController::class);
+    /*** Blog CMS Routes End ***/
+
     /*** Profile Routes Start ***/
     Route::get('/profile/{name}', [ProfileController::class, 'profile'])->name('profile');
     Route::post('/profile-update', [ProfileController::class, 'profile_update'])->name('profile_update');

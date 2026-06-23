@@ -141,8 +141,8 @@
 
 
                 @if ($canViewCmsMenu)
-                    <li class="nav-item has-treeview @if (request()->routeIs('admin::content.*')) menu-open @endif">
-                        <a href="#" class="nav-link @if (request()->routeIs('admin::content.*')) active @endif">
+                    <li class="nav-item has-treeview @if (request()->routeIs('admin::content.*') || request()->routeIs('admin::blog*')) menu-open @endif">
+                        <a href="#" class="nav-link @if (request()->routeIs('admin::content.*') || request()->routeIs('admin::blog*')) active @endif">
                             <i class="fas fa-layer-group nav-icon"></i>
                             <p>
                                 Content Management
@@ -195,6 +195,20 @@
                                    class="nav-link @if (request()->routeIs('admin::lead_forms.*')) active @endif">
                                     <i class="fas fa-list-alt nav-icon"></i>
                                     <p>Lead Forms</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('admin::blog-categories.index') }}"
+                                   class="nav-link @if (request()->routeIs('admin::blog-categories.*')) active @endif">
+                                    <i class="fas fa-tags nav-icon"></i>
+                                    <p>Blog Categories</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('admin::blogs.index') }}"
+                                   class="nav-link @if (request()->routeIs('admin::blogs.*')) active @endif">
+                                    <i class="fas fa-blog nav-icon"></i>
+                                    <p>Blogs</p>
                                 </a>
                             </li>
                         </ul>
