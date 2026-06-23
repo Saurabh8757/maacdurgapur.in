@@ -450,7 +450,7 @@
   <div class="sef-final-cta-content">
     <h2>READY TO SEE YOUR CHILD BUILD THEIR FIRST ROBOT?</h2>
     <p>You don't need to decide anything today. The best way to know if your child will love this is to let them try it. Book a free demo class and let your child build something before you commit to anything.</p>
-    <button class="sef-cta-btn open-modal">
+    <button class="sef-cta-btn" onclick="document.getElementById('sefEnquiryForm').scrollIntoView({ behavior: 'smooth', block: 'center' });">
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 16 16 12 12 8"></polyline><line x1="8" y1="12" x2="16" y2="12"></line></svg>
       <span>BOOK FREE DEMO CLASS</span>
     </button>

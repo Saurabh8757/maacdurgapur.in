@@ -230,6 +230,7 @@ public function terms()
 
  public function faq(BrandContextManager $brandContextManager)
     {
+        $courses = \App\Models\OurCourse::where('status', 'Active')->get();
         $brandId = $brandContextManager
             ->requirePublicContext()
             ->brand()
@@ -248,7 +249,7 @@ public function terms()
             ->orderBy('id')
             ->get();
 
-        return view('frontend.pages.faq', compact('categories'));
+        return view('frontend.pages.faq', compact('categories', 'courses'));
     }
 
  public function space_e_fic()
@@ -273,14 +274,16 @@ public function terms()
 
  public function showcase(CmsShowcaseReadService $showcaseReadService)
     {
+        $courses = \App\Models\OurCourse::where('status', 'Active')->get();
         $showcaseCategories = $showcaseReadService->getCategoriesPublic();
         $showcaseProjects = $showcaseReadService->getProjectsPublic();
-        return view('frontend.pages.showcase', compact('showcaseCategories', 'showcaseProjects'));
+        return view('frontend.pages.showcase', compact('showcaseCategories', 'showcaseProjects', 'courses'));
     }
 
  public function blog()
     {
-        return view('frontend.pages.blog');
+        $courses = \App\Models\OurCourse::where('status', 'Active')->get();
+        return view('frontend.pages.blog', compact('courses'));
     }
     
  public function web()
