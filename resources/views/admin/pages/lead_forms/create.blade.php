@@ -29,6 +29,13 @@
                             </select>
                         </div>
                         <div class="form-group">
+                            <label>Form Type</label>
+                            <select name="form_type" class="form-control" required>
+                                <option value="hero">Hero Form (Default Page Form)</option>
+                                <option value="global_modal">Global Modal</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
                             <label>Label</label>
                             <input type="text" name="label" class="form-control" placeholder="e.g. Full Name" required>
                         </div>

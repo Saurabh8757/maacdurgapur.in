@@ -139,6 +139,14 @@
     appearance: none;
 }
 
+textarea.field-input {
+    height: auto;
+    min-height: 100px;
+    padding-top: 16px;
+    padding-bottom: 12px;
+    resize: vertical;
+}
+
 .field-input:focus,
 .field-select:focus {
     outline: none;

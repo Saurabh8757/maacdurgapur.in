@@ -30,6 +30,13 @@
                             </select>
                         </div>
                         <div class="form-group">
+                            <label>Form Type</label>
+                            <select name="form_type" class="form-control" required>
+                                <option value="hero" {{ $field->form_type == 'hero' ? 'selected' : '' }}>Hero Form (Default Page Form)</option>
+                                <option value="global_modal" {{ $field->form_type == 'global_modal' ? 'selected' : '' }}>Global Modal</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
                             <label>Label</label>
                             <input type="text" name="label" class="form-control" value="{{ $field->label }}" required>
                         </div>

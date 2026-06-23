@@ -10,7 +10,7 @@ class LeadFormField extends Model
     use HasFactory;
 
     protected $fillable = [
-        'brand_id', 'field_name', 'label', 'type', 'options', 
+        'brand_id', 'form_type', 'field_name', 'label', 'type', 'options', 
         'placeholder', 'is_required', 'sort_order', 'is_active'
     ];
 

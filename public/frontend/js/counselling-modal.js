@@ -427,7 +427,7 @@
 
   /* ─── Floating label behavior ──────────────────────────── */
   function setupFloatingLabels() {
-    form.querySelectorAll('.form-group.labeled').forEach(function (group) {
+    form.querySelectorAll('.form-group').forEach(function (group) {
       var input = group.querySelector('.field-input, .field-select');
       var label = group.querySelector('.field-label');
       if (!input || !label) return;

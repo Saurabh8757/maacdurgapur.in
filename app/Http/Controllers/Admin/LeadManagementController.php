@@ -23,6 +23,10 @@ class LeadManagementController extends Controller
             $query->where('status', $request->status);
         }
 
+        if ($request->filled('source_page')) {
+            $query->where('source_page', $request->source_page);
+        }
+
         if ($request->filled('date_from') && $request->filled('date_to')) {
             $query->whereBetween('created_at', [$request->date_from . ' 00:00:00', $request->date_to . ' 23:59:59']);
         }
@@ -43,8 +47,9 @@ class LeadManagementController extends Controller
         $leads = $query->paginate(20)->appends($request->all());
 
         $brands = Brand::all();
+        $sourcePages = Lead::select('source_page')->distinct()->whereNotNull('source_page')->pluck('source_page');
 
-        return view('admin.pages.lead_management.index', compact('leads', 'brands'));
+        return view('admin.pages.lead_management.index', compact('leads', 'brands', 'sourcePages'));
     }
 
     public function show($id)
@@ -109,6 +114,9 @@ class LeadManagementController extends Controller
         }
         if ($request->filled('status')) {
             $query->where('status', $request->status);
+        }
+        if ($request->filled('source_page')) {
+            $query->where('source_page', $request->source_page);
         }
         if ($request->filled('date_from') && $request->filled('date_to')) {
             $query->whereBetween('created_at', [$request->date_from . ' 00:00:00', $request->date_to . ' 23:59:59']);

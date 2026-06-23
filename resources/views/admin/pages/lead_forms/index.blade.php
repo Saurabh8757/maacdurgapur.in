@@ -29,9 +29,14 @@
                                 </option>
                             @endforeach
                         </select>
+                        <label class="mr-2 ml-3">Form Type:</label>
+                        <select name="form_type" class="form-control mr-2" onchange="this.form.submit()">
+                            <option value="hero" {{ $form_type == 'hero' ? 'selected' : '' }}>Hero Form</option>
+                            <option value="global_modal" {{ $form_type == 'global_modal' ? 'selected' : '' }}>Global Modal</option>
+                        </select>
                     </form>
                     <div class="card-tools">
-                        <a href="{{ route('admin::lead_forms.create', ['brand_id' => $brand_id]) }}" class="btn btn-primary btn-sm">
+                        <a href="{{ route('admin::lead_forms.create', ['brand_id' => $brand_id, 'form_type' => $form_type]) }}" class="btn btn-primary btn-sm">
                             <i class="fas fa-plus"></i> Add Field
                         </a>
                     </div>
@@ -43,6 +48,7 @@
                                 <th>Order</th>
                                 <th>Label</th>
                                 <th>Field Name</th>
+                                <th>Form Type</th>
                                 <th>Type</th>
                                 <th>Required</th>
                                 <th>Status</th>
@@ -55,7 +61,14 @@
                                     <td>{{ $field->sort_order }}</td>
                                     <td>{{ $field->label }}</td>
                                     <td><code>{{ $field->field_name }}</code></td>
-                                    <td>{{ ucfirst($field->type) }}</td>
+                                    <td>
+                                    @if($field->form_type === 'global_modal')
+                                        <span class="badge badge-info">Global Modal</span>
+                                    @else
+                                        <span class="badge badge-secondary">Hero</span>
+                                    @endif
+                                </td>
+                                <td>{{ ucfirst($field->type) }}</td>
                                     <td>
                                         @if($field->is_required)
                                             <span class="badge badge-danger">Required</span>

@@ -254,40 +254,80 @@
       <form action="{{ route('career_counselling') }}" method="POST" id="comment_form" class="counselling-form">
         @csrf
 
-        <div class="form-group">
-          <span class="field-icon">👤</span>
-          <input type="text" name="name" id="modal-name" class="field-input" placeholder=" " autocomplete="name" required>
-          <label class="field-label" for="modal-name">Your Full Name</label>
-          <span class="error-text name_error"></span>
-        </div>
+        <input type="hidden" name="form_type" value="global_modal">
+        
+        @if(isset($globalModalFormFields) && $globalModalFormFields->isNotEmpty())
+          <input type="hidden" name="brand_id" value="{{ \App\Models\Brand::where('slug', 'maac')->first()->id ?? 9 }}">
+          @foreach($globalModalFormFields as $field)
+            <div class="form-group {{ $field->type === 'textarea' ? 'enquiry-field-textarea' : '' }}">
+              @php
+                $svg = '<span class="field-icon">✏️</span>';
+                if($field->field_name == 'phone') $svg = '<span class="field-icon">📞</span>';
+                elseif($field->field_name == 'email') $svg = '<span class="field-icon">✉️</span>';
+                elseif($field->field_name == 'name') $svg = '<span class="field-icon">👤</span>';
+                elseif($field->type == 'select') $svg = '<span class="field-icon">🎓</span>';
+              @endphp
+              {!! $svg !!}
+              
+              @if($field->type === 'select')
+                <select name="{{ $field->field_name }}" id="modal-{{ $field->field_name }}" class="field-select" {{ $field->is_required ? 'required' : '' }}>
+                  <option value="" disabled selected hidden></option>
+                  @if(!empty($field->options))
+                    @foreach(json_decode($field->options, true) as $option)
+                      <option value="{{ trim($option) }}">{{ trim($option) }}</option>
+                    @endforeach
+                  @elseif($field->field_name === 'course_id' && !empty($courses))
+                    @foreach($courses as $course)
+                      <option value="{{ $course->id }}">{{ $course->name }}</option>
+                    @endforeach
+                  @endif
+                </select>
+              @elseif($field->type === 'textarea')
+                <textarea name="{{ $field->field_name }}" id="modal-{{ $field->field_name }}" class="field-input" placeholder=" " {{ $field->is_required ? 'required' : '' }} rows="3"></textarea>
+              @else
+                <input type="{{ $field->type }}" name="{{ $field->field_name }}" id="modal-{{ $field->field_name }}" class="field-input" placeholder=" " {{ $field->is_required ? 'required' : '' }}>
+              @endif
+              
+              <label class="field-label" for="modal-{{ $field->field_name }}">{{ $field->label }}</label>
+              <span class="error-text {{ $field->field_name }}_error"></span>
+            </div>
+          @endforeach
+        @else
+          <div class="form-group">
+            <span class="field-icon">👤</span>
+            <input type="text" name="name" id="modal-name" class="field-input" placeholder=" " autocomplete="name" required>
+            <label class="field-label" for="modal-name">Your Full Name</label>
+            <span class="error-text name_error"></span>
+          </div>
 
-        <div class="form-group">
-          <span class="field-icon">📞</span>
-          <input type="tel" name="phone" id="modal-phone" class="field-input" placeholder=" " autocomplete="tel" required>
-          <label class="field-label" for="modal-phone">Phone Number</label>
-          <span class="error-text phone_error"></span>
-        </div>
+          <div class="form-group">
+            <span class="field-icon">📞</span>
+            <input type="tel" name="phone" id="modal-phone" class="field-input" placeholder=" " autocomplete="tel" required>
+            <label class="field-label" for="modal-phone">Phone Number</label>
+            <span class="error-text phone_error"></span>
+          </div>
 
-        <div class="form-group">
-          <span class="field-icon">✉️</span>
-          <input type="email" name="email" id="modal-email" class="field-input" placeholder=" " autocomplete="email" required>
-          <label class="field-label" for="modal-email">Email Address</label>
-          <span class="error-text email_error"></span>
-        </div>
+          <div class="form-group">
+            <span class="field-icon">✉️</span>
+            <input type="email" name="email" id="modal-email" class="field-input" placeholder=" " autocomplete="email" required>
+            <label class="field-label" for="modal-email">Email Address</label>
+            <span class="error-text email_error"></span>
+          </div>
 
-        <div class="form-group">
-          <span class="field-icon">🎓</span>
-          <select name="course_id" id="modal-course" class="field-select">
-            <option value="" disabled selected hidden></option>
-            @if(!empty($courses))
-              @foreach ($courses as $course)
-                <option value="{{ $course->id }}">{{ $course->name }}</option>
-              @endforeach
-            @endif
-          </select>
-          <label class="field-label" for="modal-course">Select Course</label>
-          <span class="error-text course_id_error"></span>
-        </div>
+          <div class="form-group">
+            <span class="field-icon">🎓</span>
+            <select name="course_id" id="modal-course" class="field-select">
+              <option value="" disabled selected hidden></option>
+              @if(!empty($courses))
+                @foreach ($courses as $course)
+                  <option value="{{ $course->id }}">{{ $course->name }}</option>
+                @endforeach
+              @endif
+            </select>
+            <label class="field-label" for="modal-course">Select Course</label>
+            <span class="error-text course_id_error"></span>
+          </div>
+        @endif
 
         <button type="submit" class="counselling-submit" id="counsellingSubmit">
           <span class="spinner"></span>

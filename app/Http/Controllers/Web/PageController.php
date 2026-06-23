@@ -31,14 +31,21 @@ class PageController extends Controller
 
         $brand = \App\Models\Brand::where('slug', 'maac')->first();
         $formFields = [];
+        $globalModalFormFields = [];
         if ($brand && env('DYNAMIC_FORMS_MAAC', false)) {
             $formFields = \App\Models\LeadFormField::where('brand_id', $brand->id)
+                ->where('form_type', 'hero')
+                ->where('is_active', true)
+                ->orderBy('sort_order', 'asc')
+                ->get();
+            $globalModalFormFields = \App\Models\LeadFormField::where('brand_id', $brand->id)
+                ->where('form_type', 'global_modal')
                 ->where('is_active', true)
                 ->orderBy('sort_order', 'asc')
                 ->get();
         }
 
-        return view('frontend.pages.index',compact('courses', 'brand', 'formFields'));
+        return view('frontend.pages.index',compact('courses', 'brand', 'formFields', 'globalModalFormFields'));
     }
 
     public function counselling(Request $request){
@@ -51,8 +58,10 @@ class PageController extends Controller
                 if (env($envKey, false)) {
                     $brand_id = $brand->id;
             
-            // Fetch active fields for this brand
+            // Fetch active fields for this brand and form type
+            $formType = $request->input('form_type', 'hero');
             $fields = \App\Models\LeadFormField::where('brand_id', $brand_id)
+                ->where('form_type', $formType)
                 ->where('is_active', true)
                 ->get();
                 
@@ -101,6 +110,10 @@ class PageController extends Controller
                 'course_name' => $course_name,
                 'status' => 'new'
             ];
+            
+            if ($formType === 'global_modal') {
+                $leadData['source_page'] = 'Global Modal';
+            }
             $customData = [];
 
             foreach ($fields as $field) {
@@ -205,6 +218,7 @@ public function terms()
         $formFields = [];
         if ($brand && env('DYNAMIC_FORMS_MAAC', false)) {
             $formFields = \App\Models\LeadFormField::where('brand_id', $brand->id)
+                ->where('form_type', 'hero')
                 ->where('is_active', true)
                 ->orderBy('sort_order', 'asc')
                 ->get();
@@ -220,6 +234,7 @@ public function terms()
         $formFields = [];
         if ($brand && env('DYNAMIC_FORMS_AKSHA', false)) {
             $formFields = \App\Models\LeadFormField::where('brand_id', $brand->id)
+                ->where('form_type', 'hero')
                 ->where('is_active', true)
                 ->orderBy('sort_order', 'asc')
                 ->get();
@@ -259,6 +274,7 @@ public function terms()
         $formFields = [];
         if ($brand && env('DYNAMIC_FORMS_SPACE_E_FIC', false)) {
             $formFields = \App\Models\LeadFormField::where('brand_id', $brand->id)
+                ->where('form_type', 'hero')
                 ->where('is_active', true)
                 ->orderBy('sort_order', 'asc')
                 ->get();

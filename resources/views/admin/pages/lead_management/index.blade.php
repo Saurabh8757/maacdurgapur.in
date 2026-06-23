@@ -61,6 +61,21 @@
                                 </div>
                                 <div class="col-md-2">
                                     <div class="form-group">
+                                        <label>Source Page</label>
+                                        <select name="source_page" class="form-control">
+                                            <option value="">All Sources</option>
+                                            @if(isset($sourcePages) && $sourcePages->isNotEmpty())
+                                                @foreach($sourcePages as $source)
+                                                    <option value="{{ $source }}" {{ request('source_page') == $source ? 'selected' : '' }}>{{ $source }}</option>
+                                                @endforeach
+                                            @else
+                                                <option value="Global Modal" {{ request('source_page') == 'Global Modal' ? 'selected' : '' }}>Global Modal</option>
+                                            @endif
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-group">
                                         <label>Name</label>
                                         <input type="text" name="name" class="form-control" value="{{ request('name') }}" placeholder="Search Name">
                                     </div>

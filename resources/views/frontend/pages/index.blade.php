@@ -961,9 +961,10 @@
       <form action="{{ route('career_counselling') }}" method="POST" id="comment_form" class="counselling-form">
         @csrf
 
-        @if(!empty($formFields))
+        @if(!empty($globalModalFormFields))
           <input type="hidden" name="brand_id" value="{{ $brand->id }}">
-          @foreach($formFields as $field)
+          <input type="hidden" name="form_type" value="global_modal">
+          @foreach($globalModalFormFields as $field)
             <div class="form-group {{ $field->type === 'checkbox' ? 'form-check-group' : '' }}">
               @php
                 $icon = '👤';
@@ -1067,6 +1068,8 @@
 
   </div>
 </div>
+
+
 
 <!-- chatbot -->
 <button id="aksha-launcher" aria-label="Open chat" onclick="toggleChat()">

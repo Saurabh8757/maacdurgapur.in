@@ -14,11 +14,14 @@ class LeadFormController extends Controller
         $brands = Brand::all();
         $brand_id = $request->get('brand_id', $brands->first()->id ?? null);
         
+        $form_type = $request->get('form_type', 'hero');
+        
         $fields = LeadFormField::where('brand_id', $brand_id)
+            ->where('form_type', $form_type)
             ->orderBy('sort_order', 'asc')
             ->get();
 
-        return view('admin.pages.lead_forms.index', compact('fields', 'brands', 'brand_id'));
+        return view('admin.pages.lead_forms.index', compact('fields', 'brands', 'brand_id', 'form_type'));
     }
 
     public function create(Request $request)
@@ -32,6 +35,7 @@ class LeadFormController extends Controller
     {
         $request->validate([
             'brand_id' => 'required|exists:brands,id',
+            'form_type' => 'required|in:hero,global_modal',
             'label' => 'required|string|max:255',
             'field_name' => 'required|string|max:255|regex:/^[a-zA-Z0-9_]+$/',
             'type' => 'required|in:text,email,phone,select,textarea,checkbox',
@@ -79,6 +83,7 @@ class LeadFormController extends Controller
 
         $request->validate([
             'brand_id' => 'required|exists:brands,id',
+            'form_type' => 'required|in:hero,global_modal',
             'label' => 'required|string|max:255',
             'field_name' => 'required|string|max:255|regex:/^[a-zA-Z0-9_]+$/',
             'type' => 'required|in:text,email,phone,select,textarea,checkbox',
