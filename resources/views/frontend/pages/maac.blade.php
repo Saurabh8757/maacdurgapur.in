@@ -406,7 +406,7 @@
         <div class="swiper-slide maac-course-card">
           @if($course->thumbnail)
           <div class="course-card-icon-wrap">
-            <img loading="lazy" src="{{ asset($course->thumbnail->storage_key) }}" alt="{{ $course->title }}" class="course-card-icon">
+            <img loading="lazy" src="{{ asset('storage/' . $course->thumbnail->storage_key) }}" alt="{{ $course->title }}" class="course-card-icon">
           </div>
           @endif
           <h3 class="course-card-title">{!! nl2br(e($course->title)) !!}</h3>

@@ -183,7 +183,7 @@
                             @if ($cmsMenuPermissions['courses'] || $cmsMenuPermissions['features'])
                             <li class="nav-item has-treeview @if (request()->routeIs('admin::content.courses.*') || request()->routeIs('admin::content.features.*')) menu-open @endif">
                                 <a href="#" class="nav-link @if (request()->routeIs('admin::content.courses.*') || request()->routeIs('admin::content.features.*')) active @endif" style="padding-left: 2rem !important;">
-                                    <i class="fas fa-graduation-cap nav-icon" style="font-size: 0.9rem;"></i>
+                                    <i class="fas fa-school nav-icon" style="font-size: 0.9rem;"></i>
                                     <p>
                                         MAAC
                                         <i class="right fas fa-angle-left"></i>
@@ -211,6 +211,33 @@
                                 </ul>
                             </li>
                             @endif
+
+                            {{-- AKSHA Group --}}
+                            <li class="nav-item has-treeview @if (request()->routeIs('admin::content.aksha.*')) menu-open @endif">
+                                <a href="#" class="nav-link @if (request()->routeIs('admin::content.aksha.*')) active @endif" style="padding-left: 2rem !important;">
+                                    <i class="fas fa-star nav-icon" style="font-size: 0.9rem;"></i>
+                                    <p>
+                                        AKSHA
+                                        <i class="right fas fa-angle-left"></i>
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview">
+                                    <li class="nav-item">
+                                        <a href="{{ route('admin::content.aksha.major-programs.index') }}"
+                                           class="nav-link @if (request()->routeIs('admin::content.aksha.major-programs.*')) active @endif" style="padding-left: 3rem !important;">
+                                            <i class="far fa-circle nav-icon" style="font-size: 0.8rem;"></i>
+                                            <p style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Major Programs</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="{{ route('admin::content.aksha.supporting-courses.index') }}"
+                                           class="nav-link @if (request()->routeIs('admin::content.aksha.supporting-courses.*')) active @endif" style="padding-left: 3rem !important;">
+                                            <i class="far fa-circle nav-icon" style="font-size: 0.8rem;"></i>
+                                            <p style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Supporting Courses</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
 
                             {{-- Student Work Group --}}
                             @if ($cmsMenuPermissions['showcase'])

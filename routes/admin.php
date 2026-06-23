@@ -128,6 +128,21 @@ Route::group(['as' => 'admin::', 'prefix' => 'v1/cpanel/admin', 'middleware' => 
         Route::patch('showcase-projects/{showcase_project}/publish', [\App\Http\Controllers\Admin\Cms\CmsShowcaseProjectController::class, 'publish'])
             ->name('admin::cms.showcase_projects.publish');
 
+        Route::post('aksha/major-programs/reorder', [\App\Http\Controllers\Admin\AkshaMajorProgramController::class, 'updateOrder'])
+            ->name('aksha.major_programs.reorder');
+        Route::patch('aksha/major-programs/{major_program}/toggle', [\App\Http\Controllers\Admin\AkshaMajorProgramController::class, 'toggleStatus'])
+            ->name('aksha.major_programs.toggle');
+        Route::apiResource('aksha/major-programs', \App\Http\Controllers\Admin\AkshaMajorProgramController::class)
+            ->except('show')
+            ->names('aksha.major_programs');
+
+        Route::post('aksha/supporting-courses/reorder', [\App\Http\Controllers\Admin\AkshaSupportingCourseController::class, 'updateOrder'])
+            ->name('aksha.supporting_courses.reorder');
+        Route::patch('aksha/supporting-courses/{supporting_course}/toggle', [\App\Http\Controllers\Admin\AkshaSupportingCourseController::class, 'toggleStatus'])
+            ->name('aksha.supporting_courses.toggle');
+        Route::apiResource('aksha/supporting-courses', \App\Http\Controllers\Admin\AkshaSupportingCourseController::class)
+            ->except('show')
+            ->names('aksha.supporting_courses');
     });
     /*** CMS FAQ End ***/
 
@@ -148,6 +163,16 @@ Route::group(['as' => 'admin::', 'prefix' => 'v1/cpanel/admin', 'middleware' => 
         Route::get('features', [CmsFeaturePageController::class, 'index'])->name('features.index');
         Route::get('features/create', [CmsFeaturePageController::class, 'create'])->name('features.create');
         Route::get('features/{feature}/edit', [CmsFeaturePageController::class, 'edit'])->name('features.edit');
+
+        Route::prefix('aksha')->name('aksha.')->group(function () {
+            Route::get('major-programs', [\App\Http\Controllers\Admin\AkshaMajorProgramPageController::class, 'index'])->name('major-programs.index');
+            Route::get('major-programs/create', [\App\Http\Controllers\Admin\AkshaMajorProgramPageController::class, 'create'])->name('major-programs.create');
+            Route::get('major-programs/{program}/edit', [\App\Http\Controllers\Admin\AkshaMajorProgramPageController::class, 'edit'])->name('major-programs.edit');
+
+            Route::get('supporting-courses', [\App\Http\Controllers\Admin\AkshaSupportingCoursePageController::class, 'index'])->name('supporting-courses.index');
+            Route::get('supporting-courses/create', [\App\Http\Controllers\Admin\AkshaSupportingCoursePageController::class, 'create'])->name('supporting-courses.create');
+            Route::get('supporting-courses/{course}/edit', [\App\Http\Controllers\Admin\AkshaSupportingCoursePageController::class, 'edit'])->name('supporting-courses.edit');
+        });
 
         Route::get('showcase-categories', [CmsShowcaseCategoryPageController::class, 'index'])->name('showcase-categories.index');
         Route::get('showcase-categories/create', [CmsShowcaseCategoryPageController::class, 'create'])->name('showcase-categories.create');

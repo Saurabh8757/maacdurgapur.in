@@ -265,7 +265,17 @@ public function terms()
                 ->get();
         }
 
-        return view('frontend.pages.aksha', compact('courses', 'brand', 'formFields'));
+        $majorPrograms = \App\Models\AkshaMajorProgram::with('featuredImage')
+            ->where('is_active', true)
+            ->orderBy('sort_order')
+            ->get();
+
+        $supportingCourses = \App\Models\AkshaSupportingCourse::with('featuredImage')
+            ->where('is_active', true)
+            ->orderBy('sort_order')
+            ->get();
+
+        return view('frontend.pages.aksha', compact('courses', 'brand', 'formFields', 'majorPrograms', 'supportingCourses'));
     }
 
  public function faq(BrandContextManager $brandContextManager)

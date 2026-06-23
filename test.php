@@ -1,9 +1,13 @@
 <?php
-require __DIR__."/vendor/autoload.php";
-$app = require_once __DIR__."/bootstrap/app.php";
+require __DIR__.'/vendor/autoload.php';
+$app = require_once __DIR__.'/bootstrap/app.php';
 $kernel = $app->make(Illuminate\Contracts\Console\Kernel::class);
 $kernel->bootstrap();
-$request = new \Illuminate\Http\Request(["name" => "jhoonjhoona bhai", "phone" => "1234567898", "email" => "dxfjkhngz@gmail.com", "course_id" => "2"]);
-$controller = app()->make(App\Http\Controllers\Web\PageController::class);
-var_dump($controller->counselling($request)->getContent());
 
+$media = \App\Models\MediaAsset::latest()->first();
+if ($media) {
+    \App\Models\AkshaSupportingCourse::where('id', 1)->update(['featured_image_media_id' => $media->id]);
+    echo "Media attached: " . $media->storage_key . "\n";
+} else {
+    echo "No media found.\n";
+}

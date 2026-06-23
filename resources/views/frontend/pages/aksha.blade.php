@@ -273,93 +273,31 @@
     </div>
 
     <div class="aksha-showcase-grid">
-      <!-- Major Program 1 -->
+      @foreach($majorPrograms as $program)
       <div class="showcase-cinematic-card">
         <div class="cinematic-image-wrap">
-          <img src="{{ asset('frontend/images/animation.webp') }}" alt="3D Animation" loading="lazy">
+          <img src="{{ $program->featuredImage ? $program->featuredImage->url : asset('frontend/images/pg-01.webp') }}" alt="{{ $program->title }}" loading="lazy">
           <div class="cinematic-glow"></div>
         </div>
         <div class="cinematic-content">
-          <h3>Professional Program in 3D Animation</h3>
-          <p>Master the art of 3D animation, character design, and modeling using industry-standard tools like Maya and Blender.</p>
+          <h3>{{ $program->title }}</h3>
+          <p>{{ $program->short_description }}</p>
+          @if(is_array($program->skills) && count($program->skills) > 0)
           <div class="course-skills-tags">
-            <span>Character Design</span>
-            <span>Modeling</span>
-            <span>Rigging</span>
-            <span>Animation</span>
+            @foreach($program->skills as $skill)
+            <span>{{ trim($skill) }}</span>
+            @endforeach
           </div>
+          @endif
+          @if($program->outcome)
           <div class="course-outcome">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-            Outcome: 3D Animator / Character Artist
+            Outcome: {{ $program->outcome }}
           </div>
+          @endif
         </div>
       </div>
-
-      <!-- Major Program 2 -->
-      <div class="showcase-cinematic-card">
-        <div class="cinematic-image-wrap">
-          <img src="{{ asset('frontend/images/pg-04.webp') }}" alt="3D Animation & VFX" loading="lazy">
-          <div class="cinematic-glow"></div>
-        </div>
-        <div class="cinematic-content">
-          <h3>Professional Program in 3D Animation & VFX</h3>
-          <p>Combine advanced 3D animation techniques with high-end visual effects for film, television, and gaming.</p>
-          <div class="course-skills-tags">
-            <span>VFX Compositing</span>
-            <span>Motion Tracking</span>
-            <span>CGI</span>
-            <span>Dynamics</span>
-          </div>
-          <div class="course-outcome">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-            Outcome: VFX Artist / Compositor
-          </div>
-        </div>
-      </div>
-
-      <!-- Major Program 3 -->
-      <div class="showcase-cinematic-card">
-        <div class="cinematic-image-wrap">
-          <img src="{{ asset('frontend/images/aksha/bg/fantasy1.webp') }}" alt="Core Programming" loading="lazy">
-          <div class="cinematic-glow"></div>
-        </div>
-        <div class="cinematic-content">
-          <h3>Diploma in Core Programming & Languages</h3>
-          <p>Build a strong foundation in computer science with deep dives into algorithms, data structures, and multiple coding languages.</p>
-          <div class="course-skills-tags">
-            <span>Python</span>
-            <span>C / C++</span>
-            <span>JavaScript</span>
-            <span>Logic Building</span>
-          </div>
-          <div class="course-outcome">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-            Outcome: Software Developer / Programmer
-          </div>
-        </div>
-      </div>
-
-      <!-- Major Program 4 -->
-      <div class="showcase-cinematic-card">
-        <div class="cinematic-image-wrap">
-          <img src="{{ asset('frontend/images/aksha/bg/fantasy1.webp') }}" alt="Digital Marketing" loading="lazy">
-          <div class="cinematic-glow"></div>
-        </div>
-        <div class="cinematic-content">
-          <h3>Professional Program in Digital Marketing & AI Analytics</h3>
-          <p>Master modern marketing strategies integrated with AI tools, performance marketing, and data-driven growth tactics.</p>
-          <div class="course-skills-tags">
-            <span>SEO</span>
-            <span>Meta Ads</span>
-            <span>Google Ads</span>
-            <span>AI Marketing</span>
-          </div>
-          <div class="course-outcome">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-            Outcome: Digital Marketing Manager
-          </div>
-        </div>
-      </div>
+      @endforeach
     </div>
   </div>
 </section>
@@ -379,243 +317,47 @@
 
     <div class="swiper aksha-courses-swiper">
       <div class="swiper-wrapper">
-      <!-- Course 1 -->
+      @php
+          $fallbackImages = [
+              'graphic-design' => 'frontend/images/pg-01.webp',
+              'ui-ux-design' => 'frontend/images/aksha/bg/fantasy1.webp',
+              'motion-graphics' => 'frontend/images/pg-03.webp',
+              'video-editing' => 'frontend/images/pg-06.webp',
+              'web-development' => 'frontend/images/aksha/bg/fantasy1.webp',
+              'full-stack-development' => 'frontend/images/aksha/bg/fantasy1.webp',
+              'python-programming' => 'frontend/images/aksha/bg/fantasy1.webp',
+              'data-analytics' => 'frontend/images/aksha/bg/fantasy1.webp',
+              'ai-tools-and-automation' => 'frontend/images/aksha/bg/fantasy1.webp',
+              'seo-and-performance' => 'frontend/images/aksha/bg/fantasy1.webp',
+              'social-media-marketing' => 'frontend/images/pg-05.webp',
+              'content-and-branding' => 'frontend/images/pg-02.webp',
+          ];
+      @endphp
+      @foreach($supportingCourses as $course)
       <div class="swiper-slide aksha-course-card">
         <div class="course-card-img-wrap">
-          <img src="{{ asset('frontend/images/pg-01.webp') }}" alt="Graphic Design" loading="lazy">
+          <img src="{{ $course->featuredImage ? $course->featuredImage->url : asset($fallbackImages[$course->slug] ?? 'frontend/images/aksha/bg/fantasy1.webp') }}" alt="{{ $course->title }}" loading="lazy">
         </div>
         <div class="course-card-content">
-          <h3>Graphic Design</h3>
-          <p>Master visual communication, branding, and layout design using Photoshop, Illustrator, and InDesign.</p>
+          <h3>{{ $course->title }}</h3>
+          <p>{{ $course->short_description }}</p>
+          @if(is_array($course->skills) && count($course->skills) > 0)
           <div class="course-skills-tags">
-            <span>Photoshop</span>
-            <span>Illustrator</span>
-            <span>Branding</span>
+            @foreach($course->skills as $skill)
+            <span>{{ trim($skill) }}</span>
+            @endforeach
           </div>
+          @endif
+          @if($course->outcome)
           <div class="course-outcome">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            Graphic Designer
+            {{ $course->outcome }}
           </div>
+          @endif
         </div>
       </div>
+      @endforeach
 
-      <!-- Course 2 -->
-      <div class="swiper-slide aksha-course-card">
-        <div class="course-card-img-wrap">
-          <img src="{{ asset('frontend/images/aksha/bg/fantasy1.webp') }}" alt="UI/UX Design" loading="lazy">
-        </div>
-        <div class="course-card-content">
-          <h3>UI/UX Design</h3>
-          <p>Design intuitive and engaging user experiences for web and mobile applications using Figma and Adobe XD.</p>
-          <div class="course-skills-tags">
-            <span>Figma</span>
-            <span>Wireframing</span>
-            <span>Prototyping</span>
-          </div>
-          <div class="course-outcome">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            UI/UX Designer
-          </div>
-        </div>
-      </div>
-
-      <!-- Course 3 -->
-      <div class="swiper-slide aksha-course-card">
-        <div class="course-card-img-wrap">
-          <img src="{{ asset('frontend/images/pg-03.webp') }}" alt="Motion Graphics" loading="lazy">
-        </div>
-        <div class="course-card-content">
-          <h3>Motion Graphics</h3>
-          <p>Bring static designs to life with advanced animation techniques in After Effects and Premiere Pro.</p>
-          <div class="course-skills-tags">
-            <span>After Effects</span>
-            <span>Kinetic Typography</span>
-          </div>
-          <div class="course-outcome">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            Motion Designer
-          </div>
-        </div>
-      </div>
-
-      <!-- Course 4 -->
-      <div class="swiper-slide aksha-course-card">
-        <div class="course-card-img-wrap">
-          <img src="{{ asset('frontend/images/pg-06.webp') }}" alt="Video Editing" loading="lazy">
-        </div>
-        <div class="course-card-content">
-          <h3>Video Editing</h3>
-          <p>Learn professional non-linear editing, color grading, and audio mixing for YouTube, films, and social media.</p>
-          <div class="course-skills-tags">
-            <span>Premiere Pro</span>
-            <span>Color Grading</span>
-          </div>
-          <div class="course-outcome">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            Video Editor
-          </div>
-        </div>
-      </div>
-
-      <!-- Course 5 -->
-      <div class="swiper-slide aksha-course-card">
-        <div class="course-card-img-wrap">
-          <img src="{{ asset('frontend/images/aksha/bg/fantasy1.webp') }}" alt="Web Development" loading="lazy">
-        </div>
-        <div class="course-card-content">
-          <h3>Web Development</h3>
-          <p>Build responsive, modern websites from scratch using HTML5, CSS3, JavaScript, and popular frontend frameworks.</p>
-          <div class="course-skills-tags">
-            <span>HTML/CSS</span>
-            <span>JavaScript</span>
-            <span>React</span>
-          </div>
-          <div class="course-outcome">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            Frontend Developer
-          </div>
-        </div>
-      </div>
-
-      <!-- Course 6 -->
-      <div class="swiper-slide aksha-course-card">
-        <div class="course-card-img-wrap">
-          <img src="{{ asset('frontend/images/aksha/bg/fantasy1.webp') }}" alt="Full Stack Development" loading="lazy">
-        </div>
-        <div class="course-card-content">
-          <h3>Full Stack Development</h3>
-          <p>Master both frontend interfaces and backend databases to build complete, scalable web applications.</p>
-          <div class="course-skills-tags">
-            <span>Node.js</span>
-            <span>Databases</span>
-            <span>APIs</span>
-          </div>
-          <div class="course-outcome">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            Full Stack Engineer
-          </div>
-        </div>
-      </div>
-
-      <!-- Course 7 -->
-      <div class="swiper-slide aksha-course-card">
-        <div class="course-card-img-wrap">
-          <img src="{{ asset('frontend/images/aksha/bg/fantasy1.webp') }}" alt="Python Programming" loading="lazy">
-        </div>
-        <div class="course-card-content">
-          <h3>Python Programming</h3>
-          <p>Learn the world's most versatile language for automation, backend development, and introductory data science.</p>
-          <div class="course-skills-tags">
-            <span>Python</span>
-            <span>Automation</span>
-            <span>Django</span>
-          </div>
-          <div class="course-outcome">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            Python Developer
-          </div>
-        </div>
-      </div>
-
-      <!-- Course 8 -->
-      <div class="swiper-slide aksha-course-card">
-        <div class="course-card-img-wrap">
-          <img src="{{ asset('frontend/images/aksha/bg/fantasy1.webp') }}" alt="Data Analytics" loading="lazy">
-        </div>
-        <div class="course-card-content">
-          <h3>Data Analytics</h3>
-          <p>Turn raw data into actionable business insights using SQL, Excel, Tableau, and Python data libraries.</p>
-          <div class="course-skills-tags">
-            <span>SQL</span>
-            <span>Tableau</span>
-            <span>Data Viz</span>
-          </div>
-          <div class="course-outcome">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            Data Analyst
-          </div>
-        </div>
-      </div>
-
-      <!-- Course 9 -->
-      <div class="swiper-slide aksha-course-card">
-        <div class="course-card-img-wrap">
-          <img src="{{ asset('frontend/images/aksha/bg/fantasy1.webp') }}" alt="AI Tools & Automation" loading="lazy">
-        </div>
-        <div class="course-card-content">
-          <h3>AI Tools & Automation</h3>
-          <p>Future-proof your career by integrating generative AI and automated workflows into daily business operations.</p>
-          <div class="course-skills-tags">
-            <span>ChatGPT</span>
-            <span>MidJourney</span>
-            <span>Zapier</span>
-          </div>
-          <div class="course-outcome">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            AI Specialist
-          </div>
-        </div>
-      </div>
-
-      <!-- Course 10 -->
-      <div class="swiper-slide aksha-course-card">
-        <div class="course-card-img-wrap">
-          <img src="{{ asset('frontend/images/aksha/bg/fantasy1.webp') }}" alt="SEO & Performance Marketing" loading="lazy">
-        </div>
-        <div class="course-card-content">
-          <h3>SEO & Performance</h3>
-          <p>Drive organic traffic and manage high-budget paid ad campaigns across search and social networks.</p>
-          <div class="course-skills-tags">
-            <span>Google Ads</span>
-            <span>On-Page SEO</span>
-            <span>Analytics</span>
-          </div>
-          <div class="course-outcome">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            Performance Marketer
-          </div>
-        </div>
-      </div>
-
-      <!-- Course 11 -->
-      <div class="swiper-slide aksha-course-card">
-        <div class="course-card-img-wrap">
-          <img src="{{ asset('frontend/images/pg-05.webp') }}" alt="Social Media Marketing" loading="lazy">
-        </div>
-        <div class="course-card-content">
-          <h3>Social Media Marketing</h3>
-          <p>Build vibrant brand communities, run influencer campaigns, and master engagement on Instagram, LinkedIn & X.</p>
-          <div class="course-skills-tags">
-            <span>Community</span>
-            <span>Instagram</span>
-            <span>Strategy</span>
-          </div>
-          <div class="course-outcome">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            Social Media Manager
-          </div>
-        </div>
-      </div>
-
-      <!-- Course 12 -->
-      <div class="swiper-slide aksha-course-card">
-        <div class="course-card-img-wrap">
-          <img src="{{ asset('frontend/images/pg-02.webp') }}" alt="Content Creation & Branding" loading="lazy">
-        </div>
-        <div class="course-card-content">
-          <h3>Content & Branding</h3>
-          <p>Master the art of storytelling, copywriting, and visual branding to create compelling corporate narratives.</p>
-          <div class="course-skills-tags">
-            <span>Copywriting</span>
-            <span>Storytelling</span>
-            <span>Brand Identity</span>
-          </div>
-          <div class="course-outcome">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            Content Strategist
-          </div>
-        </div>
-      </div>
           </div>
       <!-- Swiper Pagination & Navigation -->
       <div class="swiper-pagination mt-4"></div>

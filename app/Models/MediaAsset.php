@@ -77,6 +77,18 @@ class MediaAsset extends Model
         });
     }
 
+    public function getUrlAttribute()
+    {
+        if (\Illuminate\Support\Str::startsWith($this->storage_key, 'http')) {
+            return $this->storage_key;
+        }
+        $key = \Illuminate\Support\Str::startsWith($this->storage_key, 'storage/') 
+            ? substr($this->storage_key, 8) 
+            : $this->storage_key;
+            
+        return asset('storage/' . ltrim($key, '/'));
+    }
+
     public function brand()
     {
         return $this->belongsTo(Brand::class);

@@ -32,7 +32,30 @@ class CmsCourseController extends Controller
 
     public function store(CmsCourseRequest $request): JsonResponse
     {
-        $course = $this->courseService->create($request->validated());
+        $data = $request->validated();
+        
+        if ($request->hasFile('thumbnail')) {
+            $file = $request->file('thumbnail');
+            $path = $file->store('cms/courses', 'public');
+            $media = \App\Models\MediaAsset::create([
+                'brand_id' => $this->brandContextManager->requireAdminContext()->brand()->getKey(),
+                'uploaded_by' => auth()->id() ?? 1,
+                'storage_disk' => 'public',
+                'storage_key' => $path,
+                'original_filename' => $file->getClientOriginalName(),
+                'display_name' => $file->getClientOriginalName(),
+                'extension' => strtolower($file->getClientOriginalExtension()),
+                'media_type' => 'image',
+                'mime_type' => $file->getMimeType(),
+                'size_bytes' => $file->getSize(),
+                'checksum_sha256' => hash_file('sha256', $file->getRealPath()),
+                'visibility' => 'public',
+                'is_active' => true,
+            ]);
+            $data['thumbnail_media_id'] = $media->id;
+        }
+
+        $course = $this->courseService->create($data);
         
         return response()->json($course->load('thumbnail'), 201);
     }
@@ -44,7 +67,30 @@ class CmsCourseController extends Controller
             abort(403, 'Unauthorized action.');
         }
 
-        $course = $this->courseService->update($course, $request->validated());
+        $data = $request->validated();
+        
+        if ($request->hasFile('thumbnail')) {
+            $file = $request->file('thumbnail');
+            $path = $file->store('cms/courses', 'public');
+            $media = \App\Models\MediaAsset::create([
+                'brand_id' => $brandId,
+                'uploaded_by' => auth()->id() ?? 1,
+                'storage_disk' => 'public',
+                'storage_key' => $path,
+                'original_filename' => $file->getClientOriginalName(),
+                'display_name' => $file->getClientOriginalName(),
+                'extension' => strtolower($file->getClientOriginalExtension()),
+                'media_type' => 'image',
+                'mime_type' => $file->getMimeType(),
+                'size_bytes' => $file->getSize(),
+                'checksum_sha256' => hash_file('sha256', $file->getRealPath()),
+                'visibility' => 'public',
+                'is_active' => true,
+            ]);
+            $data['thumbnail_media_id'] = $media->id;
+        }
+
+        $course = $this->courseService->update($course, $data);
         
         return response()->json($course->load('thumbnail'));
     }

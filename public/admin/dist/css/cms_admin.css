@@ -99,3 +99,9 @@
         min-width: 150px;
     }
 }
+
+/* Toastr Bug Fix for repeating background icons */
+#toast-container > div,
+#toast-container > div:hover {
+    background-repeat: no-repeat !important;
+}

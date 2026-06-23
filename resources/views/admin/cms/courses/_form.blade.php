@@ -20,9 +20,19 @@
 </div>
 <div class="row">
     <div class="col-md-4 form-group">
-        <label for="thumbnail_media_id">Thumbnail media ID</label>
-        <input class="form-control" type="number" min="1" id="thumbnail_media_id" name="thumbnail_media_id" value="{{ old('thumbnail_media_id', optional($course ?? null)->thumbnail_media_id) }}">
-        <div class="cms-help mt-1">Optional. Uses an existing media asset; no upload is performed here.</div>
+        <label for="thumbnail">Thumbnail Image</label>
+        <div class="custom-file">
+            <input type="file" name="thumbnail" class="custom-file-input" id="thumbnail" accept="image/*">
+            <label class="custom-file-label" for="thumbnail">Choose file</label>
+        </div>
+        @if(isset($course) && $course->thumbnail)
+            <div class="mt-2" id="thumbnailPreview">
+                <img src="{{ asset('storage/' . $course->thumbnail->storage_key) }}" style="max-height: 80px; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,.12),0 1px 2px rgba(0,0,0,.24);">
+            </div>
+        @else
+            <div class="mt-2" id="thumbnailPreview"></div>
+        @endif
+        <div class="cms-help mt-1">Optional. Upload a new image to replace the existing one.</div>
     </div>
     <div class="col-md-4 form-group">
         <label for="status">Status</label>
@@ -37,3 +47,27 @@
         <input class="form-control" type="number" min="0" id="sort_order" name="sort_order" value="{{ old('sort_order', optional($course ?? null)->sort_order ?? 0) }}">
     </div>
 </div>
+
+<script>
+    const thumbnailInput = document.getElementById('thumbnail');
+    if (thumbnailInput) {
+        thumbnailInput.addEventListener('change', function(e) {
+            let fileName = e.target.value.split('\\').pop();
+            const label = e.target.nextElementSibling;
+            if (label) {
+                label.innerHTML = fileName || 'Choose file';
+            }
+            
+            let previewContainer = document.getElementById('thumbnailPreview');
+            if (e.target.files && e.target.files[0]) {
+                let reader = new FileReader();
+                reader.onload = function(evt) {
+                    if(previewContainer) {
+                        previewContainer.innerHTML = '<img src="'+evt.target.result+'" style="max-height: 80px; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,.12),0 1px 2px rgba(0,0,0,.24);">';
+                    }
+                }
+                reader.readAsDataURL(e.target.files[0]);
+            }
+        });
+    }
+</script>

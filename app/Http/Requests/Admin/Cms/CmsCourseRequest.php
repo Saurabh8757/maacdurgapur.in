@@ -42,7 +42,7 @@ class CmsCourseRequest extends FormRequest
             'description' => 'required|string|max:2000',
             'tools_covered' => 'nullable|array',
             'tools_covered.*' => 'string|max:100',
-            'thumbnail_media_id' => 'nullable|exists:media_assets,id',
+            'thumbnail' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
             'status' => 'required|in:active,inactive',
             'sort_order' => 'integer|min:0'
         ];
