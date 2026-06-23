@@ -29,11 +29,107 @@ class PageController extends Controller
     {
         $courses = OurCourse::where('status', 'Active')->get();
 
-        return view('frontend.pages.index',compact('courses'));
+        $brand = \App\Models\Brand::where('slug', 'maac')->first();
+        $formFields = [];
+        if ($brand && env('DYNAMIC_FORMS_MAAC', false)) {
+            $formFields = \App\Models\LeadFormField::where('brand_id', $brand->id)
+                ->where('is_active', true)
+                ->orderBy('sort_order', 'asc')
+                ->get();
+        }
+
+        return view('frontend.pages.index',compact('courses', 'brand', 'formFields'));
     }
 
     public function counselling(Request $request){
 
+        // Feature Flag Check dynamically based on brand
+        if ($request->has('brand_id')) {
+            $brand = \App\Models\Brand::find($request->brand_id);
+            if ($brand) {
+                $envKey = 'DYNAMIC_FORMS_' . strtoupper(str_replace('-', '_', $brand->slug));
+                if (env($envKey, false)) {
+                    $brand_id = $brand->id;
+            
+            // Fetch active fields for this brand
+            $fields = \App\Models\LeadFormField::where('brand_id', $brand_id)
+                ->where('is_active', true)
+                ->get();
+                
+            $rules = [];
+            $messages = [];
+            
+            foreach ($fields as $field) {
+                if ($field->is_required) {
+                    $rules[$field->field_name] = 'required';
+                    $messages[$field->field_name . '.required'] = 'Please enter ' . $field->label;
+                } else {
+                    $rules[$field->field_name] = 'nullable';
+                }
+                
+                if ($field->type === 'email') {
+                    $rules[$field->field_name] .= '|email';
+                    $messages[$field->field_name . '.email'] = $field->label . ' should be a valid format';
+                }
+                if ($field->type === 'phone') {
+                    $rules[$field->field_name] .= '|numeric';
+                    $messages[$field->field_name . '.numeric'] = $field->label . ' must be a numeric format';
+                }
+            }
+
+            $validator = Validator::make($request->all(), $rules, $messages);
+            if ($validator->fails()) {
+                return response()->json(['status' => 0, 'error' => $validator->errors()->toArray()]);
+            }
+
+            // Determine Course Name
+            $course_name = null;
+            if ($request->has('course_id')) {
+                // If it's a numeric ID (like MAAC legacy), get name. Otherwise, store raw string (like SpaceEFic/Aksha).
+                if (is_numeric($request->course_id)) {
+                    $course = OurCourse::find($request->course_id);
+                    $course_name = $course ? $course->name : $request->course_id;
+                } else {
+                    $course_name = $request->course_id;
+                }
+            }
+
+            // Separate core fields from custom data
+            $coreFields = ['name', 'phone', 'email', 'location', 'message'];
+            $leadData = [
+                'brand_id' => $brand_id,
+                'course_name' => $course_name,
+                'status' => 'new'
+            ];
+            $customData = [];
+
+            foreach ($fields as $field) {
+                $fname = $field->field_name;
+                if ($fname === 'course_id') continue;
+
+                if (in_array($fname, $coreFields)) {
+                    $leadData[$fname] = $request->$fname;
+                } else {
+                    if ($request->has($fname)) {
+                        $customData[$fname] = $request->$fname;
+                    }
+                }
+            }
+
+            if (!empty($customData)) {
+                $leadData['custom_data'] = $customData;
+            }
+
+            \App\Models\Lead::create($leadData);
+
+            return response()->json([
+                'status' => 1,
+                'success' => 'Successfully sent your request'
+            ]);
+                }
+            }
+        }
+        // --- LEGACY FALLBACK ---
         $msg = [
             'name.required' => 'Please enter your Full Name',
             'email.required' => 'Please enter your Email',
@@ -56,24 +152,40 @@ class PageController extends Controller
             return response()->json(['status' => 0, 'error' => $validator->errors()->toArray()]);
         } else {
 
+            // Save to Legacy Table (for safety and external scripts)
             $comments = new CarrerCounselling();
-
             $comments->name = $request->name;
             $comments->phone = $request->phone;
             $comments->email = $request->email;
             $comments->course_id  = $request->course_id;
             $comments->save();
 
-            $course=OurCourse::where('id',$request->course_id)->first();
-            $course_name=$course->name;
+            // Save to Unified Lead Management (so it shows in CMS)
+            $brand = \App\Models\Brand::where('slug', 'maac')->first();
+            if ($brand) {
+                $courseName = null;
+                if ($request->course_id) {
+                    $course = \App\Models\OurCourse::find($request->course_id);
+                    if ($course) {
+                        $courseName = $course->name;
+                    }
+                }
+                \App\Models\Lead::create([
+                    'brand_id' => $brand->id,
+                    'name' => $request->name,
+                    'phone' => $request->phone,
+                    'email' => $request->email,
+                    'course_name' => $courseName,
+                    'source_page' => 'Global Modal',
+                    'status' => 'new'
+                ]);
+            }
 
             return response()->json([
                 'status' => 1,
                 'success' => 'Successfully sent your request'
             ]);
         }
-
-
     }
 
 public function terms()
@@ -88,12 +200,32 @@ public function terms()
         $courses = OurCourse::where('status', 'Active')->get();
         $cmsCourses = $cmsCourseReadService->getAllPublic();
         $cmsFeatures = $cmsFeatureReadService->getAllPublic();
-        return view('frontend.pages.maac', compact('courses', 'cmsCourses', 'cmsFeatures'));
+        
+        $brand = \App\Models\Brand::where('slug', 'maac')->first();
+        $formFields = [];
+        if ($brand && env('DYNAMIC_FORMS_MAAC', false)) {
+            $formFields = \App\Models\LeadFormField::where('brand_id', $brand->id)
+                ->where('is_active', true)
+                ->orderBy('sort_order', 'asc')
+                ->get();
+        }
+
+        return view('frontend.pages.maac', compact('courses', 'cmsCourses', 'cmsFeatures', 'brand', 'formFields'));
     }
 
  public function aksha()
     {
-        return view('frontend.pages.aksha');
+        $courses = \App\Models\OurCourse::where('status', 'Active')->get();
+        $brand = \App\Models\Brand::where('slug', 'aksha')->first();
+        $formFields = [];
+        if ($brand && env('DYNAMIC_FORMS_AKSHA', false)) {
+            $formFields = \App\Models\LeadFormField::where('brand_id', $brand->id)
+                ->where('is_active', true)
+                ->orderBy('sort_order', 'asc')
+                ->get();
+        }
+
+        return view('frontend.pages.aksha', compact('courses', 'brand', 'formFields'));
     }
 
  public function faq(BrandContextManager $brandContextManager)
@@ -121,7 +253,17 @@ public function terms()
 
  public function space_e_fic()
     {
-        return view('frontend.pages.space_e_fic');
+        $courses = \App\Models\OurCourse::where('status', 'Active')->get();
+        $brand = \App\Models\Brand::where('slug', 'space-e-fic')->first();
+        $formFields = [];
+        if ($brand && env('DYNAMIC_FORMS_SPACE_E_FIC', false)) {
+            $formFields = \App\Models\LeadFormField::where('brand_id', $brand->id)
+                ->where('is_active', true)
+                ->orderBy('sort_order', 'asc')
+                ->get();
+        }
+
+        return view('frontend.pages.space_e_fic', compact('courses', 'brand', 'formFields'));
     }
 
  public function fcq()

@@ -81,6 +81,49 @@
                     </a>
                 </li>
 
+                <!-- Lead Management Menu -->
+                <li class="nav-item @if (in_array($segment4, ['lead-management'])) menu-open @endif">
+                    <a href="#" class="nav-link @if (in_array($segment4, ['lead-management'])) active @endif">
+                        <i class="nav-icon fas fa-bullhorn"></i>
+                        <p>
+                            Lead Management
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('admin::leads.index') }}" class="nav-link @if ($segment4 == 'lead-management' && request('status') == null) active @endif">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>All Leads</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('admin::leads.index', ['status' => 'new']) }}" class="nav-link @if ($segment4 == 'lead-management' && request('status') == 'new') active @endif">
+                                <i class="far fa-circle nav-icon text-info"></i>
+                                <p>New Leads</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('admin::leads.index', ['status' => 'follow_up']) }}" class="nav-link @if ($segment4 == 'lead-management' && request('status') == 'follow_up') active @endif">
+                                <i class="far fa-circle nav-icon text-warning"></i>
+                                <p>Follow Up</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('admin::leads.index', ['status' => 'converted']) }}" class="nav-link @if ($segment4 == 'lead-management' && request('status') == 'converted') active @endif">
+                                <i class="far fa-circle nav-icon text-success"></i>
+                                <p>Converted</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('admin::leads.index', ['status' => 'closed']) }}" class="nav-link @if ($segment4 == 'lead-management' && request('status') == 'closed') active @endif">
+                                <i class="far fa-circle nav-icon text-danger"></i>
+                                <p>Closed</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
 
                 <li class="nav-item">
                     <a href="{{ route('admin::course') }}"
@@ -93,13 +136,7 @@
 
 
 
-                <li class="nav-item">
-                    <a href="{{ route('admin::user_detail') }}"
-                       class="nav-link @if (in_array($segment4, ['users-details'])) active @endif">
-                        <i class="fas fa-users nav-icon"></i>
-                        <p>Users Details</p>
-                    </a>
-                </li>
+
 
 
 
@@ -153,6 +190,13 @@
                                     </a>
                                 </li>
                             @endif
+                            <li class="nav-item">
+                                <a href="{{ route('admin::lead_forms.index') }}"
+                                   class="nav-link @if (request()->routeIs('admin::lead_forms.*')) active @endif">
+                                    <i class="fas fa-list-alt nav-icon"></i>
+                                    <p>Lead Forms</p>
+                                </a>
+                            </li>
                         </ul>
                     </li>
                 @endif

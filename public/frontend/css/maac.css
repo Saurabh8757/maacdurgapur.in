@@ -634,11 +634,18 @@
     gap: 15px;
 }
 
-.cta-icon-img,
-.cta-icon-svg {
+.cta-icon-img {
     width: 24px;
     height: 24px;
     filter: invert(1);
+    opacity: 0.9;
+    flex-shrink: 0;
+}
+
+.cta-icon-svg {
+    width: 24px;
+    height: 24px;
+    color: #ffffff;
     opacity: 0.9;
     flex-shrink: 0;
 }

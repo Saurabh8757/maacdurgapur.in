@@ -54,6 +54,25 @@ Route::group(['as' => 'admin::', 'prefix' => 'v1/cpanel/admin', 'middleware' => 
         ->name('settings.global.versions.index');
     Route::get('/settings/global/{definition}/versions/{version}', [SettingsVersionController::class, 'show'])
         ->name('settings.global.versions.show');
+    /*** Lead Management Routes Start ***/
+    Route::get('/leads', [\App\Http\Controllers\Admin\LeadManagementController::class, 'index'])->name('leads.index');
+    Route::get('/leads/export/csv', [\App\Http\Controllers\Admin\LeadManagementController::class, 'exportCsv'])->name('leads.export.csv');
+    Route::get('/leads/export/excel', [\App\Http\Controllers\Admin\LeadManagementController::class, 'exportExcel'])->name('leads.export.excel');
+    Route::get('/leads/{id}', [\App\Http\Controllers\Admin\LeadManagementController::class, 'show'])->name('leads.show');
+    Route::put('/leads/{id}/status', [\App\Http\Controllers\Admin\LeadManagementController::class, 'updateStatus'])->name('leads.update_status');
+    Route::put('/leads/{id}/assign', [\App\Http\Controllers\Admin\LeadManagementController::class, 'assignUser'])->name('leads.assign');
+    Route::delete('/leads/{id}', [\App\Http\Controllers\Admin\LeadManagementController::class, 'destroy'])->name('leads.destroy');
+    /*** Lead Management Routes End ***/
+
+    /*** Lead Forms Routes Start ***/
+    Route::get('/lead-forms', [\App\Http\Controllers\Admin\LeadFormController::class, 'index'])->name('lead_forms.index');
+    Route::get('/lead-forms/create', [\App\Http\Controllers\Admin\LeadFormController::class, 'create'])->name('lead_forms.create');
+    Route::post('/lead-forms', [\App\Http\Controllers\Admin\LeadFormController::class, 'store'])->name('lead_forms.store');
+    Route::get('/lead-forms/{id}/edit', [\App\Http\Controllers\Admin\LeadFormController::class, 'edit'])->name('lead_forms.edit');
+    Route::put('/lead-forms/{id}', [\App\Http\Controllers\Admin\LeadFormController::class, 'update'])->name('lead_forms.update');
+    Route::delete('/lead-forms/{id}', [\App\Http\Controllers\Admin\LeadFormController::class, 'destroy'])->name('lead_forms.destroy');
+    /*** Lead Forms Routes End ***/
+
     /*** Profile Routes Start ***/
     Route::get('/profile/{name}', [ProfileController::class, 'profile'])->name('profile');
     Route::post('/profile-update', [ProfileController::class, 'profile_update'])->name('profile_update');
@@ -165,6 +184,5 @@ Route::group(['as' => 'admin::', 'prefix' => 'v1/cpanel/admin', 'middleware' => 
     Route::post('/status-services',[ServiceController::class,'status'])->name('status_services');
     /*** services End ***/
 
-Route::get('users-details', [CourseController::class, 'usersDetails'])->name('user_detail');
 
 });

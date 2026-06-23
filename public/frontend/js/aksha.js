@@ -1,82 +1,156 @@
-(function () {
-  'use strict';
+document.addEventListener('DOMContentLoaded', () => {
+    
+    // Check if GSAP is loaded
+    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+        gsap.registerPlugin(ScrollTrigger);
 
-  var page = document.querySelector('.aksha-page');
-  if (!page) return;
 
-  page.classList.add('aksha-js');
 
-  var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var revealItems = page.querySelectorAll('.aksha-reveal');
+        // Staggered reveal for grid cards
+        const grids = [
+            '.aksha-info-grid', 
+            '.aksha-showcase-grid',
+            '.aksha-locations-grid',
+            '.aksha-stats-row',
+            '.aksha-roles-grid'
+        ];
 
-  function initHeroAnimation() {
-    var hero = page.querySelector('.aksha-hero');
-    if (!hero) return;
-
-    function runGsap() {
-      if (typeof window.gsap === 'undefined') {
-        window.setTimeout(runGsap, 60);
-        return;
-      }
-
-      var timeline = window.gsap.timeline({ defaults: { ease: 'power3.out' } });
-      timeline
-        .from(hero.querySelector('.aksha-hero-brand'), { y: 24, opacity: 0, duration: .65 })
-        .from(hero.querySelector('.aksha-hero-label'), { y: 20, opacity: 0, duration: .5 }, '-=.35')
-        .from(hero.querySelector('.aksha-hero h1'), { y: 42, opacity: 0, duration: .8 }, '-=.28')
-        .from(hero.querySelector('.aksha-hero-text'), { y: 26, opacity: 0, duration: .6 }, '-=.42')
-        .from(hero.querySelectorAll('.aksha-hero .aksha-btn'), { y: 20, opacity: 0, duration: .5, stagger: .12 }, '-=.32')
-        .from(hero.querySelector('.aksha-student-circle'), { x: 55, opacity: 0, scale: .94, duration: .9 }, '-=.82')
-        .from(hero.querySelectorAll('.aksha-achievement-card'), { y: 24, opacity: 0, scale: .94, duration: .55, stagger: .13 }, '-=.48');
-
-      window.gsap.to('.aksha-card-one', { y: -10, duration: 2.8, repeat: -1, yoyo: true, ease: 'sine.inOut' });
-      window.gsap.to('.aksha-card-two', { y: 12, duration: 3.2, repeat: -1, yoyo: true, ease: 'sine.inOut', delay: .25 });
-      window.gsap.to('.aksha-card-three', { y: -8, duration: 3, repeat: -1, yoyo: true, ease: 'sine.inOut', delay: .5 });
-    }
-
-    if (!reducedMotion) runGsap();
-
-    if (!reducedMotion && window.matchMedia('(pointer: fine)').matches) {
-      var visual = hero.querySelector('.aksha-hero-visual');
-      var student = hero.querySelector('.aksha-student-circle');
-      var cards = hero.querySelectorAll('.aksha-achievement-card');
-
-      hero.addEventListener('pointermove', function (event) {
-        var bounds = hero.getBoundingClientRect();
-        var x = (event.clientX - bounds.left) / bounds.width - 0.5;
-        var y = (event.clientY - bounds.top) / bounds.height - 0.5;
-        visual.style.transform = 'translate3d(' + (x * 8) + 'px,' + (y * 8) + 'px,0)';
-        student.style.transform = 'translate3d(' + (x * -5) + 'px,' + (y * -5) + 'px,0)';
-        cards.forEach(function (card, index) {
-          card.style.marginLeft = (x * (6 + index * 3)) + 'px';
+        grids.forEach(gridSelector => {
+            const grid = document.querySelector(gridSelector);
+            if(grid) {
+                const cards = grid.children;
+                gsap.fromTo(cards, 
+                    {
+                        y: 30,
+                        opacity: 0
+                    },
+                    {
+                        scrollTrigger: {
+                            trigger: grid,
+                            start: "top 85%",
+                            toggleActions: "play none none reverse"
+                        },
+                        y: 0,
+                        opacity: 1,
+                        duration: 0.8,
+                        stagger: 0.15,
+                        ease: "power2.out"
+                    }
+                );
+            }
         });
-      });
-
-      hero.addEventListener('pointerleave', function () {
-        visual.style.transform = '';
-        student.style.transform = '';
-        cards.forEach(function (card) { card.style.marginLeft = ''; });
-      });
     }
-  }
 
-  initHeroAnimation();
+    
+    function injectSuccessStyles() {
+        if (document.getElementById('enquiry-success-styles')) return;
 
-  if (reducedMotion || !('IntersectionObserver' in window)) {
-    revealItems.forEach(function (item) { item.classList.add('is-visible'); });
-  } else {
-    var observer = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (!entry.isIntersecting) return;
-        entry.target.classList.add('is-visible');
-        observer.unobserve(entry.target);
-      });
-    }, { threshold: 0.12, rootMargin: '0px 0px -40px' });
+        var css =
+            '.enquiry-success-state {' +
+                'text-align: center;' +
+                'padding: 40px 20px;' +
+                'color: #ffffff;' +
+                'display: flex;' +
+                'flex-direction: column;' +
+                'align-items: center;' +
+                'justify-content: center;' +
+                'min-height: 200px;' +
+            '}' +
+            '.enquiry-success-state .success-checkmark {' +
+                'margin-bottom: 8px;' +
+            '}' +
+            '.enquiry-success-state h3 {' +
+                'font-family: inherit;' +
+                'font-size: 1.5rem;' +
+                'margin-top: 20px;' +
+                'color: #ffd700;' +
+                'font-weight: 600;' +
+                'letter-spacing: 0.5px;' +
+            '}' +
+            '.enquiry-success-state p {' +
+                'font-family: inherit;' +
+                'color: #9999bb;' +
+                'margin-top: 8px;' +
+                'font-size: 1rem;' +
+                'line-height: 1.5;' +
+            '}';
 
-    revealItems.forEach(function (item, index) {
-      item.style.transitionDelay = Math.min(index % 4, 3) * 70 + 'ms';
-      observer.observe(item);
-    });
-  }
+        var style = document.createElement('style');
+        style.id = 'enquiry-success-styles';
+        style.type = 'text/css';
+        style.textContent = css;
+        document.head.appendChild(style);
+    }
+    injectSuccessStyles();
 
-})();
+    // AJAX Form Submission
+    var form = document.getElementById('akshaEnquiryForm');
+    if (form) {
+        var submitBtn = form.querySelector('.enquiry-submit');
+        var btnText  = submitBtn ? submitBtn.querySelector('.btn-text') : null;
+        var btnArrow = submitBtn ? submitBtn.querySelector('.submit-arrow') : null;
+
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            // CSRF token
+            var tokenMeta = document.querySelector('meta[name="csrf-token"]');
+            var token = tokenMeta ? tokenMeta.content : '';
+
+            if (submitBtn) submitBtn.disabled = true;
+            if (btnText)  btnText.textContent = 'Submitting...';
+            if (btnArrow) btnArrow.style.display = 'none';
+
+            // Clear previous validation errors
+            form.querySelectorAll('.field-error').forEach(function (el) { el.textContent = ''; });
+
+            var formData = new FormData(form);
+
+            fetch(form.action, {
+                method: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': token,
+                    'Accept': 'application/json',
+                    'X-Requested-With': 'XMLHttpRequest'
+                },
+                body: formData
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.status === 0 && data.error) {
+                    Object.keys(data.error).forEach(function (key) {
+                        var errorEl = form.querySelector('.' + key + '_error');
+                        if (errorEl) {
+                            errorEl.textContent = data.error[key][0];
+                            var field = errorEl.closest('.enquiry-field');
+                            if (field && typeof gsap !== 'undefined') {
+                                gsap.fromTo(field, { x: -8 }, { x: 0, duration: 0.5, ease: 'elastic.out(1, 0.3)' });
+                            }
+                        }
+                    });
+                } else if (data.status === 1) {
+                    var formCard = form.closest('.maac-enquiry-form');
+                    if (!formCard) formCard = form.parentElement;
+                    gsap.to(form, { opacity: 0, y: -20, duration: 0.4, onComplete: function () {
+                        form.style.display = 'none';
+                        var successDiv = document.createElement('div');
+                        successDiv.className = 'enquiry-success-state';
+                        successDiv.innerHTML = '<div class="success-checkmark"><svg viewBox="0 0 100 100" width="80" height="80"><circle class="success-circle" cx="50" cy="50" r="45" fill="none" stroke="url(#akshaGoldGrad)" stroke-width="3"/><path class="success-check" d="M30 52 L44 66 L70 36" fill="none" stroke="url(#akshaGoldGrad)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><defs><linearGradient id="akshaGoldGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#ffd700"/><stop offset="100%" style="stop-color:#ff6a00"/></linearGradient></defs></svg></div><h3>Thank You! 🎉</h3><p>Our counsellor will contact you shortly.</p>';
+                        formCard.appendChild(successDiv);
+                        gsap.fromTo(successDiv, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' });
+                    }});
+                }
+            })
+            .catch(err => {
+                console.error('Form submission error:', err);
+                alert('Something went wrong. Please try again.');
+            })
+            .finally(() => {
+                if (submitBtn) submitBtn.disabled = false;
+                if (btnText)  btnText.textContent = 'START MY JOURNEY';
+                if (btnArrow) btnArrow.style.display = '';
+            });
+        });
+    }
+
+});

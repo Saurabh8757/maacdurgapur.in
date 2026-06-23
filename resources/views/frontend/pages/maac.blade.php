@@ -195,59 +195,100 @@
           <p class="enquiry-subtitle">Fill out the form and our counselor will<br>connect you .</p>
         </div>
 
-        <form action="{{ route('career_counselling') }}" method="POST" id="maacEnquiryForm" class="enquiry-form-body">
+        <form action="{{ route('career_counselling') }}" method="POST" id="maacEnquiryForm" class="enquiry-form-body" novalidate>
           @csrf
 
-          <div class="enquiry-field">
-            <img loading="lazy" src="{{ asset('frontend/images/maac/icons/user.png') }}" alt="" class="enquiry-field-icon">
-            <input type="text" name="name" placeholder="Full Name *" required autocomplete="name">
-            <span class="field-error name_error"></span>
-          </div>
-
-          <div class="enquiry-field">
-            <img loading="lazy" src="{{ asset('frontend/images/maac/icons/phone-call.png') }}" alt="" class="enquiry-field-icon">
-            <input type="tel" name="phone" placeholder="Phone Number*" required autocomplete="tel">
-            <span class="field-error phone_error"></span>
-          </div>
-
-          <div class="enquiry-field">
-            <img loading="lazy" src="{{ asset('frontend/images/maac/icons/email.png') }}" alt="" class="enquiry-field-icon">
-            <input type="email" name="email" placeholder="E-mail Address*" required autocomplete="email">
-            <span class="field-error email_error"></span>
-          </div>
-
-          <div class="enquiry-field">
-            <img loading="lazy" src="{{ asset('frontend/images/maac/icons/education.png') }}" alt="" class="enquiry-field-icon">
-            <select name="course_id" required>
-              <option value="" disabled selected hidden>Select Course of Interest*</option>
-              @if(!empty($courses))
-                @foreach ($courses as $course)
-                  <option value="{{ $course->id }}">{{ $course->name }}</option>
-                @endforeach
+          @if(!empty($formFields))
+            <input type="hidden" name="brand_id" value="{{ $brand->id }}">
+            @foreach($formFields as $field)
+              @if($field->type === 'checkbox')
+                <div class="enquiry-consent">
+                  <input type="checkbox" name="{{ $field->field_name }}" value="1" id="field_{{ $field->id }}" {{ $field->is_required ? 'required' : '' }}>
+                  <label for="field_{{ $field->id }}">{!! nl2br(e($field->label)) !!}</label>
+                  <span class="field-error {{ $field->field_name }}_error" style="display:block; margin-left:25px;"></span>
+                </div>
+              @else
+                <div class="enquiry-field {{ $field->type === 'textarea' ? 'enquiry-field-textarea' : '' }}">
+                  @php
+                    $icon = 'user.png';
+                    if($field->field_name == 'phone') $icon = 'phone-call.png';
+                    elseif($field->field_name == 'email') $icon = 'email.png';
+                    elseif($field->field_name == 'course_id') $icon = 'education.png';
+                    elseif($field->field_name == 'location') $icon = 'location.png';
+                    elseif($field->field_name == 'message') $icon = 'chat.png';
+                  @endphp
+                  <img loading="lazy" src="{{ asset('frontend/images/maac/icons/' . $icon) }}" alt="" class="enquiry-field-icon" {{ $field->type === 'textarea' ? 'style=top:25px;' : '' }}>
+                  
+                  @if($field->type === 'select')
+                    <select name="{{ $field->field_name }}" {{ $field->is_required ? 'required' : '' }}>
+                      <option value="" disabled selected hidden>{{ $field->placeholder }}</option>
+                      @if($field->options)
+                        @foreach(json_decode($field->options, true) as $opt)
+                          <option value="{{ $opt }}">{{ $opt }}</option>
+                        @endforeach
+                      @endif
+                    </select>
+                  @elseif($field->type === 'textarea')
+                    <textarea name="{{ $field->field_name }}" placeholder="{{ $field->placeholder }}" rows="3" {{ $field->is_required ? 'required' : '' }}></textarea>
+                  @else
+                    <input type="{{ $field->type }}" name="{{ $field->field_name }}" placeholder="{{ $field->placeholder }}" {{ $field->is_required ? 'required' : '' }}>
+                  @endif
+                  <span class="field-error {{ $field->field_name }}_error"></span>
+                </div>
               @endif
-            </select>
-            <span class="field-error course_id_error"></span>
-          </div>
+            @endforeach
+          @else
+            <div class="enquiry-field">
+              <img loading="lazy" src="{{ asset('frontend/images/maac/icons/user.png') }}" alt="" class="enquiry-field-icon">
+              <input type="text" name="name" placeholder="Full Name *" required autocomplete="name">
+              <span class="field-error name_error"></span>
+            </div>
 
-          <div class="enquiry-field">
-            <img loading="lazy" src="{{ asset('frontend/images/maac/icons/location.png') }}" alt="" class="enquiry-field-icon">
-            <select name="location">
-              <option value="" disabled selected hidden>Prefered Location</option>
-              <option value="Durgapur">Durgapur</option>
-              <option value="Burdwan">Burdwan / Bardhaman</option>
-              <option value="Bolpur">Bolpur / Santiniketan</option>
-              <option value="Bankura">Bankura</option>
-              <option value="Asansol">Asansol / Raniganj</option>
-              <option value="Purulia">Purulia</option>
-              <option value="Kolkata">Kolkata</option>
-              <option value="Other">Other</option>
-            </select>
-          </div>
+            <div class="enquiry-field">
+              <img loading="lazy" src="{{ asset('frontend/images/maac/icons/phone-call.png') }}" alt="" class="enquiry-field-icon">
+              <input type="tel" name="phone" placeholder="Phone Number*" required autocomplete="tel">
+              <span class="field-error phone_error"></span>
+            </div>
 
-          <div class="enquiry-field enquiry-field-textarea">
-            <img loading="lazy" src="{{ asset('frontend/images/maac/icons/chat.png') }}" alt="" class="enquiry-field-icon" style="top: 25px;">
-            <textarea name="message" placeholder="Tell Us about Your interest / query" rows="3"></textarea>
-          </div>
+            <div class="enquiry-field">
+              <img loading="lazy" src="{{ asset('frontend/images/maac/icons/email.png') }}" alt="" class="enquiry-field-icon">
+              <input type="email" name="email" placeholder="E-mail Address*" required autocomplete="email">
+              <span class="field-error email_error"></span>
+            </div>
+
+            <div class="enquiry-field">
+              <img loading="lazy" src="{{ asset('frontend/images/maac/icons/education.png') }}" alt="" class="enquiry-field-icon">
+              <select name="course_id" required>
+                <option value="" disabled selected hidden>Select Course of Interest*</option>
+                @if(!empty($courses))
+                  @foreach ($courses as $course)
+                    <option value="{{ $course->id }}">{{ $course->name }}</option>
+                  @endforeach
+                @endif
+              </select>
+              <span class="field-error course_id_error"></span>
+            </div>
+
+            <div class="enquiry-field">
+              <img loading="lazy" src="{{ asset('frontend/images/maac/icons/location.png') }}" alt="" class="enquiry-field-icon">
+              <select name="location">
+                <option value="" disabled selected hidden>Prefered Location</option>
+                <option value="Durgapur">Durgapur</option>
+                <option value="Burdwan">Burdwan / Bardhaman</option>
+                <option value="Bolpur">Bolpur / Santiniketan</option>
+                <option value="Bankura">Bankura</option>
+                <option value="Asansol">Asansol / Raniganj</option>
+                <option value="Purulia">Purulia</option>
+                <option value="Kolkata">Kolkata</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+
+            <div class="enquiry-field enquiry-field-textarea">
+              <img loading="lazy" src="{{ asset('frontend/images/maac/icons/chat.png') }}" alt="" class="enquiry-field-icon" style="top: 25px;">
+              <textarea name="message" placeholder="Tell Us about Your interest / query" rows="3"></textarea>
+            </div>
+          @endif
 
           <div class="enquiry-consent">
             <input type="checkbox" id="maac-consent" name="consent" value="1">

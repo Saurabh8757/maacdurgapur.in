@@ -127,7 +127,13 @@
   </ul>
 
   <!-- Desktop CTA -->
-  <a href="#" class="btn-counselling open-modal">Book Free Counselling</a>
+  @if(request()->routeIs('aksha'))
+    <a href="#akshaEnquiryForm" class="btn-counselling scroll-to-hero-form">Book Free Counselling</a>
+  @elseif(request()->routeIs('space_e_fic'))
+    <a href="#sefEnquiryForm" class="btn-counselling scroll-to-hero-form">Book Free Counselling</a>
+  @else
+    <a href="#" class="btn-counselling open-modal">Book Free Counselling</a>
+  @endif
 
   <!-- Hamburger (mobile) -->
   <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
@@ -160,7 +166,13 @@
 
     <div class="mobile-cta-wrap">
       <p class="mobile-divider">Ready to start?</p>
-      <a href="#counselling" class="mobile-cta" data-close>Book Free Counselling</a>
+      @if(request()->routeIs('aksha'))
+        <a href="#akshaEnquiryForm" class="mobile-cta scroll-to-hero-form" data-close>Book Free Counselling</a>
+      @elseif(request()->routeIs('space_e_fic'))
+        <a href="#sefEnquiryForm" class="mobile-cta scroll-to-hero-form" data-close>Book Free Counselling</a>
+      @else
+        <a href="#counselling" class="mobile-cta" data-close>Book Free Counselling</a>
+      @endif
     </div>
   </div>
 </div>
@@ -265,7 +277,7 @@
 
         <div class="form-group">
           <span class="field-icon">🎓</span>
-          <select name="course_id" id="modal-course" class="field-select" required>
+          <select name="course_id" id="modal-course" class="field-select">
             <option value="" disabled selected hidden></option>
             @if(!empty($courses))
               @foreach ($courses as $course)
@@ -538,5 +550,27 @@
 <script defer src="{{ asset('frontend/js/counselling-modal.js') }}?v={{ time() }}"></script>
 <script defer src="{{ asset('frontend/js/chatbot.js') }}"></script>
     @yield('custom_js')
+<script>
+  document.addEventListener('click', function(e) {
+    const btn = e.target.closest('.scroll-to-hero-form');
+    if (btn) {
+      e.preventDefault();
+      const targetId = btn.getAttribute('href');
+      if (!targetId || !targetId.startsWith('#')) return;
+      
+      const targetEl = document.querySelector(targetId);
+      if (targetEl) {
+        if (typeof lenis !== 'undefined') {
+          lenis.scrollTo(targetEl, { offset: -100 });
+        } else if (typeof gsap !== 'undefined') {
+          gsap.to(window, { duration: 1, scrollTo: { y: targetEl, offsetY: 100 }, ease: "power3.inOut" });
+        } else {
+          const y = targetEl.getBoundingClientRect().top + window.scrollY - 100;
+          window.scrollTo({top: y, behavior: 'smooth'});
+        }
+      }
+    }
+  });
+</script>
 </body>
 </html>

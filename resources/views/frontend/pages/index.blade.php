@@ -961,40 +961,81 @@
       <form action="{{ route('career_counselling') }}" method="POST" id="comment_form" class="counselling-form">
         @csrf
 
-        <div class="form-group">
-          <span class="field-icon">👤</span>
-          <input type="text" name="name" id="modal-name" class="field-input" placeholder=" " autocomplete="name" required>
-          <label class="field-label" for="modal-name">Your Full Name</label>
-          <span class="error-text name_error"></span>
-        </div>
+        @if(!empty($formFields))
+          <input type="hidden" name="brand_id" value="{{ $brand->id }}">
+          @foreach($formFields as $field)
+            <div class="form-group {{ $field->type === 'checkbox' ? 'form-check-group' : '' }}">
+              @php
+                $icon = '👤';
+                if($field->field_name == 'phone') $icon = '📞';
+                elseif($field->field_name == 'email') $icon = '✉️';
+                elseif($field->field_name == 'course_id') $icon = '🎓';
+                elseif($field->field_name == 'location') $icon = '📍';
+                elseif($field->field_name == 'message') $icon = '💬';
+              @endphp
+              <span class="field-icon">{{ $icon }}</span>
+              
+              @if($field->type === 'select')
+                <select name="{{ $field->field_name }}" id="modal-{{ $field->field_name }}" class="field-select" {{ $field->is_required ? 'required' : '' }}>
+                  <option value="" disabled selected hidden></option>
+                  @if($field->options)
+                    @foreach(json_decode($field->options, true) as $opt)
+                      <option value="{{ $opt }}">{{ $opt }}</option>
+                    @endforeach
+                  @endif
+                </select>
+                <label class="field-label" for="modal-{{ $field->field_name }}">{{ $field->label }}</label>
+              @elseif($field->type === 'textarea')
+                <textarea name="{{ $field->field_name }}" id="modal-{{ $field->field_name }}" class="field-input" placeholder=" " {{ $field->is_required ? 'required' : '' }} rows="3"></textarea>
+                <label class="field-label" for="modal-{{ $field->field_name }}">{{ $field->label }}</label>
+              @elseif($field->type === 'checkbox')
+                <div style="padding-left: 30px; padding-top: 10px;">
+                  <input type="checkbox" name="{{ $field->field_name }}" id="modal-{{ $field->field_name }}" value="1" {{ $field->is_required ? 'required' : '' }}>
+                  <label for="modal-{{ $field->field_name }}" style="color: #fff;">{{ $field->label }}</label>
+                </div>
+              @else
+                <input type="{{ $field->type }}" name="{{ $field->field_name }}" id="modal-{{ $field->field_name }}" class="field-input" placeholder=" " autocomplete="{{ $field->field_name }}" {{ $field->is_required ? 'required' : '' }}>
+                <label class="field-label" for="modal-{{ $field->field_name }}">{{ $field->label }}</label>
+              @endif
+              <span class="error-text {{ $field->field_name }}_error"></span>
+            </div>
+          @endforeach
+        @else
+          <div class="form-group">
+            <span class="field-icon">👤</span>
+            <input type="text" name="name" id="modal-name" class="field-input" placeholder=" " autocomplete="name" required>
+            <label class="field-label" for="modal-name">Your Full Name</label>
+            <span class="error-text name_error"></span>
+          </div>
 
-        <div class="form-group">
-          <span class="field-icon">📞</span>
-          <input type="tel" name="phone" id="modal-phone" class="field-input" placeholder=" " autocomplete="tel" required>
-          <label class="field-label" for="modal-phone">Phone Number</label>
-          <span class="error-text phone_error"></span>
-        </div>
+          <div class="form-group">
+            <span class="field-icon">📞</span>
+            <input type="tel" name="phone" id="modal-phone" class="field-input" placeholder=" " autocomplete="tel" required>
+            <label class="field-label" for="modal-phone">Phone Number</label>
+            <span class="error-text phone_error"></span>
+          </div>
 
-        <div class="form-group">
-          <span class="field-icon">✉️</span>
-          <input type="email" name="email" id="modal-email" class="field-input" placeholder=" " autocomplete="email" required>
-          <label class="field-label" for="modal-email">Email Address</label>
-          <span class="error-text email_error"></span>
-        </div>
+          <div class="form-group">
+            <span class="field-icon">✉️</span>
+            <input type="email" name="email" id="modal-email" class="field-input" placeholder=" " autocomplete="email" required>
+            <label class="field-label" for="modal-email">Email Address</label>
+            <span class="error-text email_error"></span>
+          </div>
 
-        <div class="form-group">
-          <span class="field-icon">🎓</span>
-          <select name="course_id" id="modal-course" class="field-select" required>
-            <option value="" disabled selected hidden></option>
-            @if(!empty($courses))
-              @foreach ($courses as $course)
-                <option value="{{ $course->id }}">{{ $course->name }}</option>
-              @endforeach
-            @endif
-          </select>
-          <label class="field-label" for="modal-course">Select Course</label>
-          <span class="error-text course_id_error"></span>
-        </div>
+          <div class="form-group">
+            <span class="field-icon">🎓</span>
+            <select name="course_id" id="modal-course" class="field-select" required>
+              <option value="" disabled selected hidden></option>
+              @if(!empty($courses))
+                @foreach ($courses as $course)
+                  <option value="{{ $course->id }}">{{ $course->name }}</option>
+                @endforeach
+              @endif
+            </select>
+            <label class="field-label" for="modal-course">Select Course</label>
+            <span class="error-text course_id_error"></span>
+          </div>
+        @endif
 
         <button type="submit" class="counselling-submit" id="counsellingSubmit">
           <span class="spinner"></span>

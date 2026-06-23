@@ -2,6 +2,77 @@
 
 @section('custom_css')
 <link rel="stylesheet" href="{{ asset('frontend/css/space_e_fic.css') }}?v={{ time() }}">
+<style>
+    @font-face {
+        font-family: 'Barber Chop';
+        src: url('{{ asset('frontend/fonts/barber_chop/BarberChop.otf') }}') format('opentype');
+        font-weight: normal;
+        font-style: normal;
+    }
+    @import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@300;400;700&family=Montserrat:wght@300;400;500;700;800;900&display=swap');
+
+    .enquiry-title {
+        font-family: 'Montserrat', sans-serif !important;
+        font-weight: 300 !important;
+        letter-spacing: 1px;
+    }
+
+    /* Fix tagline underline positioning on mobile */
+    @media (max-width: 768px) {
+        .sef-hero-tagline-wrapper {
+            display: inline-flex !important;
+            flex-direction: column !important;
+            align-items: flex-start !important;
+            margin: 30px auto !important;
+        }
+    }
+
+    .sef-title,
+    .sef-final-cta-content h2 {
+        font-weight: 300 !important;
+    }
+
+    .sef-hero-subtitle {
+        font-family: 'Comic Neue', sans-serif !important;
+    }
+
+    .sef-hero-tagline {
+        font-family: 'Montserrat', sans-serif !important;
+    }
+
+    .offer-title {
+        font-family: 'Comic Neue', sans-serif !important;
+    }
+
+    .offer-emi span {
+        font-family: 'Comic Neue', sans-serif !important;
+    }
+
+    .sef-desc {
+        font-family: 'Myriad Pro', 'Segoe UI', Arial, sans-serif !important;
+        font-style: italic !important;
+    }
+
+    .sef-label {
+        font-family: 'Comic Neue', sans-serif !important;
+    }
+
+    .info-card-title,
+    .course-card-title {
+        font-family: 'Comic Neue', sans-serif !important;
+    }
+
+    .info-card-text,
+    .course-card-desc,
+    .curriculum-card-text {
+        font-family: 'Myriad Pro', 'Segoe UI', Arial, sans-serif !important;
+        font-style: italic !important;
+    }
+
+    .btn-text, .submit-arrow {
+        font-family: 'Montserrat', sans-serif !important;
+    }
+</style>
 @endsection
 
 @section('content')
@@ -46,8 +117,57 @@
           <p class="enquiry-subtitle">Let your child build something before you commit to anything.</p>
         </div>
 
-        <form action="{{ route('career_counselling') }}" method="POST" id="sefEnquiryForm" class="enquiry-form-body">
+        <form action="{{ route('career_counselling') }}" method="POST" id="sefEnquiryForm" class="enquiry-form-body" novalidate>
           @csrf
+
+          @if(!empty($formFields))
+            <input type="hidden" name="brand_id" value="{{ $brand->id }}">
+            @foreach($formFields as $field)
+              <div class="enquiry-field {{ $field->type === 'textarea' ? 'enquiry-field-textarea' : '' }}">
+                @php
+                  $svg = '<svg class="enquiry-field-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>';
+                  if($field->field_name == 'phone') {
+                    $svg = '<svg class="enquiry-field-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>';
+                  } elseif($field->field_name == 'email') {
+                    $svg = '<svg class="enquiry-field-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>';
+                  } elseif($field->field_name == 'course_id') {
+                    $svg = '<svg class="enquiry-field-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>';
+                  } elseif($field->field_name == 'location') {
+                    $svg = '<svg class="enquiry-field-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>';
+                  } elseif($field->type === 'textarea') {
+                    $svg = '<svg class="enquiry-field-icon" style="top: 25px;" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>';
+                  }
+                @endphp
+                {!! $field->type !== 'checkbox' ? $svg : '' !!}
+                
+                @if($field->type === 'select')
+                  <select name="{{ $field->field_name }}" {{ $field->is_required ? 'required' : '' }}>
+                    <option value="" disabled selected hidden>{{ $field->placeholder }}</option>
+                    @if($field->options)
+                      @foreach(json_decode($field->options, true) as $opt)
+                        <option value="{{ $opt }}">{{ $opt }}</option>
+                      @endforeach
+                    @endif
+                  </select>
+                @elseif($field->type === 'textarea')
+                  <textarea name="{{ $field->field_name }}" placeholder="{{ $field->placeholder }}" rows="3" {{ $field->is_required ? 'required' : '' }}></textarea>
+                @elseif($field->type === 'checkbox')
+                  </div>
+                  <div class="enquiry-consent">
+                    <input type="checkbox" name="{{ $field->field_name }}" value="1" id="field_{{ $field->id }}" {{ $field->is_required ? 'required' : '' }}>
+                    <label for="field_{{ $field->id }}">{!! nl2br(e($field->label)) !!}</label>
+                    <span class="field-error {{ $field->field_name }}_error" style="display:block; margin-left:25px;"></span>
+                  </div>
+                  <div class="d-none">
+                @else
+                  <input type="{{ $field->type }}" name="{{ $field->field_name }}" placeholder="{{ $field->placeholder }}" {{ $field->is_required ? 'required' : '' }}>
+                @endif
+                @if($field->type !== 'checkbox')
+                  <span class="field-error {{ $field->field_name }}_error"></span>
+                @endif
+              </div>
+            @endforeach
+          @else
 
           <div class="enquiry-field">
             <svg class="enquiry-field-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
@@ -96,6 +216,8 @@
             <input type="checkbox" id="sef-consent" name="consent" value="1">
             <label for="sef-consent">I agree to receive information about Space E Fic courses<br>& updates via call ,SMS & email.</label>
           </div>
+
+          @endif
 
           <button type="submit" class="enquiry-submit">
             <span class="btn-text">RESERVE DEMO</span>

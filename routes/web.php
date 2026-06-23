@@ -23,10 +23,11 @@ Route::redirect('/vfx', '/animation-vfx-gaming-institute-durgapur', 301);
 Route::redirect('/gaming', '/animation-vfx-gaming-institute-durgapur', 301);
 
 // SEO 301 Redirects for AKSHA Legacy URLs
-Route::redirect('/aksha', '/digital-marketing-course-durgapur', 301);
-Route::redirect('/digital-marketing', '/digital-marketing-course-durgapur', 301);
-Route::redirect('/digital-marketing-course', '/digital-marketing-course-durgapur', 301);
-Route::redirect('/marketing-course', '/digital-marketing-course-durgapur', 301);
+Route::redirect('/aksha', '/coding-programming-ui-ux-digital-marketing', 301);
+Route::redirect('/digital-marketing', '/coding-programming-ui-ux-digital-marketing', 301);
+Route::redirect('/digital-marketing-course', '/coding-programming-ui-ux-digital-marketing', 301);
+Route::redirect('/marketing-course', '/coding-programming-ui-ux-digital-marketing', 301);
+Route::redirect('/digital-marketing-course-durgapur', '/coding-programming-ui-ux-digital-marketing', 301);
 
 // SEO 301 Redirects for SPACE-E-FIC Legacy URLs
 Route::redirect('/space-e-fic', '/robotics-classes-for-kids-durgapur', 301);
@@ -36,7 +37,7 @@ Route::redirect('/robotics-for-kids', '/robotics-classes-for-kids-durgapur', 301
 
 // Official SEO Routes (Names kept identical so frontend navigation continues working seamlessly)
 Route::get('/animation-vfx-gaming-institute-durgapur',[PageController::class, 'maac'])->name('maac');
-Route::get('/digital-marketing-course-durgapur',[PageController::class, 'aksha'])->name('aksha');
+Route::get('/coding-programming-ui-ux-digital-marketing',[PageController::class, 'aksha'])->name('aksha');
 Route::get('/robotics-classes-for-kids-durgapur',[PageController::class, 'space_e_fic'])->name('space_e_fic');
 Route::get('/fcq',[PageController::class, 'fcq'])->name('fcq');
 Route::get('/showcase',[PageController::class, 'showcase'])->name('showcase');

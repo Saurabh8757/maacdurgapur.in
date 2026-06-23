@@ -838,4 +838,12 @@ h1, h2, h3, h4, h5, h6 {
         padding: 10px;
         font-size: 0.9rem;
     }
+    
+    .sef-cta-btn {
+        padding: 14px 20px;
+        font-size: 14px;
+    }
+    .sef-cta-btn span {
+        white-space: nowrap;
+    }
 }
