@@ -130,7 +130,7 @@
                                     </thead>
                                     <tbody>
                                     @forelse($leads as $lead)
-                                        <tr>
+                                        <tr class="clickable-row" data-href="{{ route('admin::leads.show', $lead->id) }}" style="cursor: pointer;">
                                             <td>{{ $lead->id }}</td>
                                             <td>{{ $lead->brand ? $lead->brand->name : 'N/A' }}</td>
                                             <td>{{ $lead->name }}</td>
@@ -191,3 +191,16 @@
         </section>
     </div>
 @endsection
+
+@push('scripts')
+<script>
+    $(document).ready(function($) {
+        $(".clickable-row").click(function(e) {
+            // Prevent click if clicking on a button, link, or form element
+            if (!$(e.target).closest('a, button, form, input, select').length) {
+                window.location = $(this).data("href");
+            }
+        });
+    });
+</script>
+@endpush
