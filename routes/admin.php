@@ -159,9 +159,20 @@ Route::group(['as' => 'admin::', 'prefix' => 'v1/cpanel/admin', 'middleware' => 
         Route::get('showcase', [CmsShowcasePageController::class, 'index'])->name('showcase.index');
         Route::get('showcase/create', [CmsShowcasePageController::class, 'create'])->name('showcase.create');
         Route::get('showcase/{showcase}/edit', [CmsShowcasePageController::class, 'edit'])->name('showcase.edit');
-
     });
     /*** CMS Admin UI End ***/
+
+    // Placement Showcase
+    Route::resource('placement-showcases', \App\Http\Controllers\Admin\PlacementShowcaseController::class)->except(['show']);
+    Route::post('placement-showcases/toggle-active', [\App\Http\Controllers\Admin\PlacementShowcaseController::class, 'toggleActive'])->name('placement-showcases.toggle-active');
+    Route::post('placement-showcases/toggle-featured', [\App\Http\Controllers\Admin\PlacementShowcaseController::class, 'toggleFeatured'])->name('placement-showcases.toggle-featured');
+    Route::post('placement-showcases/reorder', [\App\Http\Controllers\Admin\PlacementShowcaseController::class, 'reorder'])->name('placement-showcases.reorder');
+
+    // Recruiters
+    Route::resource('recruiters', \App\Http\Controllers\Admin\RecruiterController::class)->except(['show']);
+    Route::post('recruiters/toggle-active', [\App\Http\Controllers\Admin\RecruiterController::class, 'toggleActive'])->name('recruiters.toggle-active');
+    Route::post('recruiters/toggle-featured', [\App\Http\Controllers\Admin\RecruiterController::class, 'toggleFeatured'])->name('recruiters.toggle-featured');
+    Route::post('recruiters/reorder', [\App\Http\Controllers\Admin\RecruiterController::class, 'reorder'])->name('recruiters.reorder');
 
 
 

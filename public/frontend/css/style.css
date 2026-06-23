@@ -1706,7 +1706,8 @@ body.loading {
 .student-name {
     font-family: Rajdhani, sans-serif;
     font-size: 1.1rem;
-    font-weight: 700;
+    font-weight: 400; /* Reduced to make it light/normal */
+    text-transform: capitalize; /* Ensure it's not all caps */
     color: #fff;
     letter-spacing: 0.3px;
     line-height: 1.2;

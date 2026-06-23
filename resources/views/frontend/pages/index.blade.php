@@ -469,6 +469,7 @@
     </script>
 
 <!-- ===================== RECRUITERS SECTION ===================== -->
+@if(isset($recruiters) && $recruiters->count() > 0)
 <section class="recruiters-section">
   <!-- <canvas class="sakura-canvas" data-section="recruiters"></canvas> -->
   <!-- <canvas class="interactive-leaf-canvas"></canvas> -->
@@ -480,26 +481,36 @@
   
   <div class="logo-ticker-wrapper">
     <div class="logo-ticker" id="logo-ticker">
-      <div class="ticker-item"><div class="recruiter-logo netflix">NETFLIX</div></div>
-      <div class="ticker-item"><div class="recruiter-logo rockstar">R★<br><small>GAMES</small></div></div>
-      <div class="ticker-item"><div class="recruiter-logo tata-elxsi">TATA<br>ELXSI</div></div>
-      <div class="ticker-item"><div class="recruiter-logo pogo">pogo</div></div>
-      <div class="ticker-item"><div class="recruiter-logo dneg">DNEG</div></div>
-      <div class="ticker-item"><div class="recruiter-logo prime">prime<br>video</div></div>
-      <div class="ticker-item"><div class="recruiter-logo ea">EA</div></div>
-      <div class="ticker-item"><div class="recruiter-logo ubisoft">UBISOFT</div></div>
+      @foreach($recruiters as $recruiter)
+        <div class="ticker-item">
+          @if($recruiter->logo)
+            <div class="recruiter-logo" style="padding: 10px;">
+                <img src="{{ asset('storage/' . $recruiter->logo->storage_key) }}" alt="{{ $recruiter->company_name }}" class="recruiter-logo-img" style="max-height: 45px; max-width: 130px; object-fit: contain;">
+            </div>
+          @else
+            <div class="recruiter-logo {{ $recruiter->css_class }}">{!! $recruiter->custom_html ?? $recruiter->company_name !!}</div>
+          @endif
+        </div>
+      @endforeach
       <!-- Clones for infinite loop -->
-      <div class="ticker-item"><div class="recruiter-logo netflix">NETFLIX</div></div>
-      <div class="ticker-item"><div class="recruiter-logo rockstar">R★<br><small>GAMES</small></div></div>
-      <div class="ticker-item"><div class="recruiter-logo tata-elxsi">TATA<br>ELXSI</div></div>
-      <div class="ticker-item"><div class="recruiter-logo pogo">pogo</div></div>
+      @foreach($recruiters->take(4) as $recruiter)
+        <div class="ticker-item">
+          @if($recruiter->logo)
+            <div class="recruiter-logo" style="padding: 10px;">
+                <img src="{{ asset('storage/' . $recruiter->logo->storage_key) }}" alt="{{ $recruiter->company_name }}" class="recruiter-logo-img" style="max-height: 45px; max-width: 130px; object-fit: contain;">
+            </div>
+          @else
+            <div class="recruiter-logo {{ $recruiter->css_class }}">{!! $recruiter->custom_html ?? $recruiter->company_name !!}</div>
+          @endif
+        </div>
+      @endforeach
     </div>
   </div>
-  <!-- <div class="swiper-button-prev recruiter-prev"></div>
-  <div class="swiper-button-next recruiter-next"></div>-->
 </section>
+@endif
 
 <!-- ===================== PLACEMENT SECTION ===================== -->
+@if(isset($placements) && $placements->count() > 0)
 <section class="placement-section">
   <!-- <canvas class="sakura-canvas" data-section="placement"></canvas> -->
   <div class="section-header">
@@ -510,113 +521,39 @@
   
   <div class="swiper placement-swiper">
     <div class="swiper-wrapper">
+      @foreach($placements as $placement)
       <div class="swiper-slide">
         <div class="placement-card">
           <div class="placement-card-img-wrap">
             <div class="placement-card-ribbon"></div>
-            <img src="{{ asset('upload/SERVICE/photo-1512295767273-ac109ac3acfa.jpeg') }}" alt="Priya S." class="placement-card-img" loading="lazy">
+            @if($placement->studentImage)
+              @if(Str::startsWith($placement->studentImage->storage_key, 'upload/'))
+                <img src="{{ asset($placement->studentImage->storage_key) }}" alt="{{ $placement->student_name }}" class="placement-card-img" loading="lazy">
+              @else
+                <img src="{{ asset('storage/' . $placement->studentImage->storage_key) }}" alt="{{ $placement->student_name }}" class="placement-card-img" loading="lazy">
+              @endif
+            @else
+              <img src="{{ asset('frontend/images/default-avatar.jpg') }}" alt="{{ $placement->student_name }}" class="placement-card-img" loading="lazy">
+            @endif
           </div>
           <div class="placement-card-body">
-            <h4 class="student-name">Priya S.</h4>
-            <p class="company-name">Netflix Studios</p>
-            <p class="job-role">VFX Artist</p>
+            <h4 class="student-name">{{ $placement->student_name }}</h4>
+            <p class="company-name">{{ $placement->company ? $placement->company->name : $placement->company_name }}</p>
+            <p class="job-role">{{ $placement->designation }}</p>
             <div class="salary-wrap">
-              <span class="salary-amount">₹3,79,000</span>
+              <span class="salary-amount">₹{{ number_format($placement->annual_package) }}</span>
               <span class="salary-label">PER ANNUM</span>
             </div>
           </div>
         </div>
       </div>
-      <div class="swiper-slide">
-        <div class="placement-card">
-          <div class="placement-card-img-wrap">
-            <div class="placement-card-ribbon"></div>
-            <img src="{{ asset('upload/SERVICE/photo-1540242908484-50aa09aea5a7.jpeg') }}" alt="Rahul M." class="placement-card-img" loading="lazy">
-          </div>
-          <div class="placement-card-body">
-            <h4 class="student-name">Rahul M.</h4>
-            <p class="company-name">Prime Focus</p>
-            <p class="job-role">Motion Designer</p>
-            <div class="salary-wrap">
-              <span class="salary-amount">₹1,70,000</span>
-              <span class="salary-label">PER ANNUM</span>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="swiper-slide">
-        <div class="placement-card">
-          <div class="placement-card-img-wrap">
-            <div class="placement-card-ribbon"></div>
-            <img src="{{ asset('upload/SERVICE/photo-1572044162444-ad60f128bdea.jpeg') }}" alt="Anjali K." class="placement-card-img" loading="lazy">
-          </div>
-          <div class="placement-card-body">
-            <h4 class="student-name">Anjali K.</h4>
-            <p class="company-name">Adobe</p>
-            <p class="job-role">UI/UX Designer</p>
-            <div class="salary-wrap">
-              <span class="salary-amount">₹3,60,000</span>
-              <span class="salary-label">PER ANNUM</span>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="swiper-slide">
-        <div class="placement-card">
-          <div class="placement-card-img-wrap">
-            <div class="placement-card-ribbon"></div>
-            <img src="{{ asset('upload/SERVICE/photo-1611241893603-3c359704e0ee.jpeg') }}" alt="Arjun D." class="placement-card-img" loading="lazy">
-          </div>
-          <div class="placement-card-body">
-            <h4 class="student-name">Arjun D.</h4>
-            <p class="company-name">DNEG</p>
-            <p class="job-role">3D Animator</p>
-            <div class="salary-wrap">
-              <span class="salary-amount">₹4,40,000</span>
-              <span class="salary-label">PER ANNUM</span>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="swiper-slide">
-        <div class="placement-card">
-          <div class="placement-card-img-wrap">
-            <div class="placement-card-ribbon"></div>
-            <img src="{{ asset('upload/SERVICE/photo-1613909207039-6b173b755cc1.jpeg') }}" alt="Sneha R." class="placement-card-img" loading="lazy">
-          </div>
-          <div class="placement-card-body">
-            <h4 class="student-name">Sneha R.</h4>
-            <p class="company-name">Tata Elxsi</p>
-            <p class="job-role">Graphic Designer</p>
-            <div class="salary-wrap">
-              <span class="salary-amount">₹2,40,000</span>
-              <span class="salary-label">PER ANNUM</span>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="swiper-slide">
-        <div class="placement-card">
-          <div class="placement-card-img-wrap">
-            <div class="placement-card-ribbon"></div>
-            <img src="{{ asset('upload/SERVICE/animation2.jpg') }}" alt="Vikram P." class="placement-card-img" loading="lazy">
-          </div>
-          <div class="placement-card-body">
-            <h4 class="student-name">Vikram P.</h4>
-            <p class="company-name">Ubisoft</p>
-            <p class="job-role">Game Developer</p>
-            <div class="salary-wrap">
-              <span class="salary-amount">₹5,20,000</span>
-              <span class="salary-label">PER ANNUM</span>
-            </div>
-          </div>
-        </div>
-      </div>
+      @endforeach
     </div>
     <div class="swiper-button-prev placement-prev"></div>
     <div class="swiper-button-next placement-next"></div>
   </div>
 </section>
+@endif
 
 <!-- ===================== JOURNEY SECTION ===================== -->
 <section class="journey-section">

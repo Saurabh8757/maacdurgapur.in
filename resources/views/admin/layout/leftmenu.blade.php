@@ -150,65 +150,148 @@
                             </p>
                         </a>
                         <ul class="nav nav-treeview">
+                            {{-- FAQ Group --}}
                             @if ($cmsMenuPermissions['faqs'])
-                                <li class="nav-item">
-                                    <a href="{{ route('admin::content.faq-categories.index') }}"
-                                       class="nav-link @if (request()->routeIs('admin::content.faq-categories.*')) active @endif">
-                                        <i class="fas fa-folder-open nav-icon"></i>
-                                        <p>FAQ Categories</p>
-                                    </a>
-                                </li>
-                            @endif
-                            @foreach ([
-                                'faqs' => ['label' => 'FAQs', 'icon' => 'fa-question-circle'],
-                                'courses' => ['label' => 'Courses', 'icon' => 'fa-graduation-cap'],
-                                'features' => ['label' => 'Features', 'icon' => 'fa-star'],
-                            ] as $module => $menu)
-                                @if ($cmsMenuPermissions[$module])
+                            <li class="nav-item has-treeview @if (request()->routeIs('admin::content.faqs.*') || request()->routeIs('admin::content.faq-categories.*')) menu-open @endif">
+                                <a href="#" class="nav-link @if (request()->routeIs('admin::content.faqs.*') || request()->routeIs('admin::content.faq-categories.*')) active @endif" style="padding-left: 2rem !important;">
+                                    <i class="fas fa-question-circle nav-icon" style="font-size: 0.9rem;"></i>
+                                    <p>
+                                        FAQ
+                                        <i class="right fas fa-angle-left"></i>
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview">
                                     <li class="nav-item">
-                                        <a href="{{ route("admin::content.{$module}.index") }}"
-                                           class="nav-link @if (request()->routeIs("admin::content.{$module}.*")) active @endif">
-                                            <i class="fas {{ $menu['icon'] }} nav-icon"></i>
-                                            <p>{{ $menu['label'] }}</p>
+                                        <a href="{{ route('admin::content.faq-categories.index') }}"
+                                           class="nav-link @if (request()->routeIs('admin::content.faq-categories.*')) active @endif" style="padding-left: 3rem !important;">
+                                            <i class="fas fa-folder-open nav-icon" style="font-size: 0.8rem;"></i>
+                                            <p style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">FAQ Categories</p>
                                         </a>
                                     </li>
-                                @endif
-                            @endforeach
-                            @if ($cmsMenuPermissions['showcase'])
-                                <li class="nav-item">
-                                    <a href="{{ route('admin::content.showcase-categories.index') }}"
-                                       class="nav-link @if (request()->routeIs('admin::content.showcase-categories.*')) active @endif">
-                                        <i class="fas fa-folder-open nav-icon"></i>
-                                        <p>Showcase Categories</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{ route('admin::content.showcase.index') }}"
-                                       class="nav-link @if (request()->routeIs('admin::content.showcase.*')) active @endif">
-                                        <i class="fas fa-images nav-icon"></i>
-                                        <p>Showcase</p>
-                                    </a>
-                                </li>
+                                    <li class="nav-item">
+                                        <a href="{{ route('admin::content.faqs.index') }}"
+                                           class="nav-link @if (request()->routeIs('admin::content.faqs.*')) active @endif" style="padding-left: 3rem !important;">
+                                            <i class="far fa-circle nav-icon" style="font-size: 0.8rem;"></i>
+                                            <p style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">FAQs</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
                             @endif
+
+                            {{-- MAAC Group --}}
+                            @if ($cmsMenuPermissions['courses'] || $cmsMenuPermissions['features'])
+                            <li class="nav-item has-treeview @if (request()->routeIs('admin::content.courses.*') || request()->routeIs('admin::content.features.*')) menu-open @endif">
+                                <a href="#" class="nav-link @if (request()->routeIs('admin::content.courses.*') || request()->routeIs('admin::content.features.*')) active @endif" style="padding-left: 2rem !important;">
+                                    <i class="fas fa-graduation-cap nav-icon" style="font-size: 0.9rem;"></i>
+                                    <p>
+                                        MAAC
+                                        <i class="right fas fa-angle-left"></i>
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview">
+                                    @if ($cmsMenuPermissions['courses'])
+                                    <li class="nav-item">
+                                        <a href="{{ route('admin::content.courses.index') }}"
+                                           class="nav-link @if (request()->routeIs('admin::content.courses.*')) active @endif" style="padding-left: 3rem !important;">
+                                            <i class="far fa-circle nav-icon" style="font-size: 0.8rem;"></i>
+                                            <p style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Courses</p>
+                                        </a>
+                                    </li>
+                                    @endif
+                                    @if ($cmsMenuPermissions['features'])
+                                    <li class="nav-item">
+                                        <a href="{{ route('admin::content.features.index') }}"
+                                           class="nav-link @if (request()->routeIs('admin::content.features.*')) active @endif" style="padding-left: 3rem !important;">
+                                            <i class="fas fa-star nav-icon" style="font-size: 0.8rem;"></i>
+                                            <p style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Features</p>
+                                        </a>
+                                    </li>
+                                    @endif
+                                </ul>
+                            </li>
+                            @endif
+
+                            {{-- Student Work Group --}}
+                            @if ($cmsMenuPermissions['showcase'])
+                            <li class="nav-item has-treeview @if (request()->routeIs('admin::content.showcase.*') || request()->routeIs('admin::content.showcase-categories.*')) menu-open @endif">
+                                <a href="#" class="nav-link @if (request()->routeIs('admin::content.showcase.*') || request()->routeIs('admin::content.showcase-categories.*')) active @endif" style="padding-left: 2rem !important;">
+                                    <i class="fas fa-images nav-icon" style="font-size: 0.9rem;"></i>
+                                    <p>
+                                        Student Work
+                                        <i class="right fas fa-angle-left"></i>
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview">
+                                    <li class="nav-item">
+                                        <a href="{{ route('admin::content.showcase-categories.index') }}"
+                                           class="nav-link @if (request()->routeIs('admin::content.showcase-categories.*')) active @endif" style="padding-left: 3rem !important;">
+                                            <i class="fas fa-folder-open nav-icon" style="font-size: 0.8rem;"></i>
+                                            <p style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Showcase Categories</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="{{ route('admin::content.showcase.index') }}"
+                                           class="nav-link @if (request()->routeIs('admin::content.showcase.*')) active @endif" style="padding-left: 3rem !important;">
+                                            <i class="far fa-circle nav-icon" style="font-size: 0.8rem;"></i>
+                                            <p style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Showcase</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            @endif
+
+                            {{-- Blogs Group --}}
+                            <li class="nav-item has-treeview @if (request()->routeIs('admin::blog*')) menu-open @endif">
+                                <a href="#" class="nav-link @if (request()->routeIs('admin::blog*')) active @endif" style="padding-left: 2rem !important;">
+                                    <i class="fas fa-blog nav-icon" style="font-size: 0.9rem;"></i>
+                                    <p>
+                                        Blogs
+                                        <i class="right fas fa-angle-left"></i>
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview">
+                                    <li class="nav-item">
+                                        <a href="{{ route('admin::blog-categories.index') }}"
+                                           class="nav-link @if (request()->routeIs('admin::blog-categories.*')) active @endif" style="padding-left: 3rem !important;">
+                                            <i class="fas fa-tags nav-icon" style="font-size: 0.8rem;"></i>
+                                            <p style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Blog Categories</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="{{ route('admin::blogs.index') }}"
+                                           class="nav-link @if (request()->routeIs('admin::blogs.*')) active @endif" style="padding-left: 3rem !important;">
+                                            <i class="far fa-circle nav-icon" style="font-size: 0.8rem;"></i>
+                                            <p style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Blogs</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+
+                            {{-- Placement Showcase --}}
+                            <li class="nav-item">
+                                <a href="{{ route('admin::placement-showcases.index') }}"
+                                   class="nav-link @if (request()->routeIs('admin::placement-showcases.*')) active @endif" style="padding-left: 2rem !important;">
+                                    <i class="fas fa-user-graduate nav-icon" style="font-size: 0.9rem;"></i>
+                                    <p>Placement Showcase</p>
+                                </a>
+                            </li>
+
+                            {{-- Recruiters --}}
+                            <li class="nav-item">
+                                <a href="{{ route('admin::recruiters.index') }}"
+                                   class="nav-link @if (request()->routeIs('admin::recruiters.*')) active @endif" style="padding-left: 2rem !important;">
+                                    <i class="fas fa-building nav-icon" style="font-size: 0.9rem;"></i>
+                                    <p>Recruiters</p>
+                                </a>
+                            </li>
+
+                            {{-- Lead Forms --}}
                             <li class="nav-item">
                                 <a href="{{ route('admin::lead_forms.index') }}"
-                                   class="nav-link @if (request()->routeIs('admin::lead_forms.*')) active @endif">
-                                    <i class="fas fa-list-alt nav-icon"></i>
+                                   class="nav-link @if (request()->routeIs('admin::lead_forms.*')) active @endif" style="padding-left: 2rem !important;">
+                                    <i class="fas fa-list-alt nav-icon" style="font-size: 0.9rem;"></i>
                                     <p>Lead Forms</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{{ route('admin::blog-categories.index') }}"
-                                   class="nav-link @if (request()->routeIs('admin::blog-categories.*')) active @endif">
-                                    <i class="fas fa-tags nav-icon"></i>
-                                    <p>Blog Categories</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{{ route('admin::blogs.index') }}"
-                                   class="nav-link @if (request()->routeIs('admin::blogs.*')) active @endif">
-                                    <i class="fas fa-blog nav-icon"></i>
-                                    <p>Blogs</p>
                                 </a>
                             </li>
                         </ul>

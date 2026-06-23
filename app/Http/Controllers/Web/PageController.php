@@ -30,6 +30,31 @@ class PageController extends Controller
         $courses = OurCourse::where('status', 'Active')->get();
 
         $brand = \App\Models\Brand::where('slug', 'maac')->first();
+        
+        $placements = \App\Models\PlacementShowcase::with(['company', 'studentImage'])
+            ->where('is_active', true)
+            ->where(function($q) use ($brand) {
+                if ($brand) {
+                    $q->where('brand_id', $brand->id)->orWhereNull('brand_id');
+                }
+            })
+            ->orderBy('sort_order', 'asc')
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        $recruiters = \Illuminate\Support\Facades\Cache::remember('homepage_recruiters', 3600, function() use ($brand) {
+            return \App\Models\Recruiter::with('logo')
+                ->where('is_active', true)
+                ->where(function($q) use ($brand) {
+                    if ($brand) {
+                        $q->where('brand_id', $brand->id)->orWhereNull('brand_id');
+                    }
+                })
+                ->orderBy('sort_order', 'asc')
+                ->orderBy('created_at', 'desc')
+                ->get();
+        });
+
         $formFields = [];
         $globalModalFormFields = [];
         if ($brand && env('DYNAMIC_FORMS_MAAC', false)) {
@@ -45,7 +70,7 @@ class PageController extends Controller
                 ->get();
         }
 
-        return view('frontend.pages.index',compact('courses', 'brand', 'formFields', 'globalModalFormFields'));
+        return view('frontend.pages.index',compact('courses', 'brand', 'formFields', 'globalModalFormFields', 'placements', 'recruiters'));
     }
 
     public function counselling(Request $request){
