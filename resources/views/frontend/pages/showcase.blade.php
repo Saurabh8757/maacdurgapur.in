@@ -80,8 +80,8 @@
                         <div class="swiper-wrapper" id="showcaseList">
                             @forelse($showcaseProjects as $index => $project)
                                 @php
-                                    $thumbUrl = $project->thumbnail ? asset('storage/' . $project->thumbnail->storage_key) : asset('frontend/images/placeholder.jpg');
-                                    $iconUrl = $project->softwareIcon ? asset($project->softwareIcon->storage_key) : '';
+                                    $thumbUrl = $project->thumbnail ? asset(str_starts_with($project->thumbnail->storage_key, 'storage/') ? $project->thumbnail->storage_key : 'storage/' . $project->thumbnail->storage_key) : asset('frontend/images/placeholder.jpg');
+                                    $iconUrl = $project->softwareIcon ? asset(str_starts_with($project->softwareIcon->storage_key, 'storage/') ? $project->softwareIcon->storage_key : 'storage/' . $project->softwareIcon->storage_key) : '';
                                     $formattedIndex = sprintf('%02d', $index + 1);
                                 @endphp
                                 <div class="swiper-slide showcase-slide" 

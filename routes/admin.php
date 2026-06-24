@@ -15,9 +15,6 @@ use App\Http\Controllers\Admin\Profile\ProfileController;
 use App\Http\Controllers\Admin\Dashboard\DashboardController;
 use App\Http\Controllers\Admin\Login\AdminLoginController;
 use App\Http\Controllers\Admin\BrandContextController;
-use App\Http\Controllers\Admin\Settings\SettingsController;
-use App\Http\Controllers\Admin\Settings\SettingsDraftController;
-use App\Http\Controllers\Admin\Settings\SettingsVersionController;
 use App\Http\Controllers\Admin\Cms\Pages\CmsCoursePageController;
 use App\Http\Controllers\Admin\Cms\Pages\CmsFaqCategoryPageController;
 use App\Http\Controllers\Admin\Cms\Pages\CmsFaqPageController;
@@ -38,22 +35,6 @@ Route::group(['as' => 'admin::', 'prefix' => 'v1/cpanel/admin', 'middleware' => 
     Route::post('/brand-context', [BrandContextController::class, 'switch'])
         ->name('brand_context.switch');
     Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
-    Route::get('/settings/brand', [SettingsController::class, 'brand'])
-        ->name('settings.brand.index');
-    Route::put('/settings/brand/draft', [SettingsDraftController::class, 'update'])
-        ->name('settings.brand.draft.update');
-    Route::delete('/settings/brand/draft/{definition}/override', [SettingsDraftController::class, 'resetOverride'])
-        ->name('settings.brand.draft.reset');
-    Route::get('/settings/brand/{definition}/versions', [SettingsVersionController::class, 'index'])
-        ->name('settings.brand.versions.index');
-    Route::get('/settings/brand/{definition}/versions/{version}', [SettingsVersionController::class, 'show'])
-        ->name('settings.brand.versions.show');
-    Route::get('/settings/global', [SettingsController::class, 'global'])
-        ->name('settings.global.index');
-    Route::get('/settings/global/{definition}/versions', [SettingsVersionController::class, 'index'])
-        ->name('settings.global.versions.index');
-    Route::get('/settings/global/{definition}/versions/{version}', [SettingsVersionController::class, 'show'])
-        ->name('settings.global.versions.show');
     /*** Lead Management Routes Start ***/
     Route::get('/leads', [\App\Http\Controllers\Admin\LeadManagementController::class, 'index'])->name('leads.index');
     Route::get('/leads/export/csv', [\App\Http\Controllers\Admin\LeadManagementController::class, 'exportCsv'])->name('leads.export.csv');

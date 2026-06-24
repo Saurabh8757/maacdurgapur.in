@@ -2,9 +2,6 @@
     $segment4 = Request::segment(4);
     $segment5 = Request::segment(5);
     $info = \App\Helper\admin\siteInformation::siteInfo();
-    $settingsNavigation = app(\App\Services\Settings\SettingsNavigationService::class);
-    $canViewBrandSettings = $settingsNavigation->canViewBrand(Auth::user());
-    $canViewGlobalSettings = $settingsNavigation->canViewGlobal(Auth::user());
     $cmsAuthorization = app(\App\Services\Cms\CmsAuthorizationService::class);
     $adminBrandContext = app(\App\Services\Brands\BrandContextManager::class)->adminContext();
     $cmsMenuPermissions = [
@@ -321,38 +318,6 @@
                                     <p>Lead Forms</p>
                                 </a>
                             </li>
-                        </ul>
-                    </li>
-                @endif
-
-                @if ($canViewBrandSettings || $canViewGlobalSettings)
-                    <li class="nav-item has-treeview @if ($segment4 === 'settings') menu-open @endif">
-                        <a href="#" class="nav-link @if ($segment4 === 'settings') active @endif">
-                            <i class="fas fa-sliders-h nav-icon"></i>
-                            <p>
-                                Settings
-                                <i class="right fas fa-angle-left"></i>
-                            </p>
-                        </a>
-                        <ul class="nav nav-treeview">
-                            @if ($canViewBrandSettings)
-                                <li class="nav-item">
-                                    <a href="{{ route('admin::settings.brand.index') }}"
-                                       class="nav-link @if (request()->routeIs('admin::settings.brand.index')) active @endif">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Brand Settings</p>
-                                    </a>
-                                </li>
-                            @endif
-                            @if ($canViewGlobalSettings)
-                                <li class="nav-item">
-                                    <a href="{{ route('admin::settings.global.index') }}"
-                                       class="nav-link @if (request()->routeIs('admin::settings.global.index')) active @endif">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Global Settings</p>
-                                    </a>
-                                </li>
-                            @endif
                         </ul>
                     </li>
                 @endif
