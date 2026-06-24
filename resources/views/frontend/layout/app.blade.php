@@ -114,10 +114,12 @@
     <li class="has-dropdown">
       <a href="#courses" class="">Courses <span class="arrow">▼</span></a>
       <ul class="dropdown">
-        <li><a href="#"><span class="dot-icon"></span>Animation &amp; VFX</a></li>
-        <li><a href="#"><span class="dot-icon"></span>UI/UX Design</a></li>
-        <li><a href="#"><span class="dot-icon"></span>Game Development</a></li>
-        <li><a href="#"><span class="dot-icon"></span>AI &amp; Technology</a></li>
+        <li><a href="{{ route('home') }}#courses"><span class="dot-icon"></span>Animation &amp; VFX</a></li>
+        <li><a href="{{ route('home') }}#courses"><span class="dot-icon"></span>Gaming &amp; Unreal Engine</a></li>
+        <li><a href="{{ route('home') }}#courses"><span class="dot-icon"></span>Motion Graphics &amp; Video Editing</a></li>
+        <li><a href="{{ route('home') }}#courses"><span class="dot-icon"></span>Graphic Design &amp; Multimedia</a></li>
+        <li><a href="{{ route('home') }}#courses"><span class="dot-icon"></span>AI Creative Tools &amp; Digital Content Creation</a></li>
+        <li><a href="{{ route('home') }}#courses"><span class="dot-icon"></span>Filmmaking &amp; Visual Storytelling</a></li>
       </ul>
     </li>
     <li><a href="{{ route('showcase') }}" class="{{ request()->routeIs('showcase') ? 'active' : '' }}">Students Work</a></li>
@@ -155,10 +157,12 @@
       <span class="arrow" style="font-size:0.7rem">▼</span>
     </a>
     <ul class="mobile-sub" id="coursesSub">
-      <li><a href="#" data-close><span class="dot-icon"></span>Animation &amp; VFX</a></li>
-      <li><a href="#" data-close><span class="dot-icon"></span>UI/UX Design</a></li>
-      <li><a href="#" data-close><span class="dot-icon"></span>Game Development</a></li>
-      <li><a href="#" data-close><span class="dot-icon"></span>AI &amp; Technology</a></li>
+      <li><a href="{{ route('home') }}#courses" data-close><span class="dot-icon"></span>Animation &amp; VFX</a></li>
+      <li><a href="{{ route('home') }}#courses" data-close><span class="dot-icon"></span>Gaming &amp; Unreal Engine</a></li>
+      <li><a href="{{ route('home') }}#courses" data-close><span class="dot-icon"></span>Motion Graphics &amp; Video Editing</a></li>
+      <li><a href="{{ route('home') }}#courses" data-close><span class="dot-icon"></span>Graphic Design &amp; Multimedia</a></li>
+      <li><a href="{{ route('home') }}#courses" data-close><span class="dot-icon"></span>AI Creative Tools &amp; Digital Content Creation</a></li>
+      <li><a href="{{ route('home') }}#courses" data-close><span class="dot-icon"></span>Filmmaking &amp; Visual Storytelling</a></li>
     </ul>
 
     <a href="{{ route('showcase') }}" class="mobile-link {{ request()->routeIs('showcase') ? 'active' : '' }}" data-close>Students Work</a>

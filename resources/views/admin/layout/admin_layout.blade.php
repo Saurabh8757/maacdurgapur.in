@@ -81,6 +81,40 @@ $info = \App\Helper\admin\siteInformation::siteInfo();
                 </li>
             </ul>
             <ul class="navbar-nav ml-auto">
+                @php
+                    $notificationService = app(\App\Services\NotificationService::class);
+                    $unreadCount = $notificationService->getUnreadCount(Auth::user());
+                    $latestNotifications = $notificationService->getLatest(Auth::user(), 5);
+                @endphp
+                <li class="nav-item dropdown">
+                    <a class="nav-link" data-toggle="dropdown" href="#">
+                        <i class="far fa-bell"></i>
+                        @if($unreadCount > 0)
+                            <span class="badge badge-warning navbar-badge" style="font-size: 10px;">{{ $unreadCount }}</span>
+                        @endif
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                        <span class="dropdown-item dropdown-header">{{ $unreadCount }} Unread Notifications</span>
+                        <div class="dropdown-divider"></div>
+                        @forelse($latestNotifications as $notif)
+                            <a href="{{ $notif->action_url ?? '#' }}" class="dropdown-item {{ !$notif->is_read ? 'bg-light' : '' }}">
+                                <div class="d-flex align-items-center">
+                                    <i class="{{ $notif->icon ?? 'fas fa-info-circle' }} mr-2 text-{{ $notif->color ?? 'primary' }}"></i>
+                                    <div class="text-truncate" style="max-width: 200px;">
+                                        <strong>{{ $notif->title }}</strong><br>
+                                        <small class="text-muted">{{ Str::limit($notif->message, 30) }}</small>
+                                    </div>
+                                    <small class="ml-auto text-muted text-xs">{{ $notif->created_at->shortAbsoluteDiffForHumans() }}</small>
+                                </div>
+                            </a>
+                            <div class="dropdown-divider"></div>
+                        @empty
+                            <a href="#" class="dropdown-item text-center text-muted">No notifications</a>
+                            <div class="dropdown-divider"></div>
+                        @endforelse
+                        <a href="{{ route('admin::notifications.index') }}" class="dropdown-item dropdown-footer text-center">See All Notifications</a>
+                    </div>
+                </li>
                 @include('admin.components.brand-switcher')
                 <li class="nav-item">
                     <a class="nav-link" data-toggle="modal" data-target="#modal-default">

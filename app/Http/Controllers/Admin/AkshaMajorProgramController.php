@@ -29,6 +29,19 @@ class AkshaMajorProgramController extends Controller
         $data['slug'] = $data['slug'] ?: Str::slug($data['title']);
 
         $program = AkshaMajorProgram::create($data);
+
+        app(\App\Services\NotificationService::class)->sendToBrand(
+            null, // AKSHA might be global
+            'AKSHA Content Added',
+            'New AKSHA content has been added.',
+            'info',
+            'Aksha',
+            null,
+            null,
+            'fas fa-book',
+            'info'
+        );
+
         return response()->json($program, 201);
     }
 

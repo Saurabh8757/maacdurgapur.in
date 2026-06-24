@@ -36,10 +36,13 @@ class CmsController extends Controller
         }
         $key = $request->get('key');
 
+        // Sanitize HTML description before storage
+        $description = \Mews\Purifier\Facades\Purifier::clean($request->get('description'));
+
         $olddata = Cms::where('key',$key)->first();
         if (!empty($olddata)){
             $olddata->title = $request->get('title');
-            $olddata->description = $request->get('description');
+            $olddata->description = $description;
             $olddata->status = $status;
             $olddata->save();
 
@@ -48,7 +51,7 @@ class CmsController extends Controller
             $save = new Cms();
             $save->key = $key;
             $save->title = $request->get('title');
-            $save->description = $request->get('description');
+            $save->description = $description;
             $save->save();
             return redirect()->back()->with('success', 'Update Successfully');
         }

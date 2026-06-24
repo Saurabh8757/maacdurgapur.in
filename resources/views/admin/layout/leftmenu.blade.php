@@ -320,6 +320,29 @@
                             </li>
                         </ul>
                     </li>
+
+                    <li class="nav-item">
+                        <a href="{{ route('admin::whatsapp.settings') }}" class="nav-link {{ request()->routeIs('admin::whatsapp.settings') ? 'active' : '' }}">
+                            <i class="nav-icon fab fa-whatsapp"></i>
+                            <p>WhatsApp Config</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('admin::whatsapp.templates') }}" class="nav-link {{ request()->routeIs('admin::whatsapp.templates') ? 'active' : '' }}">
+                            <i class="nav-icon far fa-comment-dots"></i>
+                            <p>WhatsApp Templates</p>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="{{ route('admin::followups.index') }}" class="nav-link {{ request()->routeIs('admin::followups.*') ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-calendar-check"></i>
+                            <p>
+                                Followups
+                                <span class="badge badge-warning right">{{ \App\Models\LeadFollowup::where('status', 'pending')->count() }}</span>
+                            </p>
+                        </a>
+                    </li>
                 @endif
 
             </ul>

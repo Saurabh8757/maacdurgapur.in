@@ -29,7 +29,7 @@ class ServiceController extends Controller
             'description.required' => 'Please Enter Description',
         ];
         $this->validate($request, [
-            'image' => 'required',
+            'image' => 'required|image|mimes:jpg,jpeg,png,webp|max:10240',
             'title' => 'required',
             'description' => 'required',
         ],$msg);

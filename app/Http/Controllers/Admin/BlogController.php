@@ -57,6 +57,11 @@ class BlogController extends Controller
             'category_id', 'brand_id',
         ]);
 
+        // Sanitize HTML content before storage
+        if (isset($data['content'])) {
+            $data['content'] = \Mews\Purifier\Facades\Purifier::clean($data['content']);
+        }
+
         // Handle tags
         if ($request->filled('tags')) {
             $tagsArray = explode(',', $request->tags);
@@ -76,7 +81,21 @@ class BlogController extends Controller
             $data['featured_image_media_id'] = $this->uploadFeaturedImage($request->file('featured_image'));
         }
 
-        Blog::create($data);
+        $blog = Blog::create($data);
+
+        if ($request->status == 'published') {
+            app(\App\Services\NotificationService::class)->sendToBrand(
+                $data['brand_id'] ?? null,
+                'Blog Published',
+                'A new blog post ('.$data['title'].') has been published.',
+                'info',
+                'Blog',
+                $blog->id ?? null, // use the newly created blog ID
+                null,
+                'fas fa-file-alt',
+                'primary'
+            );
+        }
 
         return redirect()->route('admin::blogs.index')->with('success', 'Blog created successfully.');
     }
@@ -106,6 +125,11 @@ class BlogController extends Controller
             'category_id', 'brand_id',
         ]);
 
+        // Sanitize HTML content before storage
+        if (isset($data['content'])) {
+            $data['content'] = \Mews\Purifier\Facades\Purifier::clean($data['content']);
+        }
+
         // Handle tags
         if ($request->filled('tags')) {
             $tagsArray = explode(',', $request->tags);
@@ -128,6 +152,20 @@ class BlogController extends Controller
         }
 
         $blog->update($data);
+
+        if ($request->status == 'published') {
+            app(\App\Services\NotificationService::class)->sendToBrand(
+                $data['brand_id'] ?? null,
+                'Blog Published',
+                'A new blog post ('.$data['title'].') has been published.',
+                'info',
+                'Blog',
+                $blog->id ?? null, // use the newly created blog ID
+                null,
+                'fas fa-file-alt',
+                'primary'
+            );
+        }
 
         return redirect()->route('admin::blogs.index')->with('success', 'Blog updated successfully.');
     }

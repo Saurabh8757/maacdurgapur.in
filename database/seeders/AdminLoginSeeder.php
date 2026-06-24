@@ -14,14 +14,25 @@ class AdminLoginSeeder extends Seeder
      */
     public function run()
     {
-          $user = new User();
-        $user->name = 'John Doe';
-        $user->slug_name ='john';
-        // $user->slug_name= Str::slug('John Doe');
+        $email = env('SEED_ADMIN_EMAIL', 'admin@maacdurgapur.com');
+        $password = env('SEED_ADMIN_PASSWORD', \Illuminate\Support\Str::random(16));
+
+        $user = new User();
+        $user->name = 'Administrator';
+        $user->slug_name = 'administrator';
         $user->profile_picture = 'user_image.jpg';
-        $user->email = 'admin@gmail.com';
-        $user->password = bcrypt('123456');
+        $user->email = $email;
+        $user->password = bcrypt($password);
         $user->user_type = 'Admin';
         $user->save();
+
+        // Log the generated password so it can be noted during installation
+        if (!env('SEED_ADMIN_PASSWORD')) {
+            $this->command->info('========================================');
+            $this->command->info('ADMIN CREDENTIALS (save these now!):');
+            $this->command->info('Email: ' . $email);
+            $this->command->info('Password: ' . $password);
+            $this->command->info('========================================');
+        }
     }
 }

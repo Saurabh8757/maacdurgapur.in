@@ -96,10 +96,12 @@
     <li class="has-dropdown">
       <a href="#courses" class="{{ request()->routeIs('maac', 'aksha', 'space_e_fic') ? 'active' : '' }}">Courses <span class="arrow">▼</span></a>
       <ul class="dropdown">
-        <li><a href="#"><span class="dot-icon"></span>Animation &amp; VFX</a></li>
-        <li><a href="#"><span class="dot-icon"></span>UI/UX Design</a></li>
-        <li><a href="#"><span class="dot-icon"></span>Game Development</a></li>
-        <li><a href="#"><span class="dot-icon"></span>AI &amp; Technology</a></li>
+        <li><a href="#courses"><span class="dot-icon"></span>Animation &amp; VFX</a></li>
+        <li><a href="#courses"><span class="dot-icon"></span>Gaming &amp; Unreal Engine</a></li>
+        <li><a href="#courses"><span class="dot-icon"></span>Motion Graphics &amp; Video Editing</a></li>
+        <li><a href="#courses"><span class="dot-icon"></span>Graphic Design &amp; Multimedia</a></li>
+        <li><a href="#courses"><span class="dot-icon"></span>AI Creative Tools &amp; Digital Content Creation</a></li>
+        <li><a href="#courses"><span class="dot-icon"></span>Filmmaking &amp; Visual Storytelling</a></li>
       </ul>
     </li>
     <li><a href="{{ route('showcase') }}" class="{{ request()->routeIs('showcase') ? 'active' : '' }}">Students Work</a></li>
@@ -130,10 +132,12 @@
       <span class="arrow" style="font-size:0.7rem">▼</span>
     </a>
     <ul class="mobile-sub" id="coursesSub">
-      <li><a href="#" data-close><span class="dot-icon"></span>Animation &amp; VFX</a></li>
-      <li><a href="#" data-close><span class="dot-icon"></span>UI/UX Design</a></li>
-      <li><a href="#" data-close><span class="dot-icon"></span>Game Development</a></li>
-      <li><a href="#" data-close><span class="dot-icon"></span>AI &amp; Technology</a></li>
+      <li><a href="#courses" data-close><span class="dot-icon"></span>Animation &amp; VFX</a></li>
+      <li><a href="#courses" data-close><span class="dot-icon"></span>Gaming &amp; Unreal Engine</a></li>
+      <li><a href="#courses" data-close><span class="dot-icon"></span>Motion Graphics &amp; Video Editing</a></li>
+      <li><a href="#courses" data-close><span class="dot-icon"></span>Graphic Design &amp; Multimedia</a></li>
+      <li><a href="#courses" data-close><span class="dot-icon"></span>AI Creative Tools &amp; Digital Content Creation</a></li>
+      <li><a href="#courses" data-close><span class="dot-icon"></span>Filmmaking &amp; Visual Storytelling</a></li>
     </ul>
 
     <a href="{{ route('showcase') }}" class="mobile-link {{ request()->routeIs('showcase') ? 'active' : '' }}" data-close>Students Work</a>
@@ -549,8 +553,6 @@
       </div>
       @endforeach
     </div>
-    <div class="swiper-button-prev placement-prev"></div>
-    <div class="swiper-button-next placement-next"></div>
   </div>
 </section>
 @endif
@@ -695,7 +697,7 @@
       <div class="swiper-slide">
         <div class="journey-card">
           <div class="journey-card-bg">
-            <img src="{{ asset('frontend/images/courses_outline.webp') }}" alt="UI/UX Redesign — EduApp" class="journey-card-img" loading="lazy">
+            <img src="{{ asset('frontend/images/ui_ux_redesign.png') }}" alt="UI/UX Redesign — EduApp" class="journey-card-img" loading="lazy">
           </div>
           <div class="journey-card-overlay"></div>
           <div class="journey-card-content">

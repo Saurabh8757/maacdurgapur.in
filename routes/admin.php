@@ -30,11 +30,19 @@ use App\Http\Middleware\ResolveAdminBrandContext;
 Route::get('admin-login',[AdminLoginController::class,'admin_login_page'])->name('admin_login');
 
 
-Route::post('admin-login-check',[AdminLoginController::class,'admin_login_check'])->name('admin_login_check');
+Route::post('admin-login-check',[AdminLoginController::class,'admin_login_check'])->middleware('throttle:login')->name('admin_login_check');
 Route::group(['as' => 'admin::', 'prefix' => 'v1/cpanel/admin', 'middleware' => ['web', 'AdminMiddleware', ResolveAdminBrandContext::class, 'revalidate']], function () {
     Route::post('/brand-context', [BrandContextController::class, 'switch'])
         ->name('brand_context.switch');
     Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
+    Route::get('/dashboard/export', [DashboardController::class, 'export'])->name('dashboard.export');
+
+    // Notifications
+    Route::get('/notifications', [\App\Http\Controllers\Admin\NotificationController::class, 'index'])->name('notifications.index');
+    Route::post('/notifications/read-all', [\App\Http\Controllers\Admin\NotificationController::class, 'markAllAsRead'])->name('notifications.markAllRead');
+    Route::post('/notifications/{id}/read', [\App\Http\Controllers\Admin\NotificationController::class, 'markAsRead'])->name('notifications.markRead');
+    Route::delete('/notifications/{id}', [\App\Http\Controllers\Admin\NotificationController::class, 'destroy'])->name('notifications.destroy');
+
     /*** Lead Management Routes Start ***/
     Route::get('/leads', [\App\Http\Controllers\Admin\LeadManagementController::class, 'index'])->name('leads.index');
     Route::get('/leads/export/csv', [\App\Http\Controllers\Admin\LeadManagementController::class, 'exportCsv'])->name('leads.export.csv');
@@ -42,8 +50,25 @@ Route::group(['as' => 'admin::', 'prefix' => 'v1/cpanel/admin', 'middleware' => 
     Route::get('/leads/{id}', [\App\Http\Controllers\Admin\LeadManagementController::class, 'show'])->name('leads.show');
     Route::put('/leads/{id}/status', [\App\Http\Controllers\Admin\LeadManagementController::class, 'updateStatus'])->name('leads.update_status');
     Route::put('/leads/{id}/assign', [\App\Http\Controllers\Admin\LeadManagementController::class, 'assignUser'])->name('leads.assign');
+    Route::post('/leads/{id}/notes', [\App\Http\Controllers\Admin\LeadManagementController::class, 'addNote'])->name('leads.add_note');
+    Route::post('/leads/{id}/followups', [\App\Http\Controllers\Admin\FollowupController::class, 'store'])->name('leads.followups.store');
     Route::delete('/leads/{id}', [\App\Http\Controllers\Admin\LeadManagementController::class, 'destroy'])->name('leads.destroy');
     /*** Lead Management Routes End ***/
+
+    /*** Followups Routes Start ***/
+    Route::get('/followups', [\App\Http\Controllers\Admin\FollowupController::class, 'index'])->name('followups.index');
+    Route::put('/followups/{id}/complete', [\App\Http\Controllers\Admin\FollowupController::class, 'complete'])->name('followups.complete');
+    Route::put('/followups/{id}/cancel', [\App\Http\Controllers\Admin\FollowupController::class, 'cancel'])->name('followups.cancel');
+    /*** Followups Routes End ***/
+
+    /*** WhatsApp Settings Routes Start ***/
+    Route::get('/whatsapp/settings', [\App\Http\Controllers\Admin\WhatsApp\WhatsappAdminController::class, 'settings'])->name('whatsapp.settings');
+    Route::post('/whatsapp/settings', [\App\Http\Controllers\Admin\WhatsApp\WhatsappAdminController::class, 'saveSettings'])->name('whatsapp.settings.save');
+    Route::get('/whatsapp/templates', [\App\Http\Controllers\Admin\WhatsApp\WhatsappAdminController::class, 'templates'])->name('whatsapp.templates');
+    Route::post('/whatsapp/templates', [\App\Http\Controllers\Admin\WhatsApp\WhatsappAdminController::class, 'saveTemplate'])->name('whatsapp.templates.save');
+    /*** WhatsApp Settings Routes End ***/
+
+
 
     /*** Lead Forms Routes Start ***/
     Route::get('/lead-forms', [\App\Http\Controllers\Admin\LeadFormController::class, 'index'])->name('lead_forms.index');
@@ -188,7 +213,7 @@ Route::group(['as' => 'admin::', 'prefix' => 'v1/cpanel/admin', 'middleware' => 
     Route::post('/save-course',[CourseController::class,'save'])->name('save_course');
     Route::get('/edit-course/{id}',[CourseController::class,'edit'])->name('edit_course');
     Route::post('/update-course/{id}',[CourseController::class,'update'])->name('update_course');
-    Route::get('/delete-course/{id}',[CourseController::class,'delete'])->name('delete_course');
+    Route::delete('/delete-course/{id}',[CourseController::class,'delete'])->name('delete_course');
     Route::post('/status-course',[CourseController::class,'status'])->name('status_course');
     /*** Team Member End ***/
 
@@ -202,7 +227,7 @@ Route::group(['as' => 'admin::', 'prefix' => 'v1/cpanel/admin', 'middleware' => 
     Route::post('/save-services',[ServiceController::class,'save'])->name('save_services');
     Route::get('/edit-services/{id}',[ServiceController::class,'edit'])->name('edit_services');
     Route::post('/update-services/{id}',[ServiceController::class,'update'])->name('update_services');
-    Route::get('/delete-services/{id}',[ServiceController::class,'delete'])->name('delete_services');
+    Route::delete('/delete-services/{id}',[ServiceController::class,'delete'])->name('delete_services');
     Route::post('/status-services',[ServiceController::class,'status'])->name('status_services');
     /*** services End ***/
 

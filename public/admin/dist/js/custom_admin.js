@@ -116,7 +116,10 @@ function deleteItem(url){
         if (result.isConfirmed === true) {
             $.ajax({
                 url: url,
-                type: "GET",
+                type: "DELETE",
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
                 success: function (res) {
                     if (res.status === 200) {
                         Swal.fire(

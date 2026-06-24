@@ -1551,13 +1551,13 @@ body.loading {
 
 /* ─── Placement Card ──────────────────────────────────── */
 .placement-swiper .swiper-wrapper {
-    align-items: stretch !important;
     flex-wrap: nowrap !important; /* Prevent Swiper loop cloning bugs from wrapping edge slides */
 }
 
 .placement-swiper .swiper-slide {
     height: auto !important; /* Required for align-items: stretch to work */
     display: flex !important;
+    flex-direction: column !important;
     align-self: stretch !important; /* Force to top and stretch */
     z-index: 1;
     transition: z-index 0.3s;
@@ -1585,14 +1585,14 @@ body.loading {
     display: flex;
     flex-direction: column;
     width: 100%;
-    min-height: 360px;
+    min-height: 380px;
     height: 100% !important; /* Force to stretch and align perfectly with siblings */
+    flex: 1 1 auto !important;
     position: relative;
     will-change: transform;
 }
 
 .placement-card:hover {
-    transform: translateY(-12px);
     border-color: rgba(255, 106, 0, 0.6);
     box-shadow:
         0 40px 80px rgba(0, 0, 0, 0.95),
@@ -1856,7 +1856,7 @@ body.loading {
 .journey-card {
     position: relative;
     width: 100%;
-    aspect-ratio: 16 / 9;
+    aspect-ratio: 4 / 3;
     border-radius: 24px;
     overflow: hidden;
     cursor: pointer;
@@ -1939,15 +1939,9 @@ body.loading {
     position: absolute;
     inset: 0;
     background:
-        /* Top: subtle dark feather */
         linear-gradient(to bottom,
-            rgba(5, 5, 12, 0.15) 0%,
-            transparent 20%,
-            transparent 35%,
-            /* Bottom: strong cinematic ramp for readability */
-            rgba(5, 5, 12, 0.50) 45%,
-            rgba(5, 5, 12, 0.70) 60%,
-            rgba(5, 5, 12, 0.88) 80%,
+            rgba(5, 5, 12, 0.40) 0%,
+            rgba(5, 5, 12, 0.75) 50%,
             rgba(5, 5, 12, 0.95) 100%);
     z-index: 1;
     pointer-events: none;
@@ -1979,6 +1973,7 @@ body.loading {
 /* ─── Card Content (bottom-left) ──────────────────────── */
 .journey-card-content {
     position: absolute;
+    top: 0;
     bottom: 0;
     left: 0;
     right: 0;
@@ -1986,15 +1981,18 @@ body.loading {
     z-index: 3;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
     gap: 6px;
 }
 
 .journey-card-badge {
     display: inline-block;
-    align-self: flex-start;
+    align-self: center;
     font-family: Rajdhani, sans-serif;
     font-size: 0.65rem;
-    font-weight: 700;
+    font-weight: 600;
     letter-spacing: 1.5px;
     text-transform: uppercase;
     color: var(--gold);
@@ -2009,7 +2007,7 @@ body.loading {
 .journey-card-title {
     font-family: Oswald, sans-serif;
     font-size: clamp(1.1rem, 2.2vw, 1.5rem);
-    font-weight: 700;
+    font-weight: 500;
     color: #fff;
     line-height: 1.15;
     letter-spacing: 0.3px;
@@ -2193,15 +2191,19 @@ body.loading {
     .journey-swiper {
         padding: 20px 16px 40px;
     }
+    .journey-card {
+        aspect-ratio: auto;
+        min-height: 380px;
+    }
     .journey-card-content {
         padding: 22px;
     }
     .journey-pagination {
         margin-top: 44px;
     }
-    /* Tablet: hide description, show title + meta (student + company) */
+    /* Tablet: description is visible now because we have enough height */
     .journey-card-desc {
-        display: none;
+        /* display: none; */
     }
     .journey-card-title {
         font-size: clamp(1rem, 2.5vw, 1.2rem);
@@ -2219,15 +2221,19 @@ body.loading {
     .journey-swiper {
         padding: 16px 12px 36px;
     }
+    .journey-card {
+        aspect-ratio: auto;
+        min-height: 360px;
+    }
     .journey-card-content {
         padding: 16px;
     }
-    /* Mobile: hide company, show only title + student */
+    /* Mobile: ensure all meta is visible */
     .journey-card-company {
-        display: none;
+        /* display: none; */
     }
     .journey-card-sep {
-        display: none;
+        /* display: none; */
     }
     .journey-card-title {
         font-size: clamp(0.9rem, 3vw, 1.05rem);

@@ -139,18 +139,20 @@ class PageController extends Controller
             if ($formType === 'global_modal') {
                 $leadData['source_page'] = 'Global Modal';
             }
-            $customData = [];
+            // Always save core fields if present in request
+            foreach ($coreFields as $coreField) {
+                if ($request->has($coreField) && !empty($request->$coreField)) {
+                    $leadData[$coreField] = $request->$coreField;
+                }
+            }
 
+            $customData = [];
             foreach ($fields as $field) {
                 $fname = $field->field_name;
-                if ($fname === 'course_id') continue;
+                if ($fname === 'course_id' || in_array($fname, $coreFields)) continue;
 
-                if (in_array($fname, $coreFields)) {
-                    $leadData[$fname] = $request->$fname;
-                } else {
-                    if ($request->has($fname)) {
-                        $customData[$fname] = $request->$fname;
-                    }
+                if ($request->has($fname)) {
+                    $customData[$fname] = $request->$fname;
                 }
             }
 
@@ -158,7 +160,26 @@ class PageController extends Controller
                 $leadData['custom_data'] = $customData;
             }
 
-            \App\Models\Lead::create($leadData);
+            $newLead = \App\Models\Lead::create($leadData);
+            
+            $activityService = app(\App\Services\LeadActivityService::class);
+            $activityService->logLeadCreated($newLead);
+
+            // Trigger Notification
+            $notificationService = app(\App\Services\NotificationService::class);
+            $notificationService->sendToBrand(
+                $newLead->brand_id,
+                'New Lead Submitted',
+                "A new lead {$newLead->name} submitted the form.",
+                'lead_created',
+                'Lead',
+                $newLead->id,
+                route('admin::leads.show', $newLead->id)
+            );
+
+            // Trigger WhatsApp Acknowledgement
+            $whatsappService = app(\App\Services\WhatsApp\WhatsappServiceInterface::class);
+            $whatsappService->sendLeadAcknowledgement($newLead);
 
             return response()->json([
                 'status' => 1,
@@ -198,6 +219,19 @@ class PageController extends Controller
             $comments->course_id  = $request->course_id;
             $comments->save();
 
+            $notificationService = app(\App\Services\NotificationService::class);
+            $notificationService->sendToBrand(
+                $comments->brand_id,
+                'New Lead Submitted',
+                'A new lead ('.$comments->name.') has been submitted for '.$comments->course_name,
+                'success',
+                'Lead',
+                $comments->id,
+                route('admin::leads.show', $comments->id),
+                'fas fa-user-plus',
+                'success'
+            );
+
             // Save to Unified Lead Management (so it shows in CMS)
             $brand = \App\Models\Brand::where('slug', 'maac')->first();
             if ($brand) {
@@ -208,8 +242,8 @@ class PageController extends Controller
                         $courseName = $course->name;
                     }
                 }
-                \App\Models\Lead::create([
-                    'brand_id' => $brand->id,
+                $newLead = \App\Models\Lead::create([
+                    'brand_id' => null, // Needs assignment based on program later if required
                     'name' => $request->name,
                     'phone' => $request->phone,
                     'email' => $request->email,
@@ -217,6 +251,25 @@ class PageController extends Controller
                     'source_page' => 'Global Modal',
                     'status' => 'new'
                 ]);
+
+                $activityService = app(\App\Services\LeadActivityService::class);
+                $activityService->logLeadCreated($newLead);
+
+                // Trigger Notification
+                $notificationService = app(\App\Services\NotificationService::class);
+                $notificationService->sendToBrand(
+                    null, // Superadmin
+                    'New Counselling Request',
+                    "A new counselling request from {$newLead->name}.",
+                    'lead_created',
+                    'Lead',
+                    $newLead->id,
+                    route('admin::leads.show', $newLead->id)
+                );
+
+                // Trigger WhatsApp Acknowledgement
+                $whatsappService = app(\App\Services\WhatsApp\WhatsappServiceInterface::class);
+                $whatsappService->sendLeadAcknowledgement($newLead);
             }
 
             return response()->json([

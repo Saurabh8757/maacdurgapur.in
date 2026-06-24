@@ -171,21 +171,9 @@
     });
   }
 
-  /* ─── Placement cards staggered reveal ────────────────── */
+  /* ─── Placement cards staggered reveal REMOVED ────────────────── */
   if (document.querySelector('.placement-swiper')) {
-    gsap.from('.placement-card', {
-      y: 50,
-      opacity: 0,
-      scale: 0.95,
-      duration: 0.8,
-      stagger: 0.1,
-      ease: 'power3.out',
-      scrollTrigger: {
-        trigger: '.placement-swiper',
-        start: 'top 85%',
-        toggleActions: 'play none none none',
-      },
-    });
+    // Animation removed per user request to fix layout bugs with Swiper clones
   }
 
   if (document.querySelector('.placement-section .section-header')) {

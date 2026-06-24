@@ -30,9 +30,9 @@
     loop: true,
     grabCursor: true,
     speed: 600,
-    navigation: {
-      nextEl: '.placement-next',
-      prevEl: '.placement-prev',
+    autoplay: {
+      delay: 3000,
+      disableOnInteraction: false,
     },
     breakpoints: {
       320: { slidesPerView: 1.2, spaceBetween: 12 },

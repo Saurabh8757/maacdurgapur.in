@@ -47,7 +47,19 @@ class RecruiterController extends Controller
             $data['company_logo_media_id'] = $this->uploadImage($request->file('company_logo'), 'recruiters/logos');
         }
 
-        Recruiter::create($data);
+        $recruiter = Recruiter::create($data);
+
+        app(\App\Services\NotificationService::class)->sendToBrand(
+            null, // Generic or use brand_id if recruiter belongs to brand
+            'Recruiter Added',
+            'A new recruiter has been added.',
+            'info',
+            'Recruiter',
+            null,
+            null,
+            'fas fa-briefcase',
+            'info'
+        );
 
         return redirect()->route('admin::recruiters.index')->with('success', 'Recruiter created successfully.');
     }

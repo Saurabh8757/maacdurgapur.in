@@ -28,4 +28,19 @@ class Lead extends Model
     {
         return $this->belongsTo(User::class, 'assigned_to');
     }
+
+    public function activities()
+    {
+        return $this->hasMany(LeadActivity::class)->orderBy('created_at', 'desc');
+    }
+
+    public function followups()
+    {
+        return $this->hasMany(LeadFollowup::class)->orderBy('followup_date', 'asc')->orderBy('followup_time', 'asc');
+    }
+
+    public function whatsappMessages()
+    {
+        return $this->hasMany(WhatsappMessage::class);
+    }
 }

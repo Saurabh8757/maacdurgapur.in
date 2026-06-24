@@ -6,10 +6,18 @@ use App\Http\Controllers\Controller;
 use App\Models\Lead;
 use App\Models\Brand;
 use App\Models\User;
+use App\Services\LeadActivityService;
 use Illuminate\Http\Request;
 
 class LeadManagementController extends Controller
 {
+    protected $activityService;
+
+    public function __construct(LeadActivityService $activityService)
+    {
+        $this->activityService = $activityService;
+    }
+
     public function index(Request $request)
     {
         $query = Lead::with(['brand', 'assignedUser']);
@@ -54,7 +62,15 @@ class LeadManagementController extends Controller
 
     public function show($id)
     {
-        $lead = Lead::with(['brand', 'assignedUser'])->findOrFail($id);
+        $lead = Lead::with([
+            'brand', 
+            'assignedUser',
+            'activities' => function($q) {
+                $q->orderBy('is_pinned', 'desc')->orderBy('created_at', 'desc');
+            },
+            'activities.user'
+        ])->findOrFail($id);
+        
         $users = User::where('user_type', 'Admin')->get();
         return view('admin.pages.lead_management.show', compact('lead', 'users'));
     }
@@ -66,8 +82,26 @@ class LeadManagementController extends Controller
         ]);
 
         $lead = Lead::findOrFail($id);
+        $oldStatus = $lead->status;
         $lead->status = $request->status;
         $lead->save();
+
+        if ($oldStatus !== $request->status) {
+            $this->activityService->logStatusChange($lead, $oldStatus, $request->status);
+        }
+
+        $notificationService = app(\App\Services\NotificationService::class);
+        $notificationService->sendToBrand(
+            $lead->brand_id,
+            'Lead Status Changed',
+            'Lead ('.$lead->name.') status changed to '.$request->status,
+            'info',
+            'Lead',
+            $lead->id,
+            route('admin::leads.show', $lead->id),
+            'fas fa-sync',
+            'info'
+        );
 
         return redirect()->back()->with('success', 'Lead status updated successfully.');
     }
@@ -82,7 +116,39 @@ class LeadManagementController extends Controller
         $lead->assigned_to = $request->assigned_to;
         $lead->save();
 
+        $this->activityService->logAssignment($lead, $request->assigned_to);
+
+        if ($request->assigned_to) {
+            $notificationService = app(\App\Services\NotificationService::class);
+            $notificationService->sendToUser(
+                $request->assigned_to,
+                'Lead Assigned to You',
+                'Lead ('.$lead->name.') has been assigned to you.',
+                'warning',
+                'Lead',
+                $lead->id,
+                route('admin::leads.show', $lead->id),
+                'fas fa-user-check',
+                'warning'
+            );
+        }
+
         return redirect()->back()->with('success', 'Lead assigned successfully.');
+    }
+
+    public function addNote(Request $request, $id)
+    {
+        $request->validate([
+            'note' => 'required|string',
+            'is_pinned' => 'nullable|boolean'
+        ]);
+
+        $lead = Lead::findOrFail($id);
+        $isPinned = $request->has('is_pinned') ? true : false;
+        
+        $this->activityService->addNote($lead, $request->note, null, $isPinned);
+
+        return redirect()->back()->with('success', 'Note added successfully.');
     }
 
     public function destroy($id)

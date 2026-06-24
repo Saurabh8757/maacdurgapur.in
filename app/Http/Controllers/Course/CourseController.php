@@ -14,12 +14,12 @@ class CourseController extends Controller
     {
         $allCourses = OurCourse::orderBy('created_at','DESC')->get();
 
-        return view('admin.pages.team_member.index',['allCourses' => $allCourses]);
+        return view('admin.pages.courses.index',['allCourses' => $allCourses]);
     }
 
     public function add()
     {
-        return view('admin.pages.team_member.add');
+        return view('admin.pages.courses.add');
 
     }
 
@@ -32,7 +32,7 @@ class CourseController extends Controller
 
         ];
         $this->validate($request, [
-            'image' => 'required',
+            'image' => 'required|image|mimes:jpg,jpeg,png,webp|max:10240',
             'name' => 'required',
             'duration' => 'required',
 
@@ -41,7 +41,7 @@ class CourseController extends Controller
         if ($request->hasFile('image')) {
             $file = $request->file('image');
             $path = "upload/images/course";
-            $filename = $file->getClientOriginalName(); // Get the original file name
+            $filename = $file->hashName(); // Secure random filename
 
             // Move the uploaded file to the specified path
             $file->move($path, $filename);
@@ -59,14 +59,14 @@ class CourseController extends Controller
         $save->save();
 
 
-        return redirect()->route('admin::course')->with('success','Team Member Add Successfully');
+        return redirect()->route('admin::course')->with('success','Course Added Successfully');
 
     }
 
     public function edit($id)
     {
         $data = OurCourse::where('id',$id)->first();
-        return view('admin.pages.team_member.edit',['data' => $data]);
+        return view('admin.pages.courses.edit',['data' => $data]);
     }
 
     public function update(Request $request, $id)
@@ -86,9 +86,10 @@ class CourseController extends Controller
         $old = $data->image;
 
         if ($request->hasFile('image')) {
+            $request->validate(['image' => 'image|mimes:jpg,jpeg,png,webp|max:10240']);
             $file = $request->file('image');
             $path = "upload/images/course/";
-            $filename = $file->getClientOriginalName();
+            $filename = $file->hashName(); // Secure random filename
 
             // Remove the old image file if it exists
             if (!empty($old) && file_exists(public_path($old))) {
@@ -108,7 +109,7 @@ class CourseController extends Controller
         $data->save();
 
 
-        return redirect()->route('admin::course')->with('success','Team Member Update Successfully');
+        return redirect()->route('admin::course')->with('success','Course Updated Successfully');
 
     }
 

@@ -14,7 +14,8 @@
             <select
                 id="admin-brand-context"
                 name="brand_uuid"
-                class="form-control form-control-sm"
+                class="custom-select custom-select-sm bg-dark text-white"
+                style="min-width: 150px; border: 1px solid #4a4a59; box-shadow: none; outline: none; border-radius: 4px;"
                 aria-label="Active brand"
                 onchange="this.form.submit()"
             >

@@ -62,7 +62,19 @@ class PlacementShowcaseController extends Controller
             $data['company_logo_media_id'] = $this->uploadImage($request->file('company_logo'), 'placements/companies');
         }
 
-        PlacementShowcase::create($data);
+        $placement = PlacementShowcase::create($data);
+
+        app(\App\Services\NotificationService::class)->sendToBrand(
+            $placement->brand_id ?? null, // adjust based on available property
+            'Placement Added',
+            'A new placement has been added.',
+            'success',
+            'Placement',
+            $placement->id ?? null,
+            null,
+            'fas fa-graduation-cap',
+            'success'
+        );
 
         return redirect()->route('admin::placement-showcases.index')->with('success', 'Placement Showcase created successfully.');
     }

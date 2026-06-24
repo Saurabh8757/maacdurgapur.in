@@ -17,3 +17,6 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('/webhooks/whatsapp', [\App\Http\Controllers\Api\WhatsappWebhookController::class, 'verify'])->name('api.whatsapp.webhook.verify');
+Route::post('/webhooks/whatsapp', [\App\Http\Controllers\Api\WhatsappWebhookController::class, 'handle'])->name('api.whatsapp.webhook');

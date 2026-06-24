@@ -30,6 +30,19 @@ class AkshaSupportingCourseController extends Controller
         $data['slug'] = $data['slug'] ?: Str::slug($data['title']);
 
         $course = AkshaSupportingCourse::create($data);
+
+        app(\App\Services\NotificationService::class)->sendToBrand(
+            null, // AKSHA might be global
+            'AKSHA Content Added',
+            'New AKSHA content has been added.',
+            'info',
+            'Aksha',
+            null,
+            null,
+            'fas fa-book',
+            'info'
+        );
+
         return response()->json($course, 201);
     }
 

@@ -143,7 +143,7 @@ function showLeadForm() {
   bubble.innerHTML = '<strong>\u{1F4CB} Book Your Free Counselling Session</strong><br><br>Fill in your details and our team will reach out shortly!';
   var form = document.createElement('div');
   form.className = 'lead-form';
-  var courseSelect = document.getElementById('modal-course');
+  var courseSelect = document.getElementById('modal-course') || document.getElementById('modal-course_id');
   var courseOptions = courseSelect ? courseSelect.innerHTML : '<option value="" disabled selected>Interested Course</option>';
   
   form.innerHTML = '<input type="text" id="lf-name" placeholder="Your Full Name *" /><div class="lead-error" id="lf-name-error"></div><input type="tel" id="lf-phone" placeholder="Phone Number *" /><div class="lead-error" id="lf-phone-error"></div><input type="text" id="lf-email" placeholder="Email Address" /><div class="lead-error" id="lf-email-error"></div><select id="lf-course">' + courseOptions + '</select><div class="lead-error" id="lf-course-error"></div><button type="button" onclick="submitLead()">\u{1F680} Submit &amp; Book Counselling</button>';
@@ -174,7 +174,8 @@ function submitLead() {
   if (!name) { document.getElementById('lf-name-error').textContent = 'Please enter your name'; hasError = true; }
   if (!phone) { document.getElementById('lf-phone-error').textContent = 'Please enter phone number'; hasError = true; }
   else if (!/^\d+$/.test(phone)) { document.getElementById('lf-phone-error').textContent = 'Phone must be numeric'; hasError = true; }
-  if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { document.getElementById('lf-email-error').textContent = 'Invalid email format'; hasError = true; }
+  if (!email) { document.getElementById('lf-email-error').textContent = 'Please enter your email'; hasError = true; }
+  else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { document.getElementById('lf-email-error').textContent = 'Invalid email format'; hasError = true; }
   if (!course) { document.getElementById('lf-course-error').textContent = 'Please select a course'; hasError = true; }
 
   if (hasError) return;
@@ -235,11 +236,17 @@ function submitLead() {
     }
   };
 
+  var brandIdInput = document.querySelector('input[name="brand_id"]');
+  var brandId = brandIdInput ? brandIdInput.value : '';
+
   var payload = JSON.stringify({
+    brand_id: brandId,
     name: name,
     phone: phone,
     email: email,
-    course_id: course
+    course_id: course,
+    form_type: 'global_modal',
+    source_page: 'Global Modal'
   });
   xhr.send(payload);
 }

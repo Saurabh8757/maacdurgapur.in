@@ -1,0 +1,13 @@
+{
+    "table_count": 50,
+    "record_counts": {
+        "leads": 14,
+        "lead_activities": 16,
+        "lead_followups": 1,
+        "notifications": 5,
+        "whatsapp_messages": 0,
+        "blogs": 7,
+        "recruiters": 8,
+        "placement_showcases": 7
+    }
+}
