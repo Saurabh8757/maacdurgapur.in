@@ -1,5 +1,12 @@
 @extends('frontend.layout.app')
 
+@section('meta_title', 'Blog – MAAC Durgapur | Animation, VFX, Gaming & Creative Industry Insights')
+@section('meta_description', 'Read the latest insights, tips, and trends on Animation, VFX, Graphic Design, and AI from MAAC Durgapur experts.')
+@section('canonical_url', url()->current())
+@section('og_title', 'Blog – MAAC Durgapur | Animation, VFX, Gaming & Creative Industry Insights')
+@section('og_description', 'Read the latest insights, tips, and trends on Animation, VFX, Graphic Design, and AI from MAAC Durgapur experts.')
+
+
 @section('custom_css')
 <link rel="stylesheet" href="{{ asset('frontend/css/blog.css') }}?v={{ time() }}">
 @endsection

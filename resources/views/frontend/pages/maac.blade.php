@@ -1,5 +1,12 @@
 @extends('frontend.layout.app')
 
+@section('meta_title', 'MAAC Durgapur – Best Animation, VFX & Gaming Institute in West Bengal')
+@section('meta_description', 'Join MAAC Durgapur, West Bengal\'s premier institute for Animation, VFX, Gaming, Graphic Design, and AI. Get industry-focused training and 100% placement support.')
+@section('canonical_url', url()->current())
+@section('og_title', 'MAAC Durgapur – Best Animation, VFX & Gaming Institute in West Bengal')
+@section('og_description', 'Join MAAC Durgapur, West Bengal\'s premier institute for Animation, VFX, Gaming, Graphic Design, and AI. Get industry-focused training and 100% placement support.')
+
+
 @section('custom_css')
 <link rel="stylesheet" href="{{ asset('frontend/css/maac.css') }}">
 <style>

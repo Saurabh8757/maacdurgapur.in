@@ -1,4 +1,11 @@
-﻿@extends('frontend.layout.app')
+@extends('frontend.layout.app')
+
+@section('meta_title', 'Free Career Counselling – MAAC Durgapur')
+@section('meta_description', 'Get expert career advice and guidance in Animation, VFX, and Gaming. Book your free career counselling session at MAAC Durgapur today.')
+@section('canonical_url', url()->current())
+@section('og_title', 'Free Career Counselling – MAAC Durgapur')
+@section('og_description', 'Get expert career advice and guidance in Animation, VFX, and Gaming. Book your free career counselling session at MAAC Durgapur today.')
+
 
 @section('custom_css')
 <link rel="stylesheet" href="{{ asset('frontend/css/fcq.css') }}">

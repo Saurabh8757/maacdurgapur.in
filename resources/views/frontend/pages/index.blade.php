@@ -16,8 +16,8 @@
 <meta property="og:url" content="{{ url()->current() }}">
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="MAAC Durgapur – West Bengal's #1 Animation, VFX & AI Institute">
-<meta name="twitter:description" content="Learn Animation, VFX, Gaming, Graphic Design & AI at MAAC Durgapur. Industry-focused training with 100% placement support.">
+<meta name="twitter:title" content="MAAC Durgapur – West Bengal's #1 Animation, VFX & AI Creative Institute">
+<meta name="twitter:description" content="MAAC Durgapur is West Bengal's leading Animation, VFX, Gaming, Graphic Design & AI Creative Institute. Industry-focused training, expert mentorship, modern studios and 100% placement support near City Centre, Durgapur.">
 <meta name="twitter:image" content="{{ asset('frontend/images/pg-01.webp') }}">
 <link rel="icon" type="image/png" href="{{ asset('frontend/images/favicon.png') }}">
 <link rel="stylesheet" href="{{ asset('frontend/css/style.css') }}">

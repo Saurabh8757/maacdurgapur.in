@@ -1,5 +1,12 @@
 @extends('frontend.layout.app')
 
+@section('meta_title', 'AKSHA Durgapur – Coding, UI/UX, Digital Marketing & Programming Courses')
+@section('meta_description', 'AKSHA Durgapur offers comprehensive courses in Coding, Programming, UI/UX Design, and Digital Marketing. Empower your tech career with expert-led practical training.')
+@section('canonical_url', url()->current())
+@section('og_title', 'AKSHA Durgapur – Coding, UI/UX, Digital Marketing & Programming Courses')
+@section('og_description', 'AKSHA Durgapur offers comprehensive courses in Coding, Programming, UI/UX Design, and Digital Marketing. Empower your tech career with expert-led practical training.')
+
+
 @section('custom_css')
 <link rel="stylesheet" href="{{ asset('frontend/css/aksha.css') }}?v={{ time() }}">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/10.3.1/swiper-bundle.min.css">

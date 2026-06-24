@@ -1,5 +1,12 @@
 @extends('frontend.layout.app')
 
+@section('meta_title', 'Space-E-Fic Durgapur – Robotics & STEM Classes for Kids')
+@section('meta_description', 'Space-E-Fic Durgapur provides interactive Robotics, AI, and STEM classes for kids. Build a strong foundation in technology with our hands-on learning approach.')
+@section('canonical_url', url()->current())
+@section('og_title', 'Space-E-Fic Durgapur – Robotics & STEM Classes for Kids')
+@section('og_description', 'Space-E-Fic Durgapur provides interactive Robotics, AI, and STEM classes for kids. Build a strong foundation in technology with our hands-on learning approach.')
+
+
 @section('custom_css')
 <link rel="stylesheet" href="{{ asset('frontend/css/space_e_fic.css') }}?v={{ time() }}">
 <style>

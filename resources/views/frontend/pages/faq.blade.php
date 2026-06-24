@@ -1,5 +1,12 @@
 @extends('frontend.layout.app')
 
+@section('meta_title', 'FAQ – Frequently Asked Questions | MAAC Durgapur')
+@section('meta_description', 'Find answers to common questions about MAAC Durgapur courses, admissions, fees, placements, and more.')
+@section('canonical_url', url()->current())
+@section('og_title', 'FAQ – Frequently Asked Questions | MAAC Durgapur')
+@section('og_description', 'Find answers to common questions about MAAC Durgapur courses, admissions, fees, placements, and more.')
+
+
 @section('custom_css')
 <link rel="stylesheet" href="{{ asset('frontend/css/faq.css') }}?v={{ time() }}">
 @endsection

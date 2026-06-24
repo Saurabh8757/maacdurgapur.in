@@ -1,5 +1,12 @@
 @extends('frontend.layout.app')
 
+@section('meta_title', 'Student Showcase – Creative Work by MAAC Durgapur Students')
+@section('meta_description', 'Explore the amazing portfolios and creative works in Animation, VFX, 3D Design, and UI/UX created by the talented students of MAAC Durgapur.')
+@section('canonical_url', url()->current())
+@section('og_title', 'Student Showcase – Creative Work by MAAC Durgapur Students')
+@section('og_description', 'Explore the amazing portfolios and creative works in Animation, VFX, 3D Design, and UI/UX created by the talented students of MAAC Durgapur.')
+
+
 @section('custom_css')
 <link rel="stylesheet" href="{{ asset('frontend/css/showcase.css') }}?v={{ time() }}">
 @endsection

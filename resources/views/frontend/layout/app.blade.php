@@ -16,9 +16,9 @@
 <meta property="og:url" content="@yield('canonical_url', url()->current())">
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="MAAC Durgapur – West Bengal's #1 Animation, VFX & AI Institute">
-<meta name="twitter:description" content="Learn Animation, VFX, Gaming, Graphic Design & AI at MAAC Durgapur. Industry-focused training with 100% placement support.">
-<meta name="twitter:image" content="{{ asset('frontend/images/pg-01.webp') }}">
+<meta name="twitter:title" content="@yield('twitter_title', View::getSection('og_title', View::getSection('meta_title', 'MAAC Durgapur – West Bengal\'s #1 Animation, VFX & AI Institute')))">
+<meta name="twitter:description" content="@yield('twitter_description', View::getSection('og_description', View::getSection('meta_description', 'Learn Animation, VFX, Gaming, Graphic Design & AI at MAAC Durgapur. Industry-focused training with 100% placement support.')))">
+<meta name="twitter:image" content="@yield('twitter_image', View::getSection('og_image', asset('frontend/images/pg-01.webp')))">
 <!-- Favicon -->
 <link rel="icon" type="image/png" href="{{ asset('frontend/images/favicon.png') }}">
 <link rel="stylesheet" href="{{ asset('frontend/css/style.css') }}">
