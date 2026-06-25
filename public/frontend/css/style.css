@@ -102,15 +102,17 @@ body.loading {
     overflow: hidden;
 }
 
-/* Prevent the rectangular mobile browser tap flash on clickable UI. */
-a,
-button,
-[role="button"],
-input[type="button"],
-input[type="submit"],
-input[type="reset"],
-label[for] {
-    -webkit-tap-highlight-color: transparent;
+/* ── Mobile tap-highlight suppression ────────────────────────
+   Removes the default translucent overlay that WebKit/Blink
+   browsers paint on every tap.  Applied universally so cards,
+   SVGs, custom components and JS-bound elements are covered.
+   Desktop keyboard focus / :focus-visible is NOT affected.
+   ──────────────────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+    -webkit-tap-highlight-color: transparent;  /* Chrome, Edge, Samsung, Opera */
+    -webkit-touch-callout: none;               /* Safari iOS long-press callout */
 }
 
 /* Custom Scrollbar */
