@@ -1198,6 +1198,7 @@ body.loading {
 }
 
 .courses-section > .section-bg {
+    pointer-events: none;
     -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 150px, black 100%);
     mask-image: linear-gradient(to bottom, transparent 0%, black 150px, black 100%);
 }
