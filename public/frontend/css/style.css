@@ -80,6 +80,7 @@ html {
     font-size: 16px;
     overflow-x: hidden;
     width: 100%;
+    -webkit-tap-highlight-color: transparent;
 }
 
 body {
@@ -102,17 +103,27 @@ body.loading {
     overflow: hidden;
 }
 
-/* ── Mobile tap-highlight suppression ────────────────────────
-   Removes the default translucent overlay that WebKit/Blink
-   browsers paint on every tap.  Applied universally so cards,
-   SVGs, custom components and JS-bound elements are covered.
-   Desktop keyboard focus / :focus-visible is NOT affected.
+/* ── Mobile tap-highlight & touch-focus suppression ───────────
+   1. -webkit-tap-highlight-color: transparent — removes the
+      translucent overlay WebKit/Blink paints on every tap.
+   2. -webkit-touch-callout: none — suppresses Safari iOS
+      long-press callout highlight.
+   3. :focus:not(:focus-visible) — removes outline/box-shadow
+      that some mobile browsers add on tap-focus WITHOUT
+      breaking keyboard :focus-visible for accessibility.
    ──────────────────────────────────────────────────────────── */
 *,
 *::before,
 *::after {
-    -webkit-tap-highlight-color: transparent;  /* Chrome, Edge, Samsung, Opera */
-    -webkit-touch-callout: none;               /* Safari iOS long-press callout */
+    -webkit-tap-highlight-color: transparent !important;
+    -webkit-touch-callout: none;
+}
+
+/* Remove outline/box-shadow on TOUCH-triggered focus only.
+   Keyboard users (Tab key) still see :focus-visible styles. */
+*:focus:not(:focus-visible) {
+    outline: none !important;
+    box-shadow: none !important;
 }
 
 /* Custom Scrollbar */
