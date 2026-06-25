@@ -126,9 +126,9 @@
 
         <form action="{{ route('career_counselling') }}" method="POST" id="sefEnquiryForm" class="enquiry-form-body" novalidate>
           @csrf
+          <input type="hidden" name="brand_id" value="{{ $brand->id }}">
 
-          @if(!empty($formFields))
-            <input type="hidden" name="brand_id" value="{{ $brand->id }}">
+          @if(count($formFields) > 0)
             @foreach($formFields as $field)
               <div class="enquiry-field {{ $field->type === 'textarea' ? 'enquiry-field-textarea' : '' }}">
                 @php

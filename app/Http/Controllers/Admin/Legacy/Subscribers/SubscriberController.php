@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Subscribers;
+namespace App\Http\Controllers\Admin\Legacy\Subscribers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Subscriber;

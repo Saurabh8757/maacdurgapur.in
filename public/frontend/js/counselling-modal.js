@@ -369,7 +369,12 @@
       },
     })
     .then(function (response) {
-      return response.json();
+      return response.json().then(function (data) {
+        if (!response.ok) {
+          throw new Error(data.message || 'Form submission failed.');
+        }
+        return data;
+      });
     })
     .then(function (data) {
       submitBtn.classList.remove('loading');
@@ -393,10 +398,11 @@
         showSuccess();
       }
     })
-    .catch(function () {
+    .catch(function (error) {
       submitBtn.classList.remove('loading');
       submitBtn.disabled = false;
-      form.submit();
+      console.error('Form submission error:', error);
+      alert('Something went wrong. Please try again.');
     });
   }
 

@@ -900,7 +900,7 @@
       <form action="{{ route('career_counselling') }}" method="POST" id="comment_form" class="counselling-form">
         @csrf
 
-        @if(!empty($globalModalFormFields))
+        @if(count($globalModalFormFields) > 0)
           <input type="hidden" name="brand_id" value="{{ $brand->id }}">
           <input type="hidden" name="form_type" value="global_modal">
           @foreach($globalModalFormFields as $field)

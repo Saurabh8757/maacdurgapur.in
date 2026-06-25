@@ -204,9 +204,9 @@
 
         <form action="{{ route('career_counselling') }}" method="POST" id="maacEnquiryForm" class="enquiry-form-body" novalidate>
           @csrf
+          <input type="hidden" name="brand_id" value="{{ $brand->id }}">
 
-          @if(!empty($formFields))
-            <input type="hidden" name="brand_id" value="{{ $brand->id }}">
+          @if(count($formFields) > 0)
             @foreach($formFields as $field)
               @if($field->type === 'checkbox')
                 <div class="enquiry-consent">

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Career;
+namespace App\Http\Controllers\Admin\Legacy\Career;
 
 use App\Helper\admin\ImageUpload;
 use App\Http\Controllers\Controller;

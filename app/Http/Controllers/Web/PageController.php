@@ -79,19 +79,38 @@ class PageController extends Controller
         if ($request->has('brand_id')) {
             $brand = \App\Models\Brand::find($request->brand_id);
             if ($brand) {
-                $envKey = 'DYNAMIC_FORMS_' . strtoupper(str_replace('-', '_', $brand->slug));
-                if (env($envKey, false)) {
-                    $brand_id = $brand->id;
+                $brand_id = $brand->id;
             
             // Fetch active fields for this brand and form type
             $formType = $request->input('form_type', 'hero');
-            $fields = \App\Models\LeadFormField::where('brand_id', $brand_id)
-                ->where('form_type', $formType)
-                ->where('is_active', true)
-                ->get();
+            $fields = collect();
+            $envKey = 'DYNAMIC_FORMS_' . strtoupper(str_replace('-', '_', $brand->slug));
+            if (env($envKey, false)) {
+                $fields = \App\Models\LeadFormField::where('brand_id', $brand_id)
+                    ->where('form_type', $formType)
+                    ->where('is_active', true)
+                    ->get();
+            }
                 
             $rules = [];
             $messages = [];
+
+            if ($fields->isEmpty()) {
+                $rules = [
+                    'name' => 'required',
+                    'phone' => 'required|numeric',
+                    'email' => 'required|email',
+                    'course_id' => 'required',
+                ];
+                $messages = [
+                    'name.required' => 'Please enter your Full Name',
+                    'phone.required' => 'Please enter phone number',
+                    'phone.numeric' => 'phone number must be a numeric format',
+                    'email.required' => 'Please enter your Email',
+                    'email.email' => ' Email should be a valid format',
+                    'course_id.required' => 'Please Select Course',
+                ];
+            }
             
             foreach ($fields as $field) {
                 if ($field->is_required) {
@@ -178,14 +197,20 @@ class PageController extends Controller
             );
 
             // Trigger WhatsApp Acknowledgement
-            $whatsappService = app(\App\Services\WhatsApp\WhatsappServiceInterface::class);
-            $whatsappService->sendLeadAcknowledgement($newLead);
+            try {
+                $whatsappService = app(\App\Services\WhatsApp\WhatsappServiceInterface::class);
+                $whatsappService->sendLeadAcknowledgement($newLead);
+            } catch (\Throwable $exception) {
+                \Illuminate\Support\Facades\Log::warning('Lead WhatsApp acknowledgement failed.', [
+                    'lead_id' => $newLead->id,
+                    'exception' => $exception->getMessage(),
+                ]);
+            }
 
             return response()->json([
                 'status' => 1,
                 'success' => 'Successfully sent your request'
             ]);
-                }
             }
         }
         // --- LEGACY FALLBACK ---
@@ -219,19 +244,6 @@ class PageController extends Controller
             $comments->course_id  = $request->course_id;
             $comments->save();
 
-            $notificationService = app(\App\Services\NotificationService::class);
-            $notificationService->sendToBrand(
-                $comments->brand_id,
-                'New Lead Submitted',
-                'A new lead ('.$comments->name.') has been submitted for '.$comments->course_name,
-                'success',
-                'Lead',
-                $comments->id,
-                route('admin::leads.show', $comments->id),
-                'fas fa-user-plus',
-                'success'
-            );
-
             // Save to Unified Lead Management (so it shows in CMS)
             $brand = \App\Models\Brand::where('slug', 'maac')->first();
             if ($brand) {
@@ -259,17 +271,26 @@ class PageController extends Controller
                 $notificationService = app(\App\Services\NotificationService::class);
                 $notificationService->sendToBrand(
                     null, // Superadmin
-                    'New Counselling Request',
-                    "A new counselling request from {$newLead->name}.",
-                    'lead_created',
+                    'New Lead Submitted',
+                    'A new lead ('.$newLead->name.') has been submitted for '.$newLead->course_name,
+                    'success',
                     'Lead',
                     $newLead->id,
-                    route('admin::leads.show', $newLead->id)
+                    route('admin::leads.show', $newLead->id),
+                    'fas fa-user-plus',
+                    'success'
                 );
 
                 // Trigger WhatsApp Acknowledgement
-                $whatsappService = app(\App\Services\WhatsApp\WhatsappServiceInterface::class);
-                $whatsappService->sendLeadAcknowledgement($newLead);
+                try {
+                    $whatsappService = app(\App\Services\WhatsApp\WhatsappServiceInterface::class);
+                    $whatsappService->sendLeadAcknowledgement($newLead);
+                } catch (\Throwable $exception) {
+                    \Illuminate\Support\Facades\Log::warning('Lead WhatsApp acknowledgement failed.', [
+                        'lead_id' => $newLead->id,
+                        'exception' => $exception->getMessage(),
+                    ]);
+                }
             }
 
             return response()->json([

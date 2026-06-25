@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Product;
+namespace App\Http\Controllers\Admin\Legacy\Product;
 
 use App\Helper\admin\ImageUpload;
 use App\Http\Controllers\Controller;

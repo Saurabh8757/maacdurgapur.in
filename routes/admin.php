@@ -1,13 +1,9 @@
 <?php
 
 
-use App\Http\Controllers\Admin\Career\CareerController;
 use App\Http\Controllers\Admin\Cms\CmsController;
-use App\Http\Controllers\Admin\Product\ProductController;
 use App\Http\Controllers\Admin\Service\ServiceController;
 use App\Http\Controllers\Admin\SiteInformation\SiteInformationController;
-use App\Http\Controllers\Admin\Subscribers\SubscriberController;
-use App\Http\Controllers\Admin\Team\TeamMamebrController;
 use App\Http\Controllers\Course\CourseController;
 use Illuminate\Support\Facades\Route;
 
@@ -26,7 +22,6 @@ use App\Http\Middleware\ResolveAdminBrandContext;
 
 
 
-// Route::get('auth',[AdminLoginController::class,'admin_login'])->name('admin_login');
 Route::get('admin-login',[AdminLoginController::class,'admin_login_page'])->name('admin_login');
 
 

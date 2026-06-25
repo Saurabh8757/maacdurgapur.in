@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Team;
+namespace App\Http\Controllers\Admin\Legacy\Team;
 
 use App\Helper\admin\GetTeamProfileLink;
 use App\Helper\admin\ImageUpload;
