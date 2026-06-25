@@ -21,7 +21,7 @@
 <meta name="twitter:image" content="@yield('twitter_image', View::getSection('og_image', asset('frontend/images/pg-01.webp')))">
 <!-- Favicon -->
 <link rel="icon" type="image/png" href="{{ asset('frontend/images/favicon.png') }}">
-<link rel="stylesheet" href="{{ asset('frontend/css/style.css') }}">
+<link rel="stylesheet" href="{{ asset('frontend/css/style.css') }}?v={{ filemtime(public_path('frontend/css/style.css')) }}">
 <link rel="stylesheet" href="{{ asset('frontend/css/chatbot.css') }}" media="print" onload="this.media='all'">
 <noscript><link rel="stylesheet" href="{{ asset('frontend/css/chatbot.css') }}"></noscript>
 <link rel="preconnect" href="https://fonts.googleapis.com">

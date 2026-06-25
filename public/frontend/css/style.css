@@ -102,6 +102,17 @@ body.loading {
     overflow: hidden;
 }
 
+/* Prevent the rectangular mobile browser tap flash on clickable UI. */
+a,
+button,
+[role="button"],
+input[type="button"],
+input[type="submit"],
+input[type="reset"],
+label[for] {
+    -webkit-tap-highlight-color: transparent;
+}
+
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
     width: 6px;
