@@ -1,7 +1,11 @@
 Options -Indexes
 
 # Deny sensitive root files and common backup/configuration artifacts.
-<FilesMatch "(^\.|^(?:artisan|composer\.(?:json|lock)|package(?:-lock)?\.json|phpunit\.xml|vite\.config\.js|db_dump\.sql|PROJECT_MAP\.md|SPRINT1_EXECUTION_PLAN\.md)$|\.(?:env|log|sql|sqlite|bak|backup|old|orig|save|swp)$)">
+<FilesMatch "(^\.|^(?:artisan|composer\.(?:json|lock)|package(?:-lock)?\.json|phpunit\.xml|vite\.config\.js|db_dump\.sql|PROJECT_MAP\.md|SPRINT1_EXECUTION_PLAN\.md)$|\.(?:env|log|sql|sqlite|zip|tar|gz|7z|bak|backup|old|orig|save|swp)$)">
+    Require all denied
+</FilesMatch>
+
+<FilesMatch "^(?!index\.php$).*\.php$">
     Require all denied
 </FilesMatch>
 
