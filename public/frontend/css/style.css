@@ -1189,6 +1189,12 @@ body.loading {
     margin-top: -150px;
     padding-top: 250px;
     z-index: 2;
+    pointer-events: none;
+}
+
+.courses-section > .section-header,
+.courses-section > .courses-swiper {
+    pointer-events: auto;
 }
 
 .courses-section > .section-bg {
