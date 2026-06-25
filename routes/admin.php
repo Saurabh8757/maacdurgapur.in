@@ -83,7 +83,7 @@ Route::group(['as' => 'admin::', 'prefix' => 'v1/cpanel/admin', 'middleware' => 
     Route::get('/profile/{name}', [ProfileController::class, 'profile'])->name('profile');
     Route::post('/profile-update', [ProfileController::class, 'profile_update'])->name('profile_update');
     Route::post('/password-update', [ProfileController::class, 'password_update'])->name('password_update');
-    Route::get('/admin-logout', [ProfileController::class, 'admin_logout'])->name('admin_logout');
+    Route::post('/admin-logout', [ProfileController::class, 'admin_logout'])->name('admin_logout');
     /*** Profile Routes End ***/
 
      /*** Site Information Start ***/

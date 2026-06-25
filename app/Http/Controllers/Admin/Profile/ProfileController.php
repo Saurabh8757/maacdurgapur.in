@@ -16,7 +16,7 @@ class ProfileController extends Controller
     /*** Profile ***/
     public function profile($name)
     {
-        $user = User::where('slug_name',$name)->first();
+        $user = Auth::user();
         $session['password_success'] = Session::get('password_success');
         $session['password_error'] = Session::get('password_error');
         return view('admin.pages.profile.index',compact('user','session'));
@@ -35,6 +35,7 @@ class ProfileController extends Controller
             'name' => 'required',
             'email' => 'required|email',
             'phone' => 'required|numeric',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
         ], $msg);
         try {
             $height = 128;

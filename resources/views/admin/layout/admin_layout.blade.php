@@ -148,7 +148,10 @@ $info = \App\Helper\admin\siteInformation::siteInfo();
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                    <a href="{{ route('admin::admin_logout') }}" type="button" class="btn btn-danger">Confirm Logout</a>
+                    <form action="{{ route('admin::admin_logout') }}" method="POST">
+                        @csrf
+                        <button type="submit" class="btn btn-danger">Confirm Logout</button>
+                    </form>
                 </div>
             </div>
         </div>

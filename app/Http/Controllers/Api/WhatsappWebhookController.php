@@ -34,10 +34,15 @@ class WhatsappWebhookController extends Controller
         $expectedToken = WhatsappSetting::get('whatsapp_webhook_token');
         $token = $request->query('token') ?? $request->header('X-Hub-Signature'); // Example validation logic
         
-        if ($expectedToken && $token !== $expectedToken) {
+        if (
+            !is_string($expectedToken)
+            || $expectedToken === ''
+            || !is_string($token)
+            || !hash_equals($expectedToken, $token)
+        ) {
             WhatsappWebhookLog::create([
                 'provider' => 'unknown',
-                'payload' => $request->all(),
+                'payload' => [],
                 'status' => 'rejected',
                 'error' => 'Invalid webhook token',
             ]);

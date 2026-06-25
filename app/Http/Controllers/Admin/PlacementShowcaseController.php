@@ -30,7 +30,7 @@ class PlacementShowcaseController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
+        $validated = $request->validate([
             'student_name' => 'required|string|max:255',
             'company_id' => 'nullable|exists:companies,id',
             'company_name' => 'nullable|string|max:255',
@@ -43,7 +43,7 @@ class PlacementShowcaseController extends Controller
             'sort_order' => 'nullable|integer',
         ]);
 
-        $data = $request->except(['_token', 'student_image', 'company_logo']);
+        $data = collect($validated)->except(['student_image', 'company_logo'])->all();
         $data['is_featured'] = $request->has('is_featured') ? 1 : 0;
         $data['is_active'] = $request->has('is_active') ? 1 : 0;
         $data['sort_order'] = $request->input('sort_order', 0);
@@ -87,7 +87,7 @@ class PlacementShowcaseController extends Controller
 
     public function update(Request $request, PlacementShowcase $placementShowcase)
     {
-        $request->validate([
+        $validated = $request->validate([
             'student_name' => 'required|string|max:255',
             'company_id' => 'nullable|exists:companies,id',
             'company_name' => 'nullable|string|max:255',
@@ -100,7 +100,7 @@ class PlacementShowcaseController extends Controller
             'sort_order' => 'nullable|integer',
         ]);
 
-        $data = $request->except(['_token', '_method', 'student_image', 'company_logo']);
+        $data = collect($validated)->except(['student_image', 'company_logo'])->all();
         $data['is_featured'] = $request->has('is_featured') ? 1 : 0;
         $data['is_active'] = $request->has('is_active') ? 1 : 0;
         

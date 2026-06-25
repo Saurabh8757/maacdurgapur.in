@@ -26,7 +26,11 @@ class BlogCategoryController extends Controller
             'status' => 'required|in:active,inactive',
         ]);
 
-        \App\Models\BlogCategory::create($request->all());
+        \App\Models\BlogCategory::create($request->only([
+            'name',
+            'slug',
+            'status',
+        ]));
 
         return redirect()->route('admin.blog-categories.index')->with('success', 'Blog Category created successfully.');
     }
@@ -44,7 +48,11 @@ class BlogCategoryController extends Controller
             'status' => 'required|in:active,inactive',
         ]);
 
-        $blogCategory->update($request->all());
+        $blogCategory->update($request->only([
+            'name',
+            'slug',
+            'status',
+        ]));
 
         return redirect()->route('admin.blog-categories.index')->with('success', 'Blog Category updated successfully.');
     }

@@ -28,7 +28,7 @@ class RecruiterController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
+        $validated = $request->validate([
             'company_name' => 'required|string|max:255',
             'company_logo' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
             'company_website' => 'nullable|url|max:255',
@@ -37,7 +37,7 @@ class RecruiterController extends Controller
             'sort_order' => 'nullable|integer',
         ]);
 
-        $data = $request->except(['_token', 'company_logo']);
+        $data = collect($validated)->except('company_logo')->all();
         $data['is_featured'] = $request->has('is_featured') ? 1 : 0;
         $data['is_active'] = $request->has('is_active') ? 1 : 0;
         $data['sort_order'] = $request->input('sort_order', 0);
@@ -71,7 +71,7 @@ class RecruiterController extends Controller
 
     public function update(Request $request, Recruiter $recruiter)
     {
-        $request->validate([
+        $validated = $request->validate([
             'company_name' => 'required|string|max:255',
             'company_logo' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
             'company_website' => 'nullable|url|max:255',
@@ -80,7 +80,7 @@ class RecruiterController extends Controller
             'sort_order' => 'nullable|integer',
         ]);
 
-        $data = $request->except(['_token', '_method', 'company_logo']);
+        $data = collect($validated)->except('company_logo')->all();
         $data['is_featured'] = $request->has('is_featured') ? 1 : 0;
         $data['is_active'] = $request->has('is_active') ? 1 : 0;
         $data['css_class'] = Str::slug($request->company_name);

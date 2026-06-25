@@ -46,7 +46,16 @@ class LeadFormController extends Controller
             'options' => 'nullable|string'
         ]);
 
-        $data = $request->all();
+        $data = $request->only([
+            'brand_id',
+            'form_type',
+            'label',
+            'field_name',
+            'type',
+            'placeholder',
+            'sort_order',
+            'options',
+        ]);
         $data['is_required'] = $request->has('is_required');
         $data['is_active'] = $request->has('is_active');
         
@@ -94,7 +103,16 @@ class LeadFormController extends Controller
             'options' => 'nullable|string'
         ]);
 
-        $data = $request->all();
+        $data = $request->only([
+            'brand_id',
+            'form_type',
+            'label',
+            'field_name',
+            'type',
+            'placeholder',
+            'sort_order',
+            'options',
+        ]);
         $data['is_required'] = $request->has('is_required');
         $data['is_active'] = $request->has('is_active');
 

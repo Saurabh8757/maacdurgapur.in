@@ -4,6 +4,11 @@ $app = require_once __DIR__.'/../bootstrap/app.php';
 $kernel = $app->make(Illuminate\Contracts\Console\Kernel::class);
 $kernel->bootstrap();
 
+if (!$app->environment('local')) {
+    http_response_code(404);
+    exit;
+}
+
 use App\Models\Lead;
 use App\Models\LeadFollowup;
 use App\Models\LeadActivity;
