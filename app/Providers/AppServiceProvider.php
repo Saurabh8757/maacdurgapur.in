@@ -109,7 +109,7 @@ class AppServiceProvider extends ServiceProvider
             $maacBrand = Brand::where('slug', 'maac')->first();
             $globalModalFormFields = collect();
             
-            if ($maacBrand && env('DYNAMIC_FORMS_MAAC', false)) {
+            if ($maacBrand && config('brands.dynamic_forms.maac', false)) {
                 $globalModalFormFields = LeadFormField::where('brand_id', $maacBrand->id)
                     ->where('form_type', 'global_modal')
                     ->where('is_active', true)
