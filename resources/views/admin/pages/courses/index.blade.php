@@ -56,7 +56,10 @@
                                            <tr>
                                                <td>{{$i}}</td>
                                                <td>
-                                                   <img src="{{asset($data['image'])}}" style="width: 120px;height: 120px;">
+                                                   <img src="{{ asset($data['image']) }}"
+                                                        alt="{{ $data['name'] }}"
+                                                        style="width: 120px;height: 120px;object-fit: cover;"
+                                                        onerror="this.onerror=null;this.src='{{ asset('upload/images/course/default.png') }}';">
                                                </td>
                                                <td>
                                                    {{$data['name']}}

@@ -270,7 +270,10 @@
           <div class="swiper-slide">
             <div class="course-card">
               <div class="course-img">
-                <img loading="lazy" src="{{ asset($course->image) }}" alt="{{ $course->name }}" loading="lazy">
+                <img loading="lazy"
+                     src="{{ asset($course->image) }}"
+                     alt="{{ $course->name }}"
+                     onerror="this.onerror=null;this.src='{{ asset('upload/images/course/default.png') }}';">
                 <div class="course-overlay"></div>
               </div>
               <div class="course-info">

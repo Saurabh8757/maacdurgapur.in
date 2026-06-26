@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\OurCourse;
 use Illuminate\Http\Request;
 use App\Models\CarrerCounselling;
+use Illuminate\Support\Facades\File;
 
 class CourseController extends Controller
 {
@@ -50,6 +51,7 @@ class CourseController extends Controller
             $file->move(public_path($path), $filename);
 
             $image_name = $path . '/' . $filename;
+            $this->mirrorCourseImageToDocumentRoot($image_name);
         } else {
             $image_name = '';
         }
@@ -98,13 +100,12 @@ class CourseController extends Controller
             }
 
             // Remove the old image file if it exists
-            if (!empty($old) && file_exists(public_path($old))) {
-                unlink(public_path($old));
-            }
+            $this->deleteCourseImageFiles($old);
 
             // Move the new uploaded file to the specified path
             $file->move(public_path($path), $filename);
             $image_name = $path . '/' . $filename;
+            $this->mirrorCourseImageToDocumentRoot($image_name);
         } else {
             $image_name = $old;
         }
@@ -124,9 +125,7 @@ class CourseController extends Controller
         $data = OurCourse::where('id',$id)->first();
         if (!empty($data)) {
             $oldImage = $data->image;
-            if (!empty($oldImage)) {
-                @unlink(public_path() . '/' . $oldImage);
-            }
+            $this->deleteCourseImageFiles($oldImage);
             $data->delete();
             return response()->json(['status' => 200]);
         }else{
@@ -153,6 +152,49 @@ class CourseController extends Controller
             $st='Active';
             $html = '<a href="javascript:void(0);" class="btn btn-success btn-sm" onclick="active_inactive_banner('.$id.','.json_encode($st).')"><span class="fa fa-check"></span> </a>&emsp;';
             return json_encode(array('id'=>$id,'html'=>$html, 'status'=>$st));
+        }
+    }
+
+    private function mirrorCourseImageToDocumentRoot(?string $relativePath): void
+    {
+        if (empty($relativePath)) {
+            return;
+        }
+
+        $source = public_path($relativePath);
+        $documentRoot = rtrim((string) request()->server('DOCUMENT_ROOT'), DIRECTORY_SEPARATOR);
+
+        if ($documentRoot === '' || !file_exists($source)) {
+            return;
+        }
+
+        $target = $documentRoot . DIRECTORY_SEPARATOR . str_replace(['/', '\\'], DIRECTORY_SEPARATOR, $relativePath);
+
+        if (realpath(dirname($source)) === realpath(dirname($target))) {
+            return;
+        }
+
+        File::ensureDirectoryExists(dirname($target), 0755, true);
+        File::copy($source, $target);
+    }
+
+    private function deleteCourseImageFiles(?string $relativePath): void
+    {
+        if (empty($relativePath)) {
+            return;
+        }
+
+        $paths = [public_path($relativePath)];
+        $documentRoot = rtrim((string) request()->server('DOCUMENT_ROOT'), DIRECTORY_SEPARATOR);
+
+        if ($documentRoot !== '') {
+            $paths[] = $documentRoot . DIRECTORY_SEPARATOR . str_replace(['/', '\\'], DIRECTORY_SEPARATOR, $relativePath);
+        }
+
+        foreach (array_unique($paths) as $path) {
+            if (file_exists($path)) {
+                @unlink($path);
+            }
         }
     }
     

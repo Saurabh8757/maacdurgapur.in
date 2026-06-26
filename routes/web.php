@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Web\PageController;
+use App\Http\Controllers\Web\CourseImageController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ContactUsController;
 /*
@@ -15,6 +16,11 @@ use App\Http\Controllers\ContactUsController;
 */
 
 Route::get('/',[PageController::class, 'index'])->name('home');
+
+Route::get('/upload/images/course/{filename}', [CourseImageController::class, 'show'])
+    ->where('filename', '[A-Za-z0-9._-]+')
+    ->name('course.image.fallback');
+
 // SEO 301 Redirects for MAAC Legacy URLs
 Route::redirect('/maac', '/animation-vfx-gaming-institute-durgapur', 301);
 Route::redirect('/maac-durgapur', '/animation-vfx-gaming-institute-durgapur', 301);
