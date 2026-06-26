@@ -35,9 +35,21 @@ class CmsFaqController extends Controller
 
     public function store(CmsFaqRequest $request): JsonResponse
     {
-        $faq = $this->faqService->create($request->validated());
-        
-        return response()->json($faq->load('category'), 201);
+        try {
+            $faq = $this->faqService->create($request->validated());
+
+            return response()->json($faq->load('category'), 201);
+        } catch (\InvalidArgumentException $exception) {
+            return response()->json([
+                'message' => $exception->getMessage(),
+            ], 422);
+        } catch (\Throwable $exception) {
+            report($exception);
+
+            return response()->json([
+                'message' => 'Unable to save FAQ. Please verify the selected category and brand access.',
+            ], 500);
+        }
     }
 
     public function update(CmsFaqRequest $request, CmsFaq $faq): JsonResponse
@@ -47,9 +59,21 @@ class CmsFaqController extends Controller
             abort(403, 'Unauthorized action.');
         }
 
-        $faq = $this->faqService->update($faq, $request->validated());
-        
-        return response()->json($faq->load('category'));
+        try {
+            $faq = $this->faqService->update($faq, $request->validated());
+
+            return response()->json($faq->load('category'));
+        } catch (\InvalidArgumentException $exception) {
+            return response()->json([
+                'message' => $exception->getMessage(),
+            ], 422);
+        } catch (\Throwable $exception) {
+            report($exception);
+
+            return response()->json([
+                'message' => 'Unable to update FAQ. Please verify the selected category and brand access.',
+            ], 500);
+        }
     }
 
     public function destroy(CmsFaq $faq): JsonResponse

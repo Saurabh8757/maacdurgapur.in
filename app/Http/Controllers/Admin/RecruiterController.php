@@ -42,6 +42,10 @@ class RecruiterController extends Controller
         $data['is_active'] = $request->has('is_active') ? 1 : 0;
         $data['sort_order'] = $request->input('sort_order', 0);
         $data['css_class'] = Str::slug($request->company_name);
+        $data['brand_id'] = app(\App\Services\Brands\BrandContextManager::class)
+            ->adminContext()
+            ?->brand()
+            ->getKey();
 
         if ($request->hasFile('company_logo')) {
             $data['company_logo_media_id'] = $this->uploadImage($request->file('company_logo'), 'recruiters/logos');
@@ -84,6 +88,10 @@ class RecruiterController extends Controller
         $data['is_featured'] = $request->has('is_featured') ? 1 : 0;
         $data['is_active'] = $request->has('is_active') ? 1 : 0;
         $data['css_class'] = Str::slug($request->company_name);
+        $data['brand_id'] = app(\App\Services\Brands\BrandContextManager::class)
+            ->adminContext()
+            ?->brand()
+            ->getKey();
 
         if ($request->hasFile('company_logo')) {
             $data['company_logo_media_id'] = $this->uploadImage($request->file('company_logo'), 'recruiters/logos');
@@ -141,6 +149,10 @@ class RecruiterController extends Controller
         $path = $file->storeAs($folderPath, $filename, 'public');
 
         $asset = MediaAsset::create([
+            'brand_id' => app(\App\Services\Brands\BrandContextManager::class)
+                ->adminContext()
+                ?->brand()
+                ->getKey(),
             'uploaded_by' => Auth::id() ?? 1,
             'storage_disk' => 'public',
             'storage_key' => $path,

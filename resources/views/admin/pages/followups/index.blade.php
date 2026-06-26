@@ -69,8 +69,14 @@
                         <tbody>
                             @forelse($followups as $followup)
                             <tr>
-                                <td><a href="{{ route('admin::leads.show', $followup->lead->id) }}">{{ $followup->lead->name }}</a></td>
-                                <td>{{ $followup->lead->phone }}</td>
+                                <td>
+                                    @if($followup->lead)
+                                        <a href="{{ route('admin::leads.show', $followup->lead->id) }}">{{ $followup->lead->name }}</a>
+                                    @else
+                                        <span class="text-muted">Deleted / missing lead</span>
+                                    @endif
+                                </td>
+                                <td>{{ optional($followup->lead)->phone ?? 'N/A' }}</td>
                                 <td>{{ $followup->assignedUser->name ?? 'Unassigned' }}</td>
                                 <td>
                                     <strong>{{ $followup->followup_date->format('d M Y') }}</strong><br>

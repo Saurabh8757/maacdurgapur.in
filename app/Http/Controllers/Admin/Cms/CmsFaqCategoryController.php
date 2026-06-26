@@ -34,9 +34,17 @@ class CmsFaqCategoryController extends Controller
 
     public function store(CmsFaqCategoryRequest $request): JsonResponse
     {
-        $category = $this->faqCategoryService->create($request->validated());
-        
-        return response()->json($category, 201);
+        try {
+            $category = $this->faqCategoryService->create($request->validated());
+
+            return response()->json($category, 201);
+        } catch (\Throwable $exception) {
+            report($exception);
+
+            return response()->json([
+                'message' => 'Unable to save FAQ category. Please verify your brand access and try again.',
+            ], 500);
+        }
     }
 
     public function update(CmsFaqCategoryRequest $request, CmsFaqCategory $faqCategory): JsonResponse
@@ -47,9 +55,17 @@ class CmsFaqCategoryController extends Controller
             abort(403, 'Unauthorized action.');
         }
 
-        $category = $this->faqCategoryService->update($faqCategory, $request->validated());
-        
-        return response()->json($category);
+        try {
+            $category = $this->faqCategoryService->update($faqCategory, $request->validated());
+
+            return response()->json($category);
+        } catch (\Throwable $exception) {
+            report($exception);
+
+            return response()->json([
+                'message' => 'Unable to update FAQ category. Please verify your brand access and try again.',
+            ], 500);
+        }
     }
 
     public function destroy(CmsFaqCategory $faqCategory): JsonResponse
