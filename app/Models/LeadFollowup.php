@@ -18,11 +18,13 @@ class LeadFollowup extends Model
         'status',
         'created_by',
         'completed_at',
+        'send_whatsapp_reminder',
     ];
 
     protected $casts = [
         'followup_date' => 'date',
         'completed_at' => 'datetime',
+        'send_whatsapp_reminder' => 'boolean',
     ];
 
     public function lead()

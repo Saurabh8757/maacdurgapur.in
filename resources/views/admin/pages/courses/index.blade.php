@@ -108,7 +108,7 @@
 @endsection
 @push('scripts')
 <script>
-    var Inactive='Inactive';
+    var InActive='InActive';
     var Active='Active';
     function active_inactive_banner(id,status) {
         $.ajax({

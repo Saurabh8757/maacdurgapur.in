@@ -254,7 +254,7 @@ class PageController extends Controller
                     }
                 }
                 $newLead = \App\Models\Lead::create([
-                    'brand_id' => null, // Needs assignment based on program later if required
+                    'brand_id' => $brand->id,
                     'name' => $request->name,
                     'phone' => $request->phone,
                     'email' => $request->email,

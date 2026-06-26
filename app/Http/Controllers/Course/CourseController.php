@@ -42,9 +42,12 @@ class CourseController extends Controller
             $file = $request->file('image');
             $path = "upload/images/course";
             $filename = $file->hashName(); // Secure random filename
+            if (!is_dir(public_path($path))) {
+                mkdir(public_path($path), 0755, true);
+            }
 
             // Move the uploaded file to the specified path
-            $file->move($path, $filename);
+            $file->move(public_path($path), $filename);
 
             $image_name = $path . '/' . $filename;
         } else {
@@ -88,8 +91,11 @@ class CourseController extends Controller
         if ($request->hasFile('image')) {
             $request->validate(['image' => 'image|mimes:jpg,jpeg,png,webp|max:10240']);
             $file = $request->file('image');
-            $path = "upload/images/course/";
+            $path = "upload/images/course";
             $filename = $file->hashName(); // Secure random filename
+            if (!is_dir(public_path($path))) {
+                mkdir(public_path($path), 0755, true);
+            }
 
             // Remove the old image file if it exists
             if (!empty($old) && file_exists(public_path($old))) {
@@ -97,8 +103,8 @@ class CourseController extends Controller
             }
 
             // Move the new uploaded file to the specified path
-            $file->move($path, $filename);
-            $image_name = $path . $filename;
+            $file->move(public_path($path), $filename);
+            $image_name = $path . '/' . $filename;
         } else {
             $image_name = $old;
         }
@@ -134,10 +140,10 @@ class CourseController extends Controller
         $status = $request->get('status');
         if($status=='Active'){
             OurCourse::where('id',$id)->update([
-                'status' => 'Inactive',
+                'status' => 'InActive',
             ]);
-            $st='Inactive';
-            $html='<a href="javascript:void(0);" class="btn btn-warning btn-sm" onclick="active_inactive_banner('.$id.','.$st.')" ><span class="fa fa-ban"></span> </a>&emsp;';
+            $st='InActive';
+            $html='<a href="javascript:void(0);" class="btn btn-warning btn-sm" onclick="active_inactive_banner('.$id.','.json_encode($st).')" ><span class="fa fa-ban"></span> </a>&emsp;';
             return json_encode(array('id'=>$id,'html'=>$html, 'status'=>$st));
         }
         else{
@@ -145,7 +151,7 @@ class CourseController extends Controller
                 'status' => 'Active',
             ]);
             $st='Active';
-            $html = '<a href="javascript:void(0);" class="btn btn-success btn-sm" onclick="active_inactive_banner('.$id.','.$st.')"><span class="fa fa-check"></span> </a>&emsp;';
+            $html = '<a href="javascript:void(0);" class="btn btn-success btn-sm" onclick="active_inactive_banner('.$id.','.json_encode($st).')"><span class="fa fa-check"></span> </a>&emsp;';
             return json_encode(array('id'=>$id,'html'=>$html, 'status'=>$st));
         }
     }

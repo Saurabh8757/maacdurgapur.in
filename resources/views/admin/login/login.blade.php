@@ -591,7 +591,7 @@
                 <button type="submit" class="login-submit" id="loginBtn">
                     <span class="btn-content">
                         <span class="spinner"></span>
-                        <span class="btn-text">Signing In...</span>
+                        <span class="btn-text">Sign In</span>
                     </span>
                 </button>
             </form>
@@ -657,7 +657,9 @@
             $('#login_form').on('submit', function (e) {
                 e.preventDefault();
                 var btn = $('#loginBtn');
+                var btnText = btn.find('.btn-text');
                 btn.addClass('loading').prop('disabled', true);
+                btnText.text('Signing In...');
                 showLoader();
 
                 $.ajax({
@@ -674,6 +676,7 @@
                         if (data.status == 400) {
                             hideLoader();
                             btn.removeClass('loading').prop('disabled', false);
+                            btnText.text('Sign In');
                             $.each(data.error, function (key, value) {
                                 $('span.' + key + '_error').text(value[0]);
                             });
@@ -686,12 +689,14 @@
                         if (data.status == 201) {
                             hideLoader();
                             btn.removeClass('loading').prop('disabled', false);
+                            btnText.text('Sign In');
                             toastr.error(data.message);
                         }
                     },
                     error: function(xhr) {
                         hideLoader();
                         btn.removeClass('loading').prop('disabled', false);
+                        btnText.text('Sign In');
                         if (xhr.status === 419) {
                             toastr.warning('Session expired. Refreshing page...');
                             setTimeout(function() {
