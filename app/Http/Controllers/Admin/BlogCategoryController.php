@@ -32,7 +32,7 @@ class BlogCategoryController extends Controller
             'status',
         ]));
 
-        return redirect()->route('admin.blog-categories.index')->with('success', 'Blog Category created successfully.');
+        return redirect()->route('admin::blog-categories.index')->with('success', 'Blog Category created successfully.');
     }
 
     public function edit(\App\Models\BlogCategory $blogCategory)
@@ -54,12 +54,12 @@ class BlogCategoryController extends Controller
             'status',
         ]));
 
-        return redirect()->route('admin.blog-categories.index')->with('success', 'Blog Category updated successfully.');
+        return redirect()->route('admin::blog-categories.index')->with('success', 'Blog Category updated successfully.');
     }
 
     public function destroy(\App\Models\BlogCategory $blogCategory)
     {
         $blogCategory->delete();
-        return redirect()->route('admin.blog-categories.index')->with('success', 'Blog Category deleted successfully.');
+        return redirect()->route('admin::blog-categories.index')->with('success', 'Blog Category deleted successfully.');
     }
 }
