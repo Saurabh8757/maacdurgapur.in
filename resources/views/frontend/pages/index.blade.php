@@ -51,27 +51,22 @@
 <body class="loading">
 
 <!-- ===================== SITE LOADER ===================== -->
-<div id="siteLoader">
-  <div class="loader-bg"></div>
-  <div class="loader-particles" id="loaderParticles"></div>
-  <div class="loader-content">
-    <div class="loader-ring-wrap">
-      <div class="loader-ring"></div>
-      <div class="loader-ring loader-ring-inner"></div>
-      <div class="loader-glow"></div>
-
-      <div class="loader-logo">
-        <img loading="lazy" src="{{ asset('frontend/images/maac/icons/transparent-logo.png') }}" alt="MAAC Robot Mascot" style="max-width: 80px; height: auto;">
-      </div>
-    </div>
-    <h2 class="loader-text">Loading Creative Universe<span class="loader-dots"></span></h2>
-    <div class="loader-progress-wrap">
-      <div class="loader-progress-bar">
-        <div class="loader-progress-fill" id="loaderProgressFill"></div>
-        <div class="loader-progress-glow"></div>
-      </div>
-      <span class="loader-percent" id="loaderPercent">0%</span>
-    </div>
+<style>
+.custom-home-loader { position: fixed; inset: 0; z-index: 99999; background: rgba(5, 10, 20, 1); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.custom-loader-brand { position: relative; width: 80px; height: 80px; }
+.custom-loader-ring-outer { position: absolute; inset: 0; border-radius: 50%; border: 2.5px solid transparent; border-top-color: #ff7a00; border-right-color: rgba(251, 191, 36, 0.4); animation: customLoaderSpin 1.2s linear infinite; }
+.custom-loader-ring-inner { position: absolute; inset: 10px; border-radius: 50%; border: 2px solid transparent; border-top-color: rgba(255, 122, 0, 0.5); border-right-color: #ff7a00; animation: customLoaderSpin 1.8s linear infinite reverse; }
+.custom-loader-glow { position: absolute; inset: -20px; border-radius: 50%; background: radial-gradient(circle, rgba(255, 122, 0, 0.18) 0%, transparent 70%); animation: customLoaderGlow 2s ease-in-out infinite alternate; }
+.custom-loader-text-brand { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 0.72rem; font-weight: 800; color: #ff7a00; letter-spacing: 1px; z-index: 1; font-family: 'Oswald', sans-serif; }
+@keyframes customLoaderSpin { to { transform: rotate(360deg); } }
+@keyframes customLoaderGlow { 0% { transform: scale(0.85); opacity: 0.4; } 100% { transform: scale(1.15); opacity: 1; } }
+</style>
+<div id="siteLoader" class="custom-home-loader">
+  <div class="custom-loader-brand loader-content">
+      <div class="custom-loader-glow"></div>
+      <div class="custom-loader-ring-outer"></div>
+      <div class="custom-loader-ring-inner"></div>
+      <div class="custom-loader-text-brand">MAAC</div>
   </div>
 </div>
 
@@ -1051,183 +1046,33 @@
 <script>
 (function() {
   'use strict';
-
-  /* ── Lock scroll immediately ────────────────────────── */
   document.documentElement.style.overflow = 'hidden';
   document.body.style.overflow = 'hidden';
   document.body.classList.add('loading');
 
-  /* ── DOM refs ───────────────────────────────────────── */
   var loader = document.getElementById('siteLoader');
-  var progressFill = document.getElementById('loaderProgressFill');
-  var percentText = document.getElementById('loaderPercent');
-  var particlesContainer = document.getElementById('loaderParticles');
-  var petalTweens = [];
-
   if (!loader) return;
 
-  /* ── Spawn floating sakura petals ───────────────────── */
-  var petalCount = window.innerWidth < 768 ? 12 : 24;
-  for (var i = 0; i < petalCount; i++) {
-    var petal = document.createElement('div');
-    petal.className = 'loader-petal';
-    petal.style.left = (Math.random() * 100) + '%';
-    petal.style.top = (-5 + Math.random() * 20) + '%';
-    var size = 5 + Math.random() * 8;
-    petal.style.width = size + 'px';
-    petal.style.height = (size * 0.7) + 'px';
-    petal.style.opacity = '0';
-    particlesContainer.appendChild(petal);
-  }
-
-  /* ── Animate petals once GSAP is available ──────────── */
-  function animatePetals() {
-    if (typeof gsap === 'undefined') { setTimeout(animatePetals, 50); return; }
-    var petals = particlesContainer.querySelectorAll('.loader-petal');
-    petals.forEach(function(p) {
-      var tw = gsap.to(p, {
-        y: window.innerHeight + 60,
-        x: (Math.random() - 0.5) * 120,
-        rotation: Math.random() * 360,
-        opacity: 0.5 + Math.random() * 0.4,
-        duration: 3 + Math.random() * 4,
-        repeat: -1,
-        delay: Math.random() * 3,
-        ease: 'none',
-        modifiers: {
-          y: function(y) { return (parseFloat(y) % (window.innerHeight + 80)) + 'px'; }
-        }
-      });
-      petalTweens.push(tw);
-    });
-  }
-  animatePetals();
-
-  /* ── Progress tracking ──────────────────────────────── */
-  var currentProgress = 0;
-  var targetProgress = 0;
-  var loadComplete = false;
-
-  function updateProgress() {
-    if (currentProgress < targetProgress) {
-      currentProgress += (targetProgress - currentProgress) * 0.08;
-      if (targetProgress - currentProgress < 0.5) currentProgress = targetProgress;
-    }
-    var rounded = Math.round(currentProgress);
-    if (progressFill) progressFill.style.width = rounded + '%';
-    if (percentText) percentText.textContent = rounded + '%';
-    if (!loadComplete || currentProgress < 99) {
-      requestAnimationFrame(updateProgress);
-    }
-  }
-  requestAnimationFrame(updateProgress);
-
-  /* ── Track image loading ────────────────────────────── */
-  var images = document.querySelectorAll('img');
-  var totalImages = images.length;
-  var loadedImages = 0;
-
-  if (totalImages === 0) {
-    targetProgress = 50;
-  } else {
-    images.forEach(function(img) {
-      if (img.complete) {
-        loadedImages++;
-      } else {
-        img.addEventListener('load', function() {
-          loadedImages++;
-          targetProgress = Math.max(targetProgress, Math.min(50, (loadedImages / totalImages) * 50));
-        });
-        img.addEventListener('error', function() {
-          loadedImages++;
-          targetProgress = Math.max(targetProgress, Math.min(50, (loadedImages / totalImages) * 50));
-        });
-      }
-    });
-    targetProgress = Math.min(50, (loadedImages / totalImages) * 50);
-  }
-
-  /* ── Track font loading ─────────────────────────────── */
-  if (document.fonts && document.fonts.ready) {
-    document.fonts.ready.then(function() {
-      targetProgress = Math.max(targetProgress, 75);
-    });
-  } else {
-    targetProgress = Math.max(targetProgress, 75);
-  }
-
-  /* ── window.load — the real trigger ─────────────────── */
   window.addEventListener('load', function() {
-    targetProgress = 100;
-    loadComplete = true;
-
-    /* Wait for progress animation to reach ~100, then dismiss */
-    var dismissCheck = setInterval(function() {
-      if (currentProgress >= 99.5) {
-        clearInterval(dismissCheck);
-        dismissLoader();
-      }
-    }, 50);
-
-    /* Safety: dismiss after 4s max even if progress stalls */
     setTimeout(function() {
-      if (loader && loader.parentNode) dismissLoader();
-    }, 4000);
-  });
-
-  /* ── Dismiss loader ─────────────────────────────────── */
-  var dismissed = false;
-  function dismissLoader() {
-    if (dismissed) return;
-    dismissed = true;
-
-    /* Kill petal tweens to prevent memory leak */
-    petalTweens.forEach(function(tw) { tw.kill(); });
-    petalTweens = [];
-
-    if (typeof gsap === 'undefined') {
-      /* Fallback if GSAP somehow not loaded */
-      loader.style.display = 'none';
-      document.body.classList.remove('loading');
-      document.documentElement.style.overflow = '';
-      document.body.style.overflow = '';
-      return;
-    }
-
-    var tl = gsap.timeline({
-      onComplete: function() {
-        if (loader.parentNode) loader.parentNode.removeChild(loader);
+      if (typeof gsap !== 'undefined') {
+        var tl = gsap.timeline({
+          onComplete: function() {
+            if (loader.parentNode) loader.parentNode.removeChild(loader);
+            document.body.classList.remove('loading');
+            document.documentElement.style.overflow = '';
+            document.body.style.overflow = '';
+          }
+        });
+        tl.to(loader, { opacity: 0, duration: 0.6, ease: 'power2.inOut' });
+      } else {
+        loader.style.display = 'none';
         document.body.classList.remove('loading');
         document.documentElement.style.overflow = '';
         document.body.style.overflow = '';
       }
-    });
-
-    /* 1. Fade out loader content */
-    tl.to('.loader-content', {
-      opacity: 0,
-      y: -30,
-      duration: 0.6,
-      ease: 'power2.in'
-    });
-
-    /* 2. Scale + fade the entire loader */
-    tl.to(loader, {
-      opacity: 0,
-      scale: 1.05,
-      duration: 0.5,
-      ease: 'power2.in'
-    }, '-=0.3');
-
-    /* 3. Reveal hero section with a subtle upward slide */
-    tl.from('.hero-section', {
-      opacity: 0,
-      y: 40,
-      duration: 0.8,
-      ease: 'power3.out'
-    }, '-=0.2');
-  }
-
+    }, 200);
+  });
 })();
 </script>
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
