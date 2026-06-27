@@ -58,8 +58,9 @@
         }
     </style>
 </head>
-<body class="loading">
+<body class="{{ request()->routeIs('home') ? 'loading' : '' }}">
 
+@if(request()->routeIs('home'))
 <!-- ===================== SITE LOADER ===================== -->
 <div id="siteLoader">
   <div class="loader-bg"></div>
@@ -84,6 +85,7 @@
     </div>
   </div>
 </div>
+@endif
 
 
 
@@ -402,6 +404,7 @@
 <!-- chatbot end -->
 
 <!-- Scripts -->
+@if(request()->routeIs('home'))
 <!-- ===================== SITE LOADER JS ===================== -->
 <script>
 (function() {
@@ -587,6 +590,7 @@
 
 })();
 </script>
+@endif
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
