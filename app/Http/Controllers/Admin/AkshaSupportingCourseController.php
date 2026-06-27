@@ -26,7 +26,9 @@ class AkshaSupportingCourseController extends Controller
             'is_active' => 'boolean',
         ]);
 
-        $data['brand_id'] = \App\Models\Brand::where('slug', 'aksha')->first()->id ?? 1;
+        $data['brand_id'] = \App\Models\Brand::where('slug', 'aksha')->first()?->id
+            ?? \App\Models\Brand::first()?->id
+            ?? 1;
         $data['slug'] = $data['slug'] ?: Str::slug($data['title']);
 
         $course = AkshaSupportingCourse::create($data);
