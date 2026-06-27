@@ -60,30 +60,76 @@
 </head>
 <body class="{{ request()->routeIs('home') ? 'loading' : '' }}">
 
-@if(request()->routeIs('home'))
-<!-- ===================== SITE LOADER ===================== -->
-<div id="siteLoader">
-  <div class="loader-bg"></div>
-  <div class="loader-particles" id="loaderParticles"></div>
-  <div class="loader-content">
-    <div class="loader-ring-wrap">
-      <div class="loader-ring"></div>
-      <div class="loader-ring loader-ring-inner"></div>
-      <div class="loader-glow"></div>
+@if(!request()->routeIs('home'))
+<!-- ===================== SKELETON LOADER ===================== -->
+<style>
+.skeleton-loader-overlay { position: fixed; inset: 0; z-index: 999999; background-color: #fcfcfc; display: flex; justify-content: center; padding: 60px 20px; opacity: 1; visibility: visible; transition: opacity 0.5s ease, visibility 0.5s ease; }
+.skeleton-container { display: flex; max-width: 1140px; width: 100%; gap: 60px; align-items: flex-start; }
+.skeleton-main { flex: 1; display: flex; flex-direction: column; gap: 40px; }
+.skeleton-sidebar { width: 340px; display: flex; flex-direction: column; gap: 30px; }
+@media (max-width: 992px) { .skeleton-sidebar { display: none; } }
+.skeleton-card { background: #fff; padding: 24px; border-radius: 8px; border: 1px solid #f0f0f0; box-shadow: 0 4px 15px rgba(0,0,0,0.03); }
+.skeleton-header { display: flex; align-items: center; gap: 16px; margin-bottom: 24px; }
+.skeleton-avatar { width: 50px; height: 50px; border-radius: 50%; }
+.skeleton-title-group { flex: 1; display: flex; flex-direction: column; gap: 12px; }
+.skeleton-line { height: 12px; border-radius: 4px; }
+.skeleton-body { display: flex; flex-direction: column; gap: 14px; }
+.skeleton-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.skeleton-box { height: 70px; border-radius: 6px; }
+.skeleton-anim { background: #f0f2f5; background: linear-gradient(90deg, #f0f2f5 25%, #e6e8eb 50%, #f0f2f5 75%); background-size: 200% 100%; animation: skeletonShimmer 1.5s infinite linear; }
+@keyframes skeletonShimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+</style>
 
-      <div class="loader-logo">
-        <img src="{{ asset('frontend/images/maac/icons/transparent-logo.png') }}" alt="MAAC Robot Mascot" style="max-width: 80px; height: auto;">
-      </div>
+<div id="innerPageSkeleton" class="skeleton-loader-overlay">
+    <div class="skeleton-container">
+        <!-- Main Content Area -->
+        <div class="skeleton-main">
+            <!-- Block 1 -->
+            <div class="skeleton-card">
+                <div class="skeleton-header">
+                    <div class="skeleton-avatar skeleton-anim"></div>
+                    <div class="skeleton-title-group">
+                        <div class="skeleton-line skeleton-anim" style="width: 40%;"></div>
+                        <div class="skeleton-line skeleton-anim" style="width: 20%;"></div>
+                    </div>
+                </div>
+                <div class="skeleton-body">
+                    <div class="skeleton-line skeleton-anim" style="width: 100%;"></div>
+                    <div class="skeleton-line skeleton-anim" style="width: 90%;"></div>
+                    <div class="skeleton-line skeleton-anim" style="width: 75%;"></div>
+                </div>
+            </div>
+            <!-- Block 2 -->
+            <div class="skeleton-card">
+                <div class="skeleton-header">
+                    <div class="skeleton-avatar skeleton-anim"></div>
+                    <div class="skeleton-title-group">
+                        <div class="skeleton-line skeleton-anim" style="width: 40%;"></div>
+                        <div class="skeleton-line skeleton-anim" style="width: 20%;"></div>
+                    </div>
+                </div>
+                <div class="skeleton-body">
+                    <div class="skeleton-line skeleton-anim" style="width: 100%;"></div>
+                    <div class="skeleton-line skeleton-anim" style="width: 90%;"></div>
+                    <div class="skeleton-line skeleton-anim" style="width: 75%;"></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Sidebar Area -->
+        <div class="skeleton-sidebar">
+            <div class="skeleton-line skeleton-anim" style="width: 100%; height: 2px; margin-bottom: 20px;"></div>
+            <div class="skeleton-line skeleton-anim" style="width: 40%; height: 10px; margin-bottom: 30px;"></div>
+            <div class="skeleton-grid">
+                <div class="skeleton-box skeleton-anim"></div>
+                <div class="skeleton-box skeleton-anim"></div>
+                <div class="skeleton-box skeleton-anim"></div>
+                <div class="skeleton-box skeleton-anim"></div>
+                <div class="skeleton-box skeleton-anim"></div>
+                <div class="skeleton-box skeleton-anim"></div>
+            </div>
+        </div>
     </div>
-    <h2 class="loader-text">Loading Creative Universe<span class="loader-dots"></span></h2>
-    <div class="loader-progress-wrap">
-      <div class="loader-progress-bar">
-        <div class="loader-progress-fill" id="loaderProgressFill"></div>
-        <div class="loader-progress-glow"></div>
-      </div>
-      <span class="loader-percent" id="loaderPercent">0%</span>
-    </div>
-  </div>
 </div>
 @endif
 
@@ -404,190 +450,37 @@
 <!-- chatbot end -->
 
 <!-- Scripts -->
-@if(request()->routeIs('home'))
-<!-- ===================== SITE LOADER JS ===================== -->
+@if(!request()->routeIs('home'))
+<!-- ===================== SKELETON LOADER JS ===================== -->
 <script>
 (function() {
   'use strict';
-
-  /* ── Lock scroll immediately ────────────────────────── */
+  
   document.documentElement.style.overflow = 'hidden';
   document.body.style.overflow = 'hidden';
-  document.body.classList.add('loading');
 
-  /* ── DOM refs ───────────────────────────────────────── */
-  var loader = document.getElementById('siteLoader');
-  var progressFill = document.getElementById('loaderProgressFill');
-  var percentText = document.getElementById('loaderPercent');
-  var particlesContainer = document.getElementById('loaderParticles');
-  var petalTweens = [];
-
-  if (!loader) return;
-
-  /* ── Spawn floating sakura petals ───────────────────── */
-  var petalCount = window.innerWidth < 768 ? 12 : 24;
-  for (var i = 0; i < petalCount; i++) {
-    var petal = document.createElement('div');
-    petal.className = 'loader-petal';
-    petal.style.left = (Math.random() * 100) + '%';
-    petal.style.top = (-5 + Math.random() * 20) + '%';
-    var size = 5 + Math.random() * 8;
-    petal.style.width = size + 'px';
-    petal.style.height = (size * 0.7) + 'px';
-    petal.style.opacity = '0';
-    particlesContainer.appendChild(petal);
-  }
-
-  /* ── Animate petals once GSAP is available ──────────── */
-  function animatePetals() {
-    if (typeof gsap === 'undefined') { setTimeout(animatePetals, 50); return; }
-    var petals = particlesContainer.querySelectorAll('.loader-petal');
-    petals.forEach(function(p) {
-      var tw = gsap.to(p, {
-        y: window.innerHeight + 60,
-        x: (Math.random() - 0.5) * 120,
-        rotation: Math.random() * 360,
-        opacity: 0.5 + Math.random() * 0.4,
-        duration: 3 + Math.random() * 4,
-        repeat: -1,
-        delay: Math.random() * 3,
-        ease: 'none',
-        modifiers: {
-          y: function(y) { return (parseFloat(y) % (window.innerHeight + 80)) + 'px'; }
-        }
-      });
-      petalTweens.push(tw);
-    });
-  }
-  animatePetals();
-
-  /* ── Progress tracking ──────────────────────────────── */
-  var currentProgress = 0;
-  var targetProgress = 0;
-  var loadComplete = false;
-
-  function updateProgress() {
-    if (currentProgress < targetProgress) {
-      currentProgress += (targetProgress - currentProgress) * 0.08;
-      if (targetProgress - currentProgress < 0.5) currentProgress = targetProgress;
-    }
-    var rounded = Math.round(currentProgress);
-    if (progressFill) progressFill.style.width = rounded + '%';
-    if (percentText) percentText.textContent = rounded + '%';
-    if (!loadComplete || currentProgress < 99) {
-      requestAnimationFrame(updateProgress);
-    }
-  }
-  requestAnimationFrame(updateProgress);
-
-  /* ── Track image loading ────────────────────────────── */
-  var images = document.querySelectorAll('img');
-  var totalImages = images.length;
-  var loadedImages = 0;
-
-  if (totalImages === 0) {
-    targetProgress = 50;
-  } else {
-    images.forEach(function(img) {
-      if (img.complete) {
-        loadedImages++;
-      } else {
-        img.addEventListener('load', function() {
-          loadedImages++;
-          targetProgress = Math.max(targetProgress, Math.min(50, (loadedImages / totalImages) * 50));
-        });
-        img.addEventListener('error', function() {
-          loadedImages++;
-          targetProgress = Math.max(targetProgress, Math.min(50, (loadedImages / totalImages) * 50));
-        });
-      }
-    });
-    targetProgress = Math.min(50, (loadedImages / totalImages) * 50);
-  }
-
-  /* ── Track font loading ─────────────────────────────── */
-  if (document.fonts && document.fonts.ready) {
-    document.fonts.ready.then(function() {
-      targetProgress = Math.max(targetProgress, 75);
-    });
-  } else {
-    targetProgress = Math.max(targetProgress, 75);
-  }
-
-  /* ── window.load — the real trigger ─────────────────── */
   window.addEventListener('load', function() {
-    targetProgress = 100;
-    loadComplete = true;
-
-    /* Wait for progress animation to reach ~100, then dismiss */
-    var dismissCheck = setInterval(function() {
-      if (currentProgress >= 99.5) {
-        clearInterval(dismissCheck);
-        dismissLoader();
-      }
-    }, 50);
-
-    /* Safety: dismiss after 4s max even if progress stalls */
-    setTimeout(function() {
-      if (loader && loader.parentNode) dismissLoader();
-    }, 4000);
-  });
-
-  /* ── Dismiss loader ─────────────────────────────────── */
-  var dismissed = false;
-  function dismissLoader() {
-    if (dismissed) return;
-    dismissed = true;
-
-    /* Kill petal tweens to prevent memory leak */
-    petalTweens.forEach(function(tw) { tw.kill(); });
-    petalTweens = [];
-
-    if (typeof gsap === 'undefined') {
-      /* Fallback if GSAP somehow not loaded */
-      loader.style.display = 'none';
-      document.body.classList.remove('loading');
-      document.documentElement.style.overflow = '';
-      document.body.style.overflow = '';
-      return;
-    }
-
-    var tl = gsap.timeline({
-      onComplete: function() {
-        if (loader.parentNode) loader.parentNode.removeChild(loader);
-        document.body.classList.remove('loading');
+    var skeletonLoader = document.getElementById('innerPageSkeleton');
+    if (!skeletonLoader) {
         document.documentElement.style.overflow = '';
         document.body.style.overflow = '';
-      }
-    });
-
-    /* 1. Fade out loader content */
-    tl.to('.loader-content', {
-      opacity: 0,
-      y: -30,
-      duration: 0.6,
-      ease: 'power2.in'
-    });
-
-    /* 2. Scale + fade the entire loader */
-    tl.to(loader, {
-      opacity: 0,
-      scale: 1.05,
-      duration: 0.5,
-      ease: 'power2.in'
-    }, '-=0.3');
-
-    /* 3. Reveal hero section with a subtle upward slide */
-    if (document.querySelector('.hero-section')) {
-      tl.from('.hero-section', {
-        opacity: 0,
-        y: 40,
-        duration: 0.8,
-        ease: 'power3.out'
-      }, '-=0.2');
+        return;
     }
-  }
 
+    setTimeout(function() {
+      skeletonLoader.style.opacity = '0';
+      skeletonLoader.style.visibility = 'hidden';
+      
+      document.documentElement.style.overflow = '';
+      document.body.style.overflow = '';
+      
+      setTimeout(function() {
+        if (skeletonLoader.parentNode) {
+          skeletonLoader.parentNode.removeChild(skeletonLoader);
+        }
+      }, 500);
+    }, 150);
+  });
 })();
 </script>
 @endif
