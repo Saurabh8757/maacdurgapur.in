@@ -54,6 +54,7 @@ Route::group(['as' => 'admin::', 'prefix' => 'v1/cpanel/admin', 'middleware' => 
     Route::get('/followups', [\App\Http\Controllers\Admin\FollowupController::class, 'index'])->name('followups.index');
     Route::put('/followups/{id}/complete', [\App\Http\Controllers\Admin\FollowupController::class, 'complete'])->name('followups.complete');
     Route::put('/followups/{id}/cancel', [\App\Http\Controllers\Admin\FollowupController::class, 'cancel'])->name('followups.cancel');
+    Route::delete('/followups/{id}', [\App\Http\Controllers\Admin\FollowupController::class, 'destroy'])->name('followups.destroy');
     /*** Followups Routes End ***/
 
     /*** WhatsApp Settings Routes Start ***/

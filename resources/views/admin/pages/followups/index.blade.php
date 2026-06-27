@@ -107,6 +107,11 @@
                                             <button type="submit" class="btn btn-sm btn-danger" title="Cancel Followup"><i class="fas fa-times"></i></button>
                                         </form>
                                     @endif
+                                    <form action="{{ route('admin::followups.destroy', $followup->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Delete this followup permanently?');">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-sm btn-outline-danger" title="Delete Followup"><i class="fas fa-trash"></i></button>
+                                    </form>
                                 </td>
                             </tr>
                             @empty

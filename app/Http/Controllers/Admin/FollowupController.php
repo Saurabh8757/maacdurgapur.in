@@ -92,4 +92,12 @@ class FollowupController extends Controller
 
         return redirect()->back()->with('success', 'Followup cancelled.');
     }
+
+    public function destroy($id)
+    {
+        $followup = LeadFollowup::findOrFail($id);
+        $followup->delete();
+
+        return redirect()->back()->with('success', 'Followup deleted successfully.');
+    }
 }
