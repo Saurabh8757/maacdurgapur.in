@@ -63,21 +63,21 @@
 @if(!request()->routeIs('home'))
 <!-- ===================== SKELETON LOADER ===================== -->
 <style>
-.skeleton-loader-overlay { position: fixed; inset: 0; z-index: 999999; background-color: #fcfcfc; display: flex; justify-content: center; padding: 60px 20px; opacity: 1; visibility: visible; transition: opacity 0.5s ease, visibility 0.5s ease; }
+.skeleton-loader-overlay { position: fixed; inset: 0; z-index: 999999; background-color: #f8f9fa; display: flex; justify-content: center; padding: 80px 20px; opacity: 1; visibility: visible; transition: opacity 0.6s ease, visibility 0.6s ease; }
 .skeleton-container { display: flex; max-width: 1140px; width: 100%; gap: 60px; align-items: flex-start; }
 .skeleton-main { flex: 1; display: flex; flex-direction: column; gap: 40px; }
 .skeleton-sidebar { width: 340px; display: flex; flex-direction: column; gap: 30px; }
 @media (max-width: 992px) { .skeleton-sidebar { display: none; } }
-.skeleton-card { background: #fff; padding: 24px; border-radius: 8px; border: 1px solid #f0f0f0; box-shadow: 0 4px 15px rgba(0,0,0,0.03); }
-.skeleton-header { display: flex; align-items: center; gap: 16px; margin-bottom: 24px; }
-.skeleton-avatar { width: 50px; height: 50px; border-radius: 50%; }
-.skeleton-title-group { flex: 1; display: flex; flex-direction: column; gap: 12px; }
-.skeleton-line { height: 12px; border-radius: 4px; }
-.skeleton-body { display: flex; flex-direction: column; gap: 14px; }
-.skeleton-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
-.skeleton-box { height: 70px; border-radius: 6px; }
-.skeleton-anim { background: #f0f2f5; background: linear-gradient(90deg, #f0f2f5 25%, #e6e8eb 50%, #f0f2f5 75%); background-size: 200% 100%; animation: skeletonShimmer 1.5s infinite linear; }
-@keyframes skeletonShimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+.skeleton-card { background: #ffffff; padding: 32px; border-radius: 12px; border: 1px solid #ebedf0; box-shadow: 0 12px 36px rgba(0,0,0,0.02); }
+.skeleton-header { display: flex; align-items: center; gap: 20px; margin-bottom: 28px; }
+.skeleton-avatar { width: 64px; height: 64px; border-radius: 50%; }
+.skeleton-title-group { flex: 1; display: flex; flex-direction: column; gap: 14px; }
+.skeleton-line { height: 14px; border-radius: 6px; }
+.skeleton-body { display: flex; flex-direction: column; gap: 16px; }
+.skeleton-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.skeleton-box { height: 80px; border-radius: 8px; }
+.skeleton-anim { background: #f6f7f8; background: linear-gradient(90deg, #f6f7f8 8%, #edeef1 18%, #f6f7f8 33%); background-size: 800px 104px; animation: skeletonShimmer 1.5s infinite linear forwards; }
+@keyframes skeletonShimmer { 0% { background-position: -468px 0; } 100% { background-position: 468px 0; } }
 </style>
 
 <div id="innerPageSkeleton" class="skeleton-loader-overlay">
@@ -89,14 +89,14 @@
                 <div class="skeleton-header">
                     <div class="skeleton-avatar skeleton-anim"></div>
                     <div class="skeleton-title-group">
-                        <div class="skeleton-line skeleton-anim" style="width: 40%;"></div>
-                        <div class="skeleton-line skeleton-anim" style="width: 20%;"></div>
+                        <div class="skeleton-line skeleton-anim" style="width: 35%;"></div>
+                        <div class="skeleton-line skeleton-anim" style="width: 15%;"></div>
                     </div>
                 </div>
                 <div class="skeleton-body">
                     <div class="skeleton-line skeleton-anim" style="width: 100%;"></div>
-                    <div class="skeleton-line skeleton-anim" style="width: 90%;"></div>
-                    <div class="skeleton-line skeleton-anim" style="width: 75%;"></div>
+                    <div class="skeleton-line skeleton-anim" style="width: 92%;"></div>
+                    <div class="skeleton-line skeleton-anim" style="width: 68%;"></div>
                 </div>
             </div>
             <!-- Block 2 -->
@@ -104,22 +104,22 @@
                 <div class="skeleton-header">
                     <div class="skeleton-avatar skeleton-anim"></div>
                     <div class="skeleton-title-group">
-                        <div class="skeleton-line skeleton-anim" style="width: 40%;"></div>
-                        <div class="skeleton-line skeleton-anim" style="width: 20%;"></div>
+                        <div class="skeleton-line skeleton-anim" style="width: 35%;"></div>
+                        <div class="skeleton-line skeleton-anim" style="width: 15%;"></div>
                     </div>
                 </div>
                 <div class="skeleton-body">
                     <div class="skeleton-line skeleton-anim" style="width: 100%;"></div>
-                    <div class="skeleton-line skeleton-anim" style="width: 90%;"></div>
-                    <div class="skeleton-line skeleton-anim" style="width: 75%;"></div>
+                    <div class="skeleton-line skeleton-anim" style="width: 92%;"></div>
+                    <div class="skeleton-line skeleton-anim" style="width: 68%;"></div>
                 </div>
             </div>
         </div>
         
         <!-- Sidebar Area -->
         <div class="skeleton-sidebar">
-            <div class="skeleton-line skeleton-anim" style="width: 100%; height: 2px; margin-bottom: 20px;"></div>
-            <div class="skeleton-line skeleton-anim" style="width: 40%; height: 10px; margin-bottom: 30px;"></div>
+            <div class="skeleton-line skeleton-anim" style="width: 100%; height: 2px; margin-bottom: 24px;"></div>
+            <div class="skeleton-line skeleton-anim" style="width: 50%; height: 12px; margin-bottom: 32px;"></div>
             <div class="skeleton-grid">
                 <div class="skeleton-box skeleton-anim"></div>
                 <div class="skeleton-box skeleton-anim"></div>
@@ -459,6 +459,8 @@
   document.documentElement.style.overflow = 'hidden';
   document.body.style.overflow = 'hidden';
 
+  var startTime = Date.now();
+
   window.addEventListener('load', function() {
     var skeletonLoader = document.getElementById('innerPageSkeleton');
     if (!skeletonLoader) {
@@ -466,6 +468,10 @@
         document.body.style.overflow = '';
         return;
     }
+
+    var elapsedTime = Date.now() - startTime;
+    var minDisplayTime = 1200; // Force it to show for at least 1.2s to look realistic
+    var delay = Math.max(0, minDisplayTime - elapsedTime);
 
     setTimeout(function() {
       skeletonLoader.style.opacity = '0';
@@ -478,8 +484,8 @@
         if (skeletonLoader.parentNode) {
           skeletonLoader.parentNode.removeChild(skeletonLoader);
         }
-      }, 500);
-    }, 150);
+      }, 600);
+    }, delay);
   });
 })();
 </script>
