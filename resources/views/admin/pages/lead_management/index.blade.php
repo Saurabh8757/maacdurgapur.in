@@ -146,7 +146,7 @@
                                     <tbody>
                                     @forelse($leads as $lead)
                                         <tr class="clickable-row" data-href="{{ route('admin::leads.show', $lead->id) }}" style="cursor: pointer;">
-                                            <td>{{ $lead->id }}</td>
+                                            <td>{{ ($leads->currentPage() - 1) * $leads->perPage() + $loop->iteration }}</td>
                                             <td>{{ $lead->brand ? $lead->brand->name : 'N/A' }}</td>
                                             <td>{{ $lead->name }}</td>
                                             <td>{{ $lead->phone }}</td>
