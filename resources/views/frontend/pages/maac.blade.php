@@ -367,14 +367,13 @@
       <p class="maac-why-label">WHY STUDENT ACROSS WEST BENGAL CHOOSE US ?</p>
       <h2 class="maac-why-title">WHY CHOOSE MAAC DURGAPUR ?</h2>
     </div>
-
     @if($cmsFeatures->isNotEmpty())
     <div class="maac-why-grid">
       @foreach($cmsFeatures as $feature)
       <div class="maac-why-card">
         <div class="why-card-icon-wrap">
           @if($feature->icon)
-              <img loading="lazy" src="{{ asset($feature->icon->storage_key) }}" alt="{{ $feature->title }}" class="why-card-icon">
+              <img loading="lazy" src="{{ $feature->icon->url }}" alt="{{ $feature->title }}" class="why-card-icon">
           @else
               <img loading="lazy" src="{{ asset('frontend/images/maac/icons/education.png') }}" alt="{{ $feature->title }}" class="why-card-icon">
           @endif

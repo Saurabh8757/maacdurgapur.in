@@ -15,9 +15,14 @@
 </div>
 <div class="row">
     <div class="col-md-4 form-group">
-        <label for="icon_media_id">Icon media ID</label>
-        <input class="form-control" type="number" min="1" id="icon_media_id" name="icon_media_id" value="{{ old('icon_media_id', optional($feature ?? null)->icon_media_id) }}">
-        <div class="cms-help mt-1">Optional. Uses an existing media asset.</div>
+        <label for="icon_file">Upload Icon</label>
+        <input class="form-control" type="file" id="icon_file" name="icon_file" accept="image/*">
+        @if(isset($feature) && $feature->icon)
+            <div class="mt-2">
+                <img src="{{ $feature->icon->url }}" alt="Current Icon" style="max-height: 50px;">
+            </div>
+        @endif
+        <div class="cms-help mt-1">Optional. Upload an image for the feature icon.</div>
     </div>
     <div class="col-md-4 form-group">
         <label for="status">Status</label>

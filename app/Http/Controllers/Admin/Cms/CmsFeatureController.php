@@ -9,6 +9,7 @@ use App\Services\Brands\BrandContextManager;
 use App\Services\Cms\CmsFeatureReadService;
 use App\Services\Cms\CmsFeatureService;
 use App\Services\Cms\CmsAuthorizationService;
+use App\Models\MediaAsset;
 use Illuminate\Http\JsonResponse;
 
 class CmsFeatureController extends Controller
@@ -32,7 +33,33 @@ class CmsFeatureController extends Controller
 
     public function store(CmsFeatureRequest $request): JsonResponse
     {
-        $feature = $this->featureService->create($request->validated());
+        $validated = $request->validated();
+        
+        if ($request->hasFile('icon_file')) {
+            $file = $request->file('icon_file');
+            $path = $file->store('features', 'public');
+            
+            $brandId = $this->brandContextManager->requireAdminContext()->brand()->getKey();
+            
+            $media = MediaAsset::create([
+                'brand_id' => $brandId,
+                'uploaded_by' => auth()->id(),
+                'storage_disk' => 'public',
+                'storage_key' => 'storage/' . $path,
+                'original_filename' => $file->getClientOriginalName(),
+                'extension' => $file->getClientOriginalExtension(),
+                'mime_type' => $file->getMimeType(),
+                'media_type' => 'image',
+                'visibility' => 'public',
+                'status' => 'ready',
+                'size_bytes' => $file->getSize(),
+            ]);
+            
+            $validated['icon_media_id'] = $media->id;
+        }
+        unset($validated['icon_file']);
+
+        $feature = $this->featureService->create($validated);
         
         return response()->json($feature->load('icon'), 201);
     }
@@ -44,7 +71,31 @@ class CmsFeatureController extends Controller
             abort(403, 'Unauthorized action.');
         }
 
-        $feature = $this->featureService->update($feature, $request->validated());
+        $validated = $request->validated();
+        
+        if ($request->hasFile('icon_file')) {
+            $file = $request->file('icon_file');
+            $path = $file->store('features', 'public');
+            
+            $media = MediaAsset::create([
+                'brand_id' => $brandId,
+                'uploaded_by' => auth()->id(),
+                'storage_disk' => 'public',
+                'storage_key' => 'storage/' . $path,
+                'original_filename' => $file->getClientOriginalName(),
+                'extension' => $file->getClientOriginalExtension(),
+                'mime_type' => $file->getMimeType(),
+                'media_type' => 'image',
+                'visibility' => 'public',
+                'status' => 'ready',
+                'size_bytes' => $file->getSize(),
+            ]);
+            
+            $validated['icon_media_id'] = $media->id;
+        }
+        unset($validated['icon_file']);
+
+        $feature = $this->featureService->update($feature, $validated);
         
         return response()->json($feature->load('icon'));
     }
