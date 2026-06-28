@@ -1,6 +1,7 @@
 @extends('frontend.layout.app')
 
 @section('meta_title', 'AKSHA Durgapur – Coding, UI/UX, Digital Marketing & Programming Courses')
+<!-- footer updated -->
 @section('meta_description', 'AKSHA Durgapur offers comprehensive courses in Coding, Programming, UI/UX Design, and Digital Marketing. Empower your tech career with expert-led practical training.')
 @section('canonical_url', url()->current())
 @section('og_title', 'AKSHA Durgapur – Coding, UI/UX, Digital Marketing & Programming Courses')
