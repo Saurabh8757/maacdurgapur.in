@@ -933,7 +933,7 @@ body.loading {
     display: flex;
     align-items: center;
     overflow: hidden;
-    padding: 80px 0;
+    padding: 80px 0 160px 0;
     background-color: transparent; /* Changed from var(--dark) */
     /* Exact Hero Transition Logic: 150px physical overlap */
     margin-top: -150px;
@@ -968,6 +968,7 @@ body.loading {
     position: absolute;
     inset: 0;
     background: rgba(5, 5, 12, 0.65);
+    pointer-events: none;
 }
 
 .section-bg-img.parallax-bg {
