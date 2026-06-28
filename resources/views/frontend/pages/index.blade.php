@@ -175,6 +175,14 @@
   </div>
 </section>
 
+<!-- Bypassing CDN/Browser cache for urgent overlap fix -->
+<style>
+  .institute-section { padding-bottom: 180px !important; }
+  .dark-bg::after { pointer-events: none !important; }
+  .brand-section-content { position: relative; z-index: 9999 !important; pointer-events: auto !important; }
+  .courses-section { pointer-events: none !important; }
+</style>
+
 <!-- ===================== MAAC SECTION ===================== -->
 <section id="maac" class="institute-section maac-section">
   <div class="section-bg">
