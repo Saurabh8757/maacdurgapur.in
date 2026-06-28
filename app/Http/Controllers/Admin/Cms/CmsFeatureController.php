@@ -47,12 +47,14 @@ class CmsFeatureController extends Controller
                 'storage_disk' => 'public',
                 'storage_key' => 'storage/' . $path,
                 'original_filename' => $file->getClientOriginalName(),
+                'display_name' => pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME),
                 'extension' => $file->getClientOriginalExtension(),
                 'mime_type' => $file->getMimeType(),
                 'media_type' => 'image',
                 'visibility' => 'public',
                 'status' => 'ready',
                 'size_bytes' => $file->getSize(),
+                'checksum_sha256' => hash_file('sha256', $file->getRealPath()),
             ]);
             
             $validated['icon_media_id'] = $media->id;
@@ -83,12 +85,14 @@ class CmsFeatureController extends Controller
                 'storage_disk' => 'public',
                 'storage_key' => 'storage/' . $path,
                 'original_filename' => $file->getClientOriginalName(),
+                'display_name' => pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME),
                 'extension' => $file->getClientOriginalExtension(),
                 'mime_type' => $file->getMimeType(),
                 'media_type' => 'image',
                 'visibility' => 'public',
                 'status' => 'ready',
                 'size_bytes' => $file->getSize(),
+                'checksum_sha256' => hash_file('sha256', $file->getRealPath()),
             ]);
             
             $validated['icon_media_id'] = $media->id;
