@@ -269,7 +269,7 @@
   window.openCounsellingModal = openModal;
 
   const attachModalListeners = () => {
-    document.querySelectorAll('.btn-counselling, .btn-register, .btn-primary, .open-modal, .mobile-cta').forEach(btn => {
+    document.querySelectorAll('.btn-counselling, .btn-primary, .open-modal, .mobile-cta').forEach(btn => {
       btn.addEventListener('click', function(e) {
         if (btn.classList.contains('scroll-to-hero-form')) {
           // Allow default anchor navigation for smooth scrolling
