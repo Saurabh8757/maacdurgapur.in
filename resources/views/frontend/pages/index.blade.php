@@ -860,9 +860,10 @@
     
     <div class="footer-contact-col">
       <h4>Contact Us</h4>
+      <p>📞 Phone: +91 - 9333111777</p>
       <p>📞 Phone: +91 - 9333504000</p>
-      <p>📞 Phone: +91 - 9333504000</p>
-      <p>✉ Email: durgapur@maacanimation.com</p>
+      <p>✉ Email: vindhyasini2009@gmail.com</p>
+      <p>✉ Email: durgapur@maacmail.com</p>
       <p class="footer-address">Address: Ambedkar Square, A/C 14, Ambedkar Union Bank, City Centre, Durgapur West Bengal 713216</p>
     </div>
   </div>
