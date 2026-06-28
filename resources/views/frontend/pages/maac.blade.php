@@ -187,7 +187,7 @@
           <img loading="lazy" src="{{ asset('frontend/images/maac/icons/payment.png') }}" alt="EMI" class="offer-check-icon">
           <span>EMI Facilities Available</span>
         </div>
-        <img loading="lazy" src="{{ asset('frontend/images/maac/icons/charctaer.png') }}" alt="Character" class="offer-character">
+        <img loading="lazy" src="{{ asset('frontend/images/maac/icons/charctaer.png?v=2') }}" alt="Character" class="offer-character">
       </div>
     </div>
 
