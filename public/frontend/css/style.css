@@ -1061,8 +1061,7 @@ body.loading {
 }
 
 /* Gradient Buttons */
-.btn-register,
-.btn-explore-now {
+.btn-register {
     display: inline-block;
     padding: 14px 35px;
     border-radius: 50px;
@@ -1079,8 +1078,7 @@ body.loading {
     overflow: hidden;
 }
 
-.btn-register::after,
-.btn-explore-now::after {
+.btn-register::after {
     content: '';
     position: absolute;
     top: 0;
@@ -1116,8 +1114,7 @@ body.loading {
     box-shadow: 0 5px 15px rgba(30, 136, 229, 0.3);
 }
 
-.btn-register:hover,
-.btn-explore-now:hover {
+.btn-register:hover {
     transform: translateY(-2px);
 }
 

@@ -192,7 +192,7 @@
     <div class="card-content">
       <p>MAAC (Maya Academy of Advanced Creativity) Durgapur is the region's most trusted animation and multimedia training institute, strategically located near City Center, Durgapur. Students from Kolkata, Burdwan, Bolpur, Bankura, Asansol, Raniganj and Purulia choose us for career-ready skills in animation, VFX, gaming, graphic design, and the latest AI creative tools.</p>
     </div>
-    <a href="{{ route('maac') }}" class="btn-explore-now btn-gradient-orange" style="position: relative; z-index: 999;">
+    <a href="{{ route('maac') }}" class="btn-register btn-gradient-orange scroll-to-hero-form" style="position: relative; z-index: 999;">
       Explore Now →
     </a>
   </div>
@@ -215,7 +215,7 @@
     <div class="card-content">
       <p>AKSHA is a modern creative design institute focused on visual storytelling, UI/UX, graphic design, branding, digital communication, and AI creative tool. With hands-on learning, expert mentorship & industry-focused training, AKSHA helps students build professional skills, creative portfolios, and successful careers in the digital design project. West Bengal's no.1 UI/UX, branding and Digital marketing training institute, strategically located near City Center, Durgapur.</p>
     </div>
-    <a href="{{ route('aksha') }}" class="btn-explore-now btn-gradient-blue" style="position: relative; z-index: 999;">
+    <a href="{{ route('aksha') }}" class="btn-register btn-gradient-blue scroll-to-hero-form" style="position: relative; z-index: 999;">
       Explore Now →
     </a>
   </div>
@@ -238,7 +238,7 @@
     <div class="card-content">
       <p>Space-E-Fic is a future focused creative technology institute specializing in AI, Robotics, Game Development, Coding, AR/VR, and immersive digital innovation. Designed for the next generation of creators and tech innovators, Space-E-Fic creativity with futuristic technology through hands-on learning and real world training best no.1 institute, strategically located near City Center, Durgapur.</p>
     </div>
-    <a href="{{ route('space_e_fic') }}" class="btn-explore-now btn-gradient-cyan" style="position: relative; z-index: 999;">
+    <a href="{{ route('space_e_fic') }}" class="btn-register btn-gradient-cyan scroll-to-hero-form" style="position: relative; z-index: 999;">
       Explore Now →
     </a>
   </div>
