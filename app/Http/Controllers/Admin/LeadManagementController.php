@@ -69,7 +69,11 @@ class LeadManagementController extends Controller
                 $q->orderBy('is_pinned', 'desc')->orderBy('created_at', 'desc');
             },
             'activities.user'
-        ])->findOrFail($id);
+        ])->find($id);
+        
+        if (!$lead) {
+            return redirect()->route('admin::leads.index')->with('error', 'The lead you are trying to view has been deleted or no longer exists.');
+        }
         
         $users = User::where('user_type', 'Admin')->get();
         return view('admin.pages.lead_management.show', compact('lead', 'users'));
