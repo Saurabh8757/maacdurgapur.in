@@ -93,6 +93,146 @@
             top: -5% !important;
         }
     }
+    /* Premium Swiper Section for Space E Fic */
+    .sef-courses-section {
+        padding: 80px 0;
+        position: relative;
+        background: radial-gradient(circle at center, #0a0b17 0%, #030409 100%);
+        overflow: hidden;
+    }
+    
+    .sef-courses-header {
+        text-align: center;
+        margin-bottom: 50px;
+        position: relative;
+        z-index: 2;
+    }
+    
+    .sef-courses-label {
+        color: #ff6a00;
+        font-family: 'Comic Neue', sans-serif !important;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        margin-bottom: 10px;
+    }
+    
+    .sef-courses-title {
+        color: #fff;
+        font-family: 'Comic Neue', sans-serif !important;
+        font-size: 2.5rem;
+        text-shadow: 0 0 20px rgba(0, 195, 255, 0.3);
+    }
+    
+    .sef-premium-swiper {
+        width: 100%;
+        padding: 20px 0 60px 0;
+    }
+    
+    .sef-premium-swiper .swiper-slide {
+        width: 350px;
+        height: auto;
+        transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+    
+    .sef-premium-swiper .swiper-slide-active {
+        transform: scale(1.05);
+        z-index: 2;
+    }
+    
+    .sef-course-card {
+        background: rgba(16, 20, 35, 0.7);
+        border-radius: 20px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        height: 100%;
+    }
+    
+    .sef-course-img-wrapper {
+        position: relative;
+        width: 100%;
+        height: 220px;
+        overflow: hidden;
+    }
+    
+    .sef-course-img-wrapper img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+    }
+    
+    .sef-course-card:hover .sef-course-img-wrapper img {
+        transform: scale(1.1);
+    }
+    
+    .sef-course-content {
+        padding: 25px 20px;
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+    }
+    
+    .sef-course-title {
+        color: #00e1ff;
+        font-family: 'Comic Neue', sans-serif !important;
+        font-size: 1.4rem;
+        margin-bottom: 15px;
+        font-weight: bold;
+    }
+    
+    .sef-course-desc {
+        color: #b0b5cc;
+        font-size: 0.95rem;
+        line-height: 1.5;
+        margin-bottom: 25px;
+        flex-grow: 1;
+        font-family: 'Myriad Pro', 'Segoe UI', Arial, sans-serif !important;
+    }
+    
+    .sef-course-btn {
+        display: inline-block;
+        background: linear-gradient(90deg, #ff6a00 0%, #ee0979 100%);
+        color: #fff;
+        text-decoration: none;
+        padding: 10px 20px;
+        border-radius: 30px;
+        font-weight: 600;
+        text-align: center;
+        transition: all 0.3s ease;
+        text-transform: uppercase;
+        font-size: 0.9rem;
+        letter-spacing: 1px;
+    }
+    
+    .sef-course-btn:hover {
+        box-shadow: 0 5px 15px rgba(255, 106, 0, 0.4);
+        color: #fff;
+        transform: translateY(-2px);
+    }
+    
+    .sef-swiper-pagination {
+        bottom: 10px !important;
+    }
+    
+    .sef-swiper-pagination .swiper-pagination-bullet {
+        background: #555;
+        opacity: 1;
+        width: 10px;
+        height: 10px;
+        transition: all 0.3s ease;
+    }
+    
+    .sef-swiper-pagination .swiper-pagination-bullet-active {
+        background: #00e1ff;
+        width: 25px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 225, 255, 0.5);
+    }
 </style>
 @endsection
 
@@ -371,6 +511,63 @@
   </div>
 </section>
 
+<!-- ===================== PREMIUM COURSES SWIPER ===================== -->
+<section class="sef-courses-section gsap-reveal">
+  <div class="sef-courses-header">
+    <p class="sef-courses-label">OUR PROGRAMS</p>
+    <h2 class="sef-courses-title">FEATURED COURSES</h2>
+  </div>
+  
+  <div class="swiper sef-premium-swiper">
+    <div class="swiper-wrapper">
+      
+      <!-- Dummy Slide 1 -->
+      <div class="swiper-slide">
+        <div class="sef-course-card">
+          <div class="sef-course-img-wrapper">
+            <img src="{{ asset('frontend/images/space_e_fic/curriculum/junior.png') }}" alt="Junior Course" onerror="this.src='{{ asset('upload/images/course/default.png') }}'">
+          </div>
+          <div class="sef-course-content">
+            <h3 class="sef-course-title">Junior Explorer</h3>
+            <p class="sef-course-desc">A perfect starting point for kids (Class 3-5) to explore the basics of robotics through engaging, hands-on activities and simple logic games.</p>
+            <a href="#" class="sef-course-btn">Learn More</a>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Dummy Slide 2 -->
+      <div class="swiper-slide">
+        <div class="sef-course-card">
+          <div class="sef-course-img-wrapper">
+            <img src="{{ asset('frontend/images/space_e_fic/curriculum/senior.png') }}" alt="Senior Course" onerror="this.src='{{ asset('upload/images/course/default.png') }}'">
+          </div>
+          <div class="sef-course-content">
+            <h3 class="sef-course-title">Coding Builder</h3>
+            <p class="sef-course-desc">Advanced curriculum for Class 6-8. Students dive into text-based programming, microcontrollers, and real-world problem solving.</p>
+            <a href="#" class="sef-course-btn">Learn More</a>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Dummy Slide 3 -->
+      <div class="swiper-slide">
+        <div class="sef-course-card">
+          <div class="sef-course-img-wrapper">
+            <img src="{{ asset('frontend/images/space_e_fic/bg/s4.png') }}" alt="AI & IoT" onerror="this.src='{{ asset('upload/images/course/default.png') }}'">
+          </div>
+          <div class="sef-course-content">
+            <h3 class="sef-course-title">AI & IoT Masterclass</h3>
+            <p class="sef-course-desc">Step into the future with Artificial Intelligence and Internet of Things. Build smart home devices and intelligent sensor systems.</p>
+            <a href="#" class="sef-course-btn">Learn More</a>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+    <div class="swiper-pagination sef-swiper-pagination"></div>
+  </div>
+</section>
+
 <!-- ===================== WHY PARENTS CHOOSE US ===================== -->
 <section class="sef-info-section gsap-reveal">
   <div class="sef-info-bg">
@@ -484,4 +681,46 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 <script src="{{ asset('frontend/js/space_e_fic.js') }}?v={{ time() }}"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  if(document.querySelector('.sef-premium-swiper')) {
+    new Swiper('.sef-premium-swiper', {
+      effect: 'coverflow',
+      grabCursor: true,
+      centeredSlides: true,
+      slidesPerView: 'auto',
+      coverflowEffect: {
+        rotate: 20,
+        stretch: 0,
+        depth: 150,
+        modifier: 1,
+        slideShadows: true,
+      },
+      loop: true,
+      autoplay: {
+        delay: 3500,
+        disableOnInteraction: false,
+      },
+      pagination: {
+        el: '.sef-swiper-pagination',
+        clickable: true,
+      },
+      breakpoints: {
+        320: {
+          slidesPerView: 1.2,
+          spaceBetween: 10
+        },
+        768: {
+          slidesPerView: 2,
+          spaceBetween: 20
+        },
+        1024: {
+          slidesPerView: 3,
+          spaceBetween: 30
+        }
+      }
+    });
+  }
+});
+</script>
 @endsection
