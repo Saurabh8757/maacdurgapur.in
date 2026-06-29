@@ -540,7 +540,7 @@
           <div class="sef-course-content">
             <h3 class="sef-course-title">Junior Explorer</h3>
             <p class="sef-course-desc">A perfect starting point for kids (Class 3-5) to explore the basics of robotics through engaging, hands-on activities and simple logic games.</p>
-            <a href="#" class="sef-course-btn">Learn More</a>
+            <a href="#" class="sef-course-btn" onclick="document.getElementById('sefEnquiryForm').scrollIntoView({ behavior: 'smooth', block: 'center' }); return false;">Learn More</a>
           </div>
         </div>
       </div>
@@ -554,7 +554,7 @@
           <div class="sef-course-content">
             <h3 class="sef-course-title">Coding Builder</h3>
             <p class="sef-course-desc">Advanced curriculum for Class 6-8. Students dive into text-based programming, microcontrollers, and real-world problem solving.</p>
-            <a href="#" class="sef-course-btn">Learn More</a>
+            <a href="#" class="sef-course-btn" onclick="document.getElementById('sefEnquiryForm').scrollIntoView({ behavior: 'smooth', block: 'center' }); return false;">Learn More</a>
           </div>
         </div>
       </div>
@@ -568,7 +568,7 @@
           <div class="sef-course-content">
             <h3 class="sef-course-title">AI & IoT Masterclass</h3>
             <p class="sef-course-desc">Step into the future with Artificial Intelligence and Internet of Things. Build smart home devices and intelligent sensor systems.</p>
-            <a href="#" class="sef-course-btn">Learn More</a>
+            <a href="#" class="sef-course-btn" onclick="document.getElementById('sefEnquiryForm').scrollIntoView({ behavior: 'smooth', block: 'center' }); return false;">Learn More</a>
           </div>
         </div>
       </div>
@@ -582,7 +582,7 @@
           <div class="sef-course-content">
             <h3 class="sef-course-title">Junior Explorer</h3>
             <p class="sef-course-desc">A perfect starting point for kids (Class 3-5) to explore the basics of robotics through engaging, hands-on activities and simple logic games.</p>
-            <a href="#" class="sef-course-btn">Learn More</a>
+            <a href="#" class="sef-course-btn" onclick="document.getElementById('sefEnquiryForm').scrollIntoView({ behavior: 'smooth', block: 'center' }); return false;">Learn More</a>
           </div>
         </div>
       </div>
@@ -596,7 +596,7 @@
           <div class="sef-course-content">
             <h3 class="sef-course-title">Coding Builder</h3>
             <p class="sef-course-desc">Advanced curriculum for Class 6-8. Students dive into text-based programming, microcontrollers, and real-world problem solving.</p>
-            <a href="#" class="sef-course-btn">Learn More</a>
+            <a href="#" class="sef-course-btn" onclick="document.getElementById('sefEnquiryForm').scrollIntoView({ behavior: 'smooth', block: 'center' }); return false;">Learn More</a>
           </div>
         </div>
       </div>
@@ -610,7 +610,7 @@
           <div class="sef-course-content">
             <h3 class="sef-course-title">AI & IoT Masterclass</h3>
             <p class="sef-course-desc">Step into the future with Artificial Intelligence and Internet of Things. Build smart home devices and intelligent sensor systems.</p>
-            <a href="#" class="sef-course-btn">Learn More</a>
+            <a href="#" class="sef-course-btn" onclick="document.getElementById('sefEnquiryForm').scrollIntoView({ behavior: 'smooth', block: 'center' }); return false;">Learn More</a>
           </div>
         </div>
       </div>
