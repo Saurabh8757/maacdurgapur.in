@@ -80,6 +80,19 @@
         font-family: 'Montserrat', sans-serif !important;
     }
 
+    /* PERFECT DESKTOP MODE FIX */
+    @media (min-width: 769px) and (orientation: portrait) {
+        .sef-hero {
+            min-height: auto !important;
+            height: auto !important;
+            padding-top: 150px !important;
+            padding-bottom: 100px !important;
+        }
+        .sef-hero-bg-img {
+            height: 110% !important;
+            top: -5% !important;
+        }
+    }
 </style>
 @endsection
 
