@@ -141,14 +141,14 @@
     }
     
     .sef-course-card {
-        background: rgba(16, 20, 35, 0.7);
+        background: rgba(30, 35, 60, 0.85);
         border-radius: 20px;
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(15px);
         overflow: hidden;
         display: flex;
         flex-direction: column;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        box-shadow: 0 15px 35px rgba(0,0,0,0.6), inset 0 0 20px rgba(255, 255, 255, 0.05);
         height: 100%;
     }
     
@@ -175,23 +175,26 @@
         display: flex;
         flex-direction: column;
         flex-grow: 1;
+        background: linear-gradient(180deg, rgba(30,35,60,0) 0%, rgba(15,20,40,1) 100%);
     }
     
     .sef-course-title {
         color: #00e1ff;
         font-family: 'Comic Neue', sans-serif !important;
-        font-size: 1.4rem;
+        font-size: 1.5rem;
         margin-bottom: 15px;
         font-weight: bold;
+        text-shadow: 0 2px 4px rgba(0,0,0,0.8);
     }
     
     .sef-course-desc {
-        color: #b0b5cc;
-        font-size: 0.95rem;
-        line-height: 1.5;
+        color: #ffffff;
+        font-size: 1rem;
+        line-height: 1.6;
         margin-bottom: 25px;
         flex-grow: 1;
         font-family: 'Myriad Pro', 'Segoe UI', Arial, sans-serif !important;
+        text-shadow: 0 1px 3px rgba(0,0,0,0.8);
     }
     
     .sef-course-btn {
@@ -516,7 +519,7 @@
   <div class="sef-info-bg">
     <img src="{{ asset('frontend/images/space_e_fic/bg/s5.png') }}" alt="" class="sef-section-bg-img" loading="lazy">
   </div>
-  <div class="sef-section-overlay" style="background: rgba(4,6,12,0.75);"></div>
+  <div class="sef-section-overlay" style="background: rgba(4,6,12,0.85);"></div>
   
   <div class="sef-courses-header">
     <p class="sef-courses-label">OUR PROGRAMS</p>
@@ -741,7 +744,7 @@ document.addEventListener('DOMContentLoaded', function() {
         stretch: 0,
         depth: 150,
         modifier: 1,
-        slideShadows: true,
+        slideShadows: false,
       },
       loop: true,
       autoplay: {
