@@ -150,9 +150,13 @@
                 @if($field->type === 'select')
                   <select name="{{ $field->field_name }}" {{ $field->is_required ? 'required' : '' }}>
                     <option value="" disabled selected hidden>{{ $field->placeholder }}</option>
-                    @if($field->options)
+                    @if(!empty($field->options))
                       @foreach(json_decode($field->options, true) as $opt)
-                        <option value="{{ $opt }}">{{ $opt }}</option>
+                        <option value="{{ trim($opt) }}">{{ trim($opt) }}</option>
+                      @endforeach
+                    @elseif($field->field_name === 'course_id' && !empty($courses))
+                      @foreach($courses as $course)
+                        <option value="{{ $course->id }}">{{ $course->name }}</option>
                       @endforeach
                     @endif
                   </select>
