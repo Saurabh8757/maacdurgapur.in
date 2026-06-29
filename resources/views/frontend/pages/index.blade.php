@@ -73,6 +73,18 @@
     #spacefic .brand-section-content {
         pointer-events: auto !important;
     }
+
+    /* 5. Desktop Mode on Phone FIX (Prevent extreme background cropping) */
+    @media (min-width: 769px) and (orientation: portrait) {
+        .hero-section, .institute-section {
+            min-height: 600px !important;
+            max-height: 800px !important;
+        }
+        .section-bg-img.parallax-bg {
+            height: 110% !important; 
+            top: -5% !important;
+        }
+    }
 </style>
 </head>
 <body class="loading">
