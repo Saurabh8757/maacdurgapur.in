@@ -159,12 +159,27 @@
         .maac-hero {
             min-height: auto !important;
             height: auto !important;
-            padding-top: 150px !important;
+            padding-top: 90px !important;
             padding-bottom: 100px !important;
         }
         .maac-hero-bg-img {
             height: 110% !important;
             top: -5% !important;
+        }
+        
+        /* Increase Text Size for impact */
+        .maac-hero-heading .line1, .maac-hero-heading .line3 {
+            font-size: 2.8rem !important;
+        }
+        .maac-hero-heading .passion {
+            font-size: 6rem !important;
+            margin: 10px 0 !important;
+        }
+        .maac-hero-subtitle {
+            font-size: 1.4rem !important;
+        }
+        .maac-hero-tagline {
+            font-size: 1.3rem !important;
         }
     }
 </style>
