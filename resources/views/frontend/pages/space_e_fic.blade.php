@@ -513,6 +513,11 @@
 
 <!-- ===================== PREMIUM COURSES SWIPER ===================== -->
 <section class="sef-courses-section gsap-reveal">
+  <div class="sef-info-bg">
+    <img src="{{ asset('frontend/images/space_e_fic/bg/s5.png') }}" alt="" class="sef-section-bg-img" loading="lazy">
+  </div>
+  <div class="sef-section-overlay" style="background: rgba(4,6,12,0.75);"></div>
+  
   <div class="sef-courses-header">
     <p class="sef-courses-label">OUR PROGRAMS</p>
     <h2 class="sef-courses-title">FEATURED COURSES</h2>
@@ -550,6 +555,48 @@
       </div>
       
       <!-- Dummy Slide 3 -->
+      <div class="swiper-slide">
+        <div class="sef-course-card">
+          <div class="sef-course-img-wrapper">
+            <img src="{{ asset('frontend/images/space_e_fic/bg/s4.png') }}" alt="AI & IoT" onerror="this.src='{{ asset('upload/images/course/default.png') }}'">
+          </div>
+          <div class="sef-course-content">
+            <h3 class="sef-course-title">AI & IoT Masterclass</h3>
+            <p class="sef-course-desc">Step into the future with Artificial Intelligence and Internet of Things. Build smart home devices and intelligent sensor systems.</p>
+            <a href="#" class="sef-course-btn">Learn More</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dummy Slide 4 (Duplicate for Loop) -->
+      <div class="swiper-slide">
+        <div class="sef-course-card">
+          <div class="sef-course-img-wrapper">
+            <img src="{{ asset('frontend/images/space_e_fic/curriculum/junior.png') }}" alt="Junior Course" onerror="this.src='{{ asset('upload/images/course/default.png') }}'">
+          </div>
+          <div class="sef-course-content">
+            <h3 class="sef-course-title">Junior Explorer</h3>
+            <p class="sef-course-desc">A perfect starting point for kids (Class 3-5) to explore the basics of robotics through engaging, hands-on activities and simple logic games.</p>
+            <a href="#" class="sef-course-btn">Learn More</a>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Dummy Slide 5 (Duplicate for Loop) -->
+      <div class="swiper-slide">
+        <div class="sef-course-card">
+          <div class="sef-course-img-wrapper">
+            <img src="{{ asset('frontend/images/space_e_fic/curriculum/senior.png') }}" alt="Senior Course" onerror="this.src='{{ asset('upload/images/course/default.png') }}'">
+          </div>
+          <div class="sef-course-content">
+            <h3 class="sef-course-title">Coding Builder</h3>
+            <p class="sef-course-desc">Advanced curriculum for Class 6-8. Students dive into text-based programming, microcontrollers, and real-world problem solving.</p>
+            <a href="#" class="sef-course-btn">Learn More</a>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Dummy Slide 6 (Duplicate for Loop) -->
       <div class="swiper-slide">
         <div class="sef-course-card">
           <div class="sef-course-img-wrapper">
