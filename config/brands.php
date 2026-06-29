@@ -24,9 +24,9 @@ return [
     ],
 
     'dynamic_forms' => [
-        'maac' => (bool) env('DYNAMIC_FORMS_MAAC', false),
-        'aksha' => (bool) env('DYNAMIC_FORMS_AKSHA', false),
-        'space-e-fic' => (bool) env('DYNAMIC_FORMS_SPACE_E_FIC', false),
+        'maac' => (bool) env('DYNAMIC_FORMS_MAAC', true),
+        'aksha' => (bool) env('DYNAMIC_FORMS_AKSHA', true),
+        'space-e-fic' => (bool) env('DYNAMIC_FORMS_SPACE_E_FIC', true),
     ],
 
     'settings' => [

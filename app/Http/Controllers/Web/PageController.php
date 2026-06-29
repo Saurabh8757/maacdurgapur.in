@@ -57,7 +57,7 @@ class PageController extends Controller
 
         $formFields = [];
         $globalModalFormFields = [];
-        if ($brand && config('brands.dynamic_forms.maac', false)) {
+        if ($brand) {
             $formFields = \App\Models\LeadFormField::where('brand_id', $brand->id)
                 ->where('form_type', 'hero')
                 ->where('is_active', true)
@@ -84,7 +84,7 @@ class PageController extends Controller
             // Fetch active fields for this brand and form type
             $formType = $request->input('form_type', 'hero');
             $fields = collect();
-            if (config("brands.dynamic_forms.{$brand->slug}", false)) {
+            if (true) {
                 $fields = \App\Models\LeadFormField::where('brand_id', $brand_id)
                     ->where('form_type', $formType)
                     ->where('is_active', true)
@@ -314,7 +314,7 @@ public function terms()
         
         $brand = \App\Models\Brand::where('slug', 'maac')->first();
         $formFields = [];
-        if ($brand && config('brands.dynamic_forms.maac', false)) {
+        if ($brand) {
             $formFields = \App\Models\LeadFormField::where('brand_id', $brand->id)
                 ->where('form_type', 'hero')
                 ->where('is_active', true)
@@ -330,7 +330,7 @@ public function terms()
         $courses = \App\Models\OurCourse::where('status', 'Active')->get();
         $brand = \App\Models\Brand::where('slug', 'aksha')->first();
         $formFields = [];
-        if ($brand && config('brands.dynamic_forms.aksha', false)) {
+        if ($brand) {
             $formFields = \App\Models\LeadFormField::where('brand_id', $brand->id)
                 ->where('form_type', 'hero')
                 ->where('is_active', true)
@@ -380,7 +380,7 @@ public function terms()
         $courses = \App\Models\OurCourse::where('status', 'Active')->get();
         $brand = \App\Models\Brand::where('slug', 'space-e-fic')->first();
         $formFields = [];
-        if ($brand && config('brands.dynamic_forms.space-e-fic', false)) {
+        if ($brand) {
             $formFields = \App\Models\LeadFormField::where('brand_id', $brand->id)
                 ->where('form_type', 'hero')
                 ->where('is_active', true)
