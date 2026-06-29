@@ -176,6 +176,8 @@ Route::group(['as' => 'admin::', 'prefix' => 'v1/cpanel/admin', 'middleware' => 
             Route::get('supporting-courses/{course}/edit', [\App\Http\Controllers\Admin\AkshaSupportingCoursePageController::class, 'edit'])->name('supporting-courses.edit');
         });
 
+        Route::resource('space-e-fic-courses', \App\Http\Controllers\Admin\SpaceEFicCourseController::class);
+
         Route::get('showcase-categories', [CmsShowcaseCategoryPageController::class, 'index'])->name('showcase-categories.index');
         Route::get('showcase-categories/create', [CmsShowcaseCategoryPageController::class, 'create'])->name('showcase-categories.create');
         Route::post('showcase-categories', [CmsShowcaseCategoryPageController::class, 'store'])->name('showcase-categories.store');

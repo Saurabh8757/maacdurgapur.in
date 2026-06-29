@@ -388,7 +388,9 @@ public function terms()
                 ->get();
         }
 
-        return view('frontend.pages.space_e_fic', compact('courses', 'brand', 'formFields'));
+        $spaceEFicCourses = \App\Models\SpaceEFicCourse::where('is_active', true)->orderBy('order')->get();
+
+        return view('frontend.pages.space_e_fic', compact('courses', 'brand', 'formFields', 'spaceEFicCourses'));
     }
 
  public function fcq()
