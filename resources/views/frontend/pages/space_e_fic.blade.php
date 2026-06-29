@@ -127,6 +127,8 @@
     .sef-premium-swiper {
         width: 100%;
         padding: 20px 0 60px 0;
+        position: relative;
+        z-index: 2;
     }
     
     .sef-premium-swiper .swiper-slide {
@@ -175,7 +177,7 @@
         display: flex;
         flex-direction: column;
         flex-grow: 1;
-        background: linear-gradient(180deg, rgba(30,35,60,0) 0%, rgba(15,20,40,1) 100%);
+        background: linear-gradient(180deg, rgba(30,35,60,0) 0%, rgba(20,25,50,0.8) 100%);
     }
     
     .sef-course-title {
