@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\SpaceEFicCourse;
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\File;
+
 class SpaceEFicCourseController extends Controller
 {
     public function index()
@@ -33,8 +35,15 @@ class SpaceEFicCourseController extends Controller
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             $name = time() . '.' . $image->getClientOriginalExtension();
-            $image->move(public_path('upload/images/space_e_fic'), $name);
-            $data['image'] = 'upload/images/space_e_fic/' . $name;
+            
+            $path = 'upload/images/space_e_fic';
+            if (!is_dir(public_path($path))) {
+                File::ensureDirectoryExists(public_path($path), 0755, true);
+            }
+            
+            $image->move(public_path($path), $name);
+            $data['image'] = $path . '/' . $name;
+            $this->mirrorCourseImageToDocumentRoot($data['image']);
         }
 
         SpaceEFicCourse::create($data);
@@ -62,13 +71,20 @@ class SpaceEFicCourseController extends Controller
 
         if ($request->hasFile('image')) {
             // Delete old image if it exists
-            if ($course->image && file_exists(public_path($course->image))) {
-                unlink(public_path($course->image));
+            if ($course->image) {
+                $this->deleteCourseImageFiles($course->image);
             }
             $image = $request->file('image');
             $name = time() . '.' . $image->getClientOriginalExtension();
-            $image->move(public_path('upload/images/space_e_fic'), $name);
-            $data['image'] = 'upload/images/space_e_fic/' . $name;
+            
+            $path = 'upload/images/space_e_fic';
+            if (!is_dir(public_path($path))) {
+                File::ensureDirectoryExists(public_path($path), 0755, true);
+            }
+            
+            $image->move(public_path($path), $name);
+            $data['image'] = $path . '/' . $name;
+            $this->mirrorCourseImageToDocumentRoot($data['image']);
         }
 
         $course->update($data);
@@ -79,10 +95,53 @@ class SpaceEFicCourseController extends Controller
     public function destroy(SpaceEFicCourse $space_e_fic_course)
     {
         $course = $space_e_fic_course;
-        if ($course->image && file_exists(public_path($course->image))) {
-            unlink(public_path($course->image));
+        if ($course->image) {
+            $this->deleteCourseImageFiles($course->image);
         }
         $course->delete();
         return redirect()->route('admin::content.space-e-fic-courses.index')->with('success', 'Course deleted successfully.');
+    }
+
+    private function mirrorCourseImageToDocumentRoot(?string $relativePath): void
+    {
+        if (empty($relativePath)) {
+            return;
+        }
+
+        $source = public_path($relativePath);
+        $documentRoot = rtrim((string) request()->server('DOCUMENT_ROOT'), DIRECTORY_SEPARATOR);
+
+        if ($documentRoot === '' || !file_exists($source)) {
+            return;
+        }
+
+        $target = $documentRoot . DIRECTORY_SEPARATOR . str_replace(['/', '\\'], DIRECTORY_SEPARATOR, $relativePath);
+
+        if (realpath(dirname($source)) === realpath(dirname($target))) {
+            return;
+        }
+
+        File::ensureDirectoryExists(dirname($target), 0755, true);
+        File::copy($source, $target);
+    }
+
+    private function deleteCourseImageFiles(?string $relativePath): void
+    {
+        if (empty($relativePath)) {
+            return;
+        }
+
+        $paths = [public_path($relativePath)];
+        $documentRoot = rtrim((string) request()->server('DOCUMENT_ROOT'), DIRECTORY_SEPARATOR);
+
+        if ($documentRoot !== '') {
+            $paths[] = $documentRoot . DIRECTORY_SEPARATOR . str_replace(['/', '\\'], DIRECTORY_SEPARATOR, $relativePath);
+        }
+
+        foreach (array_unique($paths) as $path) {
+            if (file_exists($path)) {
+                @unlink($path);
+            }
+        }
     }
 }
