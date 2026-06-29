@@ -2692,17 +2692,3 @@ body.loading {
         background: transparent !important;
     }
 }
-
-/* ============================================================
-   DESKTOP MODE ON PHONE FIX (Global)
-   ============================================================ */
-@media (min-width: 769px) and (orientation: portrait) {
-    .hero-section, .institute-section {
-        min-height: 600px !important;
-        max-height: 800px !important;
-    }
-    .section-bg-img.parallax-bg {
-        height: 110% !important;
-        top: -5% !important;
-    }
-}

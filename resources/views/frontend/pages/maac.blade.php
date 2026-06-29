@@ -153,6 +153,18 @@
             font-size: 4.2rem !important; /* Premium size for PASSION */
         }
     }
+
+    /* FIX for Desktop Mode on Phones */
+    @media (min-width: 769px) and (orientation: portrait) {
+        .maac-hero {
+            min-height: 600px !important;
+            max-height: 950px !important;
+        }
+        .maac-hero-bg-img {
+            height: 110% !important;
+            top: -5% !important;
+        }
+    }
 </style>
 @endsection
 
