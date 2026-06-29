@@ -47,6 +47,33 @@
         letter-spacing: 2px;
     }
 </style>
+<style>
+    /* FINAL BLEND & BUTTON FIX */
+    
+    /* 1. Purana z-index hataya taaki blend wapas aa jaye */
+    #spacefic { z-index: 2 !important; }
+    
+    /* 2. Courses section ke transparent hisso ko clicks rokne se mana kiya */
+    #courses,
+    #courses .section-bg,
+    #courses .sakura-canvas,
+    #courses .interactive-leaf-canvas,
+    #courses::before,
+    #courses::after {
+        pointer-events: none !important;
+    }
+    
+    /* 3. Sirf Courses ke asli content ko clickable rakha */
+    #courses .section-header,
+    #courses .courses-swiper {
+        pointer-events: auto !important;
+    }
+
+    /* 4. Space-E-Fic button ko click catch karne ke liye ready kiya */
+    #spacefic .brand-section-content {
+        pointer-events: auto !important;
+    }
+</style>
 </head>
 <body class="loading">
 
