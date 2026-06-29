@@ -42,13 +42,15 @@ class SpaceEFicCourseController extends Controller
         return redirect()->route('admin::content.space-e-fic-courses.index')->with('success', 'Course created successfully.');
     }
 
-    public function edit(SpaceEFicCourse $course)
+    public function edit(SpaceEFicCourse $space_e_fic_course)
     {
+        $course = $space_e_fic_course;
         return view('admin.pages.space-e-fic-courses.edit', compact('course'));
     }
 
-    public function update(Request $request, SpaceEFicCourse $course)
+    public function update(Request $request, SpaceEFicCourse $space_e_fic_course)
     {
+        $course = $space_e_fic_course;
         $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'required|string',
@@ -74,8 +76,9 @@ class SpaceEFicCourseController extends Controller
         return redirect()->route('admin::content.space-e-fic-courses.index')->with('success', 'Course updated successfully.');
     }
 
-    public function destroy(SpaceEFicCourse $course)
+    public function destroy(SpaceEFicCourse $space_e_fic_course)
     {
+        $course = $space_e_fic_course;
         if ($course->image && file_exists(public_path($course->image))) {
             unlink(public_path($course->image));
         }
