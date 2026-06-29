@@ -59,6 +59,7 @@ class CourseController extends Controller
         $save = new OurCourse();
         $save->name = $request->get('name');
         $save->desc = $request->get('duration');
+        $save->page_link = $request->get('page_link');
         $save->image = $image_name;
 
         $save->save();
@@ -112,6 +113,7 @@ class CourseController extends Controller
 
         $data->name = $request->get('name');
         $data->desc = $request->get('duration');
+        $data->page_link = $request->get('page_link');
         $data->image = $image_name;
         $data->save();
 

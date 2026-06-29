@@ -321,7 +321,13 @@
               <div class="course-info">
                 <h3>{{ $course->name }}</h3>
                 <p class="course-desc">{{ Str::limit($course->desc, 120) }}</p>
-                <a href="#" class="course-link">Learn More →</a>
+                @php
+                  $link = '#';
+                  if (!empty($course->page_link) && $course->page_link !== 'default') {
+                      $link = route($course->page_link);
+                  }
+                @endphp
+                <a href="{{ $link }}" class="course-link">Learn More →</a>
               </div>
             </div>
           </div>

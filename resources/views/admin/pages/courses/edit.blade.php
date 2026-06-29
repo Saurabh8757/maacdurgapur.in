@@ -59,6 +59,20 @@
 
         </div>
         <br>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label>Page Link (Learn More)</label>
+                    <select name="page_link" class="form-control">
+                        <option value="default" {{ isset($data['page_link']) && $data['page_link'] == 'default' ? 'selected' : '' }}>Default</option>
+                        <option value="maac" {{ isset($data['page_link']) && $data['page_link'] == 'maac' ? 'selected' : '' }}>MAAC</option>
+                        <option value="aksha" {{ isset($data['page_link']) && $data['page_link'] == 'aksha' ? 'selected' : '' }}>Aksha</option>
+                        <option value="space_e_fic" {{ isset($data['page_link']) && $data['page_link'] == 'space_e_fic' ? 'selected' : '' }}>Space E Fic</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <br>
 
         <div class="row">
 

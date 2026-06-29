@@ -51,6 +51,20 @@
         </div>
         <br>
         <div class="row">
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label>Page Link (Learn More)</label>
+                    <select name="page_link" class="form-control">
+                        <option value="default">Default</option>
+                        <option value="maac">MAAC</option>
+                        <option value="aksha">Aksha</option>
+                        <option value="space_e_fic">Space E Fic</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="row">
             <div class="col-md-12">
                 <div class="form-group" style="text-align:right">
                     <button type="button" class="btn btn-default btn-flat" data-dismiss="modal"><span class="fa fa-close"></span> Close</button>
