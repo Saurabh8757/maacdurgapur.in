@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('courses', function (Blueprint $table) {
+        Schema::table('our_courses', function (Blueprint $table) {
             $table->string('page_link')->nullable()->default('default');
         });
     }
@@ -25,7 +25,7 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('courses', function (Blueprint $table) {
+        Schema::table('our_courses', function (Blueprint $table) {
             $table->dropColumn('page_link');
         });
     }
