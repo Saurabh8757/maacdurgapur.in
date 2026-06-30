@@ -64,9 +64,9 @@
     });
   });
 
-  /* ─── Mouse parallax for hero (throttled) ──────────────── */
+  /* 🎇 Mouse parallax for hero (throttled) - DESKTOP ONLY 🎇 */
   var heroSection = document.querySelector('.hero-section');
-  if (heroSection) {
+  if (heroSection && window.innerWidth > 1024) {
     var heroBgImg = heroSection.querySelector('.hero-bg-img');
     var heroContent = heroSection.querySelector('.hero-content');
     var mouseRAF = false;

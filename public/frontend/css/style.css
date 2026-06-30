@@ -924,7 +924,7 @@ body.loading {
     }
     .hero-section {
         height: 100dvh;
-        overflow: hidden; /* Prevent any overscroll glitches */
+        /* Removed overflow: hidden to prevent 100dvh dynamic resize tearing on mobile Chrome */
     }
 }
 @media (max-width: 600px) {
