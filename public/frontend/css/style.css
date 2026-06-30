@@ -912,10 +912,11 @@ body.loading {
         gap: 8px;
     }
 
-    /* Disable parallax jumping completely on mobile */
+    /* Keep parallax transform disabled for stability, but restore framing to hide empty sky */
     .hero-bg-img.parallax-bg {
-        top: 0 !important;
-        height: 100% !important;
+        object-position: 29% top !important;
+        top: -35% !important;
+        height: 145% !important;
         transform: none !important;
     }
     .hero-section {
