@@ -193,12 +193,15 @@
     });
   }
 
+  // REMOVED: Caused white line flashing on mobile due to GPU compositing overlaps
+  /*
   gsap.utils.toArray('.institute-section').forEach(function (section) {
     gsap.from(section, {
       opacity: 0, duration: 1, ease: 'power2.out',
       scrollTrigger: { trigger: section, start: 'top 90%', toggleActions: 'play none none none' },
     });
   });
+  */
 
   /* ─── Smooth scroll (only if ScrollToPlugin is available) ── */
   if (typeof ScrollToPlugin !== 'undefined') {
@@ -248,7 +251,8 @@
   
   // Removed scroll progress bar as it caused scroll-linked rendering blinks on some mobile browsers.
 
-  // 2. Subtle scale-down reveal for all images
+  // REMOVED: Global image scale-down caused white gap flashes at section boundaries
+  /*
   gsap.utils.toArray('img').forEach(function(img) {
     if(!img.classList.contains('hero-bg-img') && !img.closest('.logo-ticker-wrapper')) {
       gsap.from(img, {
@@ -263,5 +267,6 @@
       });
     }
   });
+  */
 
 })();
