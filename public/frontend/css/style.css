@@ -2747,7 +2747,7 @@ body.loading {
     .placement-group {
         background-size: cover !important;
         background-position: center !important;
-        background-attachment: fixed !important;
+        background-attachment: scroll !important; /* FIXED scroll lag: never use fixed on mobile! */
     }
 
     /* 2. Make subsequent sections transparent to reveal the fixed background */
