@@ -1178,7 +1178,7 @@ body.loading {
         top: 0; /* Fallback for inset */
         bottom: 0;
         height: auto;
-        background: radial-gradient(circle at 60% 70%, rgba(20, 20, 25, 0.55) 0%, rgba(20, 20, 25, 0.2) 45%, transparent 75%);
+        background: radial-gradient(circle at 70% 60%, rgba(20, 20, 25, 0.55) 0%, rgba(20, 20, 25, 0.25) 60%, transparent 90%);
         z-index: 1; /* Keep above the background image */
     }
     .hero-section::after {

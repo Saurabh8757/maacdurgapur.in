@@ -37,8 +37,8 @@
             display: block !important;
             position: absolute !important;
             inset: 0 !important;
-            /* Center the circle over the text (bottom-center/right), fading outwards smoothly */
-            background: radial-gradient(circle at 60% 70%, rgba(20, 20, 25, 0.55) 0%, rgba(20, 20, 25, 0.2) 45%, transparent 75%) !important;
+            /* Center moved slightly up and right (70% 60%) to cover main heading, radius increased to 90% */
+            background: radial-gradient(circle at 70% 60%, rgba(20, 20, 25, 0.55) 0%, rgba(20, 20, 25, 0.25) 60%, transparent 90%) !important;
             z-index: 1 !important;
             pointer-events: none !important;
         }
