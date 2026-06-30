@@ -502,7 +502,7 @@
             let currentMode = window.innerWidth <= 1024 ? 'mobile' : 'desktop';
             
             function loadVideos() {
-                const videoSrc = currentMode === 'mobile' ? "{{ asset('frontend/vedio/waterfall.mp4') }}" : "{{ asset('frontend/vedio/waterfall_desktop.mp4') }}";
+                const videoSrc = (currentMode === 'mobile' ? "{{ asset('frontend/vedio/waterfall.mp4') }}" : "{{ asset('frontend/vedio/waterfall_desktop.mp4') }}") + "?v=" + new Date().getTime();
                 video1.src = videoSrc;
                 video2.src = videoSrc;
                 video1.load();
