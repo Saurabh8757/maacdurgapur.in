@@ -32,57 +32,22 @@
             transform: none !important;
         }
         
-        /* Soft radial mask text overlay */
+        /* Ekdum soft radial mask text ke upar jo background me dissolve ho jayega */
         .hero-section::before {
             content: '' !important;
             display: block !important;
             position: absolute !important;
             inset: 0 !important;
+            /* FIX: changed 'transparent' to rgba(20, 20, 25, 0) to prevent white ring interpolation bug on some mobile browsers */
             background: radial-gradient(circle at 70% 60%, rgba(20, 20, 25, 0.55) 0%, rgba(20, 20, 25, 0.25) 60%, rgba(20, 20, 25, 0) 90%) !important;
             z-index: 1 !important;
             pointer-events: none !important;
         }
 
-        /* NEW BLEND ARCHITECTURE: Fade bottom of hero to dark */
+        /* Remove any other gradients */
         .hero-section::after {
-            content: '' !important;
-            display: block !important;
-            position: absolute !important;
-            bottom: -1px !important; /* 1px bleed to prevent subpixel crack */
-            left: 0 !important;
-            right: 0 !important;
-            height: 150px !important;
-            background: linear-gradient(to bottom, rgba(10, 10, 15, 0) 0%, var(--dark) 100%) !important;
-            z-index: 2 !important;
-            pointer-events: none !important;
+            display: none !important;
         }
-
-        /* NEW BLEND ARCHITECTURE: Remove overlap and masks! */
-        .institute-section {
-            margin-top: 0 !important; /* NO OVERLAP */
-            padding-top: 100px !important;
-            overflow: visible !important;
-        }
-        
-        .institute-section > .section-bg {
-            -webkit-mask-image: none !important; /* NO GPU MASK */
-            mask-image: none !important;
-        }
-
-        /* NEW BLEND ARCHITECTURE: Fade top of institute from dark */
-        .institute-section::before {
-            content: '' !important;
-            display: block !important;
-            position: absolute !important;
-            top: 0 !important;
-            left: 0 !important;
-            right: 0 !important;
-            height: 150px !important;
-            background: linear-gradient(to bottom, var(--dark) 0%, rgba(10, 10, 15, 0) 100%) !important;
-            z-index: 2 !important;
-            pointer-events: none !important;
-        }
-
         .hero-content {
             position: relative !important;
             z-index: 5 !important;
