@@ -60,3 +60,8 @@ Route::get('/motion-graphics',[PageController::class, 'motion'])->name('motion')
 Route::post('career-counselling',[PageController::class, 'counselling'])->middleware('throttle:leads')->name('career_counselling');
 
 Route::get('terms-and-condition',[PageController::class, 'terms'])->name('terms_and_condition');
+
+// TEMPORARY: Debug page for mobile white line issue
+Route::get('/debug-whiteline', function () {
+    return response()->file(public_path('debug-whiteline.html'));
+});
