@@ -34,8 +34,8 @@
             content: '' !important;
             position: absolute !important;
             inset: 0 !important;
-            /* Ekdum halka gradient right se left (text visible karne ke liye) */
-            background: linear-gradient(to left, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.1) 60%, transparent 100%) !important;
+            /* Ekdum halka gradient bottom se top (text visible karne ke liye) */
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.05) 55%, transparent 100%) !important;
             z-index: 1 !important;
             pointer-events: none !important;
         }
