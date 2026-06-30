@@ -51,7 +51,6 @@
     @media (max-width: 1024px) {
         .hero-section {
             min-height: calc(var(--hero-vh, 1vh) * 100) !important;
-            height: calc(var(--hero-vh, 1vh) * 100) !important;
         }
         .hero-bg-img.parallax-bg {
             top: 0 !important;

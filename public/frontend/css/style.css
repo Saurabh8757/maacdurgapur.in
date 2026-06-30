@@ -943,7 +943,7 @@ body.loading {
         transform: none !important;
     }
     .hero-section {
-        height: 100svh;
+        min-height: 100svh;
         /* Using 100svh to completely prevent dynamic resize thrashing on mobile Chrome */
     }
 }
