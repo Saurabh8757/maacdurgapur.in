@@ -9,6 +9,34 @@
 
 @section('custom_css')
 <link rel="stylesheet" href="{{ asset('frontend/css/showcase.css') }}?v={{ time() }}">
+<style>
+    .modal-info-grid {
+        grid-template-columns: 1fr;
+    }
+    @media (min-width: 992px) {
+        .modal-info-grid {
+            grid-template-columns: 2fr 1fr;
+        }
+    }
+    .showcase-modal-close:hover {
+        background: rgba(255, 255, 255, 0.2) !important;
+        transform: scale(1.1);
+    }
+    /* Hide scrollbar for cleaner UI */
+    .showcase-modal::-webkit-scrollbar {
+        width: 8px;
+    }
+    .showcase-modal::-webkit-scrollbar-track {
+        background: #0b0f19;
+    }
+    .showcase-modal::-webkit-scrollbar-thumb {
+        background: #334155;
+        border-radius: 4px;
+    }
+    .showcase-modal::-webkit-scrollbar-thumb:hover {
+        background: #475569;
+    }
+</style>
 @endsection
 
 @section('content')
@@ -78,23 +106,30 @@
             </div>
 
             <!-- Detail Modal -->
-            <div id="showcaseDetailModal" class="showcase-modal" style="display: none; position: fixed; z-index: 9999; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.9); backdrop-filter: blur(5px);">
-                <div class="showcase-modal-content" style="background-color: #1a1a2e; margin: 5% auto; padding: 20px; border: 1px solid #333; width: 90%; max-width: 900px; border-radius: 12px; position: relative;">
-                    <span class="showcase-modal-close" style="color: #fff; position: absolute; top: 10px; right: 20px; font-size: 28px; font-weight: bold; cursor: pointer;">&times;</span>
+            <div id="showcaseDetailModal" class="showcase-modal" style="display: none; position: fixed; z-index: 99999; left: 0; top: 0; width: 100vw; height: 100vh; overflow-y: auto; background-color: #0b0f19; backdrop-filter: blur(10px);">
+                <!-- Fixed Close Button -->
+                <button class="showcase-modal-close" style="position: fixed; top: 20px; right: 20px; width: 44px; height: 44px; border-radius: 50%; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: #fff; font-size: 24px; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 100000; transition: all 0.3s ease;">&times;</button>
+                
+                <div class="showcase-modal-content" style="max-width: 1200px; margin: 60px auto 40px; padding: 0 20px; display: flex; flex-direction: column; gap: 30px;">
                     
-                    <!-- Modal Slider for multiple thumbnails -->
-                    <div class="swiper modal-swiper" style="width: 100%; height: 400px; border-radius: 8px; margin-bottom: 20px; overflow: hidden;">
-                        <div class="swiper-wrapper" id="modalSliderWrapper">
-                            <!-- Dynamically populated slides -->
-                        </div>
-                        <div class="swiper-button-next modal-next"></div>
-                        <div class="swiper-button-prev modal-prev"></div>
-                        <div class="swiper-pagination modal-pagination"></div>
+                    <div id="modalSliderWrapper" style="width: 100%; height: 60vh; min-height: 300px; max-height: 700px; border-radius: 16px; overflow: hidden; background: #131a2a; border: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: center;">
+                        <!-- Dynamically populated slide -->
                     </div>
 
-                    <h2 id="modalTitle" style="color: #fff; margin-top: 10px;">Project Title</h2>
-                    <h5 id="modalStudent" style="color: #F59E0B;">Crafted by "Student Name"</h5>
-                    <div id="modalDesc" style="color: #ddd; margin-top: 15px; line-height: 1.6;">Full description here...</div>
+                    <div class="modal-info-grid">
+                        <div class="modal-info-main">
+                            <h2 id="modalTitle" style="font-size: 2.5rem; font-weight: 800; margin-bottom: 10px; line-height: 1.2; background: linear-gradient(90deg, #fff, #a5b4fc); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Project Title</h2>
+                            <h5 id="modalStudent" style="color: #F59E0B; font-size: 1.2rem; font-weight: 500; margin-bottom: 24px; text-transform: uppercase; letter-spacing: 1px;">Crafted by "Student Name"</h5>
+                            <div id="modalDesc" style="color: #94a3b8; font-size: 1.1rem; line-height: 1.8; text-align: justify; white-space: pre-wrap;">Full description here...</div>
+                        </div>
+                        
+                        <div class="modal-info-sidebar" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05); padding: 30px; border-radius: 16px; height: fit-content;">
+                            <h4 style="font-size: 1.2rem; color: #fff; margin-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px;">Software Used</h4>
+                            <div id="modalSoftwareIconsContainer" style="display: flex; flex-wrap: wrap; gap: 15px;">
+                                <!-- Icons appended dynamically -->
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -350,6 +385,35 @@ document.addEventListener('DOMContentLoaded', function() {
 
         if (thumbUrl && thumbUrl.trim() !== '') {
             modalSliderWrapper.innerHTML = `<img src="${thumbUrl}" style="width: 100%; height: 100%; object-fit: contain;">`;
+        }
+
+        // Populate Software Icons
+        const modalSoftwareIconsContainer = document.getElementById('modalSoftwareIconsContainer');
+        modalSoftwareIconsContainer.innerHTML = '';
+        const icons = [
+            activeSlide.getAttribute('data-icon'),
+            activeSlide.getAttribute('data-icon2'),
+            activeSlide.getAttribute('data-icon3'),
+            activeSlide.getAttribute('data-icon4'),
+            activeSlide.getAttribute('data-icon5')
+        ].filter(i => i && i.trim() !== '');
+
+        if (icons.length > 0) {
+            icons.forEach(url => {
+                const img = document.createElement('img');
+                img.src = url;
+                img.style.width = '48px';
+                img.style.height = '48px';
+                img.style.objectFit = 'contain';
+                img.style.background = 'rgba(255,255,255,0.05)';
+                img.style.padding = '8px';
+                img.style.borderRadius = '12px';
+                img.style.border = '1px solid rgba(255,255,255,0.1)';
+                modalSoftwareIconsContainer.appendChild(img);
+            });
+            modalSoftwareIconsContainer.parentElement.style.display = 'block';
+        } else {
+            modalSoftwareIconsContainer.parentElement.style.display = 'none';
         }
 
         modal.style.display = 'block';
