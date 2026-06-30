@@ -23,8 +23,8 @@
 <link rel="stylesheet" href="{{ asset('frontend/css/style.css') }}?v={{ time() }}">
 <link rel="stylesheet" href="{{ asset('frontend/css/chatbot.css') }}">
 <style>
-    /* URGENT CACHE BYPASS FIX FOR MOBILE HERO */
-    @media (max-width: 768px) {
+    /* URGENT CACHE BYPASS FIX FOR MOBILE & TAB HERO */
+    @media (max-width: 1024px) {
         .hero-bg-img.parallax-bg {
             top: 0 !important;
             height: 100% !important;
@@ -36,8 +36,8 @@
             left: 0 !important;
             right: 0 !important;
             top: 0 !important;
-            height: 250px !important;
-            background: linear-gradient(to bottom, var(--dark) 0%, rgba(10, 10, 15, 0.8) 40%, transparent 100%) !important;
+            height: 550px !important;
+            background: radial-gradient(130% 120% at 100% 0%, rgba(10, 8, 15, 0.85) 0%, rgba(10, 8, 15, 0.6) 45%, rgba(10, 8, 15, 0.1) 80%, transparent 100%) !important;
             z-index: 1 !important;
             pointer-events: none !important;
         }
