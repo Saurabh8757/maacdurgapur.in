@@ -654,16 +654,13 @@ body.loading {
 .hero-section {
     position: relative;
     min-height: 100vh;
-    min-height: 100svh; /* More stable than 100dvh */
+    min-height: 100svh;
     display: flex;
     align-items: center;
-    overflow: visible; /* Allows atmospheric overlays to reach across DOM boundaries */
+    overflow: visible;
     padding-top: var(--nav-h);
     background-color: var(--dark);
     z-index: 1;
-    transform: translateZ(0); /* Force GPU Layer */
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
 }
 
 @media (min-width: 1024px) {
@@ -674,13 +671,10 @@ body.loading {
 
 .hero-bg {
     position: absolute;
-    inset: -2px; /* Subpixel bleed to prevent tearing gaps */
+    inset: 0;
     z-index: 0;
     overflow: hidden;
     background-color: var(--dark);
-    transform: translateZ(0); /* Force GPU Layer */
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
 }
 
 .hero-bg-img {
