@@ -31,29 +31,44 @@
             transform: none !important;
         }
         
-        /* Puraane kharab top aur bottom section gradients hata diye */
-        .hero-section::before { display: none !important; }
-        .hero-section::after { display: none !important; }
+        /* Chhota sa top gradient sirf navbar ke niche wali line ko chhupane ke liye */
+        .hero-section::before {
+            content: '' !important;
+            display: block !important;
+            position: absolute !important;
+            left: 0 !important;
+            right: 0 !important;
+            top: 0 !important;
+            bottom: auto !important;
+            height: 120px !important; 
+            background: linear-gradient(to bottom, var(--dark) 0%, rgba(10, 10, 15, 0.6) 40%, transparent 100%) !important;
+            z-index: 1 !important;
+            pointer-events: none !important;
+        }
 
-        /* PERFECT TEXT BACKDROP - Ekdum waisa jaisa mockup me tha, par thoda lighter */
+        /* Ekdum halka bottom gradient jaisa user ne photo bheja tha, bas thoda aur light */
+        .hero-section::after {
+            content: '' !important;
+            display: block !important;
+            position: absolute !important;
+            left: 0 !important;
+            right: 0 !important;
+            top: auto !important;
+            bottom: 0 !important;
+            height: 55% !important;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.25) 0%, rgba(0, 0, 0, 0.05) 60%, transparent 100%) !important;
+            z-index: 1 !important;
+            pointer-events: none !important;
+        }
+
+        /* Remove any weird text background */
         .hero-content {
             position: relative !important;
             z-index: 5 !important;
+            background: none !important;
         }
-        
         .hero-content::before {
-            content: '' !important;
-            position: absolute !important;
-            /* Text ke chaaro taraf thoda space deke shadow failayenge */
-            top: -40px !important;
-            bottom: -40px !important;
-            left: -60px !important;
-            right: -20px !important; 
-            /* Soft radial shadow jo right me dark hoke left ki taraf naturally fade hoga */
-            background: radial-gradient(ellipse at 80% 50%, rgba(15, 10, 25, 0.45) 0%, rgba(15, 10, 25, 0.2) 60%, transparent 100%) !important;
-            z-index: -1 !important;
-            pointer-events: none !important;
-            border-radius: 50% !important;
+            display: none !important;
         }
     }
 </style>

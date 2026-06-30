@@ -1172,25 +1172,29 @@ body.loading {
 }
 
 @media (max-width: 1024px) {
-    .hero-section::before { display: none !important; }
-    .hero-section::after { display: none !important; }
-
+    .hero-section::before {
+        display: block;
+        top: 0;
+        bottom: auto;
+        height: 120px;
+        background: linear-gradient(to bottom, var(--dark) 0%, rgba(10, 10, 15, 0.6) 40%, transparent 100%);
+        z-index: 1; /* Keep above the background image */
+    }
+    .hero-section::after {
+        display: block;
+        top: auto;
+        bottom: 0;
+        height: 55%;
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.25) 0%, rgba(0, 0, 0, 0.05) 60%, transparent 100%);
+        z-index: 1; /* Keep above the background image */
+    }
     .hero-content {
         position: relative;
         z-index: 5;
+        background: none;
     }
-    
     .hero-content::before {
-        content: '';
-        position: absolute;
-        top: -40px;
-        bottom: -40px;
-        left: -60px;
-        right: -20px; 
-        background: radial-gradient(ellipse at 80% 50%, rgba(15, 10, 25, 0.45) 0%, rgba(15, 10, 25, 0.2) 60%, transparent 100%);
-        z-index: -1;
-        pointer-events: none;
-        border-radius: 50%;
+        display: none;
     }
 }
 
