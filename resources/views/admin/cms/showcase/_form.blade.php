@@ -38,6 +38,20 @@
         <div class="cms-help mt-1">Optional. Uses an existing media asset.</div>
     </div>
 </div>
+<div class="row d-none">
+    <div class="col-md-3 form-group">
+        <input class="form-control" type="number" min="1" id="thumbnail_media_id_2" name="thumbnail_media_id_2" value="{{ old('thumbnail_media_id_2', optional($project ?? null)->thumbnail_media_id_2) }}">
+    </div>
+    <div class="col-md-3 form-group">
+        <input class="form-control" type="number" min="1" id="thumbnail_media_id_3" name="thumbnail_media_id_3" value="{{ old('thumbnail_media_id_3', optional($project ?? null)->thumbnail_media_id_3) }}">
+    </div>
+    <div class="col-md-3 form-group">
+        <input class="form-control" type="number" min="1" id="thumbnail_media_id_4" name="thumbnail_media_id_4" value="{{ old('thumbnail_media_id_4', optional($project ?? null)->thumbnail_media_id_4) }}">
+    </div>
+    <div class="col-md-3 form-group">
+        <input class="form-control" type="number" min="1" id="thumbnail_media_id_5" name="thumbnail_media_id_5" value="{{ old('thumbnail_media_id_5', optional($project ?? null)->thumbnail_media_id_5) }}">
+    </div>
+</div>
 <div class="row">
     <div class="col-md-6 form-group">
         <label for="status">Status</label>

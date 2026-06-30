@@ -64,13 +64,35 @@
                             <span class="fc-name" id="fcStudent">"Student Name"</span>
                         </div>
                         
-                        <p class="fc-desc" id="fcDesc">Description...</p>
+                        <p class="fc-desc" id="fcDesc" style="display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; margin-bottom: 5px;">Description...</p>
+                        <a href="javascript:void(0)" id="fcSeeMoreBtn" style="color: #F59E0B; font-weight: bold; font-size: 0.9rem; text-decoration: none; display: inline-block; margin-bottom: 15px;">See More <i class="fas fa-arrow-right" style="font-size: 0.8rem;"></i></a>
                         
                         <div class="fc-software-wrap">
                             <span class="fc-software-label" id="fcSoftwareLabel" style="display:none;">Software Used</span>
                             <img id="fcSoftwareIcon" class="fc-software-icon" src="" alt="Software Icon" style="display:none;">
                         </div>
                     </div>
+                </div>
+            </div>
+
+            <!-- Detail Modal -->
+            <div id="showcaseDetailModal" class="showcase-modal" style="display: none; position: fixed; z-index: 9999; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.9); backdrop-filter: blur(5px);">
+                <div class="showcase-modal-content" style="background-color: #1a1a2e; margin: 5% auto; padding: 20px; border: 1px solid #333; width: 90%; max-width: 900px; border-radius: 12px; position: relative;">
+                    <span class="showcase-modal-close" style="color: #fff; position: absolute; top: 10px; right: 20px; font-size: 28px; font-weight: bold; cursor: pointer;">&times;</span>
+                    
+                    <!-- Modal Slider for multiple thumbnails -->
+                    <div class="swiper modal-swiper" style="width: 100%; height: 400px; border-radius: 8px; margin-bottom: 20px; overflow: hidden;">
+                        <div class="swiper-wrapper" id="modalSliderWrapper">
+                            <!-- Dynamically populated slides -->
+                        </div>
+                        <div class="swiper-button-next modal-next"></div>
+                        <div class="swiper-button-prev modal-prev"></div>
+                        <div class="swiper-pagination modal-pagination"></div>
+                    </div>
+
+                    <h2 id="modalTitle" style="color: #fff; margin-top: 10px;">Project Title</h2>
+                    <h5 id="modalStudent" style="color: #F59E0B;">Crafted by "Student Name"</h5>
+                    <div id="modalDesc" style="color: #ddd; margin-top: 15px; line-height: 1.6;">Full description here...</div>
                 </div>
             </div>
 
@@ -88,6 +110,11 @@
                             @forelse($showcaseProjects as $index => $project)
                                 @php
                                     $thumbUrl = $project->thumbnail ? asset(str_starts_with($project->thumbnail->storage_key, 'storage/') ? $project->thumbnail->storage_key : 'storage/' . $project->thumbnail->storage_key) : asset('frontend/images/placeholder.jpg');
+                                    $thumbUrl2 = $project->thumbnail2 ? asset(str_starts_with($project->thumbnail2->storage_key, 'storage/') ? $project->thumbnail2->storage_key : 'storage/' . $project->thumbnail2->storage_key) : '';
+                                    $thumbUrl3 = $project->thumbnail3 ? asset(str_starts_with($project->thumbnail3->storage_key, 'storage/') ? $project->thumbnail3->storage_key : 'storage/' . $project->thumbnail3->storage_key) : '';
+                                    $thumbUrl4 = $project->thumbnail4 ? asset(str_starts_with($project->thumbnail4->storage_key, 'storage/') ? $project->thumbnail4->storage_key : 'storage/' . $project->thumbnail4->storage_key) : '';
+                                    $thumbUrl5 = $project->thumbnail5 ? asset(str_starts_with($project->thumbnail5->storage_key, 'storage/') ? $project->thumbnail5->storage_key : 'storage/' . $project->thumbnail5->storage_key) : '';
+                                    
                                     $iconUrl = $project->softwareIcon ? asset(str_starts_with($project->softwareIcon->storage_key, 'storage/') ? $project->softwareIcon->storage_key : 'storage/' . $project->softwareIcon->storage_key) : '';
                                     $formattedIndex = sprintf('%02d', $index + 1);
                                 @endphp
@@ -99,7 +126,11 @@
                                      data-category-name="{{ $project->category->name }}"
                                      data-desc="{{ $project->short_description }}"
                                      data-icon="{{ $iconUrl }}"
-                                     data-thumb="{{ $thumbUrl }}">
+                                     data-thumb="{{ $thumbUrl }}"
+                                     data-thumb2="{{ $thumbUrl2 }}"
+                                     data-thumb3="{{ $thumbUrl3 }}"
+                                     data-thumb4="{{ $thumbUrl4 }}"
+                                     data-thumb5="{{ $thumbUrl5 }}">
                                     <img src="{{ $thumbUrl }}" alt="{{ $project->title }}">
                                     <div class="slide-overlay"></div>
                                 </div>
@@ -265,6 +296,79 @@ document.addEventListener('DOMContentLoaded', function() {
                 selectProject(firstFiltered);
             }
         });
+    });
+
+    // Modal Logic
+    const seeMoreBtn = document.getElementById('fcSeeMoreBtn');
+    const modal = document.getElementById('showcaseDetailModal');
+    const modalClose = document.querySelector('.showcase-modal-close');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalStudent = document.getElementById('modalStudent');
+    const modalDesc = document.getElementById('modalDesc');
+    const modalSliderWrapper = document.getElementById('modalSliderWrapper');
+    let modalSwiper = null;
+
+    seeMoreBtn.addEventListener('click', () => {
+        const activeSlide = document.querySelector('.showcase-slide.swiper-slide-active') || document.querySelector('.showcase-slide');
+        if (!activeSlide) return;
+
+        modalTitle.textContent = activeSlide.getAttribute('data-title');
+        modalStudent.textContent = `Crafted by "${activeSlide.getAttribute('data-student')}"`;
+        modalDesc.textContent = activeSlide.getAttribute('data-desc');
+
+        // Populate modal slider
+        modalSliderWrapper.innerHTML = '';
+        const thumbs = [
+            activeSlide.getAttribute('data-thumb'),
+            activeSlide.getAttribute('data-thumb2'),
+            activeSlide.getAttribute('data-thumb3'),
+            activeSlide.getAttribute('data-thumb4'),
+            activeSlide.getAttribute('data-thumb5')
+        ];
+
+        let hasImages = false;
+        thumbs.forEach(thumbUrl => {
+            if (thumbUrl && thumbUrl.trim() !== '') {
+                hasImages = true;
+                const slide = document.createElement('div');
+                slide.className = 'swiper-slide';
+                slide.innerHTML = `<img src="${thumbUrl}" style="width: 100%; height: 100%; object-fit: contain;">`;
+                modalSliderWrapper.appendChild(slide);
+            }
+        });
+
+        modal.style.display = 'block';
+        document.body.style.overflow = 'hidden';
+
+        if (modalSwiper) {
+            modalSwiper.destroy(true, true);
+        }
+        
+        if (hasImages) {
+            modalSwiper = new Swiper('.modal-swiper', {
+                loop: true,
+                navigation: {
+                    nextEl: '.modal-next',
+                    prevEl: '.modal-prev',
+                },
+                pagination: {
+                    el: '.modal-pagination',
+                    clickable: true,
+                },
+            });
+        }
+    });
+
+    modalClose.addEventListener('click', () => {
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    });
+
+    window.addEventListener('click', (e) => {
+        if (e.target == modal) {
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
     });
 });
 </script>

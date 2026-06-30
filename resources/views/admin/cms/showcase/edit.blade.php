@@ -34,6 +34,21 @@
                         </div>
                     </div>
                 </div>
+                <div class="row mt-3">
+                    @foreach([2 => 'thumbnail2', 3 => 'thumbnail3', 4 => 'thumbnail4', 5 => 'thumbnail5'] as $num => $rel)
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="showcase_thumbnail_upload_{{ $num }}">Thumbnail image {{ $num }}</label>
+                            <input class="form-control-file" type="file" id="showcase_thumbnail_upload_{{ $num }}" accept="image/jpeg,image/png,image/webp,image/gif" data-upload-url="{{ route('admin::cms.showcase_media.store') }}" data-target-input="thumbnail_media_id_{{ $num }}">
+                            <div class="mt-2 @if(!$project->$rel) d-none @endif" id="preview_wrap_{{ $num }}">
+                                <img id="preview_{{ $num }}" src="{{ $project->$rel ? asset($project->$rel->storage_key) : '' }}" style="width:100%; object-fit:cover; border-radius:5px;">
+                                <small class="text-success d-block" id="status_{{ $num }}">{{ $project->$rel ? 'Current thumbnail' : '' }}</small>
+                            </div>
+                            <div class="text-danger mt-1 d-none" id="error_{{ $num }}"></div>
+                        </div>
+                    </div>
+                    @endforeach
+                </div>
             </div>
             <div class="card-footer cms-form-actions"><a href="{{ route('admin::content.showcase.index') }}" class="btn btn-outline-secondary">Cancel</a><button type="submit" class="btn btn-primary"><i class="fas fa-save mr-1"></i> Save changes</button></div>
         </form>
@@ -106,6 +121,59 @@ document.addEventListener('DOMContentLoaded', function () {
             fileInput.disabled = false;
             submit.disabled = false;
         }
+    });
+
+    [2, 3, 4, 5].forEach(num => {
+        const input = document.getElementById('showcase_thumbnail_upload_' + num);
+        if (!input) return;
+        input.addEventListener('change', async function () {
+            const file = input.files[0];
+            if (!file) return;
+
+            const targetInputId = input.getAttribute('data-target-input');
+            const targetInput = form.querySelector('[name="' + targetInputId + '"]');
+            const previewWrap = document.getElementById('preview_wrap_' + num);
+            const preview = document.getElementById('preview_' + num);
+            const statusLabel = document.getElementById('status_' + num);
+            const errorLabel = document.getElementById('error_' + num);
+
+            errorLabel.classList.add('d-none');
+            statusLabel.textContent = 'Uploading…';
+            preview.src = URL.createObjectURL(file);
+            previewWrap.classList.remove('d-none');
+            input.disabled = true;
+            submit.disabled = true;
+
+            const body = new FormData();
+            body.append('thumbnail', file);
+
+            try {
+                const response = await fetch(input.getAttribute('data-upload-url'), {
+                    method: 'POST',
+                    credentials: 'same-origin',
+                    headers: {
+                        'Accept': 'application/json',
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+                        'X-Requested-With': 'XMLHttpRequest'
+                    },
+                    body: body
+                });
+                const payload = await response.json();
+                if (!response.ok) throw new Error(payload.message || 'Upload failed.');
+
+                targetInput.value = payload.id;
+                preview.src = payload.url;
+                statusLabel.textContent = 'Uploaded.';
+            } catch (uploadError) {
+                targetInput.value = '';
+                statusLabel.textContent = '';
+                errorLabel.textContent = uploadError.message;
+                errorLabel.classList.remove('d-none');
+            } finally {
+                input.disabled = false;
+                submit.disabled = false;
+            }
+        });
     });
 
     iconFileInput.addEventListener('change', async function () {
