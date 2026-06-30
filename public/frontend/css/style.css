@@ -650,6 +650,7 @@ body.loading {
 .hero-section {
     position: relative;
     min-height: 100vh;
+    min-height: 100dvh;
     display: flex;
     align-items: center;
     overflow: visible; /* Allows atmospheric overlays to reach across DOM boundaries */
@@ -911,10 +912,15 @@ body.loading {
         gap: 8px;
     }
 
+    /* Disable parallax jumping completely on mobile */
     .hero-bg-img.parallax-bg {
-        object-position: 29% top;
-        top: -35%;       /* Push the image further up */
-        height: 145%;    /* Increase height to prevent gap at bottom */
+        top: 0 !important;
+        height: 100% !important;
+        transform: none !important;
+    }
+    .hero-section {
+        height: 100dvh;
+        overflow: hidden; /* Prevent any overscroll glitches */
     }
 }
 @media (max-width: 600px) {
