@@ -36,6 +36,29 @@
     .showcase-modal::-webkit-scrollbar-thumb:hover {
         background: #475569;
     }
+    .modal-image-area {
+        width: 100vw;
+        height: 40vh; /* Smaller on mobile to reveal content below */
+        background: #000;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .modal-slider-wrapper {
+        width: 100%;
+        height: 100%;
+        padding: 10px; /* Small padding on mobile */
+    }
+    @media (min-width: 768px) {
+        .modal-image-area {
+            height: 85vh; /* Large cinematic feel on desktop */
+        }
+        .modal-slider-wrapper {
+            padding: 40px; /* Large padding on desktop */
+        }
+    }
 </style>
 @endsection
 
@@ -171,8 +194,8 @@
     <button class="showcase-modal-close" style="position: fixed; top: 25px; right: 30px; width: 50px; height: 50px; border-radius: 50%; background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2); color: #fff; font-size: 28px; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 100000; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0,0,0,0.3);">&times;</button>
     
     <!-- Full Screen Image Area -->
-    <div style="width: 100vw; height: 90vh; background: #000; position: relative; display: flex; align-items: center; justify-content: center; border-bottom: 1px solid rgba(255,255,255,0.05);">
-        <div id="modalSliderWrapper" style="width: 100%; height: 100%; padding: 40px;">
+    <div class="modal-image-area">
+        <div id="modalSliderWrapper" class="modal-slider-wrapper">
             <!-- Img with object-fit: contain will be injected here -->
         </div>
     </div>
