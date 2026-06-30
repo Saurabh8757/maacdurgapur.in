@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0a0a0f">
+<title>Debug: White Line Test</title>
+<style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { background: #0a0a0f; overscroll-behavior-y: none; }
+    body { background: #0a0a0f; color: #fff; font-family: sans-serif; overscroll-behavior-y: none; }
+
+    .controls {
+        position: fixed; top: 0; left: 0; right: 0; z-index: 99999;
+        background: rgba(0,0,0,0.9); padding: 8px; display: flex; flex-wrap: wrap; gap: 4px;
+        font-size: 11px;
+    }
+    .controls button {
+        padding: 4px 8px; background: #333; color: #fff; border: 1px solid #555;
+        border-radius: 4px; font-size: 10px; cursor: pointer;
+    }
+    .controls button.active { background: #ff6a00; border-color: #ff6a00; }
+    .controls .status { width: 100%; color: #0f0; font-size: 10px; margin-top: 4px; }
+
+    /* ======= EXACT COPY of the production hero + institute architecture ======= */
+    .hero-section {
+        position: relative;
+        min-height: 100vh;
+        min-height: 100svh;
+        display: flex;
+        align-items: center;
+        overflow: visible;
+        padding-top: 72px;
+        background-color: #0a0a0f;
+        z-index: 1;
+    }
+
+    .hero-bg {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        overflow: hidden;
+        background-color: #0a0a0f;
+    }
+
+    .hero-bg img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center top;
+    }
+
+    .hero-bg img.parallax-mode {
+        position: absolute;
+        top: -15%;
+        left: 0;
+        width: 100%;
+        height: 130%;
+        object-fit: cover;
+        object-position: center top;
+    }
+
+    /* Mobile override from inline style */
+    @media (max-width: 1024px) {
+        .hero-bg img.parallax-mode {
+            top: 0 !important;
+            height: 100% !important;
+            transform: none !important;
+        }
+    }
+
+    .hero-content {
+        position: relative;
+        z-index: 5;
+        max-width: 680px;
+        margin-left: auto;
+        padding: 20px 24px 80px 48px;
+        text-align: right;
+    }
+    @media (max-width: 768px) {
+        .hero-content {
+            padding: 8vh 16px 40px 0;
+            max-width: 82%;
+            background: linear-gradient(to right, transparent 0%, rgba(10, 10, 20, 0.5) 30%, rgba(10, 10, 20, 0.8) 100%);
+        }
+        .hero-section {
+            height: 100svh;
+        }
+    }
+    @media (max-width: 480px) {
+        .hero-section { min-height: 70vh; }
+    }
+
+    /* Hero pseudo-elements (shared base) */
+    .hero-section::before,
+    .hero-section::after,
+    .institute-section::before,
+    .institute-section::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        right: 0;
+        z-index: 0;
+        pointer-events: none;
+    }
+
+    /* Mobile hero ::before */
+    @media (max-width: 1024px) {
+        .hero-section::before {
+            display: block;
+            inset: 0;
+            background: radial-gradient(circle at 70% 60%, rgba(20, 20, 25, 0.55) 0%, rgba(20, 20, 25, 0.25) 60%, rgba(20, 20, 25, 0) 90%);
+            z-index: 1;
+        }
+        .hero-section::after { display: none; }
+    }
+
+    /* Hero ::after (desktop) */
+    .hero-section::after {
+        bottom: 0;
+        height: 500px;
+        background: linear-gradient(to top, rgba(0,0,0,0) 0%, rgba(10, 8, 14, 0.02) 15%, rgba(0,0,0,0) 100%);
+    }
+
+    /* ======= INSTITUTE SECTION (the section AFTER hero) ======= */
+    .institute-section {
+        position: relative;
+        min-height: 80vh;
+        display: flex;
+        align-items: center;
+        overflow: hidden;
+        padding: 80px 0 180px 0;
+        background-color: transparent;
+        margin-top: -150px;
+        padding-top: 230px;
+        z-index: 2;
+        pointer-events: none;
+    }
+
+    .institute-section > .section-bg {
+        -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,0) 0%, black 140px, black 100%);
+        mask-image: linear-gradient(to bottom, rgba(0,0,0,0) 0%, black 140px, black 100%);
+    }
+
+    .section-bg {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        overflow: hidden;
+    }
+
+    .section-bg img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+    }
+
+    .institute-section::before {
+        top: 0;
+        height: 500px;
+        background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(10, 8, 14, 0.02) 15%, rgba(0,0,0,0) 100%);
+    }
+
+    .institute-section::after {
+        bottom: 0;
+        height: 500px;
+        background: linear-gradient(to top, rgba(0,0,0,0) 0%, rgba(10, 8, 14, 0.02) 15%, rgba(0,0,0,0) 100%);
+    }
+
+    /* Filler section */
+    .filler { min-height: 100vh; background: #0a0a0f; padding: 40px; }
+
+    /* Canvas elements */
+    .sakura-canvas, .interactive-leaf-canvas {
+        position: absolute;
+        inset: 0;
+        z-index: 2;
+        pointer-events: none;
+    }
+
+    /* Debug overlays */
+    .debug-outline .hero-section { outline: 2px solid red; }
+    .debug-outline .institute-section { outline: 2px solid blue; }
+    .debug-outline .hero-bg { outline: 1px dashed yellow; }
+    .debug-outline .section-bg { outline: 1px dashed cyan; }
+</style>
+</head>
+<body>
+
+<div class="controls" id="controls">
+    <button onclick="toggle('pseudo')" id="btn-pseudo">Toggle ::before/::after</button>
+    <button onclick="toggle('mask')" id="btn-mask">Toggle Mask</button>
+    <button onclick="toggle('overlap')" id="btn-overlap">Toggle -150px Overlap</button>
+    <button onclick="toggle('canvas')" id="btn-canvas">Toggle Canvas</button>
+    <button onclick="toggle('herobg')" id="btn-herobg">Toggle Hero BG Image</button>
+    <button onclick="toggle('institutebg')" id="btn-institutebg">Toggle Institute BG</button>
+    <button onclick="toggle('herograd')" id="btn-herograd">Toggle Hero Content Grad</button>
+    <button onclick="toggle('outline')" id="btn-outline">Debug Outlines</button>
+    <button onclick="toggle('redbody')" id="btn-redbody">Body=RED (find gap)</button>
+    <div class="status" id="status">Tap buttons to disable features. Scroll to test. If white line disappears, that feature is the cause.</div>
+</div>
+
+<!-- HERO SECTION (exact production copy) -->
+<section class="hero-section" id="hero">
+    <div class="hero-bg" id="heroBg">
+        <img src="/frontend/images/pg-01.webp" alt="Hero BG" class="parallax-mode" id="heroImg">
+    </div>
+    <canvas class="sakura-canvas" id="heroCanvas1"></canvas>
+    <canvas class="interactive-leaf-canvas" id="heroCanvas2"></canvas>
+    <div class="hero-content" id="heroContent">
+        <h1 style="font-size: 2rem; margin-bottom: 16px;">WEST BENGAL'S<br>#1 ANIMATION, VFX & AI<br><span style="background: linear-gradient(90deg, #ff8c38, #ffd700); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">CREATIVE INSTITUTE</span></h1>
+        <p style="font-size: 0.82rem; line-height: 1.6; margin-bottom: 10px;">Learn from the future of creatives at MAAC Durgapur.</p>
+    </div>
+</section>
+
+<!-- INSTITUTE SECTION (exact production copy) -->
+<section class="institute-section" id="institute">
+    <div class="section-bg" id="instituteBg">
+        <img src="/frontend/images/pg-02.webp" alt="Institute BG">
+    </div>
+    <canvas class="sakura-canvas"></canvas>
+    <canvas class="interactive-leaf-canvas"></canvas>
+    <div style="position: relative; z-index: 5; pointer-events: auto; padding: 20px; max-width: 500px; margin-left: auto; margin-right: 5%;">
+        <h2 style="font-size: 1.5rem; margin-bottom: 16px;">MAAC SECTION</h2>
+        <p style="font-size: 0.9rem; line-height: 1.6;">This is the section immediately after the hero. The white line appears at the boundary between hero and this section.</p>
+    </div>
+</section>
+
+<!-- FILLER -->
+<div class="filler">
+    <h2>Scroll area below</h2>
+    <p>Keep scrolling to test the white line behavior.</p>
+</div>
+
+<script>
+var states = {
+    pseudo: true, mask: true, overlap: true, canvas: true,
+    herobg: true, institutebg: true, herograd: true, outline: false, redbody: false
+};
+
+var styleEl = document.createElement('style');
+document.head.appendChild(styleEl);
+
+function toggle(key) {
+    states[key] = !states[key];
+    var btn = document.getElementById('btn-' + key);
+    btn.classList.toggle('active', !states[key]);
+    apply();
+    document.getElementById('status').textContent =
+        key + ' → ' + (states[key] ? 'ON (production)' : 'OFF (disabled)') +
+        '. Scroll now to test.';
+}
+
+function apply() {
+    var css = '';
+
+    if (!states.pseudo) {
+        css += '.hero-section::before, .hero-section::after, .institute-section::before, .institute-section::after { display: none !important; content: none !important; }';
+    }
+    if (!states.mask) {
+        css += '.institute-section > .section-bg { -webkit-mask-image: none !important; mask-image: none !important; }';
+    }
+    if (!states.overlap) {
+        css += '.institute-section { margin-top: 0 !important; padding-top: 80px !important; }';
+    }
+    if (!states.canvas) {
+        css += '.sakura-canvas, .interactive-leaf-canvas, #heroCanvas1, #heroCanvas2 { display: none !important; }';
+    }
+    if (!states.herobg) {
+        css += '#heroImg { display: none !important; }';
+    }
+    if (!states.institutebg) {
+        css += '#instituteBg { display: none !important; }';
+    }
+    if (!states.herograd) {
+        css += '.hero-content { background: none !important; }';
+    }
+    if (states.outline) {
+        document.body.classList.add('debug-outline');
+    } else {
+        document.body.classList.remove('debug-outline');
+    }
+    if (states.redbody) {
+        css += 'html, body { background: red !important; }';
+    }
+
+    styleEl.textContent = css;
+}
+</script>
+
+</body>
+</html>
