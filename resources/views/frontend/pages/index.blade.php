@@ -31,37 +31,22 @@
             transform: none !important;
         }
         
-        /* Chhota sa top gradient sirf navbar ke niche wali line ko chhupane ke liye */
+        /* Ekdum soft radial mask text ke upar jo background me dissolve ho jayega */
         .hero-section::before {
             content: '' !important;
             display: block !important;
             position: absolute !important;
-            left: 0 !important;
-            right: 0 !important;
-            top: 0 !important;
-            bottom: auto !important;
-            height: 120px !important; 
-            background: linear-gradient(to bottom, var(--dark) 0%, rgba(10, 10, 15, 0.6) 40%, transparent 100%) !important;
+            inset: 0 !important;
+            /* Center the circle over the text (bottom-center/right), fading outwards smoothly */
+            background: radial-gradient(circle at 60% 70%, rgba(20, 20, 25, 0.55) 0%, rgba(20, 20, 25, 0.2) 45%, transparent 75%) !important;
             z-index: 1 !important;
             pointer-events: none !important;
         }
 
-        /* Ekdum halka bottom gradient jaisa user ne photo bheja tha, bas thoda aur light */
+        /* Remove any other gradients */
         .hero-section::after {
-            content: '' !important;
-            display: block !important;
-            position: absolute !important;
-            left: 0 !important;
-            right: 0 !important;
-            top: auto !important;
-            bottom: 0 !important;
-            height: 55% !important;
-            background: linear-gradient(to top, rgba(0, 0, 0, 0.25) 0%, rgba(0, 0, 0, 0.05) 60%, transparent 100%) !important;
-            z-index: 1 !important;
-            pointer-events: none !important;
+            display: none !important;
         }
-
-        /* Remove any weird text background */
         .hero-content {
             position: relative !important;
             z-index: 5 !important;
