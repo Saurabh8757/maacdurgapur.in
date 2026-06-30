@@ -106,27 +106,32 @@
             </div>
 
             <!-- Detail Modal -->
-            <div id="showcaseDetailModal" class="showcase-modal" style="display: none; position: fixed; z-index: 99999; left: 0; top: 0; width: 100vw; height: 100vh; overflow-y: auto; background-color: #0b0f19; backdrop-filter: blur(10px);">
+            <div id="showcaseDetailModal" class="showcase-modal" style="display: none; position: fixed; z-index: 99999; left: 0; top: 0; width: 100vw; height: 100vh; overflow-y: auto; overflow-x: hidden; background-color: #050505;">
                 <!-- Fixed Close Button -->
-                <button class="showcase-modal-close" style="position: fixed; top: 20px; right: 20px; width: 44px; height: 44px; border-radius: 50%; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: #fff; font-size: 24px; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 100000; transition: all 0.3s ease;">&times;</button>
+                <button class="showcase-modal-close" style="position: fixed; top: 25px; right: 30px; width: 50px; height: 50px; border-radius: 50%; background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2); color: #fff; font-size: 28px; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 100000; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0,0,0,0.3);">&times;</button>
                 
-                <div class="showcase-modal-content" style="max-width: 1200px; margin: 60px auto 40px; padding: 0 20px; display: flex; flex-direction: column; gap: 30px;">
-                    
-                    <div id="modalSliderWrapper" style="width: 100%; height: 60vh; min-height: 300px; max-height: 700px; border-radius: 16px; overflow: hidden; background: #131a2a; border: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: center;">
-                        <!-- Dynamically populated slide -->
+                <!-- Full Screen Image Area -->
+                <div style="width: 100vw; height: 90vh; background: #000; position: relative; display: flex; align-items: center; justify-content: center; border-bottom: 1px solid rgba(255,255,255,0.05);">
+                    <div id="modalSliderWrapper" style="width: 100%; height: 100%; padding: 40px;">
+                        <!-- Img with object-fit: contain will be injected here -->
                     </div>
+                </div>
 
-                    <div class="modal-info-grid">
-                        <div class="modal-info-main">
-                            <h2 id="modalTitle" style="font-size: 2.5rem; font-weight: 800; margin-bottom: 10px; line-height: 1.2; background: linear-gradient(90deg, #fff, #a5b4fc); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Project Title</h2>
-                            <h5 id="modalStudent" style="color: #F59E0B; font-size: 1.2rem; font-weight: 500; margin-bottom: 24px; text-transform: uppercase; letter-spacing: 1px;">Crafted by "Student Name"</h5>
-                            <div id="modalDesc" style="color: #94a3b8; font-size: 1.1rem; line-height: 1.8; text-align: justify; white-space: pre-wrap;">Full description here...</div>
-                        </div>
-                        
-                        <div class="modal-info-sidebar" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05); padding: 30px; border-radius: 16px; height: fit-content;">
-                            <h4 style="font-size: 1.2rem; color: #fff; margin-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px;">Software Used</h4>
-                            <div id="modalSoftwareIconsContainer" style="display: flex; flex-wrap: wrap; gap: 15px;">
-                                <!-- Icons appended dynamically -->
+                <!-- Premium Details Area -->
+                <div style="width: 100%; background: #050505; position: relative;">
+                    <div style="max-width: 1200px; margin: 0 auto; padding: 50px 20px 80px;">
+                        <div class="modal-info-grid">
+                            <div class="modal-info-main">
+                                <h2 id="modalTitle" style="font-size: 2.8rem; font-weight: 800; margin-bottom: 10px; line-height: 1.2; background: linear-gradient(90deg, #fff, #cbd5e1); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Project Title</h2>
+                                <h5 id="modalStudent" style="color: #F59E0B; font-size: 1.2rem; font-weight: 600; margin-bottom: 24px; text-transform: uppercase; letter-spacing: 2px;">Crafted by "Student Name"</h5>
+                                <div id="modalDesc" style="color: #94a3b8; font-size: 1.15rem; line-height: 1.8; text-align: justify; white-space: pre-wrap;">Full description here...</div>
+                            </div>
+                            
+                            <div class="modal-info-sidebar" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05); padding: 30px; border-radius: 16px; height: fit-content;">
+                                <h4 style="font-size: 1.2rem; color: #fff; margin-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 15px;">Software Used</h4>
+                                <div id="modalSoftwareIconsContainer" style="display: flex; flex-wrap: wrap; gap: 15px;">
+                                    <!-- Icons appended dynamically -->
+                                </div>
                             </div>
                         </div>
                     </div>
