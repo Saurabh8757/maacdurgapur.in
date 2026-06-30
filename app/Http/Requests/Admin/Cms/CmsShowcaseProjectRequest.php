@@ -62,10 +62,10 @@ class CmsShowcaseProjectRequest extends FormRequest
                     }
                 }
             ],
-            'thumbnail_media_id_2' => 'nullable|exists:media_assets,id',
-            'thumbnail_media_id_3' => 'nullable|exists:media_assets,id',
-            'thumbnail_media_id_4' => 'nullable|exists:media_assets,id',
-            'thumbnail_media_id_5' => 'nullable|exists:media_assets,id',
+            'software_icon_media_id_2' => 'nullable|exists:media_assets,id',
+            'software_icon_media_id_3' => 'nullable|exists:media_assets,id',
+            'software_icon_media_id_4' => 'nullable|exists:media_assets,id',
+            'software_icon_media_id_5' => 'nullable|exists:media_assets,id',
             'software_icon_media_id' => [
                 'nullable',
                 'exists:media_assets,id',

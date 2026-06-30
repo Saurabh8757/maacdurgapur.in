@@ -35,14 +35,14 @@
                     </div>
                 </div>
                 <div class="row mt-3">
-                    @foreach([2 => 'thumbnail2', 3 => 'thumbnail3', 4 => 'thumbnail4', 5 => 'thumbnail5'] as $num => $rel)
+                    @foreach([2 => 'softwareIcon2', 3 => 'softwareIcon3', 4 => 'softwareIcon4', 5 => 'softwareIcon5'] as $num => $rel)
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label for="showcase_thumbnail_upload_{{ $num }}">Thumbnail image {{ $num }}</label>
-                            <input class="form-control-file" type="file" id="showcase_thumbnail_upload_{{ $num }}" accept="image/jpeg,image/png,image/webp,image/gif" data-upload-url="{{ route('admin::cms.showcase_media.store') }}" data-target-input="thumbnail_media_id_{{ $num }}">
+                            <label for="showcase_software_icon_upload_{{ $num }}">Software Icon {{ $num }}</label>
+                            <input class="form-control-file" type="file" id="showcase_software_icon_upload_{{ $num }}" accept="image/jpeg,image/png,image/webp,image/gif,image/svg+xml" data-upload-url="{{ route('admin::cms.showcase_media.store') }}" data-target-input="software_icon_media_id_{{ $num }}">
                             <div class="mt-2 @if(!$project->$rel) d-none @endif" id="preview_wrap_{{ $num }}">
-                                <img id="preview_{{ $num }}" src="{{ $project->$rel ? asset($project->$rel->storage_key) : '' }}" style="width:100%; object-fit:cover; border-radius:5px;">
-                                <small class="text-success d-block" id="status_{{ $num }}">{{ $project->$rel ? 'Current thumbnail' : '' }}</small>
+                                <img id="preview_{{ $num }}" src="{{ $project->$rel ? asset($project->$rel->storage_key) : '' }}" style="width:64px; height:64px; object-fit:contain; background:rgba(255,255,255,0.1); padding:5px; border-radius:10px; border:1px solid rgba(0,0,0,.12);">
+                                <small class="text-success d-block" id="status_{{ $num }}">{{ $project->$rel ? 'Current icon' : '' }}</small>
                             </div>
                             <div class="text-danger mt-1 d-none" id="error_{{ $num }}"></div>
                         </div>
@@ -124,7 +124,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     [2, 3, 4, 5].forEach(num => {
-        const input = document.getElementById('showcase_thumbnail_upload_' + num);
+        const input = document.getElementById('showcase_software_icon_upload_' + num);
         if (!input) return;
         input.addEventListener('change', async function () {
             const file = input.files[0];

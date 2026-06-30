@@ -35,38 +35,19 @@
                     </div>
                 </div>
                 <div class="row mt-3">
+                    @foreach([2 => 'softwareIcon2', 3 => 'softwareIcon3', 4 => 'softwareIcon4', 5 => 'softwareIcon5'] as $num => $rel)
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label for="showcase_thumbnail_upload_2">Thumbnail image 2</label>
-                            <input class="form-control-file" type="file" id="showcase_thumbnail_upload_2" accept="image/jpeg,image/png,image/webp,image/gif" data-upload-url="{{ route('admin::cms.showcase_media.store') }}" data-target-input="thumbnail_media_id_2">
-                            <div class="mt-2 d-none" id="preview_wrap_2"><img id="preview_2" style="width:100%; object-fit:cover; border-radius:5px;"><small class="text-success d-block" id="status_2"></small></div>
-                            <div class="text-danger mt-1 d-none" id="error_2"></div>
+                            <label for="showcase_software_icon_upload_{{ $num }}">Software Icon {{ $num }}</label>
+                            <input class="form-control-file" type="file" id="showcase_software_icon_upload_{{ $num }}" accept="image/jpeg,image/png,image/webp,image/gif,image/svg+xml" data-upload-url="{{ route('admin::cms.showcase_media.store') }}" data-target-input="software_icon_media_id_{{ $num }}">
+                            <div class="mt-2 d-none" id="preview_wrap_{{ $num }}">
+                                <img id="preview_{{ $num }}" src="" style="width:64px; height:64px; object-fit:contain; background:rgba(255,255,255,0.1); padding:5px; border-radius:10px; border:1px solid rgba(0,0,0,.12);">
+                                <small class="text-success d-block" id="status_{{ $num }}"></small>
+                            </div>
+                            <div class="text-danger mt-1 d-none" id="error_{{ $num }}"></div>
                         </div>
                     </div>
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label for="showcase_thumbnail_upload_3">Thumbnail image 3</label>
-                            <input class="form-control-file" type="file" id="showcase_thumbnail_upload_3" accept="image/jpeg,image/png,image/webp,image/gif" data-upload-url="{{ route('admin::cms.showcase_media.store') }}" data-target-input="thumbnail_media_id_3">
-                            <div class="mt-2 d-none" id="preview_wrap_3"><img id="preview_3" style="width:100%; object-fit:cover; border-radius:5px;"><small class="text-success d-block" id="status_3"></small></div>
-                            <div class="text-danger mt-1 d-none" id="error_3"></div>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label for="showcase_thumbnail_upload_4">Thumbnail image 4</label>
-                            <input class="form-control-file" type="file" id="showcase_thumbnail_upload_4" accept="image/jpeg,image/png,image/webp,image/gif" data-upload-url="{{ route('admin::cms.showcase_media.store') }}" data-target-input="thumbnail_media_id_4">
-                            <div class="mt-2 d-none" id="preview_wrap_4"><img id="preview_4" style="width:100%; object-fit:cover; border-radius:5px;"><small class="text-success d-block" id="status_4"></small></div>
-                            <div class="text-danger mt-1 d-none" id="error_4"></div>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label for="showcase_thumbnail_upload_5">Thumbnail image 5</label>
-                            <input class="form-control-file" type="file" id="showcase_thumbnail_upload_5" accept="image/jpeg,image/png,image/webp,image/gif" data-upload-url="{{ route('admin::cms.showcase_media.store') }}" data-target-input="thumbnail_media_id_5">
-                            <div class="mt-2 d-none" id="preview_wrap_5"><img id="preview_5" style="width:100%; object-fit:cover; border-radius:5px;"><small class="text-success d-block" id="status_5"></small></div>
-                            <div class="text-danger mt-1 d-none" id="error_5"></div>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
             <div class="card-footer cms-form-actions"><a href="{{ route('admin::content.showcase.index') }}" class="btn btn-outline-secondary">Cancel</a><button type="submit" class="btn btn-primary"><i class="fas fa-save mr-1"></i> Create Project</button></div>
@@ -144,7 +125,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     [2, 3, 4, 5].forEach(num => {
-        const input = document.getElementById('showcase_thumbnail_upload_' + num);
+        const input = document.getElementById('showcase_software_icon_upload_' + num);
         if (!input) return;
         input.addEventListener('change', async function () {
             const file = input.files[0];

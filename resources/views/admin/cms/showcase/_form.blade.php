@@ -40,16 +40,16 @@
 </div>
 <div class="row d-none">
     <div class="col-md-3 form-group">
-        <input class="form-control" type="number" min="1" id="thumbnail_media_id_2" name="thumbnail_media_id_2" value="{{ old('thumbnail_media_id_2', optional($project ?? null)->thumbnail_media_id_2) }}">
+        <input class="form-control" type="number" min="1" id="software_icon_media_id_2" name="software_icon_media_id_2" value="{{ old('software_icon_media_id_2', optional($project ?? null)->software_icon_media_id_2) }}">
     </div>
     <div class="col-md-3 form-group">
-        <input class="form-control" type="number" min="1" id="thumbnail_media_id_3" name="thumbnail_media_id_3" value="{{ old('thumbnail_media_id_3', optional($project ?? null)->thumbnail_media_id_3) }}">
+        <input class="form-control" type="number" min="1" id="software_icon_media_id_3" name="software_icon_media_id_3" value="{{ old('software_icon_media_id_3', optional($project ?? null)->software_icon_media_id_3) }}">
     </div>
     <div class="col-md-3 form-group">
-        <input class="form-control" type="number" min="1" id="thumbnail_media_id_4" name="thumbnail_media_id_4" value="{{ old('thumbnail_media_id_4', optional($project ?? null)->thumbnail_media_id_4) }}">
+        <input class="form-control" type="number" min="1" id="software_icon_media_id_4" name="software_icon_media_id_4" value="{{ old('software_icon_media_id_4', optional($project ?? null)->software_icon_media_id_4) }}">
     </div>
     <div class="col-md-3 form-group">
-        <input class="form-control" type="number" min="1" id="thumbnail_media_id_5" name="thumbnail_media_id_5" value="{{ old('thumbnail_media_id_5', optional($project ?? null)->thumbnail_media_id_5) }}">
+        <input class="form-control" type="number" min="1" id="software_icon_media_id_5" name="software_icon_media_id_5" value="{{ old('software_icon_media_id_5', optional($project ?? null)->software_icon_media_id_5) }}">
     </div>
 </div>
 <div class="row">

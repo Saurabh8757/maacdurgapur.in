@@ -69,7 +69,9 @@
                         
                         <div class="fc-software-wrap">
                             <span class="fc-software-label" id="fcSoftwareLabel" style="display:none;">Software Used</span>
-                            <img id="fcSoftwareIcon" class="fc-software-icon" src="" alt="Software Icon" style="display:none;">
+                            <div id="fcSoftwareIconsContainer" style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 5px;">
+                                <!-- Icons appended dynamically -->
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -110,12 +112,13 @@
                             @forelse($showcaseProjects as $index => $project)
                                 @php
                                     $thumbUrl = $project->thumbnail ? asset(str_starts_with($project->thumbnail->storage_key, 'storage/') ? $project->thumbnail->storage_key : 'storage/' . $project->thumbnail->storage_key) : asset('frontend/images/placeholder.jpg');
-                                    $thumbUrl2 = $project->thumbnail2 ? asset(str_starts_with($project->thumbnail2->storage_key, 'storage/') ? $project->thumbnail2->storage_key : 'storage/' . $project->thumbnail2->storage_key) : '';
-                                    $thumbUrl3 = $project->thumbnail3 ? asset(str_starts_with($project->thumbnail3->storage_key, 'storage/') ? $project->thumbnail3->storage_key : 'storage/' . $project->thumbnail3->storage_key) : '';
-                                    $thumbUrl4 = $project->thumbnail4 ? asset(str_starts_with($project->thumbnail4->storage_key, 'storage/') ? $project->thumbnail4->storage_key : 'storage/' . $project->thumbnail4->storage_key) : '';
-                                    $thumbUrl5 = $project->thumbnail5 ? asset(str_starts_with($project->thumbnail5->storage_key, 'storage/') ? $project->thumbnail5->storage_key : 'storage/' . $project->thumbnail5->storage_key) : '';
                                     
                                     $iconUrl = $project->softwareIcon ? asset(str_starts_with($project->softwareIcon->storage_key, 'storage/') ? $project->softwareIcon->storage_key : 'storage/' . $project->softwareIcon->storage_key) : '';
+                                    $iconUrl2 = $project->softwareIcon2 ? asset(str_starts_with($project->softwareIcon2->storage_key, 'storage/') ? $project->softwareIcon2->storage_key : 'storage/' . $project->softwareIcon2->storage_key) : '';
+                                    $iconUrl3 = $project->softwareIcon3 ? asset(str_starts_with($project->softwareIcon3->storage_key, 'storage/') ? $project->softwareIcon3->storage_key : 'storage/' . $project->softwareIcon3->storage_key) : '';
+                                    $iconUrl4 = $project->softwareIcon4 ? asset(str_starts_with($project->softwareIcon4->storage_key, 'storage/') ? $project->softwareIcon4->storage_key : 'storage/' . $project->softwareIcon4->storage_key) : '';
+                                    $iconUrl5 = $project->softwareIcon5 ? asset(str_starts_with($project->softwareIcon5->storage_key, 'storage/') ? $project->softwareIcon5->storage_key : 'storage/' . $project->softwareIcon5->storage_key) : '';
+                                    
                                     $formattedIndex = sprintf('%02d', $index + 1);
                                 @endphp
                                 <div class="swiper-slide showcase-slide" 
@@ -126,11 +129,11 @@
                                      data-category-name="{{ $project->category->name }}"
                                      data-desc="{{ $project->short_description }}"
                                      data-icon="{{ $iconUrl }}"
-                                     data-thumb="{{ $thumbUrl }}"
-                                     data-thumb2="{{ $thumbUrl2 }}"
-                                     data-thumb3="{{ $thumbUrl3 }}"
-                                     data-thumb4="{{ $thumbUrl4 }}"
-                                     data-thumb5="{{ $thumbUrl5 }}">
+                                     data-icon2="{{ $iconUrl2 }}"
+                                     data-icon3="{{ $iconUrl3 }}"
+                                     data-icon4="{{ $iconUrl4 }}"
+                                     data-icon5="{{ $iconUrl5 }}"
+                                     data-thumb="{{ $thumbUrl }}">
                                     <img src="{{ $thumbUrl }}" alt="{{ $project->title }}">
                                     <div class="slide-overlay"></div>
                                 </div>
@@ -166,7 +169,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const fcCategory = document.getElementById('fcCategory');
     const fcStudent = document.getElementById('fcStudent');
     const fcDesc = document.getElementById('fcDesc');
-    const fcSoftwareIcon = document.getElementById('fcSoftwareIcon');
+    const fcSoftwareIconsContainer = document.getElementById('fcSoftwareIconsContainer');
     const fcSoftwareLabel = document.getElementById('fcSoftwareLabel');
     const fcDetails = document.querySelector('.fc-details');
     
@@ -211,14 +214,21 @@ document.addEventListener('DOMContentLoaded', function() {
         const student = item.getAttribute('data-student');
         const categoryName = item.getAttribute('data-category-name');
         const desc = item.getAttribute('data-desc');
-        const iconUrl = item.getAttribute('data-icon');
         const thumbUrl = item.getAttribute('data-thumb');
+        
+        const icons = [
+            item.getAttribute('data-icon'),
+            item.getAttribute('data-icon2'),
+            item.getAttribute('data-icon3'),
+            item.getAttribute('data-icon4'),
+            item.getAttribute('data-icon5')
+        ].filter(i => i && i.trim() !== '');
         
         const tl = gsap.timeline({
             onComplete: () => { isAnimating = false; }
         });
         
-        tl.to([fcImage, fcTitle, fcCategory, fcStudent, fcDesc, fcSoftwareIcon, fcSoftwareLabel], { 
+        tl.to([fcImage, fcTitle, fcCategory, fcStudent, fcDesc, fcSoftwareIconsContainer, fcSoftwareLabel], { 
             opacity: 0, y: 10, duration: 0.3, ease: 'power2.in', stagger: 0.02
         })
         .call(() => {
@@ -228,17 +238,23 @@ document.addEventListener('DOMContentLoaded', function() {
             fcDesc.textContent = desc;
             fcImage.src = thumbUrl;
             
-            if (iconUrl) {
-                fcSoftwareIcon.src = iconUrl;
-                fcSoftwareIcon.style.display = 'block';
+            fcSoftwareIconsContainer.innerHTML = '';
+            if (icons.length > 0) {
+                icons.forEach(url => {
+                    const img = document.createElement('img');
+                    img.src = url;
+                    img.style.width = '32px';
+                    img.style.height = '32px';
+                    img.style.objectFit = 'contain';
+                    fcSoftwareIconsContainer.appendChild(img);
+                });
                 fcSoftwareLabel.style.display = 'block';
             } else {
-                fcSoftwareIcon.style.display = 'none';
                 fcSoftwareLabel.style.display = 'none';
             }
         })
         .to(fcImage, { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' })
-        .to([fcTitle, fcCategory, fcStudent, fcDesc, fcSoftwareLabel, fcSoftwareIcon], { 
+        .to([fcTitle, fcCategory, fcStudent, fcDesc, fcSoftwareLabel, fcSoftwareIconsContainer], { 
             opacity: 1, y: 0, duration: 0.5, ease: 'power3.out', stagger: 0.05
         }, "-=0.4");
     }
@@ -254,18 +270,31 @@ document.addEventListener('DOMContentLoaded', function() {
         fcDesc.textContent = initialSlide.getAttribute('data-desc');
         fcImage.src = initialSlide.getAttribute('data-thumb');
         
-        const iconUrl = initialSlide.getAttribute('data-icon');
-        if (iconUrl) {
-            fcSoftwareIcon.src = iconUrl;
-            fcSoftwareIcon.style.display = 'block';
+        const icons = [
+            initialSlide.getAttribute('data-icon'),
+            initialSlide.getAttribute('data-icon2'),
+            initialSlide.getAttribute('data-icon3'),
+            initialSlide.getAttribute('data-icon4'),
+            initialSlide.getAttribute('data-icon5')
+        ].filter(i => i && i.trim() !== '');
+
+        fcSoftwareIconsContainer.innerHTML = '';
+        if (icons.length > 0) {
+            icons.forEach(url => {
+                const img = document.createElement('img');
+                img.src = url;
+                img.style.width = '32px';
+                img.style.height = '32px';
+                img.style.objectFit = 'contain';
+                fcSoftwareIconsContainer.appendChild(img);
+            });
             fcSoftwareLabel.style.display = 'block';
         } else {
-            fcSoftwareIcon.style.display = 'none';
             fcSoftwareLabel.style.display = 'none';
         }
         
         gsap.from(fcImage, { opacity: 0, scale: 0.95, duration: 1, ease: 'power3.out' });
-        gsap.from([fcTitle, fcCategory, fcStudent, fcDesc, fcSoftwareLabel, fcSoftwareIcon], { opacity: 0, x: 20, duration: 0.8, ease: 'power3.out', stagger: 0.1, delay: 0.2 });
+        gsap.from([fcTitle, fcCategory, fcStudent, fcDesc, fcSoftwareLabel, fcSoftwareIconsContainer], { opacity: 0, x: 20, duration: 0.8, ease: 'power3.out', stagger: 0.1, delay: 0.2 });
     }
 
     // Filtering logic
@@ -306,7 +335,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const modalStudent = document.getElementById('modalStudent');
     const modalDesc = document.getElementById('modalDesc');
     const modalSliderWrapper = document.getElementById('modalSliderWrapper');
-    let modalSwiper = null;
 
     seeMoreBtn.addEventListener('click', () => {
         const activeSlide = document.querySelector('.showcase-slide.swiper-slide-active') || document.querySelector('.showcase-slide');
@@ -316,47 +344,24 @@ document.addEventListener('DOMContentLoaded', function() {
         modalStudent.textContent = `Crafted by "${activeSlide.getAttribute('data-student')}"`;
         modalDesc.textContent = activeSlide.getAttribute('data-desc');
 
-        // Populate modal slider
+        // Populate modal slider wrapper with the single thumbnail
         modalSliderWrapper.innerHTML = '';
-        const thumbs = [
-            activeSlide.getAttribute('data-thumb'),
-            activeSlide.getAttribute('data-thumb2'),
-            activeSlide.getAttribute('data-thumb3'),
-            activeSlide.getAttribute('data-thumb4'),
-            activeSlide.getAttribute('data-thumb5')
-        ];
+        const thumbUrl = activeSlide.getAttribute('data-thumb');
 
-        let hasImages = false;
-        thumbs.forEach(thumbUrl => {
-            if (thumbUrl && thumbUrl.trim() !== '') {
-                hasImages = true;
-                const slide = document.createElement('div');
-                slide.className = 'swiper-slide';
-                slide.innerHTML = `<img src="${thumbUrl}" style="width: 100%; height: 100%; object-fit: contain;">`;
-                modalSliderWrapper.appendChild(slide);
-            }
-        });
+        if (thumbUrl && thumbUrl.trim() !== '') {
+            modalSliderWrapper.innerHTML = `<img src="${thumbUrl}" style="width: 100%; height: 100%; object-fit: contain;">`;
+        }
 
         modal.style.display = 'block';
         document.body.style.overflow = 'hidden';
-
-        if (modalSwiper) {
-            modalSwiper.destroy(true, true);
-        }
         
-        if (hasImages) {
-            modalSwiper = new Swiper('.modal-swiper', {
-                loop: true,
-                navigation: {
-                    nextEl: '.modal-next',
-                    prevEl: '.modal-prev',
-                },
-                pagination: {
-                    el: '.modal-pagination',
-                    clickable: true,
-                },
-            });
-        }
+        // Hide navigation if they exist since there's no swiper anymore
+        const prevBtn = document.querySelector('.modal-prev');
+        const nextBtn = document.querySelector('.modal-next');
+        const pagination = document.querySelector('.modal-pagination');
+        if (prevBtn) prevBtn.style.display = 'none';
+        if (nextBtn) nextBtn.style.display = 'none';
+        if (pagination) pagination.style.display = 'none';
     });
 
     modalClose.addEventListener('click', () => {
