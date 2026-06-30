@@ -912,11 +912,10 @@ body.loading {
         gap: 8px;
     }
 
-    /* Keep parallax transform disabled for stability, but restore framing to hide empty sky */
+    /* Keep parallax transform disabled for stability */
     .hero-bg-img.parallax-bg {
-        object-position: 29% top !important;
-        top: -35% !important;
-        height: 145% !important;
+        top: 0 !important;
+        height: 100% !important;
         transform: none !important;
     }
     .hero-section {
@@ -1153,6 +1152,7 @@ body.loading {
    ============================================================ */
 
 /* ── Shared blend pseudo-element base ─────────────────────── */
+.hero-section::before,
 .hero-section::after,
 .maac-section::before,  .maac-section::after,
 .aksha-section::before, .aksha-section::after,
@@ -1174,6 +1174,13 @@ body.loading {
 /* ============================================================
    GLOBAL CINEMATIC BLENDING SYSTEM
    ============================================================ */
+
+.hero-section::before {
+    top: 0;
+    height: 180px;
+    background: linear-gradient(to bottom, var(--dark) 0%, rgba(5, 5, 10, 0.7) 40%, transparent 100%);
+    z-index: 1; /* Keep above the background image */
+}
 
 /* 
  * UNIVERSAL ATMOSPHERIC OVERLAYS 
