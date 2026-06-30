@@ -20,7 +20,7 @@
 <meta name="twitter:description" content="MAAC Durgapur is West Bengal's leading Animation, VFX, Gaming, Graphic Design & AI Creative Institute. Industry-focused training, expert mentorship, modern studios and 100% placement support near City Centre, Durgapur.">
 <meta name="twitter:image" content="{{ asset('frontend/images/pg-01.webp') }}">
 <link rel="icon" type="image/png" href="{{ asset('frontend/images/favicon.png') }}">
-<link rel="stylesheet" href="{{ asset('frontend/css/style.css') }}?v={{ filemtime(public_path('frontend/css/style.css')) }}">
+<link rel="stylesheet" href="{{ asset('frontend/css/style.css') }}?v={{ time() }}">
 <link rel="stylesheet" href="{{ asset('frontend/css/chatbot.css') }}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Rajdhani:wght@400;500;600;700&family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet">
