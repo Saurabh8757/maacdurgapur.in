@@ -974,8 +974,8 @@ body.loading {
 
 /* Soften top edge: 150px cross-fade with previous section visible behind */
 .institute-section > .section-bg {
-    -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,0) 0%, black 150px, black 100%);
-    mask-image: linear-gradient(to bottom, rgba(0,0,0,0) 0%, black 150px, black 100%);
+    -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,0) 0%, black 140px, black 100%);
+    mask-image: linear-gradient(to bottom, rgba(0,0,0,0) 0%, black 140px, black 100%);
 }
 
 
@@ -1274,8 +1274,8 @@ body.loading {
 
 .courses-section > .section-bg {
     pointer-events: none;
-    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 150px, black 100%);
-    mask-image: linear-gradient(to bottom, transparent 0%, black 150px, black 100%);
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 140px, black 100%);
+    mask-image: linear-gradient(to bottom, transparent 0%, black 140px, black 100%);
 }
 
 .section-header {
@@ -1409,8 +1409,8 @@ body.loading {
    ============================================================ */
 .stats-section {
     background: linear-gradient(180deg, rgba(15, 10, 5, 1), rgba(8, 8, 18, 1));
-    -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,0) 0%, black 80px, black 100%);
-    mask-image: linear-gradient(to bottom, rgba(0,0,0,0) 0%, black 80px, black 100%);
+    -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,0) 0%, black 70px, black 100%);
+    mask-image: linear-gradient(to bottom, rgba(0,0,0,0) 0%, black 70px, black 100%);
     padding: 64px 24px;
     position: relative;
     z-index: 3;
@@ -2405,8 +2405,8 @@ body.loading {
     overflow: hidden;
     /* margin-top: -80px;
     padding-top: 140px;
-    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 100px, black 100%);
-    mask-image: linear-gradient(to bottom, transparent 0%, black 100px, black 100%); */
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 90px, black 100%);
+    mask-image: linear-gradient(to bottom, transparent 0%, black 90px, black 100%); */
 }
 
 .footer-tree-left,
