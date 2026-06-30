@@ -1174,11 +1174,12 @@
 <script defer src="https://unpkg.com/lenis@1.1.20/dist/lenis.min.js"></script>
 <script defer>
   window.addEventListener('load', function() {
-    if (typeof Lenis !== 'undefined') {
+    // Only enable Lenis on Desktop! Mobile native scroll is already smooth
+    // and Lenis's `height: auto` CSS breaks the native pull-to-refresh dark background lock!
+    if (typeof Lenis !== 'undefined' && window.innerWidth >= 1024) {
       const lenis = new Lenis({
-        smoothTouch: false, // FALSE is required to allow native mobile scrolling and CSS overscroll-behavior-y: none to prevent white rubber-banding!
-        touchMultiplier: 2,
-        autoRaf: false, // Critical: prevent double-tick to stop text shaking
+        smoothTouch: false,
+        autoRaf: false, 
       });
 
       if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
