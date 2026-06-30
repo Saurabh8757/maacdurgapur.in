@@ -277,8 +277,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    let currentTl = null;
-
     function selectProject(item) {
         const title = item.getAttribute('data-title');
         const student = item.getAttribute('data-student');
@@ -294,41 +292,40 @@ document.addEventListener('DOMContentLoaded', function() {
             item.getAttribute('data-icon5')
         ].filter(i => i && i.trim() !== '');
         
-        if (currentTl) {
-            currentTl.kill();
-        }
+        const targets = [fcImage, fcTitle, fcCategory, fcStudent, fcDesc, fcSoftwareIconsContainer, fcSoftwareLabel];
+        gsap.killTweensOf(targets);
         
-        currentTl = gsap.timeline();
-        
-        currentTl.to([fcImage, fcTitle, fcCategory, fcStudent, fcDesc, fcSoftwareIconsContainer, fcSoftwareLabel], { 
-            opacity: 0, y: 10, duration: 0.2, ease: 'power2.in', stagger: 0.01
-        })
-        .call(() => {
-            fcTitle.textContent = title;
-            fcStudent.textContent = `"${student}"`;
-            fcCategory.textContent = categoryName;
-            fcDesc.textContent = desc;
-            fcImage.src = thumbUrl;
-            
-            fcSoftwareIconsContainer.innerHTML = '';
-            if (icons.length > 0) {
-                icons.forEach(url => {
-                    const img = document.createElement('img');
-                    img.src = url;
-                    img.style.width = '32px';
-                    img.style.height = '32px';
-                    img.style.objectFit = 'contain';
-                    fcSoftwareIconsContainer.appendChild(img);
-                });
-                fcSoftwareLabel.style.display = 'block';
-            } else {
-                fcSoftwareLabel.style.display = 'none';
+        gsap.to(targets, { 
+            opacity: 0, y: 10, duration: 0.2, ease: 'power2.in', stagger: 0.01,
+            onComplete: () => {
+                fcTitle.textContent = title;
+                fcStudent.textContent = `"${student}"`;
+                fcCategory.textContent = categoryName;
+                fcDesc.textContent = desc;
+                fcImage.src = thumbUrl;
+                
+                fcSoftwareIconsContainer.innerHTML = '';
+                if (icons.length > 0) {
+                    icons.forEach(url => {
+                        const img = document.createElement('img');
+                        img.src = url;
+                        img.style.width = '32px';
+                        img.style.height = '32px';
+                        img.style.objectFit = 'contain';
+                        fcSoftwareIconsContainer.appendChild(img);
+                    });
+                    fcSoftwareLabel.style.display = 'block';
+                } else {
+                    fcSoftwareLabel.style.display = 'none';
+                }
+
+                gsap.fromTo(fcImage, { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.4, ease: 'power3.out' });
+                gsap.fromTo([fcTitle, fcCategory, fcStudent, fcDesc, fcSoftwareLabel, fcSoftwareIconsContainer], 
+                    { opacity: 0, y: 10 }, 
+                    { opacity: 1, y: 0, duration: 0.4, ease: 'power3.out', stagger: 0.03, delay: 0.1 }
+                );
             }
-        })
-        .to(fcImage, { opacity: 1, y: 0, duration: 0.4, ease: 'power3.out' })
-        .to([fcTitle, fcCategory, fcStudent, fcDesc, fcSoftwareLabel, fcSoftwareIconsContainer], { 
-            opacity: 1, y: 0, duration: 0.4, ease: 'power3.out', stagger: 0.03
-        }, "-=0.3");
+        });
     }
 
     // Initialize
@@ -366,6 +363,7 @@ document.addEventListener('DOMContentLoaded', function() {
             fcSoftwareLabel.style.display = 'none';
         }
         
+        gsap.set([fcImage, fcTitle, fcCategory, fcStudent, fcDesc, fcSoftwareLabel, fcSoftwareIconsContainer], { opacity: 1, y: 0 });
         gsap.from(fcImage, { opacity: 0, scale: 0.95, duration: 1, ease: 'power3.out' });
         gsap.from([fcTitle, fcCategory, fcStudent, fcDesc, fcSoftwareLabel, fcSoftwareIconsContainer], { opacity: 0, x: 20, duration: 0.8, ease: 'power3.out', stagger: 0.1, delay: 0.2 });
     }
