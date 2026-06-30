@@ -65,8 +65,8 @@
             display: block !important;
             position: absolute !important;
             inset: 0 !important;
-            /* FIX: changed 'transparent' to rgba(20, 20, 25, 0) to prevent white ring interpolation bug on some mobile browsers */
-            background: radial-gradient(circle at 70% 60%, rgba(20, 20, 25, 0.55) 0%, rgba(20, 20, 25, 0.25) 60%, rgba(20, 20, 25, 0) 90%) !important;
+            /* Fix: changed end color to rgba(0,0,0,0.01) to prevent iOS white ring alpha-premultiplication bugs */
+            background: radial-gradient(circle at 70% 60%, rgba(20, 20, 25, 0.55) 0%, rgba(20, 20, 25, 0.25) 60%, rgba(0, 0, 0, 0.01) 95%) !important;
             z-index: 1 !important;
             pointer-events: none !important;
         }
