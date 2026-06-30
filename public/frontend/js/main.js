@@ -11,6 +11,8 @@
     centeredSlides: false,
     loop: true,
     grabCursor: true,
+    freeMode: true,
+    speed: 800,
     navigation: {
       nextEl: '.courses-next',
       prevEl: '.courses-prev',
@@ -23,13 +25,14 @@
     },
   });
 
-  /* ─── Placement Swiper — Premium Redesign ─────────────── */
+  /* ─── Placement Swiper — Premium Redesign ────────────────────── */
   const placementSwiper = new Swiper('.placement-swiper', {
     slidesPerView: 1.2,
     spaceBetween: 16,
     loop: true,
     grabCursor: true,
-    speed: 600,
+    freeMode: true,
+    speed: 800,
     autoplay: {
       delay: 3000,
       disableOnInteraction: false,
@@ -52,7 +55,7 @@
       centeredSlides: true,
       loop: true,
       grabCursor: true,
-      speed: 700,
+      speed: 400,
       effect: 'coverflow',
       coverflowEffect: {
         rotate: 0,
