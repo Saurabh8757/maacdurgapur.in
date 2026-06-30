@@ -25,7 +25,11 @@
     window.addEventListener('scroll', function () {
       if (!ticking) {
         requestAnimationFrame(function () {
-          navbar.classList.toggle('scrolled', window.scrollY > 40);
+          if (window.scrollY > 60) {
+            navbar.classList.add('scrolled');
+          } else if (window.scrollY <= 10) {
+            navbar.classList.remove('scrolled');
+          }
           ticking = false;
         });
         ticking = true;
