@@ -3,6 +3,29 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+
+<!-- PREVENT MOBILE ADDRESS BAR JUMPS -->
+<script>
+    (function() {
+        function setHeroHeight() {
+            if (window.innerWidth <= 1024) {
+                // Calculate physical pixels to prevent vh/svh resize jumping on scroll
+                let vh = window.innerHeight * 0.01;
+                document.documentElement.style.setProperty('--hero-vh', `${vh}px`);
+            } else {
+                document.documentElement.style.removeProperty('--hero-vh');
+            }
+        }
+        setHeroHeight();
+        // Only update on orientation change, NEVER on scroll/address-bar resize
+        window.addEventListener('resize', function() {
+            if (window.innerWidth !== document.documentElement.clientWidth) {
+                setHeroHeight();
+            }
+        });
+    })();
+</script>
+
 <meta name="theme-color" content="#0a0a0f">
 <meta name="csrf-token" content="{{ csrf_token() }}">
 <title>MAAC Durgapur – West Bengal's #1 Animation, VFX & AI Creative Institute</title>
@@ -26,6 +49,10 @@
 <style>
     /* URGENT CACHE BYPASS FIX FOR MOBILE & TAB HERO */
     @media (max-width: 1024px) {
+        .hero-section {
+            min-height: calc(var(--hero-vh, 1vh) * 100) !important;
+            height: calc(var(--hero-vh, 1vh) * 100) !important;
+        }
         .hero-bg-img.parallax-bg {
             top: 0 !important;
             height: 100% !important;
