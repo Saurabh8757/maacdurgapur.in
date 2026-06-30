@@ -1171,15 +1171,13 @@ body.loading {
     pointer-events: none;
 }
 
-/* ============================================================
-   GLOBAL CINEMATIC BLENDING SYSTEM
-   ============================================================ */
-
-.hero-section::before {
-    top: 0;
-    height: 450px;
-    background: linear-gradient(to bottom, var(--dark) 0%, var(--dark) 15%, rgba(10, 10, 15, 0.9) 30%, rgba(10, 10, 15, 0.4) 60%, transparent 100%);
-    z-index: 1; /* Keep above the background image */
+@media (max-width: 768px) {
+    .hero-section::before {
+        top: 0;
+        height: 250px;
+        background: linear-gradient(to bottom, var(--dark) 0%, rgba(10, 10, 15, 0.8) 40%, transparent 100%);
+        z-index: 1; /* Keep above the background image */
+    }
 }
 
 /* 

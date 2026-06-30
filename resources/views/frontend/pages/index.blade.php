@@ -30,17 +30,17 @@
             height: 100% !important;
             transform: none !important;
         }
-    }
-    .hero-section::before {
-        content: '' !important;
-        position: absolute !important;
-        left: 0 !important;
-        right: 0 !important;
-        top: 0 !important;
-        height: 450px !important;
-        background: linear-gradient(to bottom, var(--dark) 0%, var(--dark) 15%, rgba(10, 10, 15, 0.9) 30%, rgba(10, 10, 15, 0.4) 60%, transparent 100%) !important;
-        z-index: 1 !important;
-        pointer-events: none !important;
+        .hero-section::before {
+            content: '' !important;
+            position: absolute !important;
+            left: 0 !important;
+            right: 0 !important;
+            top: 0 !important;
+            height: 250px !important;
+            background: linear-gradient(to bottom, var(--dark) 0%, rgba(10, 10, 15, 0.8) 40%, transparent 100%) !important;
+            z-index: 1 !important;
+            pointer-events: none !important;
+        }
     }
 </style>
 <link rel="preconnect" href="https://fonts.googleapis.com">
