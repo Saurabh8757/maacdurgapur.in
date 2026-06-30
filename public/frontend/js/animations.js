@@ -50,19 +50,21 @@
       .from('.hero-buttons', { y: 20, opacity: 0, duration: 0.6, ease: 'power2.out' }, '-=0.4');
   }
 
-  /* ─── Parallax backgrounds — passive ScrollTrigger ────── */
-  gsap.utils.toArray('.parallax-bg').forEach(function (img) {
-    var speed = parseFloat(img.dataset.speed) || 0.2;
-    gsap.to(img, {
-      yPercent: speed * 30,
-      ease: 'none',
-      scrollTrigger: {
-        trigger: img.closest('section') || img.parentElement,
-        start: 'top bottom',
-        scrub: 0.5, // Reduced scrub to fix lag
-      },
+  /* ─── Global Image Parallax (Desktop Only) ─────────────────────── */
+  if (window.innerWidth > 1024) {
+    gsap.utils.toArray('.parallax-bg').forEach(function (img) {
+      var speed = parseFloat(img.dataset.speed) || 0.2;
+      gsap.to(img, {
+        yPercent: speed * 30,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: img.closest('section') || img.parentElement,
+          start: 'top bottom',
+          scrub: 0.5,
+        },
+      });
     });
-  });
+  }
 
   /* 🎇 Mouse parallax for hero (throttled) - DESKTOP ONLY 🎇 */
   var heroSection = document.querySelector('.hero-section');
@@ -244,25 +246,7 @@
      PREMIUM MOBILE SCROLL EFFECTS (Added dynamically)
      ============================================================ */
   
-  // 1. Sleek Scroll Progress Bar at the top
-  const progressBar = document.createElement('div');
-  progressBar.style.position = 'fixed';
-  progressBar.style.top = '0';
-  progressBar.style.left = '0';
-  progressBar.style.height = '3px';
-  progressBar.style.width = '0%';
-  progressBar.style.background = 'linear-gradient(to right, #ff416c, #ff4b2b)';
-  progressBar.style.zIndex = '9999';
-  progressBar.style.pointerEvents = 'none';
-  progressBar.style.transition = 'width 0.1s ease-out';
-  document.body.appendChild(progressBar);
-
-  window.addEventListener('scroll', function() {
-    const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-    const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-    const scrollPercent = (scrollTop / scrollHeight) * 100;
-    progressBar.style.width = scrollPercent + '%';
-  }, { passive: true });
+  // Removed scroll progress bar as it caused scroll-linked rendering blinks on some mobile browsers.
 
   // 2. Subtle scale-down reveal for all images
   gsap.utils.toArray('img').forEach(function(img) {
