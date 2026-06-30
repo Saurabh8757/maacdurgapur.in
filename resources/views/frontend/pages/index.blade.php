@@ -50,8 +50,11 @@
     /* URGENT CACHE BYPASS FIX FOR MOBILE & TAB HERO */
     @media (max-width: 1024px) {
         .hero-section {
-            min-height: calc(var(--hero-vh, 1vh) * 100) !important;
-            height: calc(var(--hero-vh, 1vh) * 100) !important;
+            /* Fix mobile height recalculation & GPU overlap gaps by adding 150px padding block */
+            min-height: calc(var(--hero-vh, 1vh) * 100 + 150px) !important;
+            height: calc(var(--hero-vh, 1vh) * 100 + 150px) !important;
+            padding-bottom: 150px !important;
+            box-sizing: border-box !important;
         }
         .hero-bg-img.parallax-bg {
             top: 0 !important;
@@ -1198,7 +1201,7 @@
 </script>
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-<script defer src="https://unpkg.com/lenis@1.1.20/dist/lenis.min.js"></script>
+<script defer src="{{ asset('frontend/js/lenis.min.js') }}"></script>
 <script defer>
   window.addEventListener('load', function() {
     // Only enable Lenis on Desktop! Mobile native scroll is already smooth
