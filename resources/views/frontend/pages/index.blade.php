@@ -1176,7 +1176,7 @@
   window.addEventListener('load', function() {
     if (typeof Lenis !== 'undefined') {
       const lenis = new Lenis({
-        smoothTouch: true, // Hijacks native mobile scroll to prevent GPU clipping gaps
+        smoothTouch: false, // FALSE is required to allow native mobile scrolling and CSS overscroll-behavior-y: none to prevent white rubber-banding!
         touchMultiplier: 2,
         autoRaf: false, // Critical: prevent double-tick to stop text shaking
       });
