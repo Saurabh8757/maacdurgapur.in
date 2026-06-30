@@ -672,11 +672,8 @@ body.loading {
    ============================================================ */
 .hero-section {
     position: relative;
-    /* Adding 150px to height with border-box padding-bottom perfectly covers the next section's negative margin */
-    min-height: calc(100vh + 150px);
-    min-height: calc(100svh + 150px);
-    padding-bottom: 150px;
-    box-sizing: border-box;
+    min-height: 100vh;
+    min-height: 100svh;
     display: flex;
     align-items: center;
     overflow: visible;
@@ -687,7 +684,7 @@ body.loading {
 
 @media (min-width: 1024px) {
     .hero-section {
-        min-height: calc(110vh + 150px);
+        min-height: 110vh;
     }
 }
 
@@ -960,7 +957,7 @@ body.loading {
 }
 @media (max-width: 480px) {
     .hero-section {
-        min-height: calc(70vh + 150px);
+        min-height: 70vh;
     }
     
     .btn-hero {

@@ -50,11 +50,8 @@
     /* URGENT CACHE BYPASS FIX FOR MOBILE & TAB HERO */
     @media (max-width: 1024px) {
         .hero-section {
-            /* Fix mobile height recalculation & GPU overlap gaps by adding 150px padding block */
-            min-height: calc(var(--hero-vh, 1vh) * 100 + 150px) !important;
-            height: calc(var(--hero-vh, 1vh) * 100 + 150px) !important;
-            padding-bottom: 150px !important;
-            box-sizing: border-box !important;
+            min-height: calc(var(--hero-vh, 1vh) * 100) !important;
+            height: calc(var(--hero-vh, 1vh) * 100) !important;
         }
         .hero-bg-img.parallax-bg {
             top: 0 !important;
