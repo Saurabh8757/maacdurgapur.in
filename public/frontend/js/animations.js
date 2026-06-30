@@ -264,22 +264,7 @@
     progressBar.style.width = scrollPercent + '%';
   }, { passive: true });
 
-  // 2. Hero Content Cinematic Fade out on scroll
-  if (document.querySelector('.hero-content')) {
-    gsap.to('.hero-content', {
-      y: -100,
-      opacity: 0,
-      ease: 'none',
-      scrollTrigger: {
-        trigger: '.hero-section',
-        start: 'top top',
-        end: 'bottom top',
-        scrub: true
-      }
-    });
-  }
-
-  // 3. Subtle scale-down reveal for all images
+  // 2. Subtle scale-down reveal for all images
   gsap.utils.toArray('img').forEach(function(img) {
     if(!img.classList.contains('hero-bg-img') && !img.closest('.logo-ticker-wrapper')) {
       gsap.from(img, {
