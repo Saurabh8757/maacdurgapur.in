@@ -22,7 +22,7 @@ class ContentSecurityPolicyMiddleware
             "default-src 'self'",
             "img-src 'self' data: https:",
             "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com",
-            "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdnjs.cloudflare.com",
+            "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdnjs.cloudflare.com https://unpkg.com",
             "font-src 'self' data: https://fonts.gstatic.com https://fonts.googleapis.com https://cdnjs.cloudflare.com",
             "connect-src 'self' https://cdnjs.cloudflare.com",
             "frame-ancestors 'self'",
