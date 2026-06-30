@@ -5,17 +5,26 @@
 (function() {
   'use strict';
 
-  var isMobile = window.innerWidth < 768;
+  var isMobile = window.innerWidth < 1024;
+  
+  // COMPLETELY disable WebGL particle systems on mobile/tablet.
+  // WebGL alpha compositing over overlapping DOM elements (margin-top: -150px)
+  // causes severe GPU rendering glitches (white line flashes) during momentum scroll.
+  if (isMobile) {
+    return;
+  }
+
   var heroCanvas = document.getElementById('hero-sakura-canvas');
 
-  // Skip Hero sakura on mobile (too heavy)
-  if (heroCanvas && !isMobile) {
+  if (heroCanvas) {
     initHeroSakura(heroCanvas);
   }
 
   // Initialize section sakura everywhere
   document.querySelectorAll('.sakura-canvas').forEach(function (canvas) {
-    initSectionSakura(canvas);
+    if (canvas.id !== 'hero-sakura-canvas') {
+      initSectionSakura(canvas);
+    }
   });
 
   /* ─────────────────────────────────────────────────────────
