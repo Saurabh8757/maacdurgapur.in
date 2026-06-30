@@ -1171,6 +1171,32 @@
 </script>
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<script defer src="https://unpkg.com/lenis@1.1.20/dist/lenis.min.js"></script>
+<script defer>
+  window.addEventListener('load', function() {
+    if (typeof Lenis !== 'undefined') {
+      const lenis = new Lenis({
+        smoothTouch: true, // Hijacks native mobile scroll to prevent GPU clipping gaps
+        touchMultiplier: 2,
+        autoRaf: false, // Critical: prevent double-tick to stop text shaking
+      });
+
+      if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+        lenis.on('scroll', ScrollTrigger.update);
+        gsap.ticker.add((time) => {
+          lenis.raf(time * 1000);
+        });
+        gsap.ticker.lagSmoothing(0, 0);
+      } else {
+        function raf(time) {
+          lenis.raf(time);
+          requestAnimationFrame(raf);
+        }
+        requestAnimationFrame(raf);
+      }
+    }
+  });
+</script>
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/10.3.1/swiper-bundle.min.js"></script>
 <script defer src="{{ asset('frontend/js/sakura.js') }}"></script>
