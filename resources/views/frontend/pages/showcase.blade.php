@@ -277,10 +277,9 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    function selectProject(item) {
-        if (isAnimating) return;
-        isAnimating = true;
+    let currentTl = null;
 
+    function selectProject(item) {
         const title = item.getAttribute('data-title');
         const student = item.getAttribute('data-student');
         const categoryName = item.getAttribute('data-category-name');
@@ -295,12 +294,14 @@ document.addEventListener('DOMContentLoaded', function() {
             item.getAttribute('data-icon5')
         ].filter(i => i && i.trim() !== '');
         
-        const tl = gsap.timeline({
-            onComplete: () => { isAnimating = false; }
-        });
+        if (currentTl) {
+            currentTl.kill();
+        }
         
-        tl.to([fcImage, fcTitle, fcCategory, fcStudent, fcDesc, fcSoftwareIconsContainer, fcSoftwareLabel], { 
-            opacity: 0, y: 10, duration: 0.3, ease: 'power2.in', stagger: 0.02
+        currentTl = gsap.timeline();
+        
+        currentTl.to([fcImage, fcTitle, fcCategory, fcStudent, fcDesc, fcSoftwareIconsContainer, fcSoftwareLabel], { 
+            opacity: 0, y: 10, duration: 0.2, ease: 'power2.in', stagger: 0.01
         })
         .call(() => {
             fcTitle.textContent = title;
@@ -324,10 +325,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 fcSoftwareLabel.style.display = 'none';
             }
         })
-        .to(fcImage, { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' })
+        .to(fcImage, { opacity: 1, y: 0, duration: 0.4, ease: 'power3.out' })
         .to([fcTitle, fcCategory, fcStudent, fcDesc, fcSoftwareLabel, fcSoftwareIconsContainer], { 
-            opacity: 1, y: 0, duration: 0.5, ease: 'power3.out', stagger: 0.05
-        }, "-=0.4");
+            opacity: 1, y: 0, duration: 0.4, ease: 'power3.out', stagger: 0.03
+        }, "-=0.3");
     }
 
     // Initialize
