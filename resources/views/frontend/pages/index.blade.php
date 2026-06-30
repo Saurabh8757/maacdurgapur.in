@@ -1173,7 +1173,7 @@
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/10.3.1/swiper-bundle.min.js"></script>
 <script defer src="{{ asset('frontend/js/sakura.js') }}"></script>
-<script defer src="{{ asset('frontend/js/animations.js') }}"></script>
+<script defer src="{{ asset('frontend/js/animations.js') }}?v={{ time() }}"></script>
 <script defer src="{{ asset('frontend/js/main.js') }}"></script>
 <script defer src="{{ asset('frontend/js/counselling-modal.js') }}"></script>
 <script defer src="{{ asset('frontend/js/chatbot.js') }}"></script>

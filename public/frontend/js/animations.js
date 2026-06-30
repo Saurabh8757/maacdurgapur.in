@@ -240,5 +240,59 @@
     });
   }
 
+  /* ============================================================
+     PREMIUM MOBILE SCROLL EFFECTS (Added dynamically)
+     ============================================================ */
+  
+  // 1. Sleek Scroll Progress Bar at the top
+  const progressBar = document.createElement('div');
+  progressBar.style.position = 'fixed';
+  progressBar.style.top = '0';
+  progressBar.style.left = '0';
+  progressBar.style.height = '3px';
+  progressBar.style.width = '0%';
+  progressBar.style.background = 'linear-gradient(to right, #ff416c, #ff4b2b)';
+  progressBar.style.zIndex = '9999';
+  progressBar.style.pointerEvents = 'none';
+  progressBar.style.transition = 'width 0.1s ease-out';
+  document.body.appendChild(progressBar);
+
+  window.addEventListener('scroll', function() {
+    const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+    const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    const scrollPercent = (scrollTop / scrollHeight) * 100;
+    progressBar.style.width = scrollPercent + '%';
+  }, { passive: true });
+
+  // 2. Hero Content Cinematic Fade out on scroll
+  if (document.querySelector('.hero-content')) {
+    gsap.to('.hero-content', {
+      y: -100,
+      opacity: 0,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: '.hero-section',
+        start: 'top top',
+        end: 'bottom top',
+        scrub: true
+      }
+    });
+  }
+
+  // 3. Subtle scale-down reveal for all images
+  gsap.utils.toArray('img').forEach(function(img) {
+    if(!img.classList.contains('hero-bg-img') && !img.closest('.logo-ticker-wrapper')) {
+      gsap.from(img, {
+        scale: 1.1,
+        duration: 1.5,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: img,
+          start: 'top 95%',
+          toggleActions: 'play none none none'
+        }
+      });
+    }
+  });
 
 })();
