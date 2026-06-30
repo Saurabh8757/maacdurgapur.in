@@ -22,6 +22,27 @@
 <link rel="icon" type="image/png" href="{{ asset('frontend/images/favicon.png') }}">
 <link rel="stylesheet" href="{{ asset('frontend/css/style.css') }}?v={{ time() }}">
 <link rel="stylesheet" href="{{ asset('frontend/css/chatbot.css') }}">
+<style>
+    /* URGENT CACHE BYPASS FIX FOR MOBILE HERO */
+    @media (max-width: 768px) {
+        .hero-bg-img.parallax-bg {
+            top: 0 !important;
+            height: 100% !important;
+            transform: none !important;
+        }
+    }
+    .hero-section::before {
+        content: '' !important;
+        position: absolute !important;
+        left: 0 !important;
+        right: 0 !important;
+        top: 0 !important;
+        height: 450px !important;
+        background: linear-gradient(to bottom, var(--dark) 0%, var(--dark) 15%, rgba(10, 10, 15, 0.9) 30%, rgba(10, 10, 15, 0.4) 60%, transparent 100%) !important;
+        z-index: 1 !important;
+        pointer-events: none !important;
+    }
+</style>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Rajdhani:wght@400;500;600;700&family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet">
 <!-- Swiper CSS -->
