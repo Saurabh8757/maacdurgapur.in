@@ -30,12 +30,31 @@
             height: 100% !important;
             transform: none !important;
         }
+        
+        /* Chhota sa top gradient sirf navbar ke niche wali line ko chhupane ke liye (phoolon par nahi jayega) */
         .hero-section::before {
             content: '' !important;
             position: absolute !important;
-            inset: 0 !important;
-            /* Ekdum halka gradient bottom se top (text visible karne ke liye) */
-            background: linear-gradient(to top, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.05) 55%, transparent 100%) !important;
+            left: 0 !important;
+            right: 0 !important;
+            top: 0 !important;
+            bottom: auto !important;
+            height: 120px !important; 
+            background: linear-gradient(to bottom, var(--dark) 0%, rgba(10, 10, 15, 0.6) 40%, transparent 100%) !important;
+            z-index: 1 !important;
+            pointer-events: none !important;
+        }
+
+        /* Ekdum halka bottom gradient sirf text ko visible karne ke liye */
+        .hero-section::after {
+            content: '' !important;
+            position: absolute !important;
+            left: 0 !important;
+            right: 0 !important;
+            top: auto !important;
+            bottom: 0 !important;
+            height: 55% !important;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.1) 60%, transparent 100%) !important;
             z-index: 1 !important;
             pointer-events: none !important;
         }

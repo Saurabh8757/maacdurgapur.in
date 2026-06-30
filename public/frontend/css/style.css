@@ -1174,9 +1174,16 @@ body.loading {
 @media (max-width: 1024px) {
     .hero-section::before {
         top: 0;
+        bottom: auto;
+        height: 120px;
+        background: linear-gradient(to bottom, var(--dark) 0%, rgba(10, 10, 15, 0.6) 40%, transparent 100%);
+        z-index: 1; /* Keep above the background image */
+    }
+    .hero-section::after {
+        top: auto;
         bottom: 0;
-        height: auto;
-        background: linear-gradient(to top, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.05) 55%, transparent 100%);
+        height: 55%;
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.1) 60%, transparent 100%);
         z-index: 1; /* Keep above the background image */
     }
 }
