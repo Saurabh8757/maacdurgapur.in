@@ -263,9 +263,15 @@ document.addEventListener('DOMContentLoaded', function() {
                 1024: { slidesPerView: 3, spaceBetween: 30 }
             },
             on: {
-                slideChangeTransitionStart: function () {
+                slideChange: function () {
                     const activeSlide = this.slides[this.activeIndex];
                     if(activeSlide) selectProject(activeSlide);
+                },
+                click: function (swiper, event) {
+                    if (swiper.clickedSlide) {
+                        swiper.slideTo(swiper.clickedIndex);
+                        selectProject(swiper.clickedSlide);
+                    }
                 }
             }
         });
