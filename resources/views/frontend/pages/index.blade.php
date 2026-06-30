@@ -33,11 +33,9 @@
         .hero-section::before {
             content: '' !important;
             position: absolute !important;
-            left: 0 !important;
-            right: 0 !important;
-            top: 0 !important;
-            height: 550px !important;
-            background: radial-gradient(130% 120% at 100% 0%, rgba(10, 8, 15, 0.85) 0%, rgba(10, 8, 15, 0.6) 45%, rgba(10, 8, 15, 0.1) 80%, transparent 100%) !important;
+            inset: 0 !important;
+            /* Ekdum halka gradient right se left (text visible karne ke liye) */
+            background: linear-gradient(to left, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.1) 60%, transparent 100%) !important;
             z-index: 1 !important;
             pointer-events: none !important;
         }
