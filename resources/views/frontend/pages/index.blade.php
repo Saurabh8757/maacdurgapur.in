@@ -4,21 +4,51 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
 
-<!-- KILL MOBILE OVERSCROLL COMPLETELY - prevents white line between navbar and hero -->
+<!-- KILL MOBILE OVERSCROLL COMPLETELY (PWA-grade) -->
 <script>
     (function() {
+        if (window.innerWidth > 1024) return; // Desktop doesn't need this
+        
+        // Force overscroll-behavior via inline style (maximum specificity)
+        document.documentElement.style.overscrollBehavior = 'none';
+        
         var startY = 0;
+        
         document.addEventListener('touchstart', function(e) {
             startY = e.touches[0].pageY;
+            // KEY TRICK: If at the very top, push 1px down BEFORE the scroll begins.
+            // This prevents momentum scroll from ever reaching scrollY=0,
+            // so the browser NEVER triggers overscroll stretch.
+            if (window.scrollY <= 0) {
+                window.scrollTo(0, 1);
+            }
         }, { passive: true });
         
         document.addEventListener('touchmove', function(e) {
             var y = e.touches[0].pageY;
-            // If at top of page and pulling DOWN, block it
-            if (window.scrollY <= 0 && y > startY) {
+            // Block direct pull-down at top
+            if (window.scrollY <= 1 && y > startY) {
                 e.preventDefault();
+                window.scrollTo(0, 1);
             }
         }, { passive: false });
+        
+        // BACKUP: If momentum scroll somehow reaches 0, snap to 1px
+        var ticking = false;
+        window.addEventListener('scroll', function() {
+            if (!ticking) {
+                ticking = true;
+                requestAnimationFrame(function() {
+                    if (window.scrollY <= 0) {
+                        window.scrollTo(0, 1);
+                    }
+                    ticking = false;
+                });
+            }
+        }, { passive: true });
+        
+        // On page load, start at 1px (not 0)
+        window.scrollTo(0, 1);
     })();
 </script>
 
@@ -168,6 +198,10 @@
 </style>
 </head>
 <body class="loading">
+
+<!-- OVERSCROLL DARK BACKDROP: Fixed behind everything. During Chrome Android stretch overscroll,
+     this stays in place and covers any gap with dark color instead of white. -->
+<div id="overscroll-cover" style="position:fixed;inset:-50px 0;background:#0a0a0f;z-index:-1;pointer-events:none"></div>
 
 <!-- ===================== SITE LOADER ===================== -->
 <style>
