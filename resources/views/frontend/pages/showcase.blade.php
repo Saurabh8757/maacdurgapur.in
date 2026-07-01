@@ -331,14 +331,15 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize
     initSwiper();
     
-    const initialSlide = (swiper && swiper.slides && swiper.slides.length > 0) ? swiper.slides[swiper.activeIndex] : document.querySelector('.showcase-slide');
+    // Initial Load - Get the active slide from Swiper directly from the DOM
+    const initialSlide = document.querySelector('.showcase-swiper .swiper-slide-active') || document.querySelector('.showcase-swiper .showcase-slide:not(.empty)');
     
     if (initialSlide) {
-        fcTitle.textContent = initialSlide.getAttribute('data-title');
-        fcStudent.textContent = `"${initialSlide.getAttribute('data-student')}"`;
-        fcCategory.textContent = initialSlide.getAttribute('data-category-name');
-        fcDesc.textContent = initialSlide.getAttribute('data-desc');
-        fcImage.src = initialSlide.getAttribute('data-thumb');
+        fcTitle.textContent = initialSlide.getAttribute('data-title') || 'Project Title';
+        fcStudent.textContent = initialSlide.getAttribute('data-student') ? `"${initialSlide.getAttribute('data-student')}"` : '';
+        fcCategory.textContent = initialSlide.getAttribute('data-category-name') || '';
+        fcDesc.textContent = initialSlide.getAttribute('data-desc') || '';
+        fcImage.src = initialSlide.getAttribute('data-thumb') || '';
         
         const icons = [
             initialSlide.getAttribute('data-icon'),
