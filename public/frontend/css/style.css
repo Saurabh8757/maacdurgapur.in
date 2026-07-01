@@ -696,6 +696,14 @@ body.loading {
     background-color: var(--dark);
 }
 
+/* On mobile, extend hero bg ABOVE the section to cover overscroll gaps */
+@media (max-width: 1024px) {
+    .hero-bg {
+        top: -200px;
+        padding-top: 200px;
+    }
+}
+
 .hero-bg-img {
     width: 100%;
     height: 100%;

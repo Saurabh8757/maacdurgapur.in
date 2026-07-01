@@ -4,6 +4,24 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
 
+<!-- KILL MOBILE OVERSCROLL COMPLETELY - prevents white line between navbar and hero -->
+<script>
+    (function() {
+        var startY = 0;
+        document.addEventListener('touchstart', function(e) {
+            startY = e.touches[0].pageY;
+        }, { passive: true });
+        
+        document.addEventListener('touchmove', function(e) {
+            var y = e.touches[0].pageY;
+            // If at top of page and pulling DOWN, block it
+            if (window.scrollY <= 0 && y > startY) {
+                e.preventDefault();
+            }
+        }, { passive: false });
+    })();
+</script>
+
 <!-- PREVENT MOBILE ADDRESS BAR JUMPS -->
 <script>
     (function() {
