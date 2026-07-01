@@ -354,11 +354,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Initialize
     initSwiper();
-    
-    // Initial Animation Only (Data is already populated via Blade)
-    gsap.set([fcImage, fcTitle, fcCategory, fcStudent, fcDesc, fcSoftwareLabel, fcSoftwareIconsContainer], { opacity: 1, y: 0 });
-    gsap.from(fcImage, { opacity: 0, scale: 0.95, duration: 1, ease: 'power3.out' });
-    gsap.from([fcTitle, fcCategory, fcStudent, fcDesc, fcSoftwareLabel, fcSoftwareIconsContainer], { opacity: 0, x: 20, duration: 0.8, ease: 'power3.out', stagger: 0.1, delay: 0.2 });
+
 
     // Filtering logic
     filterBtns.forEach(btn => {
