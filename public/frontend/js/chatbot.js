@@ -280,29 +280,55 @@ function sendUserText(text) {
 }
 
 function getBotReply(text) {
-  var lower = text.toLowerCase();
+  var t = text.toLowerCase();
   
-  if (lower.indexOf('course') !== -1 || lower.indexOf('sikha') !== -1 || lower.indexOf('kya kya') !== -1 || lower.indexOf('program') !== -1) {
-    return 'Humare paas industry ke sabse top-trending courses hain, jisme aapko 100% practical training milti hai: \u{1F525}\n<ul><li><strong>Animation & VFX</strong> \u2014 Maya, Nuke, Houdini (Hollywood level VFX)</li><li><strong>UI/UX Design</strong> \u2014 Figma, Adobe XD (High paying job profile)</li><li><strong>Graphic Design</strong> \u2014 Photoshop, Illustrator (Creative field)</li><li><strong>Game Design</strong> \u2014 Unreal Engine, Unity (Booming industry!)</li><li><strong>AI & Robotics</strong> \u2014 Future-ready tech courses</li></ul><br>Aapko kis field me interest hai? <button class="qr-btn" onclick="showLeadForm()">\u{1F4CB} Free Counselling Book Karein</button>';
+  // 1. GREETINGS
+  if (/(hi|hello|hey|namaste|pranam|morning|evening|afternoon|kaise ho|kya haal)/i.test(t)) {
+      return 'Hello ji! 🙏 Main AKSHA AI hoon, MAAC Durgapur ki official career expert.😎<br><br>Aapka swagat hai! Boliye, aaj main aapki kis cheez me madad karun? Agar aapko kisi special course ya career scope ke baare me janna hai, toh bejhijhak poochiye!';
   }
-  
-  if (lower.indexOf('career') !== -1 || lower.indexOf('job') !== -1 || lower.indexOf('salary') !== -1 || lower.indexOf('guidance') !== -1) {
-    return '<strong>\u{1F680} Career & Salary ki baat karein?</strong><br><br>Creative aur Tech industry me growth unlimited hai! Humare students aaj top studios me kaam kar rahe hain jaise:<br><ul><li>Netflix, Prime Video, DNEG</li><li>Rockstar Games, Ubisoft</li><li>Tata Elxsi, Technicolor</li></ul><br>Ek fresher aaram se <strong>\u20B93.5 Lakhs se \u20B96 Lakhs PA</strong> ka package crack kar sakta hai, aur experience ke baad toh limit hi nahi! \u{1F911}<br><br>Apna career plan discuss karne ke liye <button class="qr-btn" onclick="showLeadForm()">\u{1F4CB} Expert se baat karein</button>';
+
+  // 2. SPECIFIC COURSES - ANIMATION & VFX
+  if (/(animation|vfx|visual effects|3d|maya|blender|nuke|houdini)/i.test(t)) {
+      return '🔥 <strong>Animation & VFX toh humara USP hai!</strong><br><br>Hollywood se lekar Bollywood tak, saari badi movies me VFX ka use ho raha hai. Hum aapko <strong>Maya, Nuke, Houdini</strong> jaise industry-standard softwares sikhate hain. Ek dam zero se pro level tak! 🎬<br><br>Kya aap isme apna career banana chahte hain? Agar haan, toh der kis baat ki? <button class="qr-btn" onclick="showLeadForm()">🚀 Free Counselling Book Karein</button>';
   }
-  
-  if (lower.indexOf('placement') !== -1 || lower.indexOf('job') !== -1 || lower.indexOf('nokri') !== -1 || lower.indexOf('naukri') !== -1) {
-    return '<strong>\u{1F4BC} Placement Support? 100% Guarantee!</strong><br><br>MAAC Durgapur me aapko sirf sikhaya nahi jata, balki industry ke liye taiyaar kiya jata hai. Hum provide karte hain:<br><ul><li>Tagda Portfolio Building \u{1F4C1}</li><li>Mock Interviews & Studio Visits</li><li>Direct Studio Recruitment Drives \u{1F3E2}</li></ul><br>Humari placement cell tab tak aapke sath hai jab tak aapko pehli job nahi mil jati. Tension free hoke apply karein!';
+
+  // 3. SPECIFIC COURSES - GAME DESIGN
+  if (/(game|gaming|unreal|unity|pubg|bgmi|gamedev)/i.test(t)) {
+      return '🎮 <strong>Game Design & Development!</strong> Yeh industry abhi boom par hai!<br><br>Hum aapko <strong>Unreal Engine aur Unity 3D</strong> sikhate hain. Aap khud ke AAA quality games, characters aur environments bana sakte hain. 🕹️ Game studios me freshers ki demand bohot high hai right now.<br><br>Details chahiye? <button class="qr-btn" onclick="showLeadForm()">🎮 Game Design Details</button>';
   }
-  
-  if (lower.indexOf('admission') !== -1 || lower.indexOf('fee') !== -1 || lower.indexOf('paisa') !== -1 || lower.indexOf('kharcha') !== -1) {
-    return '<strong>\u{1F393} Admission & Fees</strong><br><br>Quality education sabke liye accessible honi chahiye! Humare paas flexible EMI payment options aur deserving students ke liye <strong>Scholarships</strong> bhi available hain. \u{1F393}<br><br>Apne pasandida course ka exact fee structure janna hai? <button class="qr-btn" onclick="showLeadForm()">\u{1F4CB} Get Fee Details Here</button>';
+
+  // 4. SPECIFIC COURSES - UI/UX & GRAPHICS
+  if (/(ui|ux|graphic|design|photoshop|illustrator|figma|web|app)/i.test(t)) {
+      return '🎨 <strong>UI/UX & Graphic Design!</strong> Sabse zyada high-paying aur creative field!<br><br>Chahe website ho, mobile app ho ya branding—har jagah designers ki zarurat hai. Hum aapko <strong>Figma, Photoshop, Illustrator</strong> par master banate hain. Ek solid portfolio aapko easily top MNCs me job dila sakta hai! 💸<br><br>Interest hai? <button class="qr-btn" onclick="showLeadForm()">✨ Expert se Discuss Karein</button>';
   }
-  
-  if (lower.indexOf('hi') !== -1 || lower.indexOf('hello') !== -1 || lower.indexOf('hey') !== -1 || lower.indexOf('namaste') !== -1) {
-      return 'Hello ji! \u{1F64F} AKSHA AI me aapka swagat hai. Boliye, main aaj aapki kya madad kar sakti hoon? Kya aap humare latest courses ya placement ke baare me janna chahenge?';
+
+  // 5. ALL COURSES GENERAL
+  if (/(course|program|kya sikhate|kya kya|options|padhai|class)/i.test(t)) {
+      return 'Humare paas future-proof aur high-paying careers ke top courses hain: 🏆\n<ul><li>🎬 <strong>Animation & VFX</strong> (Hollywood Level)</li><li>🎨 <strong>UI/UX & Graphic Design</strong> (High Demand)</li><li>🎮 <strong>Game Design & Dev</strong> (Unreal/Unity)</li><li>🤖 <strong>AI & Robotics</strong> (Future Tech)</li><li>📱 <strong>Digital Marketing</strong> (Growth hacking)</li></ul><br>Aapko inme se konsi field sabse zyada exciting lagti hai? Ya main suggest karun? 😉';
   }
-  
-  return 'Sahi sawal! \u{1F44D} Par main ek AI assistant hoon aur mere paas iska exact jawab abhi nahi hai.<br><br>Kyu na aap humare senior admission counselor se direct baat kar lein? Wo aapko saari details aaram se samjha denge.<br><br>Aap abhi <button class="qr-btn" onclick="showLeadForm()">\u{1F4CB} Free Counselling Session</button> book kar sakte hain, ya mujhse yeh sab pooch sakte hain:<br><ul><li>\u{1F3A8} Konsa course best hai?</li><li>\u{1F4BC} Placement aur Salary?</li><li>\u{1F4CB} Admission process aur fees?</li></ul>';
+
+  // 6. SALARY & JOBS
+  if (/(salary|paisa|package|income|kamai|job|naukri|nokri|placement|scope)/i.test(t)) {
+      return '💰 <strong>Jobs & Salary ki baat karein? Ekdum solid scope hai!</strong><br><br>MAAC Durgapur me humara focus sirf sikhane par nahi, aapko <strong>100% Placement</strong> dilane par hota hai. Humare students aaj <strong>Netflix, Rockstar Games, DNEG, Ubisoft</strong> jaisi top companies me kaam kar rahe hain! 🏢<br><br>Ek fresher aaram se <strong>₹3.5 Lakhs se ₹6 Lakhs PA</strong> start kar sakta hai. Aur 2-3 saal ke experience ke baad salary exponentially badhti hai! 🚀<br><br>Apna career plan banana hai? <button class="qr-btn" onclick="showLeadForm()">💼 Talk to Career Expert</button>';
+  }
+
+  // 7. FEES & ADMISSION
+  if (/(fee|cost|price|kharcha|admission|join|apply|emi|scholarship)/i.test(t)) {
+      return '🎓 <strong>Admission & Fees Structure</strong><br><br>Humara manna hai ki talent ko paiso ki wajah se rukna nahi chahiye. Isliye humare paas <strong>Easy EMI Options</strong> aur deserving candidates ke liye special <strong>Scholarships</strong> available hain! 🎉<br><br>Har course ki duration aur fees alag hoti hai. Exact details ke liye main ek expert ko aapse connect karwa deti hoon. <button class="qr-btn" onclick="showLeadForm()">📋 Get Exact Fee Details</button>';
+  }
+
+  // 8. LOCATION & CONTACT
+  if (/(location|address|kahan|where|contact|phone|number|call)/i.test(t)) {
+      return '📍 <strong>Humara Center Kahan Hai?</strong><br><br>Humara state-of-the-art campus <strong>Near City Center, Durgapur, West Bengal</strong> me hai. Yahan aapko premium studios aur high-end systems milenge practice ke liye! 🖥️<br><br>Aap aakar campus visit kar sakte hain ya call arrange karwa sakte hain: <button class="qr-btn" onclick="showLeadForm()">📞 Request a Call Back</button>';
+  }
+
+  // 9. FRUSTRATION / ABUSE / NEGATIVE
+  if (/(bekar|kharab|faltu|bakwas|gali|stupid|idiot|dumb)/i.test(t)) {
+      return 'Mujhe khed hai agar aapko koi pareshani hui hai. 😔 Main ek AI hoon aur lagatar seekh rahi hoon. Meri puri koshish hai aapki best help karne ki. Agar aapko koi serious query hai toh please direct humari team se baat karein: <button class="qr-btn" onclick="showLeadForm()">📞 Request Human Support</button>';
+  }
+
+  // 10. DEFAULT / CATCH-ALL
+  return 'Sahi kaha aapne! 👍 Par main ek AI assistant hoon toh lagta hai is specific sawal ka mere paas exact jawab abhi nahi hai.<br><br>Lekin tension mat lijiye! Humare senior counselors aapse direct baat karke aapke saare doubts clear kar denge. Ek baar unse discuss karke dekhiye, aapko maza aayega aur career clarity bhi milegi! 💯<br><br><button class="qr-btn" onclick="showLeadForm()">🎯 Book Free Expert Counselling</button>';
 }
 
 function sendMessage() {
