@@ -2765,3 +2765,40 @@ body.loading {
         background: transparent !important;
     }
 }
+
+/* ============================================================
+   MOBILE: KILL ALL SECTION OVERLAPS & MASKS
+   Prevents Chrome Android GPU compositor white line artifact
+   during fast scrolling. Desktop keeps the crossfade blend.
+   ============================================================ */
+@media (max-width: 1024px) {
+    /* Remove ALL negative margins - the root cause of GPU compositing gaps */
+    .institute-section {
+        margin-top: 0 !important;
+        padding-top: 80px !important;
+    }
+    
+    .courses-section {
+        margin-top: 0 !important;
+        padding-top: 100px !important;
+    }
+    
+    .stats-section {
+        margin-top: 0 !important;
+        padding-top: 64px !important;
+    }
+    
+    /* Remove ALL mask-images - they create transparent zones that flash during compositing */
+    .institute-section > .section-bg,
+    .courses-section > .section-bg,
+    .stats-section {
+        -webkit-mask-image: none !important;
+        mask-image: none !important;
+    }
+    
+    /* Ensure all sections have solid backgrounds so no gaps can show through */
+    .institute-section,
+    .courses-section {
+        background-color: var(--dark) !important;
+    }
+}
