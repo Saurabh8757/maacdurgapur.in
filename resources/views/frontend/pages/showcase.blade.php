@@ -108,6 +108,7 @@
                     $firstCategory = 'Category';
                     $firstStudent = '"Student Name"';
                     $firstDesc = 'Description...';
+                    $firstIcons = [];
                     
                     if ($firstProject) {
                         $firstThumb = $firstProject->thumbnail ? asset(str_starts_with($firstProject->thumbnail->storage_key, 'storage/') ? $firstProject->thumbnail->storage_key : 'storage/' . $firstProject->thumbnail->storage_key) : asset('frontend/images/placeholder.jpg');
@@ -115,6 +116,12 @@
                         $firstCategory = $firstProject->category->name ?? '';
                         $firstStudent = '"' . $firstProject->student_name . '"';
                         $firstDesc = $firstProject->short_description;
+                        
+                        if($firstProject->softwareIcon) $firstIcons[] = asset(str_starts_with($firstProject->softwareIcon->storage_key, 'storage/') ? $firstProject->softwareIcon->storage_key : 'storage/' . $firstProject->softwareIcon->storage_key);
+                        if($firstProject->softwareIcon2) $firstIcons[] = asset(str_starts_with($firstProject->softwareIcon2->storage_key, 'storage/') ? $firstProject->softwareIcon2->storage_key : 'storage/' . $firstProject->softwareIcon2->storage_key);
+                        if($firstProject->softwareIcon3) $firstIcons[] = asset(str_starts_with($firstProject->softwareIcon3->storage_key, 'storage/') ? $firstProject->softwareIcon3->storage_key : 'storage/' . $firstProject->softwareIcon3->storage_key);
+                        if($firstProject->softwareIcon4) $firstIcons[] = asset(str_starts_with($firstProject->softwareIcon4->storage_key, 'storage/') ? $firstProject->softwareIcon4->storage_key : 'storage/' . $firstProject->softwareIcon4->storage_key);
+                        if($firstProject->softwareIcon5) $firstIcons[] = asset(str_starts_with($firstProject->softwareIcon5->storage_key, 'storage/') ? $firstProject->softwareIcon5->storage_key : 'storage/' . $firstProject->softwareIcon5->storage_key);
                     }
                 @endphp
                 <div class="featured-content">
@@ -134,9 +141,11 @@
                         <a href="javascript:void(0)" id="fcSeeMoreBtn" style="color: #F59E0B; font-weight: bold; font-size: 0.9rem; text-decoration: none; display: inline-block; margin-bottom: 15px;">See More <i class="fas fa-arrow-right" style="font-size: 0.8rem;"></i></a>
                         
                         <div class="fc-software-wrap">
-                            <span class="fc-software-label" id="fcSoftwareLabel" style="display:none;">Software Used</span>
+                            <span class="fc-software-label" id="fcSoftwareLabel" style="display:{{ count($firstIcons) > 0 ? 'block' : 'none' }};">Software Used</span>
                             <div id="fcSoftwareIconsContainer" style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 5px;">
-                                <!-- Icons appended dynamically -->
+                                @foreach($firstIcons as $icon)
+                                    <img src="{{ $icon }}" style="width: 32px; height: 32px; object-fit: contain;">
+                                @endforeach
                             </div>
                         </div>
                     </div>
@@ -346,43 +355,10 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize
     initSwiper();
     
-    // Initial Load - Get the active slide from Swiper directly from the DOM
-    const initialSlide = document.querySelector('.showcase-swiper .swiper-slide-active') || document.querySelector('.showcase-swiper .showcase-slide:not(.empty)');
-    
-    if (initialSlide) {
-        fcTitle.textContent = initialSlide.getAttribute('data-title') || 'Project Title';
-        fcStudent.textContent = initialSlide.getAttribute('data-student') ? `"${initialSlide.getAttribute('data-student')}"` : '';
-        fcCategory.textContent = initialSlide.getAttribute('data-category-name') || '';
-        fcDesc.textContent = initialSlide.getAttribute('data-desc') || '';
-        fcImage.src = initialSlide.getAttribute('data-thumb') || '';
-        
-        const icons = [
-            initialSlide.getAttribute('data-icon'),
-            initialSlide.getAttribute('data-icon2'),
-            initialSlide.getAttribute('data-icon3'),
-            initialSlide.getAttribute('data-icon4'),
-            initialSlide.getAttribute('data-icon5')
-        ].filter(i => i && i.trim() !== '');
-
-        fcSoftwareIconsContainer.innerHTML = '';
-        if (icons.length > 0) {
-            icons.forEach(url => {
-                const img = document.createElement('img');
-                img.src = url;
-                img.style.width = '32px';
-                img.style.height = '32px';
-                img.style.objectFit = 'contain';
-                fcSoftwareIconsContainer.appendChild(img);
-            });
-            fcSoftwareLabel.style.display = 'block';
-        } else {
-            fcSoftwareLabel.style.display = 'none';
-        }
-        
-        gsap.set([fcImage, fcTitle, fcCategory, fcStudent, fcDesc, fcSoftwareLabel, fcSoftwareIconsContainer], { opacity: 1, y: 0 });
-        gsap.from(fcImage, { opacity: 0, scale: 0.95, duration: 1, ease: 'power3.out' });
-        gsap.from([fcTitle, fcCategory, fcStudent, fcDesc, fcSoftwareLabel, fcSoftwareIconsContainer], { opacity: 0, x: 20, duration: 0.8, ease: 'power3.out', stagger: 0.1, delay: 0.2 });
-    }
+    // Initial Animation Only (Data is already populated via Blade)
+    gsap.set([fcImage, fcTitle, fcCategory, fcStudent, fcDesc, fcSoftwareLabel, fcSoftwareIconsContainer], { opacity: 1, y: 0 });
+    gsap.from(fcImage, { opacity: 0, scale: 0.95, duration: 1, ease: 'power3.out' });
+    gsap.from([fcTitle, fcCategory, fcStudent, fcDesc, fcSoftwareLabel, fcSoftwareIconsContainer], { opacity: 0, x: 20, duration: 0.8, ease: 'power3.out', stagger: 0.1, delay: 0.2 });
 
     // Filtering logic
     filterBtns.forEach(btn => {
