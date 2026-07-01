@@ -47,7 +47,7 @@ function closeChat() {
 // ─────────────────────────────────────────────
 function showWelcome() {
 
-  var welcome = '\u{1F44B} <strong>Welcome to AKSHA International School of Design & Technology!</strong><br><br>I am <strong>AKSHA AI</strong> \u2014 your personal admission counselor powered by <strong>MAAC Durgapur</strong> \u{1F393}<br><br>I can help you with:<br><ul><li>\u{1F3A8} Choosing the right creative or tech course</li><li>\u{1F4BC} Career guidance & salary insights</li><li>\u{1F4CB} Admission process & fees</li><li>\u{1F916} AI, Animation, Gaming, Robotics & more</li></ul><br>What would you like to explore today?';
+  var welcome = '\u{1F44B} <strong>Hello! Welcome to MAAC Durgapur & AKSHA!</strong><br><br>Main <strong>AKSHA AI</strong> hoon \u2014 aapka personal career guide. \u{1F60E}<br>Agar aap Animation, VFX, Gaming ya Tech field me apna solid career banana chahte ho, toh aap bilkul sahi jagah aaye ho!<br><br>Boliye, main aapki kaise help kar sakti hoon?<br><ul><li>\u{1F3A8} Best course choose karne me?</li><li>\u{1F4BC} Placement aur salary details chahiye?</li><li>\u{1F4CB} Admission aur fees structure janna hai?</li></ul><br>Neeche diye gaye options me se select karein ya direct message type karein! \u{1F447}';
   appendBotMessage(welcome, QUICK_REPLIES_INITIAL);
 }
 
@@ -281,19 +281,28 @@ function sendUserText(text) {
 
 function getBotReply(text) {
   var lower = text.toLowerCase();
-  if (lower.indexOf('course') !== -1 || lower.indexOf('fee') !== -1) {
-    return 'We offer industry-leading courses in:\n<ul><li><strong>Animation & VFX</strong> \u2014 Maya, Houdini, Nuke</li><li><strong>UI/UX Design</strong> \u2014 Figma, Adobe XD</li><li><strong>Graphic Design</strong> \u2014 Photoshop, Illustrator</li><li><strong>Game Development</strong> \u2014 Unreal Engine, Unity</li><li><strong>AI & Robotics</strong> \u2014 Python, Machine Learning</li><li><strong>Digital Marketing</strong> \u2014 SEO, Social Media</li></ul><br>Want to <button class="qr-btn" onclick="showLeadForm()">\u{1F4CB} Book Free Counselling</button> for detailed fee structure?';
+  
+  if (lower.indexOf('course') !== -1 || lower.indexOf('sikha') !== -1 || lower.indexOf('kya kya') !== -1 || lower.indexOf('program') !== -1) {
+    return 'Humare paas industry ke sabse top-trending courses hain, jisme aapko 100% practical training milti hai: \u{1F525}\n<ul><li><strong>Animation & VFX</strong> \u2014 Maya, Nuke, Houdini (Hollywood level VFX)</li><li><strong>UI/UX Design</strong> \u2014 Figma, Adobe XD (High paying job profile)</li><li><strong>Graphic Design</strong> \u2014 Photoshop, Illustrator (Creative field)</li><li><strong>Game Design</strong> \u2014 Unreal Engine, Unity (Booming industry!)</li><li><strong>AI & Robotics</strong> \u2014 Future-ready tech courses</li></ul><br>Aapko kis field me interest hai? <button class="qr-btn" onclick="showLeadForm()">\u{1F4CB} Free Counselling Book Karein</button>';
   }
-  if (lower.indexOf('career') !== -1 || lower.indexOf('guidance') !== -1) {
-    return '<strong>\u{1F680} Career Opportunities</strong><br><br>MAAC Durgapur graduates work at top studios like:<br><ul><li>Netflix, DNEG, Prime Video</li><li>Ubisoft, Rockstar Games, EA</li><li>Tata Elxsi, Pogo</li></ul><br>Average starting salary: <strong>\u20B93.5 - 6 LPA</strong><br><br>Ready to start? <button class="qr-btn" onclick="showLeadForm()">\u{1F4CB} Book Counselling Now</button>';
+  
+  if (lower.indexOf('career') !== -1 || lower.indexOf('job') !== -1 || lower.indexOf('salary') !== -1 || lower.indexOf('guidance') !== -1) {
+    return '<strong>\u{1F680} Career & Salary ki baat karein?</strong><br><br>Creative aur Tech industry me growth unlimited hai! Humare students aaj top studios me kaam kar rahe hain jaise:<br><ul><li>Netflix, Prime Video, DNEG</li><li>Rockstar Games, Ubisoft</li><li>Tata Elxsi, Technicolor</li></ul><br>Ek fresher aaram se <strong>\u20B93.5 Lakhs se \u20B96 Lakhs PA</strong> ka package crack kar sakta hai, aur experience ke baad toh limit hi nahi! \u{1F911}<br><br>Apna career plan discuss karne ke liye <button class="qr-btn" onclick="showLeadForm()">\u{1F4CB} Expert se baat karein</button>';
   }
-  if (lower.indexOf('placement') !== -1) {
-    return '<strong>\u{1F4BC} Placement Support</strong><br><br>We provide <strong>100% placement assistance</strong> including:<br><ul><li>Portfolio building</li><li>Mock interviews</li><li>Industry visits</li><li>Direct recruitment drives</li></ul><br>Our students are placed at India\'s top creative studios!';
+  
+  if (lower.indexOf('placement') !== -1 || lower.indexOf('job') !== -1 || lower.indexOf('nokri') !== -1 || lower.indexOf('naukri') !== -1) {
+    return '<strong>\u{1F4BC} Placement Support? 100% Guarantee!</strong><br><br>MAAC Durgapur me aapko sirf sikhaya nahi jata, balki industry ke liye taiyaar kiya jata hai. Hum provide karte hain:<br><ul><li>Tagda Portfolio Building \u{1F4C1}</li><li>Mock Interviews & Studio Visits</li><li>Direct Studio Recruitment Drives \u{1F3E2}</li></ul><br>Humari placement cell tab tak aapke sath hai jab tak aapko pehli job nahi mil jati. Tension free hoke apply karein!';
   }
-  if (lower.indexOf('admission') !== -1 || lower.indexOf('fee') !== -1) {
-    return '<strong>\u{1F393} Admission & Fees</strong><br><br>We offer flexible payment options and scholarships for meritorious students. <br><br>Click below to get detailed fee info: <button class="qr-btn" onclick="showLeadForm()">\u{1F4CB} Get Fee Details</button>';
+  
+  if (lower.indexOf('admission') !== -1 || lower.indexOf('fee') !== -1 || lower.indexOf('paisa') !== -1 || lower.indexOf('kharcha') !== -1) {
+    return '<strong>\u{1F393} Admission & Fees</strong><br><br>Quality education sabke liye accessible honi chahiye! Humare paas flexible EMI payment options aur deserving students ke liye <strong>Scholarships</strong> bhi available hain. \u{1F393}<br><br>Apne pasandida course ka exact fee structure janna hai? <button class="qr-btn" onclick="showLeadForm()">\u{1F4CB} Get Fee Details Here</button>';
   }
-  return 'That\'s a great question! <br><br>Let me connect you with our admission counselor who can provide detailed information.<br><br>In the meantime, you can <button class="qr-btn" onclick="showLeadForm()">\u{1F4CB} Book Free Counselling</button> or ask me about:<br><ul><li>\u{1F3A8} Courses we offer</li><li>\u{1F4BC} Career guidance</li><li>\u{1F4CB} Fees & admission</li><li>\u{1F4C8} Placement info</li></ul>';
+  
+  if (lower.indexOf('hi') !== -1 || lower.indexOf('hello') !== -1 || lower.indexOf('hey') !== -1 || lower.indexOf('namaste') !== -1) {
+      return 'Hello ji! \u{1F64F} AKSHA AI me aapka swagat hai. Boliye, main aaj aapki kya madad kar sakti hoon? Kya aap humare latest courses ya placement ke baare me janna chahenge?';
+  }
+  
+  return 'Sahi sawal! \u{1F44D} Par main ek AI assistant hoon aur mere paas iska exact jawab abhi nahi hai.<br><br>Kyu na aap humare senior admission counselor se direct baat kar lein? Wo aapko saari details aaram se samjha denge.<br><br>Aap abhi <button class="qr-btn" onclick="showLeadForm()">\u{1F4CB} Free Counselling Session</button> book kar sakte hain, ya mujhse yeh sab pooch sakte hain:<br><ul><li>\u{1F3A8} Konsa course best hai?</li><li>\u{1F4BC} Placement aur Salary?</li><li>\u{1F4CB} Admission process aur fees?</li></ul>';
 }
 
 function sendMessage() {
