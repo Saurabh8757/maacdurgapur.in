@@ -101,21 +101,36 @@
                     </div>
                     <h2 class="fh-title">FEATURED STUDENT WORK</h2>
                 </div>
-                
+                @php
+                    $firstProject = $showcaseProjects->first();
+                    $firstThumb = '';
+                    $firstTitle = 'Project Title';
+                    $firstCategory = 'Category';
+                    $firstStudent = '"Student Name"';
+                    $firstDesc = 'Description...';
+                    
+                    if ($firstProject) {
+                        $firstThumb = $firstProject->thumbnail ? asset(str_starts_with($firstProject->thumbnail->storage_key, 'storage/') ? $firstProject->thumbnail->storage_key : 'storage/' . $firstProject->thumbnail->storage_key) : asset('frontend/images/placeholder.jpg');
+                        $firstTitle = $firstProject->title;
+                        $firstCategory = $firstProject->category->name ?? '';
+                        $firstStudent = '"' . $firstProject->student_name . '"';
+                        $firstDesc = $firstProject->short_description;
+                    }
+                @endphp
                 <div class="featured-content">
                     <div class="fc-image-wrap">
-                        <img id="fcImage" src="" alt="Featured Project">
+                        <img id="fcImage" src="{{ $firstThumb }}" alt="{{ $firstTitle }}">
                     </div>
                     <div class="fc-details">
-                        <h3 class="fc-title" id="fcTitle">Project Title</h3>
-                        <span class="fc-category" id="fcCategory">Category</span>
+                        <h3 class="fc-title" id="fcTitle">{{ $firstTitle }}</h3>
+                        <span class="fc-category" id="fcCategory">{{ $firstCategory }}</span>
                         
                         <div class="fc-student">
                             <span class="fc-crafted">Crafted by</span>
-                            <span class="fc-name" id="fcStudent">"Student Name"</span>
+                            <span class="fc-name" id="fcStudent">{{ $firstStudent }}</span>
                         </div>
                         
-                        <p class="fc-desc" id="fcDesc" style="display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; margin-bottom: 5px;">Description...</p>
+                        <p class="fc-desc" id="fcDesc" style="display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; margin-bottom: 5px;">{{ $firstDesc }}</p>
                         <a href="javascript:void(0)" id="fcSeeMoreBtn" style="color: #F59E0B; font-weight: bold; font-size: 0.9rem; text-decoration: none; display: inline-block; margin-bottom: 15px;">See More <i class="fas fa-arrow-right" style="font-size: 0.8rem;"></i></a>
                         
                         <div class="fc-software-wrap">
